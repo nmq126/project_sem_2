@@ -1,0 +1,369 @@
+/* Header */
+#header img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+body {
+    background-color: white !important;
+}
+
+.header-content {
+    visibility: hidden;
+    top: 0;
+    color: rgba(0, 0, 0, 0);
+    z-index: 2;
+    position: absolute;
+}
+
+@keyframes example {
+    from {
+        top: 8vw;
+        visibility: hidden;
+        color: rgba(0, 0, 0, 0);
+    }
+    to {
+        top: 13vw;
+        visibility: visible;
+        color: #926726;
+    }
+}
+
+@keyframes example1 {
+    from {
+        top: 10vw;
+        visibility: hidden;
+        color: rgba(0, 0, 0, 0);
+    }
+    to {
+        top: 14vw;
+        visibility: visible;
+        color: #926726;
+    }
+}
+
+@keyframes example2 {
+    from {
+        top: 12vw;
+        visibility: hidden;
+        color: rgba(0, 0, 0, 0);
+    }
+    to {
+        top: 15vw;
+        visibility: visible;
+        color: #926726;
+    }
+}
+
+@keyframes example3 {
+    from {
+        top: 14vw;
+        visibility: hidden;
+        color: rgba(0, 0, 0, 0);
+    }
+    to {
+        top: 16vw;
+        visibility: visible;
+        color: #926726;
+    }
+}
+
+.content-1 {
+    position: relative;
+    animation-name: example;
+    animation-delay: 0.5s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.content-2 {
+    position: relative;
+    animation-name: example1;
+    animation-delay: 1.5s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.content-3 {
+    font-size: 1.8vw;
+    position: relative;
+    animation-name: example2;
+    animation-delay: 2.5s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.content-4 {
+    position: relative;
+    font-size: 1.8vw;
+    animation-name: example3;
+    animation-delay: 3.5s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.header-button {
+    border: 2px solid #926726;
+    color: #926726;
+    padding: 0.8vw 1.6vw;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.header-button:hover {
+    background-color: #926726;
+    cursor: pointer;
+}
+
+.header-button:hover a {
+    color: white;
+}
+
+.header-button a {
+    text-decoration: none;
+    color: #926726;
+}
+
+
+/* Introduction */
+.introduction {
+    margin-top: 400px;
+}
+
+.introduction-img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.layer-1, .layer-2 {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    transition: 2s;
+}
+
+.layer-2 {
+    left: 0;
+}
+
+.introduction-img:hover .layer-1,
+.introduction-img:hover .layer-2 {
+    width: 0;
+    transition: 1.5s;
+}
+
+/* Modal */
+@media only screen and (min-width: 768px) {
+    .modal-dialog {
+        max-width: 700px;
+    }
+}
+
+
+/* Blog */
+.blog-title, .feature-title {
+    padding-bottom: 15px;
+}
+
+.blog-img {
+    overflow: hidden;
+}
+
+.blog-img img {
+    cursor: pointer;
+    transition: 2s;
+    width: 100%;
+    height: 100%;
+    transform: scale(1);
+}
+
+.blog-img:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.blog-img:hover img {
+    transform: scale(1.5);
+    transition: 1.5s;
+}
+
+.blog-content a {
+    text-decoration: none;
+    color: black;
+}
+
+.blog-content h2 {
+    padding-top: 5px;
+}
+
+/* Media */
+@media only screen and (max-width: 992px) {
+    .header-content {
+        top: -20px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .content-1 {
+        font-size: 25px;
+    }
+
+    .content-2 {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .header-content {
+        top: -30px;
+    }
+
+    .content-1 {
+        font-size: 20px;
+    }
+
+    .content-2 {
+        font-size: 13px;
+    }
+
+    .content-3 {
+        font-size: 10px;
+    }
+}
+
+/*gallery*/
+
+.containerG {
+    width: 100%;
+    display: grid;
+    grid-template: "1fr 1fr 1fr 1fr 1fr"250px
+                    "1fr 1fr 1fr 1fr 1fr"250px
+                    "1fr 1fr 1fr 1fr 1fr"250px;
+    grid-auto-flow: dense;
+    grid-gap: 2px;
+}
+
+.boxG {
+    position: relative;
+    background: #ccc;
+}
+.boxG img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.a{
+    grid-row: span 2;
+}
+.b, .f, .h, .j{
+    grid-column: span 2;
+}
+@media (max-width: 991px) {
+    .containerG {
+        grid-template: "1fr 1fr 1fr"250px
+                        "1fr 1fr 1fr"250px
+                        "1fr 1fr 1fr "250px
+                        "1fr 1fr 1fr "250px
+                        "1fr 1fr 1fr "250px;
+    }
+}
+@media (max-width: 768px) {
+    .containerG {
+        grid-template: "1fr 1fr"200px
+                        "1fr 1fr"200px
+                        "1fr 1fr"200px
+                        "1fr 1fr"200px
+                        "1fr 1fr"200px
+                        "1fr 1fr"200px
+                        "1fr 1fr"200px;
+    }
+    .h{
+        grid-column: span 1;
+    }
+}
+
+/*#featured-products{*/
+/*    background-color: #fff9f9;*/
+/*}*/
+.testimonial-title{
+    text-align: center;
+    padding-top: 50px;
+}
+.testimonial, .gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*min-height: 100vh;*/
+}
+
+.containerT {
+    position: relative;
+    width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.boxT {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 420px;
+    width: 320px;
+    margin: 20px;
+    background-color: #fff9f9;
+
+}
+
+.contentT {
+    padding: 30px;
+    text-align: center;
+}
+
+.contentT .quote {
+    max-width: 48px;
+}
+
+.contentT p {
+    padding: 20px 0;
+}
+
+.contentT .user {
+    max-width: 72px;
+    border-radius: 50%;
+}
+
+.contentT h3 {
+    color: #926726;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+@media (max-width: 1150px) {
+    .containerT {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .boxT {
+        width: 100%;
+        height: auto;
+        padding: 30px 20px;
+    }
+}

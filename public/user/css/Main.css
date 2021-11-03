@@ -1,0 +1,195 @@
+/* Body */
+html {
+    scroll-behavior: smooth;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Recursive', sans-serif;
+}
+
+h1,h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #926726;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1rem !important;
+}
+
+.clearfix{
+    clear: both;
+}
+
+/* Scroll to top button */
+#myBtn {
+    width: 60px;
+    height: 60px;
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #F8D5D7;
+    color: #926625;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    text-align: center;
+    opacity: 0.6;
+}
+
+#myBtn .fa{
+    padding-right: 0px!important;
+}
+
+#myBtn:hover {
+    opacity: 1;
+}
+
+.scroll-active {
+    transform: translateX(0) !important;
+}
+
+/* Navigation */
+#nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgb(40 40 40 / 30%);
+    transition: all .4s;
+    height: 80px;
+    background: rgba(255, 255, 255, .85);
+    color: #926726;
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+}
+
+.nav-active {
+    transform: translateY(-100%) !important;
+}
+
+
+nav{
+    flex: 1;
+    text-align: right;
+}
+
+nav ul{
+    display: inline-block;
+    list-style-type: none;
+}
+
+nav ul li{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav a{
+    color: #926726;
+}
+
+nav a:hover{
+    text-decoration: none;
+    color: #926726;
+}
+
+.icon{
+    font-size: 20px;
+}
+
+.fa-bars, .cart-top{
+    color: #926726;
+    padding-bottom: 10px;
+}
+
+
+.fa-bars{
+    display: none;
+}
+
+
+/* Footer */
+.footer {
+    background: black;
+    color: white;
+}
+
+.footer h2, .copy-right {
+    opacity: 0.6;
+}
+
+.footer p {
+    font-size: 16px !important;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.fa {
+    padding-right: 20px;
+}
+
+.partner img {
+    max-height: 50px;
+    max-width: 50px;
+}
+
+.copy-right {
+    padding-top: 50px;
+}
+
+.copy-right p {
+    font-size: 20px;
+}
+
+/* Media */
+@media only screen and (max-width: 768px){
+/* Nav */
+    nav ul{
+        position: absolute;
+        top: 80px;
+        left: 0;
+        background: white;
+        width: 100%;
+        padding-right: 0;
+        padding-top: 0;
+        overflow: hidden;
+        transition: max-height 0.5s;
+    }
+    nav ul li{
+        display: block;
+        margin-right: 60px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .fa-bars{
+        display: inline-block;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width: 576px) {
+    #company, #partners {
+        padding-left: 50px;
+    }
+}

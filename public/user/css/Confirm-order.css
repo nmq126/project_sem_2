@@ -1,0 +1,95 @@
+.confirm-main {
+    margin-top: 50px;
+    border: 1px solid #926726;
+    text-align: center;
+}
+
+.confirm-main h1, .confirm-main h2 {
+    padding-top: 15px;
+    color: #926726;
+}
+
+/* Product item */
+span a, span a:hover {
+    text-decoration: none;
+    color: #926625;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+th {
+    padding: 5px;
+    color: #fff;
+    background: #926726;
+}
+
+td {
+    padding: 10px 5px;
+}
+
+td a, td a:hover {
+    color: red;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+td img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.name, .quantity {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.quantity{
+    padding-left: 25px;
+}
+
+.price{
+    padding-right: 24px;
+}
+
+.total-price {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bolder;
+}
+
+.total-price table {
+    border-top: 3px solid #926726;
+    width: 100%;
+    max-width: 350px;
+}
+
+td:last-child, th:last-child {
+    text-align: right;
+}
+/* ------------------------------------------------ */
+
+
+.confirm-main-address {
+    text-align: left;
+    padding-top: 15px;
+}
+
+.confirm-main-thank {
+    padding-top: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    #order {
+        display: none;
+    }
+}

@@ -1,0 +1,140 @@
+*{
+    box-sizing: border-box;
+}
+
+.img-warp{
+    width: 50%;
+}
+
+.img-warp img{
+    width: 100%;
+    margin-left: 50%;
+}
+
+.team h2{
+    font-size: 30px;
+}
+
+.sub-container{
+    max-width: 1200px;
+    padding: 18px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.teams{
+    margin: 10px;
+    padding: 22px;
+    width: 40%;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.teams:hover{
+    background: #ddd;
+}
+
+.teams img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.name{
+    padding: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.desig{
+    font-style: italic;
+    color: #999;
+}
+
+.about{
+    margin: 20px 0;
+    font-weight: lighter;
+}
+
+
+.social a{
+    display: inline-block;
+    color: #926726;
+    text-decoration: none;
+    height: 30px;
+    width: 30px;
+    transition: .5s;
+}
+
+.social a:hover{
+    transform: scale(1.5);
+}
+
+@media screen and (max-width: 768px){
+    .teams{
+        width: 90%;
+    }
+}
+
+.about1{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*background: #fdfdfd;*/
+}
+.about-section{
+    height: 100%;
+    width: 100%;
+    background: url("https://res.cloudinary.com/nmq126/image/upload/v1621413374/lake-4841929_1920_ica3rn.jpg") no-repeat left;
+    background-size: 55%;
+    background-color: #f1f1f1;
+    overflow: hidden;
+    padding: 100px 0;
+}
+.containerAx{
+    width: 55%;
+    float: right;
+    background-color: #f1f1f1;
+    padding: 150px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.containerAx h1{
+    color: black;
+    margin-bottom: 30px;
+    /*font-size: 30px;*/
+    font-weight: 900;
+}
+.text{
+    /*font-size: 13px!important;*/
+    color: #545454;
+    line-height: 30px;
+    text-align: justify;
+    margin-bottom: 40px;
+}
+.skills{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 13px!important;
+}
+@media screen and (max-width: 1200px){
+    .containerAx{
+        padding: 80px;
+    }
+}
+@media screen and (max-width: 992px){
+    .about-section{
+        background-size: 100%;
+        padding: 100px 40px;
+    }
+    .containerAx{
+        width: 100%;
+    }
+}
+
+.containerAx h1,h3{
+    color: #926726;
+}
