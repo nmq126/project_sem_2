@@ -130,7 +130,7 @@
                         deleteByToken('nmq126', delete_token);//xoa anh tren cloudinary
                         $("#" + id).parent().remove();//xoa div
                         //sua lai value thumbnail
-                        var array_thumbnail = document.forms['apartment-form']['thumbnail'].value.split(',');
+                        var array_thumbnail = document.forms['product-form']['thumbnail'].value.split(',');
                         array_thumbnail.pop();
                         var new_array_thumbnail = array_thumbnail.filter(item => item != secure_url);
                         if (new_array_thumbnail.length > 0) {
