@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/assets/css/Blog/blog_detail.css">
+<link rel="stylesheet" href="/user/css/Blog/blog_detail.css">
 <!-- Boxicons CSS -->
 <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
