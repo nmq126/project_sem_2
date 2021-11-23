@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+    background-color: #333;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    color: aliceblue;
+    font-size: 34px;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    margin-top: 8%;
+    opacity: 0.5;
+}
+
+.back i {
+    float: left;
+    margin-left: 150px;
+    font-size: 34px;
+    border-radius: 100%;
+    border: 2px solid black;
+    transition: all 0.5s ease;
+}
+
+.back:hover i {
+    color: #00b14f;
+    border-radius: 100%;
+    border: 2px solid #00b14f;
+}
+
+.date-author {
+    margin: auto;
+    display: flex;
+    width: 100%;
+    margin-left: 20%;
+}
+
+.date-author .author {
+    margin-left: 38%;
+}
+
+.container {
+    margin-left: 150px;
+}
+
+.content {
+    margin: auto;
+    width: 60%;
+    height: 100%;
+}
+
+.content p {
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 1.5px;
+}
+
+@media only screen and (max-width: 300px) {
+    .header {
+        display: block;
+    }
+    .date-author {
+        padding-top: 20px;
+    }
+    .date-author .date,
+    .author {
+        margin-left: 1px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .content {
+        font-size: 10px;
+    }
+    .date-author {
+        margin-left: -10px;
+    }
+    .content p {
+        font-size: 20px;
+        line-height: 20px;
+        letter-spacing: 0px;
+    }
+    .container {
+        margin-left: 1px;
+        width: 100%;
+    }
+    .content {
+        width: 100%;
+        margin: 1px;
+    }
+    .date-author .author {
+        margin-left: 25%;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .back i {
+        margin-left: 50px;
+    }
+    .container {
+        margin-left: 50px;
+    }
+    .content {
+        width: 80%;
+    }
+    .date-author {
+        margin-left: 10%;
+    }
+}
