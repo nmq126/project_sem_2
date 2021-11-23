@@ -1,0 +1,20 @@
+.sign-btn a{
+    background: linear-gradient(252.62deg, #48D6F2 8.92%, #84FC6A 96.59%) !important;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+
+.sign-btn a:hover{
+    background: linear-gradient(252.62deg, #84FC6A 8.92%, #48D6F2 96.59%)!important;
+}
+
+
+.elisyam-bg.background-07 {
+    background: url(../../../../user/img/sign_in_background.jpg) no-repeat;
+    background-size: cover
+}
+
+.elisyam-bg.background-08 {
+    background: url(../../../../user/img/sign_up_background.jpg) no-repeat;
+    background-size: cover
+}
