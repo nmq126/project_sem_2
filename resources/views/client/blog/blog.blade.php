@@ -4,7 +4,7 @@
         <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/assets/css/Blog/blog.css">
+        <link rel="stylesheet" href="/user/css/Blog/blog.css">
         <!-- Boxicons CSS -->
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
@@ -164,7 +164,7 @@
         </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="assets/js/Blog/blog.js">
+        <script src="user/js/Blog/blog.js">
         </script>
 
         </body>

@@ -1,0 +1,162 @@
+* {
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+header {
+    padding-top: 20px;
+    height: 80px;
+    width: 100%;
+    z-index: 2;
+    background-color: black;
+    /*box-shadow: black 0px -2px 0px inset;*/
+}
+
+.logo h2, #colorize {
+    font-weight: 600;
+    background: linear-gradient(238.45deg, #42D2FF 10.32%, #49e513 88.6%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+}
+.container .searchBar {
+    margin-left: auto;
+    display: flex;
+}
+
+.searchBar .header-option {
+    letter-spacing: 0.6px;
+    padding-left: 3rem;
+}
+
+
+/*main part*/
+.checkout-body{
+    display: flex;
+}
+.shipping{
+    padding: 80px 80px 80px 40px;
+}
+
+.shipping .information h3{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.shipping .information .authentication-form{
+    padding-top: 20px;
+}
+
+.order-title{
+    display: flex;
+}
+.order-title h3{
+    flex-grow: 1;
+    padding-top: 10px;
+}
+.order-title .add-more{
+    padding: 0px 12px 0px 8px;
+    border-radius: 500px;
+    background: rgb(238, 238, 238);
+    width: fit-content;
+    font-size: 14px;
+    line-height: 36px;
+}
+.order .list-item{
+    display: flex;
+    justify-content: space-between;
+}
+.order .list-item .name{
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+
+.order .list-item .price{
+    flex-grow: 0;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.information hr{
+    margin: 0 0 24px;
+    height: 2px;
+    background-color: rgb(226, 226, 226);
+    border: none;
+}
+
+
+.cart{
+    padding: 80px 40px 80px 80px;
+    background-color: rgb(246, 246, 246);
+}
+.cart .place-order{
+    top:24px;
+    position: sticky;
+}
+
+.place-order-button{
+    margin-top: 2rem;
+    font-size: 18px;
+    font-weight: normal;
+}
+.place-order-button button{
+    min-height: 56px;
+    color: #fff;
+    font-weight: 500;
+    width: 100%;
+    -webkit-box-align: center;
+    text-align: center;
+    border-width: 0;
+    background: linear-gradient(252.62deg, #48D6F2 8.92%, #84FC6A 96.59%) !important;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+.place-order-button button:hover{
+    background: linear-gradient(252.62deg, #84FC6A 8.92%, #48D6F2 96.59%)!important;
+
+}
+.place-order hr, .order hr{
+    margin: 16px 0;
+    background-color: rgb(226, 226, 226);
+    border: none;
+    height: 1px;
+}
+
+.place-order .promo-text{
+    padding: 8px 12px;
+    color: rgb(4, 136, 72);
+    background-color: rgb(230, 242, 237);
+    font-size: 12px;
+    justify-content: center;
+    display: flex;
+}
+
+.place-order ul{
+    list-style: none;
+    padding: 15px 0;
+    margin: 0;
+}
+.place-order ul li, .total{
+    color: black;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+.total{
+    font-size: 20px;
+    font-weight: 600;
+}
+.promo{
+    color: rgb(5, 148, 79);
+}
+footer{
+    padding: 16px 0;
+    background-color: black;
+    height: 50px;
+}

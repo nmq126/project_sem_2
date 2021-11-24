@@ -44,6 +44,12 @@ Route::get('/sign_in', function () {
 Route::get('/sign_up', function () {
     return view('client.sign_up');
 });
+Route::get('/home', function () {
+    return view('client.home');
+});
+Route::get('/checkout', function () {
+    return view('client.checkout');
+});
 
 Route::get('/product_detail', function () {
     return view('client.product_detail.product_detail');

@@ -1,0 +1,71 @@
+/*Homepage*/
+@media (max-width: 1200px) {
+    .listings-grid-element .image {
+        height: 130px;
+    }
+    .card-item img{
+        height: 160px;
+    }
+
+    .listings {
+        padding: 1.2rem 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .listings-grid-element .image {
+        height: 180px;
+    }
+    .card-item img{
+        height: 200px;
+    }
+    .card-container{
+        padding: 1.2rem 0;
+    }
+
+    .listings {
+        padding: 1.5rem 0;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .banner, .team-hero-banner {
+        display: none;
+    }
+    header{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: rgb(226 226 226) 0px -2px 0px inset;
+    }
+    #first_list, .team-area{
+        padding-top: 150px;
+    }
+    .searchBar .header-option {
+        letter-spacing: 0.3px;
+        padding-left: 1.5rem;
+    }
+    .card-item img{
+        height: 160px;
+    }
+    .card-container{
+        padding: 1rem 0;
+    }
+}
+@media (max-width: 576px){
+    .card-item img{
+        height: auto;
+    }
+    .listings-grid-element .image{
+
+    }
+}
+@media (min-width: 768px) {
+    header {
+        position: absolute;
+    }
+}
+/**/
