@@ -36,7 +36,7 @@ Route::post('/cart/update',[ShoppingCartController::class, 'update']);
 
 Route::get('/blog',[\App\Http\Controllers\BlogController::class, 'getBlog']);
 Route::get('/blog-json',[\App\Http\Controllers\BlogController::class, 'JsonBlog']);
-Route::get('/blog_detail/{id}',[\App\Http\Controllers\BlogController::class, 'getBlogDetail']); 
+Route::get('/blog_detail/{id}',[\App\Http\Controllers\BlogController::class, 'getBlogDetail']);
 
 Route::get('/sign_in', function () {
     return view('client.sign_in');
@@ -45,3 +45,6 @@ Route::get('/sign_up', function () {
     return view('client.sign_up');
 });
 
+Route::get('/product_detail', function () {
+    return view('client.product_detail.product_detail');
+});
