@@ -13,6 +13,17 @@ body {
     width: 100%;
 }
 
+.footer {
+    background-color: #333;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    color: aliceblue;
+    font-size: 34px;
+    margin-top: 50px;
+    width: 100%;
+}
+
 .header {
     display: flex;
     margin-top: 8%;
@@ -51,14 +62,22 @@ body {
 
 .content {
     margin: auto;
-    width: 60%;
+    width: 64%;
     height: 100%;
+}
+
+.content img {
+    width: 100%;
 }
 
 .content p {
     font-size: 20px;
     line-height: 25px;
     letter-spacing: 1.5px;
+}
+
+.address p {
+    text-align: center;
 }
 
 @media only screen and (max-width: 300px) {

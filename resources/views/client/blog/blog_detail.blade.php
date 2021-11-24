@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/user/css/Blog/blog_detail.css">
 <!-- Boxicons CSS -->
 <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=618600ef20e65f001281c8c1&product=sticky-share-buttons" async="async"></script>
 <title>Blog</title>
 </head>
 <body>
@@ -31,8 +31,10 @@ HADER
         <div class="title">
             <h1> {{$blog->title}}</h1>
             </div>
-      <p>  {{$blog->getDetailAttribute()[0]}}</p>
-    </div>
+   {!!$blog->details!!}
+<!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
+</div>
    </div>
+   <div class="footer">Footer</div>
 </body>
 </html>
