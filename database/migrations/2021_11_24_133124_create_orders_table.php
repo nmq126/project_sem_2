@@ -1,8 +1,8 @@
 <?php
 
+use App\Enums\OrderStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateOrdersTable extends Migration
@@ -17,8 +17,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->double("total_price");
-            $table->integer("status");
-            $table->boolean("isCheckout");
+            $table->tinyInteger("status")->default(OrderStatus::Waiting);
+            $table->boolean("checkout");
             $table->string("ship_name");
             $table->string("ship_phone");
             $table->string("ship_address");

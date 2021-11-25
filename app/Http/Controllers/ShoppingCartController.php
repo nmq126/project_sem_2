@@ -15,7 +15,7 @@ class ShoppingCartController extends Controller
         if (Session::has('shoppingCart')) {
             $shoppingCart = Session::get('shoppingCart');
         }
-        return view('client.cart', [
+        return view('client.test.cart', [
             'shoppingCart' => $shoppingCart
         ]);
     }
@@ -27,13 +27,13 @@ class ShoppingCartController extends Controller
         //kiem tra sp ton tai, sp con ban k, sp con du so luong k
         if ($productQuantity <= 0) {
             return view('client.errors.404', [
-                'msg' => 'So luong san pham phai lon hon 0'
+                'msg' => 'Số lượng sản phẩm phải lớn hơn 0'
             ]);
         }
         $obj = Product::find($productId);
-        if ($obj == null) {
+        if ($obj == null || $obj->status == 0) {
             return view('client.errors.404', [
-                'msg' => 'Khong tim thay san pham'
+                'msg' => 'Không tìm thấy sản phẩm'
             ]);
         }
         //
@@ -50,7 +50,8 @@ class ShoppingCartController extends Controller
             $cartItem = new stdClass();
             $cartItem->id = $obj->id;
             $cartItem->name = $obj->name;
-            $cartItem->unitPrice = $obj->price;
+            $cartItem->price = $obj->price;
+            $cartItem->unitPrice = $obj->price * (100 - $obj->discount)/100;
             $cartItem->quantity = $productQuantity;
             $shoppingCart[$productId] = $cartItem;
         }
@@ -77,13 +78,13 @@ class ShoppingCartController extends Controller
         //kiem tra sp ton tai, sp con ban k, sp con du so luong k
         if ($productQuantity <= 0) {
             return view('client.errors.404', [
-                'msg' => 'So luong san pham phai lon hon 0'
+                'msg' => 'Số lượng sản phẩm phải lớn hơn 0'
             ]);
         }
         $obj = Product::find($productId);
-        if ($obj == null) {
+        if ($obj == null || $obj->status == 0) {
             return view('client.errors.404', [
-                'msg' => 'Khong tim thay san pham'
+                'msg' => 'Không tìm thấy sản phẩm'
             ]);
         }
         //

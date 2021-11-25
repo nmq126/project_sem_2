@@ -18,10 +18,12 @@ class CategorySeeder extends Seeder
         DB::table('categories')->truncate();
         DB::table('categories')->insert([
             [
-                'name' => 'lipstick'
+                'name' => 'Mon Viet',
+                'description' => 'Vietnamese food'
             ],
             [
-                'name' => 'accessories'
+                'name' => 'mon han',
+                'description' => 'mon han'
             ]
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');

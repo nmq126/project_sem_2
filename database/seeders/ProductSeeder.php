@@ -20,56 +20,75 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'LIBRE EAU DE PARFUM',
                 'price' => '800000',
-                'category_id' => '2',
+                'category_id' => '1',
+                'ingredient_id' => '1',
                 'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621679387/ey4xeidofecmu3mu9lqx.jpg',
                 'description' => 'A floral fragrance with Lavender, Orange Blossom, & Musk Accord',
+                'detail' => '123'
             ],
 
             [
                 'name' => 'LE VERNIS LIMITED EDITION',
                 'price' => '300000',
                 'category_id' => '1',
+                'ingredient_id' => '1',
                 'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621826960/sy4y4qmnu1esjaqgbfcv.jpg',
                 'description' => 'NAIL POLISH WITH LONG LASTING COLOUR AND SHINE.',
+                'detail' => '123'
+
             ],
             [
                 'name' => 'LOVE small 18ct yellow-gold wedding band',
                 'price' => '3000000',
-                'category_id' => '1',
+                'category_id' => '1','ingredient_id' => '1',
                 'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621834724/nnzyebx5n9c2jri9uge9.jpg',
                 'description' => '18ct yellow-gold wedding ring',
+                'detail' => '123'
+
             ],
 
             [
                 'name' => 'TONIQUE CONFORT HYDRATING FACIAL TONER',
                 'price' => '800000',
                 'category_id' => '2',
+                'ingredient_id' => '1',
                 'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621825537/w7vabvzacg8kmjgphabn.jpg',
                 'description' => 'The #1 Toner in the World!',
+                'detail' => '123'
+
             ],
 
             [
                 'name' => 'BLACK OPIUM EAU DE PARFUM',
                 'price' => '1200000',
                 'category_id' => '1',
+                'ingredient_id' => '1',
                 'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621678750/ibdzhiyyco9jf0gkxmtx.jpg',
                 'description' => 'A warm & spicy fragrance with Coffee, White Flowers, & Vanilla',
+                'detail' => '123'
+
             ],
 
             [
                 'name' => 'ON THE BEACH',
                 'price' => '1200000',
                 'category_id' => '1',
+                'ingredient_id' => '1',
                 'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621835488/mhqdhurdblhudazc8dlo.png',
                 'description' => 'ON THE BEACH',
+                'detail' => '123'
+
             ],
 
             [
                 'name' => 'TOP SECRETS NATURAL ACTION EXFOLIATOR',
                 'price' => '500000',
                 'category_id' => '2',
+                'ingredient_id' => '1',
                 'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621827263/gzhq501omj5cv0eiw8re.jpg',
                 'description' => 'An exfoliant comprised of sugars and ultra-fine oils for gentle exfoliation.',
+                'detail' => '123'
+
             ],
 
         ]);
