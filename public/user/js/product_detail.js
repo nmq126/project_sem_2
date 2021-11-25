@@ -19,8 +19,9 @@ window.addEventListener("load", function() {
         if (direction == 1) {
             index++;
             if (index >= sliderLength - 2) {
-                index = sliderLength - 3;
-
+                index = 0;
+                postionX = 0;
+                sliderMain.style.transform = `translateX(${postionX}px)`;
                 return;
             };
             postionX = postionX - sliderItemWidth;
@@ -29,9 +30,12 @@ window.addEventListener("load", function() {
         } else if (direction == -1) {
             index--;
             if (index < 0) {
-
                 index = 0;
+                postionX = 0;
+                sliderMain.style.transform = `translateX(${postionX}px)`;
                 return;
+
+
             };
 
             postionX = postionX + sliderItemWidth;
@@ -39,4 +43,46 @@ window.addEventListener("load", function() {
             sliderMain.style.transform = `translateX(${postionX}px)`
         }
     }
+
+
+});
+
+
+
+
+$(document).ready(function() {
+    const inputQuantity = $('input[name=quantity]');
+    let quantity = 1;
+    const input = $("#quantity-span");
+    $("button[name=minus]").click(function(event) {
+        quantity--;
+        if (quantity <= 0) {
+            quantity = 1;
+        }
+
+        input.html(quantity);
+        inputQuantity.val(quantity);
+
+    });
+    $("button[name=plus]").click(function(event) {
+        quantity++;
+        input.innerHTML = `${quantity}`
+        input.html(quantity);
+        inputQuantity.val(quantity);
+
+    });
+
+
+});
+$(".comment").click(function(event) {
+    $(".comment").addClass("active");
+    $(".detail").removeClass("active");
+    $(".detail-item-2").css("display", "none");
+    $(".detail-item-1").css("display", "block");
+});
+$(".detail").click(function(event) {
+    $(".comment").removeClass("active");
+    $(".detail").addClass("active");
+    $(".detail-item-1").css("display", "none");
+    $(".detail-item-2").css("display", "block");
 });
