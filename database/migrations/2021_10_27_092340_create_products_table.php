@@ -20,9 +20,9 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->text('detail');
             $table->double('price');
-            $table->unsignedInteger('discount');
-            $table->boolean('isFeatured');
-            $table->integer('status');
+            $table->unsignedInteger('discount')->default(0);
+            $table->boolean('isFeatured')->default(false);
+            $table->integer('status')->default(1);
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('ingredient_id');
             $table->foreign('category_id')->references('id')->on('categories');

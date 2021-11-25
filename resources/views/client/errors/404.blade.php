@@ -31,7 +31,6 @@
 <!-- Begin Preloader -->
 <div id="preloader">
     <div class="canvas">
-        <img src="/assets/img/logo.png" alt="logo" class="loader-logo">
         <div class="spinner"></div>
     </div>
 </div>
@@ -45,7 +44,7 @@
                 <h1>404</h1>
                 <h2>{{$msg}} </h2>
                 <p></p>
-                <a href="/product" class="btn btn-shadow">
+                <a href="{{ url()->previous() }}" class="btn btn-shadow">
                     Go Back
                 </a>
             </div>
