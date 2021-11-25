@@ -11,6 +11,9 @@ class ProductAdminController extends Controller
         return view('admin.products.form');
     }
 
+    public function processForm(Request $request){
+        return $request->all();
+    }
     public function getList()
     {
         return view('admin.products.list');

@@ -91,8 +91,7 @@
                     <div class="form-group row d-flex align-items-center mb-3">
                         <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Ghi chú</label>
                         <div class="col-lg-8">
-                            <textarea class="form-control" name="shipNote" placeholder="Ghi chú cho cửa hàng"
-                                      required></textarea>
+                            <textarea class="form-control" name="shipNote" placeholder="Ghi chú cho cửa hàng"></textarea>
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
@@ -100,7 +99,7 @@
                             toán</label>
                         <div class="col-lg-8">
                             <div class="select">
-                                <select name="payment" class="custom-select form-control">
+                                <select name="shipPayment" class="custom-select form-control">
                                     <option value="" disabled selected>Chọn một phương thức thanh toán</option>
                                     <option value="0">Thanh toán khi nhận hàng</option>
                                     <option value="1">Thanh toán online qua Paypal</option>
@@ -118,7 +117,7 @@
                 </div>
                 @foreach($shoppingCart as $cartItem)
                     <div class="list-item mt-4">
-{{--                        <div class="quantity">{{ $cartItem->quantity }}</div>--}}
+                        {{--                        <div class="quantity">{{ $cartItem->quantity }}</div>--}}
                         <div class="name"> {{ $cartItem->name }} ({{ $cartItem->quantity }})</div>
                         <div class="price">
                             <?php if (isset($cartItem) && $cartItem->price != $cartItem->unitPrice): ?>
@@ -173,5 +172,26 @@
 
 <script src="assets/vendors/js/app/app.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //validate form
+        $("form[name=checkout-form]").validate({
+            rules: {
+                shipName: "required",
+                shipAddress: "required",
+                shipPhone: "required",
+                shipPayment: "required",
+            },
+            messages: {
+                shipName: "Vui lòng nhập vào tên người nhận",
+                shipAddress: "Vui lòng nhập địa chỉ người nhận",
+                shipPhone: "Vui lòng nhập số điện thoại người nhận",
+                shipPayment: "Vui lòng chọn phương thức thanh toán",
+            },
+        });
+    })
+</script>
 </body>
 </html>

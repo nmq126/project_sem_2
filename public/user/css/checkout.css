@@ -4,6 +4,10 @@
 body{
     margin: 0;
 }
+.error{
+    color: red;
+    font-size: 0.75em;
+}
 header {
     padding-top: 20px;
     height: 80px;

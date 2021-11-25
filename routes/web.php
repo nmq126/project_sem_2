@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/admin/product/create',[ProductAdminController::class, 'getForm']);
-Route::post('/admin/product/create',[ProductAdminController::class, 'getForm']);
+Route::post('/admin/product/create',[ProductAdminController::class, 'processForm']);
 Route::get('/admin/product/list',[ProductAdminController::class, 'getList']);
 
 //client side

@@ -73,21 +73,15 @@ class OrderController extends Controller
             $order_details = [];
             foreach ($array_order_detail as $orderDetail){
                 $orderDetail->order_id = $order->id;
-                $order_details = [
-                    'product_id' =>$orderDetail->product_id,
-                    'quantity' => $orderDetail->quantity,
-                    'unit_price' => $orderDetail->unit_price,
-                    'order_id' => $order->id
-                ];
-//                $orderDetail->save();
+                $orderDetail->save();
             }
-            OrderDetail::insert($order_details);
+//            OrderDetail::insert($order_details);
             DB::commit();
             Session::forget('shoppingCart');
         }catch (\Exception $e){
             DB::rollBack();
             return $e;
         }
-        return $array_order_detail;
+        return "Đặt hàng thành công page";
     }
 }
