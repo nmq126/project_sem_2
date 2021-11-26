@@ -35,6 +35,12 @@ Route::get('/cart/add',[ShoppingCartController::class, 'add']);
 Route::get('/cart/show',[ShoppingCartController::class, 'show']);
 Route::get('/cart/remove',[ShoppingCartController::class, 'remove']);
 Route::post('/cart/update',[ShoppingCartController::class, 'update']);
+//checkout, order
+Route::get('/checkout', [OrderController::class, 'show']);
+Route::post('/order', [OrderController::class, 'process']);
+Route::get('/order/{id}', [OrderController::class, 'getDetail']);
+Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
+Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
 
 Route::get('/blog',[BlogController::class, 'getBlog']);
 Route::get('/blog-json',[BlogController::class, 'JsonBlog']);
@@ -57,10 +63,8 @@ Route::get('/cart', function () {
     return view('client.products-and-cart.cart');
 });
 
-Route::get('/checkout', [OrderController::class, 'show']);
-Route::post('/checkout', [OrderController::class, 'process']);
-Route::post('/checkout/create-payment', [OrderController::class, 'createPayment']);
-Route::post('/checkout/execute-payment', [OrderController::class, 'executePayment']);
+
+
 
 Route::get('/product_detail_1.2', function () {
     return view('client.product_detail.product_detail');
