@@ -99,7 +99,7 @@
                         <div class="form-group row d-flex align-items-center mb-5">
                             <label class="col-lg-3 form-control-label">Chi tiết</label>
                             <div class="col-lg-9">
-                                <textarea type="text" class="form-control" id="editor" rows="20" placeholder="Chi tiết sản phẩm"
+                                <textarea type="text" class="form-control" id="editor" rows="25" placeholder="Chi tiết sản phẩm"
                                        name="detail">
                                 </textarea>
                             </div>
@@ -188,14 +188,17 @@
         }, false);
     </script>
 {{--    <!-- Begin ckeditor -->--}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.17.1/standard-all/ckeditor.js"></script>
 {{--    <!-- End ckeditor -->--}}
     <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+        CKEDITOR.replace('editor', {
+            removeButtons: 'PasteFromWord'
+        });
+        // ClassicEditor
+        //     .create( document.querySelector( '#editor' ) )
+        //     .catch( error => {
+        //         console.error( error );
+        //     } );
     </script>
 @endsection
 

@@ -30,7 +30,8 @@
 <!-- Begin Preloader -->
 <div id="preloader">
     <div class="canvas">
-        <div class="spinner"></div>
+        <img src="user/img/loader.gif" alt="">
+{{--        <div class="spinner"></div>--}}
     </div>
 </div>
 <!-- End Preloader -->
@@ -159,6 +160,7 @@
                 <p>Tổng</p>
                 <span>{{ $totalPrice }} vnđ</span>
             </div>
+            <div id="paypal-button"></div>
         </div>
     </div>
 </div>
@@ -192,6 +194,46 @@
             },
         });
     })
+</script>
+
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+
+<script>
+    paypal.Button.render({
+        env: 'sandbox', // Or 'production'
+        // Customize button (optional)
+        locale: 'en_US',
+        style: {
+            size: 'responsive',
+            color: 'gold',
+            shape: 'pill',
+            label: 'paypal',
+            tagline: 'false'
+        },
+        // Set up the payment:
+        // 1. Add a payment callback
+        payment: function(data, actions) {
+            // 2. Make a request to your server
+            return actions.request.post('/checkout/create-payment/')
+                .then(function(res) {
+                    // 3. Return res.id from the response
+                    return res.id;
+                });
+        },
+        // Execute the payment:
+        // 1. Add an onAuthorize callback
+        onAuthorize: function(data, actions) {
+            // 2. Make a request to your server
+            return actions.request.post('/checkout/execute-payment/', {
+                paymentID: data.paymentID,
+                payerID:   data.payerID
+            })
+                .then(function(res) {
+                    // 3. Show the buyer a confirmation message.
+                });
+        }
+    }, '#paypal-button');
 </script>
 </body>
 </html>
