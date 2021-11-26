@@ -50,6 +50,12 @@ Route::get('/home', function () {
     return view('client.home');
 });
 
+Route::get('/products', function () {
+    return view('client.products-and-cart.products');
+});
+Route::get('/cart', function () {
+    return view('client.products-and-cart.cart');
+});
 
 Route::get('/checkout', [OrderController::class, 'show']);
 Route::post('/checkout', [OrderController::class, 'process']);
