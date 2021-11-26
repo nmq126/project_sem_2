@@ -2,16 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\Transaction;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
 
 class OrderController extends Controller
 {
-    public function show(){
+    public function show()
+    {
 
         $shoppingCart = [];
         if (Session::has('shoppingCart')) {
@@ -19,14 +34,29 @@ class OrderController extends Controller
         }
         return view('client.checkout', [
             'shoppingCart' => $shoppingCart
-        ]);    }
+        ]);
+    }
 
-    public function process(Request $request){
+    public function getDetail($id)
+    {
+        $order = Order::find($id);
+        if ($order == null) {
+            return view('client.errors.404', [
+                'msg' => 'Đơn hàng không tồn tại!!'
+            ]);
+        }
+        return view('client.order', [
+            'order' => $order
+        ]);
+    }
+
+    public function process(Request $request)
+    {
         if (Session::has('shoppingCart')) {
             $shoppingCart = Session::get('shoppingCart');
         }
 
-        if (!Session::has('shoppingCart') || sizeof($shoppingCart) == 0){
+        if (!Session::has('shoppingCart') || sizeof($shoppingCart) == 0) {
             return view('client.errors.404', [
                 'msg' => 'Không có sản phẩm nào trong giỏ hàng!!'
             ]);
@@ -47,9 +77,9 @@ class OrderController extends Controller
         //tạo thông tin order detail
         $hasError = false;
         $array_order_detail = [];
-        foreach ($shoppingCart as $cartItem){
+        foreach ($shoppingCart as $cartItem) {
             $product = Product::find($cartItem->id);
-            if ($product == null || $product->status == 0){
+            if ($product == null || $product->status == 0) {
                 $hasError = true;
                 break;
             }
@@ -57,11 +87,11 @@ class OrderController extends Controller
             $orderDetail->product_id = $product->id;
             $orderDetail->order_id = $product->id;
             $orderDetail->quantity = $cartItem->quantity;
-            $orderDetail->unit_price = $product->price * (100 - $product->discount)/100;
+            $orderDetail->unit_price = $product->price * (100 - $product->discount) / 100;
             $order->total_price += $orderDetail->unit_price;
             array_push($array_order_detail, $orderDetail);
         }
-        if ($hasError){
+        if ($hasError) {
             return view('client.errors.404', [
                 'msg' => 'Sản phẩm không tồn tại hoặc không khả dụng!!'
             ]);
@@ -70,22 +100,42 @@ class OrderController extends Controller
         try {
             DB::beginTransaction();
             $order->save();
-            $order_details = [];
-            foreach ($array_order_detail as $orderDetail){
-                $orderDetail->order_id = $order->id;
+            $order_id = $order->id;
+//            $order_details = [];
+            foreach ($array_order_detail as $orderDetail) {
+                $orderDetail->order_id = $order_id;
                 $orderDetail->save();
             }
 //            OrderDetail::insert($order_details);
             DB::commit();
             Session::forget('shoppingCart');
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
             return $e;
         }
-        return "Đặt hàng thành công page";
+        return redirect('/order/' . $order_id);
     }
 
-    public function createPayment(Request $request){
+    public function createPayment(Request $request)
+    {
+//        $clientId = 'AZqirfWqV2F1C9rz5DUUXC63jDUXggrZ_7tBdjkxK_6kzJUC25UcwU0j3E5OYCEkIJNDCf9oOQWQ1I1r';
+//        $clientSecret = 'EIQ6hCG0IbFg9DJD4Z1YH530f30BNFCW4T79RN-Z311mKRSfw7ZhhEWaU5nMOfJf5kP0Nj0h0KHpyVfS';
+
+
+
+        $orderId = $request->get('orderID');
+        $order = Order::find($orderId);
+        if ($order == null) {
+            return 'Đơn hàng không tồn tại!!';
+        }
+        $clientId = 'ATIs_QL16BU7nylXRhyhh4ANQXyoUz-yZGzIBx9bZp4sAIOvxSK2dNdUPFDyRv7BJM55u5fAODzqqZK-';
+        $clientSecret = 'ELVcEXLe4dYeMHan7LcH7Eb0jP5hEH6_NGRx_kzPoeHJZtq3CmNhe9v6eaRtblRngI2QKmyxA9DZJBVQ';
+        $apiContext = new ApiContext(
+            new OAuthTokenCredential(
+                $clientId,
+                $clientSecret
+            )
+        );
         // ### Payer
 // A resource representing a Payer that funds a payment
 // For paypal account payments, set payment method
@@ -96,30 +146,26 @@ class OrderController extends Controller
 // ### Itemized information
 // (Optional) Lets you specify item wise
 // information
-        $item1 = new Item();
-        $item1->setName('Ground Coffee 40 oz')
-            ->setCurrency('USD')
-            ->setQuantity(1)
-            ->setSku("123123") // Similar to `item_number` in Classic API
-            ->setPrice(7.5);
-        $item2 = new Item();
-        $item2->setName('Granola bars')
-            ->setCurrency('USD')
-            ->setQuantity(5)
-            ->setSku("321321") // Similar to `item_number` in Classic API
-            ->setPrice(2);
-
+        $array_items = [];
+        foreach ($order->orderDetails as $orderDetail) {
+            $item = new Item();
+            $item->setName($orderDetail->product->name)
+                ->setCurrency('USD')
+                ->setQuantity($orderDetail->quantity)
+                ->setSku($orderDetail->product->id) // Similar to `item_number` in Classic API
+                ->setPrice(Helper::convertVndToUsd($orderDetail->unit_price));
+            array_push($array_items, $item);
+        }
         $itemList = new ItemList();
-        $itemList->setItems(array($item1, $item2));
+        $itemList->setItems($array_items);
 
-// ### Additional payment details
-// Use this optional field to set additional
-// payment information such as tax, shipping
-// charges etc.
-        $details = new Details();
-        $details->setShipping(1.2)
-            ->setTax(1.3)
-            ->setSubtotal(17.50);
+
+        ### Additional payment details
+
+    $details = new Details();
+        $details->setShipping(0)
+            ->setTax(0)
+            ->setSubtotal(Helper::convertVndToUsd($order->total_price));
 
 // ### Amount
 // Lets you specify a payment amount.
@@ -127,26 +173,25 @@ class OrderController extends Controller
 // such as shipping, tax.
         $amount = new Amount();
         $amount->setCurrency("USD")
-            ->setTotal(20)
+            ->setTotal(Helper::convertVndToUsd($order->total_price))
             ->setDetails($details);
 
-// ### Transaction
-// A transaction defines the contract of a
-// payment - what is the payment for and who
-// is fulfilling it.
-        $transaction = new Transaction();
+
+ ### Transaction
+
+    $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)
-            ->setDescription("Payment description")
-            ->setInvoiceNumber(uniqid());
+            ->setDescription("Checkout order #$order->id")
+            ->setInvoiceNumber($order->id);
 
 // ### Redirect urls
 // Set the urls that the buyer must be redirected to after
 // payment approval/ cancellation.
-        $baseUrl = getBaseUrl();
+        $baseUrl = $request->root();
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl("$baseUrl/ExecutePayment.php?success=true")
-            ->setCancelUrl("$baseUrl/ExecutePayment.php?success=false");
+        $redirectUrls->setReturnUrl("$baseUrl/payment-success")
+            ->setCancelUrl("$baseUrl/payment-fail");
 
 // ### Payment
 // A Payment Resource; create one using
@@ -158,9 +203,6 @@ class OrderController extends Controller
             ->setTransactions(array($transaction));
 
 
-// For Sample Purposes Only.
-        $request = clone $payment;
-
 // ### Create Payment
 // Create a payment by calling the 'create' method
 // passing it a valid apiContext.
@@ -171,8 +213,6 @@ class OrderController extends Controller
         try {
             $payment->create($apiContext);
         } catch (Exception $ex) {
-            // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-            ResultPrinter::printError("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $ex);
             exit(1);
         }
 
@@ -182,13 +222,62 @@ class OrderController extends Controller
 // method
         $approvalUrl = $payment->getApprovalLink();
 
-// NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-        ResultPrinter::printResult("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", "<a href='$approvalUrl' >$approvalUrl</a>", $request, $payment);
 
         return $payment;
     }
 
-    public function executePayment(Request $request){
+    public function executePayment(Request $request)
+    {
+        $orderId = $request->get('orderID');
+        $order = Order::find($orderId);
+        if ($order == null) {
+            return 'Đơn hàng không tồn tại!!';
+        }
+        // Get the payment Object by passing paymentId
+        // payment id was previously stored in session in
+        // CreatePaymentUsingPayPal.php
+        $clientId = 'ATIs_QL16BU7nylXRhyhh4ANQXyoUz-yZGzIBx9bZp4sAIOvxSK2dNdUPFDyRv7BJM55u5fAODzqqZK-';
+        $clientSecret = 'ELVcEXLe4dYeMHan7LcH7Eb0jP5hEH6_NGRx_kzPoeHJZtq3CmNhe9v6eaRtblRngI2QKmyxA9DZJBVQ';
+        $apiContext = new ApiContext(
+            new OAuthTokenCredential(
+                $clientId,
+                $clientSecret
+            )
+        );
+        $paymentId = $request->get('paymentID');
+        $payerId = $request->get('payerID');
+        $payment = Payment::get($paymentId, $apiContext);
 
+        // ### Payment Execute
+        // PaymentExecution object includes information necessary
+        // to execute a PayPal account payment.
+        // The payer_id is added to the request query parameters
+        // when the user is redirected from paypal back to your site
+        $execution = new PaymentExecution();
+        $execution->setPayerId($payerId);
+
+
+        try {
+            // Execute the payment
+            // (See bootstrap.php for more on `ApiContext`)
+            $result = $payment->execute($execution, $apiContext);
+
+
+            try {
+                $payment = Payment::get($paymentId, $apiContext);
+                $order->checkout = true;
+                $order->updated_at = Carbon::now();
+                $order->save();
+            } catch (Exception $ex) {
+
+                exit(1);
+            }
+        } catch (Exception $ex) {
+
+            exit(1);
+        }
+
+
+        return $payment;
     }
 }
