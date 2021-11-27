@@ -20,6 +20,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin/product/create',[ProductAdminController::class, 'getForm']);
 Route::post('/admin/product/create',[ProductAdminController::class, 'getForm']);
 Route::get('/admin/product/list',[ProductAdminController::class, 'getList']);
+//Ingrendient
+Route::get('/admin/product/create/ingredient',[ProductAdminController::class, 'getFormIngredient']);
+Route::post('/admin/product/create/ingredient',[ProductAdminController::class, 'addIngredient']);
+Route::get('/admin/product/list/ingredient',[ProductAdminController::class, 'ListIngredient']);
+Route::get('/admin/product/list/ingredient/delete/{id}',[ProductAdminController::class, 'DeleteIngrendient']);
+Route::get('/admin/product/update/ingredient/{id}',[ProductAdminController::class, 'UpdateView']);
+Route::post('/admin/product/update/ingredient/{id}',[ProductAdminController::class, 'UpdateIngrendient']);
+// Category
+Route::get('/admin/product/create/category',[ProductAdminController::class, 'getFormCategory']);
+Route::post('/admin/product/create/category',[ProductAdminController::class, 'addCategory']);
+Route::get('/admin/product/list/category',[ProductAdminController::class, 'ListCategory']);
+Route::get('/admin/product/list/category/delete/{id}',[ProductAdminController::class, 'DeleteCategory']);
+Route::get('/admin/product/update/category/{id}',[ProductAdminController::class, 'UpdateViewCate']);
+Route::post('/admin/product/update/category/{id}',[ProductAdminController::class, 'UpdateCategory']);
 
 //                          client side
 

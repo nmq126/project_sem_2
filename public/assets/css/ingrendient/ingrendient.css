@@ -1,0 +1,39 @@
+#delete_message {
+    display: none;
+    position: fixed;
+    top: 25%;
+    width: 40%;
+    left: 30%;
+    height: 250px;
+    background-color: #2c304d;
+    text-align: center;
+    z-index: 999;
+}
+
+#delete_message h2 {
+    justify-content: center;
+    color: #aea9c3;
+    margin-top: 10%;
+}
+
+#delete,
+#cancel {
+    border: none;
+    background: none;
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 2px solid white;
+    margin: 20px;
+    color: #CED8F6;
+    line-height: 40px;
+    transition: all 0.5s ease;
+}
+
+#delete:hover,
+#cancel:hover {
+    cursor: pointer;
+    color: #e76c90;
+    border: 2px solid #e76c90;
+}

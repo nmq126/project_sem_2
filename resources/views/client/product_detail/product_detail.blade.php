@@ -4,9 +4,7 @@
         <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="stylesheet" href="http://localhost/client_web/css/product_detail.css">
-
+        <link rel="stylesheet" href="/user/css/product_detail.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer"
         />
         <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=618600ef20e65f001281c8c1&product=sticky-share-buttons" async="async"></script>
@@ -19,7 +17,7 @@
         <script>
         WebFont.load({
     google: {
-        "families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"]
+        "families": [ "Montserrat:400,500,600,700", "Noto+Sans:400,700" ]
     },
     active: function() {
         sessionStorage.fonts = true;
@@ -92,7 +90,7 @@
         <i class="fas fa-chevron-circle-right"></i>
         <div class="slider-wrapper">
         <div class="slider-main">
-        <div class="slider-item">
+<div class="slider-item">
         <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_631df1a3-d29e-4971-9a51-36ae4df78146_compact.jpg?v=1536552284" alt="">
         </div>
         <div class="slider-item">
@@ -110,12 +108,10 @@
         <div class="slider-item">
         <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/9_da0e5810-403d-4f1e-9d9b-a522319b9687_compact.jpg?v=1536552288" alt="">
         </div>
-
         </div>
         <i class="fas fa-chevron-circle-left"></i>
         </div>
         </div>
-
         </div>
         <div class="main2">
         <div class="container">

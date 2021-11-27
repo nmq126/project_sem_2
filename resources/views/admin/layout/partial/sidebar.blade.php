@@ -15,6 +15,15 @@
                            href="/admin/product/create">Create</a></li>
                     <li><a class="{{ request()->is('admin/product/list') ? 'active' : '' }}"
                            href="/admin/product/list">List</a></li>
+                           <li><a class="{{ request()->is('admin/product/create/ingredient') ? 'active' : '' }}"
+                            href="/admin/product/create/ingredient">Create Ingrendient</a></li>
+                   
+                                <li><a class="{{ request()->is('admin/product/list/ingredient') ? 'active' : '' }}"
+                                    href="/admin/product/list/ingredient">List Ingrendient</a></li>
+                                    <li><a class="{{ request()->is('admin/product/create/category') ? 'active' : '' }}"
+                                        href="/admin/product/create/category">Create Category</a></li>
+                                        <li><a class="{{ request()->is('admin/product/list/category') ? 'active' : '' }}"
+                                            href="/admin/product/list/category">List Category</a></li>
                 </ul>
             </li>
             {{-- End product--}}
