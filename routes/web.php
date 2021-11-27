@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin/product/create',[ProductAdminController::class, 'getForm']);
 Route::post('/admin/product/create',[ProductAdminController::class, 'processForm']);
 Route::get('/admin/product/list',[ProductAdminController::class, 'getList']);
-<<<<<<< HEAD
+
 //Ingrendient
 Route::get('/admin/product/create/ingredient',[ProductAdminController::class, 'getFormIngredient']);
 Route::post('/admin/product/create/ingredient',[ProductAdminController::class, 'addIngredient']);
@@ -39,12 +39,12 @@ Route::get('/admin/product/list/category',[ProductAdminController::class, 'ListC
 Route::get('/admin/product/list/category/delete/{id}',[ProductAdminController::class, 'DeleteCategory']);
 Route::get('/admin/product/update/category/{id}',[ProductAdminController::class, 'UpdateViewCate']);
 Route::post('/admin/product/update/category/{id}',[ProductAdminController::class, 'UpdateCategory']);
-=======
+
 Route::get('/admin/orders', [OrderAdminController::class, 'fetchOrders']);
 Route::get('/admin/orders/search', [OrderAdminController::class, 'search']);
 Route::get('/admin/orders/{id}/detail', [OrderDetailsAdminController::class, 'orderDetail']);
 Route::put('admin/orders/{id}/update', [OrderDetailsAdminController::class, 'updateStatus']);
->>>>>>> e989e9b194e31916beb543cf43daddbd7c3fd682
+
 
 //client side
 
