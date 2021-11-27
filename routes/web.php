@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailsAdminController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\ProductClientController;
 use App\Http\Controllers\ShoppingCartController;
@@ -22,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin/product/create',[ProductAdminController::class, 'getForm']);
 Route::post('/admin/product/create',[ProductAdminController::class, 'processForm']);
 Route::get('/admin/product/list',[ProductAdminController::class, 'getList']);
+Route::get('/admin/orders', [OrderAdminController::class, 'fetchOrders']);
+Route::get('/admin/orders/search', [OrderAdminController::class, 'search']);
+Route::get('/admin/orders/{id}/detail', [OrderDetailsAdminController::class, 'orderDetail']);
+Route::put('admin/orders/{id}/update', [OrderDetailsAdminController::class, 'updateStatus']);
 
 //client side
 
@@ -68,4 +74,7 @@ Route::get('/cart', function () {
 
 Route::get('/product_detail_1.2', function () {
     return view('client.product_detail.product_detail');
+});
+Route::get('/products', function (){
+   return view('client.products-and-cart.products');
 });
