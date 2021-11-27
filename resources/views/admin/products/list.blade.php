@@ -7,7 +7,7 @@
     <div class="row">
         <div class="page-header">
             <div class="d-flex align-items-center">
-                <h2 class="page-header-title">Forms Basic</h2>
+                <h2 class="page-header-title"></h2>
                 <div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="db-default.html"><i class="ti ti-home"></i></a></li>
@@ -25,7 +25,7 @@
             <!-- Sorting -->
             <div class="widget has-shadow">
                 <div class="widget-header bordered no-actions d-flex align-items-center">
-                    <h4>Sorting</h4>
+                    <h4>Danh sách sản phẩm</h4>
                 </div>
                 <div class="widget-body">
                     <div class="table-responsive">

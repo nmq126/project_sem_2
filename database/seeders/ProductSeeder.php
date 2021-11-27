@@ -18,62 +18,74 @@ class ProductSeeder extends Seeder
         DB::table('products')->truncate();
         DB::table('products')->insert([
             [
-                'name' => 'LIBRE EAU DE PARFUM',
-                'price' => '800000',
-                'category_id' => '2',
-                'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621679387/ey4xeidofecmu3mu9lqx.jpg',
+                'id' => '1',
+                'name' => 'Fried Chicken',
+                'price' => 3,
+                'category_id' => '1',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://cdn.statically.io/img/gachaybo.com/f=auto/wp-content/uploads/2021/07/4-ga-ran-kfc.jpg',
                 'description' => 'A floral fragrance with Lavender, Orange Blossom, & Musk Accord',
+                'detail' => '123',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
             ],
 
             [
-                'name' => 'LE VERNIS LIMITED EDITION',
-                'price' => '300000',
+                'id' => '2',
+                'name' => 'Pot-roast Beef',
+                'price' => 4,
                 'category_id' => '1',
-                'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621826960/sy4y4qmnu1esjaqgbfcv.jpg',
-                'description' => 'NAIL POLISH WITH LONG LASTING COLOUR AND SHINE.',
+                'ingredient_id' => '2',
+                'thumbnail' => 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/recipe-image-legacy-id-1222463_11-7eaf5a2.jpg?quality=90&webp=true&resize=440,400',
+                'description' => 'A floral fragrance with Lavender, Orange Blossom, & Musk Accord',
+                'detail' => '123',
+                'discount' => 12,
+                'isFeatured' => 0,
+                'status' => 1
             ],
             [
-                'name' => 'LOVE small 18ct yellow-gold wedding band',
-                'price' => '3000000',
+                'id' => '3',
+                'name' => 'Fried Fish',
+                'price' => 3,
                 'category_id' => '1',
-                'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621834724/nnzyebx5n9c2jri9uge9.jpg',
-                'description' => '18ct yellow-gold wedding ring',
+                'ingredient_id' => '3',
+                'thumbnail' => 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/727bda84826873.5d6906eb29c0a.jpg',
+                'description' => 'A floral fragrance with Lavender, Orange Blossom, & Musk Accord',
+                'detail' => '123',
+                'discount' => 11,
+                'isFeatured' => 0,
+                'status' => 1
             ],
 
             [
-                'name' => 'TONIQUE CONFORT HYDRATING FACIAL TONER',
-                'price' => '800000',
+                'id' => '4',
+                'name' => 'Lemon Juice',
+                'price' => 1,
                 'category_id' => '2',
-                'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621825537/w7vabvzacg8kmjgphabn.jpg',
-                'description' => 'The #1 Toner in the World!',
+                'ingredient_id' => '4',
+                'thumbnail' => 'https://tiimg.tistatic.com/fp/1/006/390/sour-taste-fresh-lemon-juice-190.jpg',
+                'description' => 'A floral fragrance with Lavender, Orange Blossom, & Musk Accord',
+                'detail' => '123',
+                'discount' => 0,
+                'isFeatured' => 0,
+                'status' => 1
             ],
 
             [
-                'name' => 'BLACK OPIUM EAU DE PARFUM',
-                'price' => '1200000',
-                'category_id' => '1',
-                'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621678750/ibdzhiyyco9jf0gkxmtx.jpg',
-                'description' => 'A warm & spicy fragrance with Coffee, White Flowers, & Vanilla',
-            ],
-
-            [
-                'name' => 'ON THE BEACH',
-                'price' => '1200000',
-                'category_id' => '1',
-                'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621835488/mhqdhurdblhudazc8dlo.png',
-                'description' => 'ON THE BEACH',
-            ],
-
-            [
-                'name' => 'TOP SECRETS NATURAL ACTION EXFOLIATOR',
-                'price' => '500000',
+                'id' => '5',
+                'name' => 'Strawberry Juice',
+                'price' => 1,
                 'category_id' => '2',
-                'thumbnail' => 'https://res.cloudinary.com/nmq126/image/upload/v1621827263/gzhq501omj5cv0eiw8re.jpg',
-                'description' => 'An exfoliant comprised of sugars and ultra-fine oils for gentle exfoliation.',
-            ],
-
+                'ingredient_id' => '5',
+                'thumbnail' => 'https://vn.all.biz/img/vn/catalog/16002.jpg',
+                'description' => 'A floral fragrance with Lavender, Orange Blossom, & Musk Accord',
+                'detail' => '123',
+                'discount' => 0,
+                'isFeatured' => 0,
+                'status' => 1
+            ]
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
-
     }
 }

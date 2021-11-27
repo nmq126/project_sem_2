@@ -30,10 +30,23 @@
 <!-- Begin Preloader -->
 <div id="preloader">
     <div class="canvas">
-        <div class="spinner"></div>
+        <img src="user/img/loader.gif" alt="">
+{{--        <div class="spinner"></div>--}}
     </div>
 </div>
 <!-- End Preloader -->
+@php
+    $totalPrice = 0;
+    $totalPromo = 0;
+@endphp
+@foreach($shoppingCart as $cartItem)
+    @php
+        if (isset($cartItem) && isset($totalPrice) && isset($totalPromo)) {
+            $totalPrice += $cartItem->unitPrice * $cartItem->quantity;
+            $totalPromo += ($cartItem->price - $cartItem->unitPrice)  * $cartItem->quantity;
+        }
+    @endphp
+@endforeach
 <header>
     <div class="container">
         <div class="logo">
@@ -55,36 +68,39 @@
         <div class="information">
             <h3>Thông tin vận chuyển</h3>
             <div class="authentication-form">
-                <form method="post" action="" name="checkout-form" id="checkout-form">
+                <form method="post" action="/order" name="checkout-form" id="checkout-form">
+                    @csrf
                     <div class="form-group row d-flex align-items-center mb-3">
                         <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Người nhận</label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" placeholder="Tên người nhận">
+                            <input type="text" class="form-control" name="shipName" placeholder="Tên người nhận">
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-3">
                         <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Địa chỉ</label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" placeholder="Địa chỉ người nhận">
+                            <input type="text" class="form-control" name="shipAddress" placeholder="Địa chỉ người nhận">
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-3">
                         <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Số điện thoại</label>
                         <div class="col-lg-8">
-                            <input type="text" class="form-control" placeholder="Số điện thoại người nhận">
+                            <input type="text" class="form-control" name="shipPhone"
+                                   placeholder="Số điện thoại người nhận">
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-3">
                         <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Ghi chú</label>
                         <div class="col-lg-8">
-                            <textarea class="form-control" placeholder="Ghi chú cho cửa hàng" required></textarea>
+                            <textarea class="form-control" name="shipNote" placeholder="Ghi chú cho cửa hàng"></textarea>
                         </div>
                     </div>
                     <div class="form-group row d-flex align-items-center mb-5">
-                        <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Phương thức thanh toán</label>
+                        <label class="col-lg-4 form-control-label d-flex justify-content-lg-end">Phương thức thanh
+                            toán</label>
                         <div class="col-lg-8">
                             <div class="select">
-                                <select name="payment" class="custom-select form-control">
+                                <select name="shipPayment" class="custom-select form-control">
                                     <option value="" disabled selected>Chọn một phương thức thanh toán</option>
                                     <option value="0">Thanh toán khi nhận hàng</option>
                                     <option value="1">Thanh toán online qua Paypal</option>
@@ -98,38 +114,21 @@
             <div class="order col-lg-8">
                 <div class="order-title">
                     <h3>Chi tiết đơn hàng</h3>
-                    <a class="add-more" href="/product  ">Thêm sản phẩm</a>
+                    <a class="add-more" href="/product  ">Chọn thêm sản phẩm</a>
                 </div>
-                <div class="list-item mt-4">
-                    <div class="name">Gà quay giấy pạc</div>
-                    <div class="price">$11.99</div>
-                </div>
-                <hr>
-                <div class="list-item mt-4">
-                    <div class="name">Gà quay giấy pạc</div>
-                    <div class="price">$11.99</div>
-                </div>
-                <hr>
-                <div class="list-item mt-4">
-                    <div class="name">Gà quay giấy pạc</div>
-                    <div class="price">$11.99</div>
-                </div>
-                <hr>
-                <div class="list-item mt-4">
-                    <div class="name">Gà quay giấy pạc</div>
-                    <div class="price">$11.99</div>
-                </div>
-                <hr>
-                <div class="list-item mt-4">
-                    <div class="name">Gà quay giấy pạc</div>
-                    <div class="price">$11.99</div>
-                </div>
-                <hr><div class="list-item mt-4">
-                    <div class="name">Gà quay giấy pạc</div>
-                    <div class="price">$11.99</div>
-                </div>
-                <hr>
-
+                @foreach($shoppingCart as $cartItem)
+                    <div class="list-item mt-4">
+                        {{--                        <div class="quantity">{{ $cartItem->quantity }}</div>--}}
+                        <div class="name"> {{ $cartItem->name }} ({{ $cartItem->quantity }})</div>
+                        <div class="price">
+                            <?php if (isset($cartItem) && $cartItem->price != $cartItem->unitPrice): ?>
+                            <del>{{ $cartItem->price * $cartItem->quantity }}</del>
+                            <?php endif; ?>
+                            {{ $cartItem->unitPrice * $cartItem->quantity }} vnđ
+                        </div>
+                    </div>
+                    <hr>
+                @endforeach
             </div>
 
         </div>
@@ -140,26 +139,26 @@
                 <button form="checkout-form" type="submit">Đặt hàng</button>
             </div>
             <hr>
-            <div class="promo-text">Miễn phí vận chuyển cho đơn hàng từ $15</div>
+            <div class="promo-text">Miễn phí vận chuyển cho đơn hàng từ 0đ</div>
             <ul>
                 <li class="text">
                     <p>Tạm tính</p>
-                    <span>$2.99</span>
+                    <span>{{ $totalPrice + $totalPromo }} vnđ</span>
                 </li>
                 <li class="text">
                     <p>Khuyến mại</p>
-                    <span class="promo">-$1.99</span>
+                    <span class="promo">- {{ $totalPromo }} vnđ</span>
                 </li>
 
                 <li class="text">
                     <p>Phí vận chuyển</p>
-                    <span>$1.99</span>
+                    <span>MIỄN PHÍ</span>
                 </li>
             </ul>
             <hr>
             <div class="total">
-                <p>Total</p>
-                <span>$10.99</span>
+                <p>Tổng</p>
+                <span>{{ $totalPrice }} vnđ</span>
             </div>
         </div>
     </div>
@@ -173,6 +172,28 @@
 <script src="assets/vendors/js/base/core.min.js"></script>
 
 <script src="assets/vendors/js/app/app.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //validate form
+        $("form[name=checkout-form]").validate({
+            rules: {
+                shipName: "required",
+                shipAddress: "required",
+                shipPhone: "required",
+                shipPayment: "required",
+            },
+            messages: {
+                shipName: "Vui lòng nhập vào tên người nhận",
+                shipAddress: "Vui lòng nhập địa chỉ người nhận",
+                shipPhone: "Vui lòng nhập số điện thoại người nhận",
+                shipPayment: "Vui lòng chọn phương thức thanh toán",
+            },
+        });
+    })
+</script>
 
 </body>
 </html>

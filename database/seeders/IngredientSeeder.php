@@ -18,6 +18,7 @@ class IngredientSeeder extends Seeder
         DB::table('ingredients')->truncate();
         DB::table('ingredients')->insert([
             [
+<<<<<<< HEAD
                 'name' => 'Trà xanh Matcha',
                 'description' => 'Là loại nguyên liệu tuyệt vời trong công thức làm nên các món tráng miệng, món bánh hay pha chế đồ uống',
             ],
@@ -76,6 +77,35 @@ class IngredientSeeder extends Seeder
             ],
 
 
+=======
+                'id' => '1',
+                'name' => 'chicken',
+                'description' => 'gia cam'
+            ],
+            [
+                'id' => '2',
+                'name' => 'beef',
+                'description' => 'gia suc'
+            ]
+            ,
+            [
+                'id' => '3',
+                'name' => 'fish',
+                'description' => 'ca'
+            ]
+            ,
+            [
+                'id' => '4',
+                'name' => 'lemon',
+                'description' => 'chanh'
+            ]
+            ,
+            [
+                'id' => '5',
+                'name' => 'strawberry',
+                'description' => 'dau'
+            ]
+>>>>>>> e989e9b194e31916beb543cf43daddbd7c3fd682
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }

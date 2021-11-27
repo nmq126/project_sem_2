@@ -47,6 +47,7 @@ class ProductAdminController extends Controller
 
         $ingrendient = Ingredient::all();
 
+<<<<<<< HEAD
         return view("admin.products.listingrendient",["ingrendient"=>$ingrendient]);
 
     }
@@ -90,6 +91,10 @@ $ingrendient->delete();
         $id = $request->id;
         DB::update('update categories set name = ? where id = ?',[$name,$id]);
         return redirect('admin/product/list/category')->with("msg","Update thành công");
+=======
+    public function processForm(Request $request){
+        return $request->all();
+>>>>>>> e989e9b194e31916beb543cf43daddbd7c3fd682
     }
     public function getList()
     {

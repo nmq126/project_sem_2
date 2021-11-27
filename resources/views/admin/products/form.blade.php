@@ -1,10 +1,10 @@
 @extends('admin.layout.master')
-@section('title', 'Add Product | Admin')
+@section('title', 'Thêm sản phẩm | Admin')
 @section('breadcrumb')
     <div class="row">
         <div class="page-header">
             <div class="d-flex align-items-center">
-                <h2 class="page-header-title">Add Product</h2>
+                <h2 class="page-header-title">Thêm sản phẩm</h2>
                 <div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href=""><i class="ti ti-home"></i></a></li>
@@ -28,32 +28,59 @@
                     <form class="form-horizontal" action="/admin/product/create" name="product-form" method="post">
                         @csrf
                         <div class="form-group row d-flex align-items-center mb-5">
-                            <label class="col-lg-3 form-control-label">Name</label>
+                            <label class="col-lg-3 form-control-label">Tên sản phẩm</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" placeholder="Enter product name"
+                                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm"
                                        name="name">
                             </div>
                         </div>
 
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-3 form-control-label">Giá sản phẩm</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" placeholder="Nhập giá sản phẩm"
+                                       name="price">
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-3 form-control-label">Giảm giá</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" placeholder="Nhập % giảm giá"
+                                       name="discount">
+                            </div>
+                        </div>
+
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-3 form-control-label">Mô tả</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" placeholder="Mô tả ngắn về sản phẩm"
+                                       name="description">
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-5">
-                            <label class="col-lg-3 form-control-label">Select</label>
+                            <label class="col-lg-3 form-control-label">Sản phẩm nổi bật</label>
                             <div class="col-lg-9 select mb-3">
-                                <select name="account" class="custom-select form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
+                                <select name="isFeatured" class="custom-select form-control">
+                                    <option value="" selected disabled>Sản phẩm này có phải sản phẩm nổi bật</option>
+                                    <option value="true">Có</option>
+                                    <option value="false">Không</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row d-flex align-items-center mb-5">
-                            <label class="col-lg-3 form-control-label">Description</label>
-                            <div class="col-lg-9">
-                                <textarea type="text" class="form-control" rows="7"
-                                          placeholder="Enter description"
-                                          name="description"></textarea>
+
+                        <div class="form-group row mb-5">
+                            <label class="col-lg-3 form-control-label">Trạng thái</label>
+                            <div class="col-lg-9 select mb-3">
+                                <select name="status" class="custom-select form-control">
+                                    <option value="" selected disabled>Trạng thái của sản phẩm</option>
+                                    <option value="1">Còn hàng</option>
+                                    <option value="false">Hết hàng</option>
+                                </select>
                             </div>
                         </div>
+
                         <div class="form-group row d-flex align-items-center mb-5">
                             <label class="col-lg-3 form-control-label">Thumbnail</label>
                             <div class="col-lg-9">
@@ -64,12 +91,21 @@
                                        placeholder="Enter avatar"
                                        name="thumbnail">
                                 <button class="btn btn-primary"
-                                        type="button" id="thumbnail_upload_widget">Upload thumbnail
+                                        type="button" id="thumbnail_upload_widget">Tải lên ảnh thumbnail
                                 </button>
                             </div>
                         </div>
+
+                        <div class="form-group row d-flex align-items-center mb-5">
+                            <label class="col-lg-3 form-control-label">Chi tiết</label>
+                            <div class="col-lg-9">
+                                <textarea type="text" class="form-control" id="editor" rows="25" placeholder="Chi tiết sản phẩm"
+                                       name="detail">
+                                </textarea>
+                            </div>
+                        </div>
                         <div class="text-right">
-                            <button class="btn btn-gradient-01" type="submit">Submit Form</button>
+                            <button class="btn btn-gradient-01" type="submit">Tạo mới</button>
                             <button class="btn btn-shadow" type="reset">Reset</button>
                         </div>
                     </form>
@@ -86,6 +122,7 @@
     <script src="/assets/vendors/js/datepicker/daterangepicker.js"></script>
     <script src="/assets/vendors/js/app/app.min.js"></script>
     <!-- End Page Vendor Js -->
+
     <!-- Begin Page Snippets -->
     <script src="/assets/js/components/datepicker/datepicker.js"></script>
     <!-- End Page Snippets -->
@@ -149,6 +186,19 @@
         document.getElementById("thumbnail_upload_widget").addEventListener("click", function () {
             myWidget.open();
         }, false);
+    </script>
+{{--    <!-- Begin ckeditor -->--}}
+    <script src="https://cdn.ckeditor.com/4.17.1/standard-all/ckeditor.js"></script>
+{{--    <!-- End ckeditor -->--}}
+    <script>
+        CKEDITOR.replace('editor', {
+            removeButtons: 'PasteFromWord'
+        });
+        // ClassicEditor
+        //     .create( document.querySelector( '#editor' ) )
+        //     .catch( error => {
+        //         console.error( error );
+        //     } );
     </script>
 @endsection
 
