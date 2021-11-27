@@ -178,12 +178,12 @@ class OrderController extends Controller
 
 
  ### Transaction
-
+    $invoice = $order->id + 100;
     $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)
             ->setDescription("Checkout order #$order->id")
-            ->setInvoiceNumber($order->id);
+            ->setInvoiceNumber($invoice);
 
 // ### Redirect urls
 // Set the urls that the buyer must be redirected to after
