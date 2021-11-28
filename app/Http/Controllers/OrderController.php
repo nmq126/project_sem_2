@@ -21,6 +21,7 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Exception\PayPalConnectionException;
 use PayPal\Rest\ApiContext;
 
 class OrderController extends Controller
@@ -147,6 +148,7 @@ class OrderController extends Controller
 // (Optional) Lets you specify item wise
 // information
         $array_items = [];
+        $total_price = 0;
         foreach ($order->orderDetails as $orderDetail) {
             $item = new Item();
             $item->setName($orderDetail->product->name)
@@ -154,6 +156,7 @@ class OrderController extends Controller
                 ->setQuantity($orderDetail->quantity)
                 ->setSku($orderDetail->product->id) // Similar to `item_number` in Classic API
                 ->setPrice(Helper::convertVndToUsd($orderDetail->unit_price));
+            $total_price +=  Helper::convertVndToUsd($orderDetail->unit_price) * $orderDetail->quantity;
             array_push($array_items, $item);
         }
         $itemList = new ItemList();
@@ -165,7 +168,7 @@ class OrderController extends Controller
     $details = new Details();
         $details->setShipping(0)
             ->setTax(0)
-            ->setSubtotal(Helper::convertVndToUsd($order->total_price));
+            ->setSubtotal($total_price);
 
 // ### Amount
 // Lets you specify a payment amount.
@@ -173,12 +176,12 @@ class OrderController extends Controller
 // such as shipping, tax.
         $amount = new Amount();
         $amount->setCurrency("USD")
-            ->setTotal(Helper::convertVndToUsd($order->total_price))
+            ->setTotal($total_price)
             ->setDetails($details);
 
 
  ### Transaction
-    $invoice = $order->id + 100;
+    $invoice = $order->id + 300;
     $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)
@@ -212,8 +215,11 @@ class OrderController extends Controller
 // for payment approval
         try {
             $payment->create($apiContext);
-        } catch (Exception $ex) {
-            exit(1);
+        } catch (PayPalConnectionException $ex) {
+            var_dump(json_decode($ex->getData()));
+
+//            exit(1);
+
         }
 
 // ### Get redirect url

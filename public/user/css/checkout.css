@@ -1,9 +1,48 @@
 * {
     box-sizing: border-box;
 }
-body{
+
+body {
     margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #98a8b4;
+    background-color: #f2f3f8;
 }
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-bottom: 0.5rem;
+    font-family: "Noto Sans", sans-serif;
+    line-height: 1.1;
+    color: #2c304d;
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 999999;
+}
+
+.canvas {
+    position: absolute;
+    margin: auto;
+    top: 50%; left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+a{
+    text-decoration: none!important;
+    color: #2c304d;
+}
+
 .error{
     color: red;
     font-size: 0.75em;
@@ -88,6 +127,17 @@ header .container {
     color: black;
 }
 
+.quantity-checkout{
+    width: 70px;
+    height: 36px;
+    padding: 0px 12px 0px 16px;
+    border-radius: 300px;
+    font-weight: 500;
+    font-size: 14px;
+    background: #EEEEEE;
+    color: #000000;
+}
+
 .information hr{
     margin: 0 0 24px;
     height: 2px;
@@ -111,6 +161,7 @@ header .container {
     font-weight: normal;
 }
 .place-order-button button{
+    cursor: pointer;
     min-height: 56px;
     color: #fff;
     font-weight: 500;

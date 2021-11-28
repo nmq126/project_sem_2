@@ -15,5 +15,7 @@ class VerifyCsrfToken extends Middleware
         //
         "order/create-payment",
         "order/execute-payment",
+        "product",
+        "cart/*"
     ];
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailsAdminController;
@@ -41,6 +42,7 @@ Route::get('/cart/add',[ShoppingCartController::class, 'add']);
 Route::get('/cart/show',[ShoppingCartController::class, 'show']);
 Route::get('/cart/remove',[ShoppingCartController::class, 'remove']);
 Route::post('/cart/update',[ShoppingCartController::class, 'update']);
+
 //checkout, order
 Route::get('/checkout', [OrderController::class, 'show']);
 Route::post('/order', [OrderController::class, 'process']);
@@ -48,6 +50,14 @@ Route::get('/order/{id}', [OrderController::class, 'getDetail']);
 Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
 Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
 
+//home page
+//Route::get('/home', function () {
+//    return view('client.home');
+//});
+Route::get('/home', [HomeController::class, 'show']);
+
+
+//blog
 Route::get('/blog',[BlogController::class, 'getBlog']);
 Route::get('/blog-json',[BlogController::class, 'JsonBlog']);
 Route::get('/blog_detail/{id}',[BlogController::class, 'getBlogDetail']);

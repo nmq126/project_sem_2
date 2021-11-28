@@ -274,7 +274,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-<script src="http://localhost/client_web/js/product_detail.js"></script>
+<script src="/user/js/product_detail.js"></script>
 </body>
 
 </html>

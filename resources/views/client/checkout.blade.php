@@ -20,7 +20,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="assets/vendors/css/base/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">
+{{--    <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">--}}
     <link rel="stylesheet" href="user/css/checkout.css">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -31,7 +31,6 @@
 <div id="preloader">
     <div class="canvas">
         <img src="user/img/loader.gif" alt="">
-{{--        <div class="spinner"></div>--}}
     </div>
 </div>
 <!-- End Preloader -->
@@ -110,16 +109,17 @@
                     </div>
                 </form>
             </div>
-            <hr class="col-lg-8">
-            <div class="order col-lg-8">
+            <hr class="col-lg-12">
+            <div class="order col-lg-12">
                 <div class="order-title">
                     <h3>Chi tiết đơn hàng</h3>
                     <a class="add-more" href="/product  ">Chọn thêm sản phẩm</a>
                 </div>
                 @foreach($shoppingCart as $cartItem)
                     <div class="list-item mt-4">
+                        <input class="quantity-checkout" type="number" min="1" data-id="{{ $cartItem->id }}" value={{ $cartItem->quantity }}>
                         {{--                        <div class="quantity">{{ $cartItem->quantity }}</div>--}}
-                        <div class="name"> {{ $cartItem->name }} ({{ $cartItem->quantity }})</div>
+                        <div class="name"> {{ $cartItem->name }}</div>
                         <div class="price">
                             <?php if (isset($cartItem) && $cartItem->price != $cartItem->unitPrice): ?>
                             <del>{{ $cartItem->price * $cartItem->quantity }}</del>
@@ -158,7 +158,7 @@
             <hr>
             <div class="total">
                 <p>Tổng</p>
-                <span>{{ $totalPrice }} vnđ</span>
+                <span id="total-price">{{ $totalPrice }} vnđ</span>
             </div>
         </div>
     </div>
@@ -168,8 +168,9 @@
 
 </footer>
 
+
 <script src="assets/vendors/js/base/jquery.min.js"></script>
-<script src="assets/vendors/js/base/core.min.js"></script>
+{{--<script src="assets/vendors/js/base/core.min.js"></script>--}}
 
 <script src="assets/vendors/js/app/app.min.js"></script>
 
@@ -193,6 +194,32 @@
             },
         });
     })
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('.quantity-checkout').change(function () {
+            let data = {
+                id: this.getAttribute('data-id'),
+                quantity: this.value
+            }
+            updateCart(data);
+            $('#total-price').load(' #total-price');
+            $('.price').load(' .price');
+        })
+    })
+    function updateCart(data) {
+        $.ajax({
+            url: '/cart/update?id='+ data.id + '&quantity=' +data.quantity,
+            method: 'POST',
+            success: function (data) {
+                console.log(data)
+            },
+            error: function (data) {
+                console.log(data)
+            }
+        })
+    }
 </script>
 
 </body>

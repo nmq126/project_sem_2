@@ -10,271 +10,456 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <!-- Google Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script>
         WebFont.load({
-            google: {"families":["Montserrat:400,500,600,700","Noto+Sans:400,700"]},
-            active: function() {
+            google: {"families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"]},
+            active: function () {
                 sessionStorage.fonts = true;
             }
         });
     </script>
+    {{--    <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">--}}
+
     <link rel="stylesheet" href="user/css/home.css">
-    <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">
-    <link rel="stylesheet" href="user/css/responsive.css">
+    <link rel="stylesheet" href="user/css/main.css">
+    {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
 </head>
 <body>
-<header id="myHeader">
-    <div class="container">
-        <div class="logo">
-            <h2>VietKitchen</h2>
-        </div>
-        <div class="searchBar">
-            <div class="header-option">
-                <img src="/viet_kitchen/img/search.svg" alt="">
-                <span>Search</span>
-            </div>
-            <div class="header-option">
-                Login
-            </div>
-        </div>
+<div id="preloader">
+    <div class="canvas">
+        <img src="user/img/loader.gif" alt="">
     </div>
+</div>
+@php
+    use Illuminate\Support\Facades\Session;
+        $shoppingCart = [];
+        if (Session::has('shoppingCart')) {
+            $shoppingCart = Session::get('shoppingCart');
+        }
+@endphp
+@php
+    $totalQuantity = 0;
+@endphp
+@foreach($shoppingCart as $cartItem)
+    @php
+        if (isset($totalQuantity) && isset($cartItem)) {
+            $totalQuantity += $cartItem->quantity;
+        }
+    @endphp
+@endforeach
+<header id="nav">
+
+    <a href="#" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
+
+    <div id="menu-bar" class="fas fa-bars"></div>
+
+    <nav class="navbar">
+        <a href="/cart/show">
+            <i class="fas fa-shopping-cart"></i>
+            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+        </a>
+        <a href="/sign_in"> Đăng nhập</a>
+    </nav>
 
 </header>
-<div class="banner">
-    <div class="elisyam-overlay overlay-06"></div>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="content">
+        <h3 style="text-transform: capitalize">Đặt món nào cũng <span>FREESHIP</span></h3>
+        <p style="font-size: 2rem"> Nhiều món ngon cho bạn thoải mái lựa chọn.</p>
+        <a href="/product" class="btn">Đặt hàng ngay</a>
+    </div>
+
+    <div class="image">
+        <img src="user/img/images/home-img.png" alt="">
+    </div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- speciality section starts  -->
+
+<section class="speciality" id="speciality">
+
+    <h1 class="heading pb-5"> Món ngon <span>nổi bật</span></h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img class="image" src="user/img/images/s-img-1.jpg" alt="">
+            <div class="content">
+                <img src="user/img/images/s-1.png" alt="">
+                <h3>tasty burger</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
+                    voluptates aperiam tempore libero labore aut.</p>
+            </div>
+        </div>
+        <div class="box">
+            <img class="image" src="user/img/images/s-img-2.jpg" alt="">
+            <div class="content">
+                <img src="user/img/images/s-2.png" alt="">
+                <h3>tasty pizza</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
+                    voluptates aperiam tempore libero labore aut.</p>
+            </div>
+        </div>
+        <div class="box">
+            <img class="image" src="user/img/images/s-img-3.jpg" alt="">
+            <div class="content">
+                <img src="user/img/images/s-3.png" alt="">
+                <h3>cold ice-cream</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
+                    voluptates aperiam tempore libero labore aut.</p>
+            </div>
+        </div>
+        <div class="box">
+            <img class="image" src="user/img/images/s-img-4.jpg" alt="">
+            <div class="content">
+                <img src="user/img/images/s-4.png" alt="">
+                <h3>cold drinks</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
+                    voluptates aperiam tempore libero labore aut.</p>
+            </div>
+        </div>
+        <div class="box">
+            <img class="image" src="user/img/images/s-img-5.jpg" alt="">
+            <div class="content">
+                <img src="user/img/images/s-5.png" alt="">
+                <h3>tasty sweets</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
+                    voluptates aperiam tempore libero labore aut.</p>
+            </div>
+        </div>
+        <div class="box">
+            <img class="image" src="user/img/images/s-img-6.jpg" alt="">
+            <div class="content">
+                <img src="user/img/images/s-6.png" alt="">
+                <h3>healty breakfast</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
+                    voluptates aperiam tempore libero labore aut.</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- speciality section ends -->
+
+<!-- popular section starts  -->
+
+<section class="popular" id="popular">
+
+    <h1 class="heading pt-5 pb-5"> Món <span>khuyến mãi</span></h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <span class="price"> $5 - $20 </span>
+            <img src="user/img/images/p-1.jpg" alt="">
+            <h3>tasty burger</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <a href="#" class="btn">order now</a>
+        </div>
+        <div class="box">
+            <span class="price"> $5 - $20 </span>
+            <img src="user/img/images/p-2.jpg" alt="">
+            <h3>tasty cakes</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <a href="#" class="btn">order now</a>
+        </div>
+        <div class="box">
+            <span class="price"> $5 - $20 </span>
+            <img src="user/img/images/p-3.jpg" alt="">
+            <h3>tasty sweets</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <a href="#" class="btn">order now</a>
+        </div>
+        <div class="box">
+            <span class="price"> $5 - $20 </span>
+            <img src="user/img/images/p-4.jpg" alt="">
+            <h3>tasty cupcakes</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <a href="#" class="btn">order now</a>
+        </div>
+        <div class="box">
+            <span class="price"> $5 - $20 </span>
+            <img src="user/img/images/p-5.jpg" alt="">
+            <h3>cold drinks</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <a href="#" class="btn">order now</a>
+        </div>
+        <div class="box">
+            <span class="price"> $5 - $20 </span>
+            <img src="user/img/images/p-6.jpg" alt="">
+            <h3>cold ice-cream</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <a href="#" class="btn">order now</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- popular section ends -->
+
+<!-- steps section starts  -->
+
+<div class="step-container pt-5 pb-5">
+
+    <h1 class="heading">Đặt hàng cùng <span>VietKitchen</span></h1>
+
+    <section class="steps">
+
+        <div class="box">
+            <img src="user/img/images/step-1.jpg" alt="">
+            <p>Chọn những món ăn yêu thích</p>
+        </div>
+        <div class="box">
+            <img src="user/img/images/step-2.jpg" alt="">
+            <p>Vận chuyển nhanh, miễn phí</p>
+        </div>
+        <div class="box">
+            <img src="user/img/images/step-3.jpg" alt="">
+            <p>Thanh toán tiện lợi</p>
+        </div>
+        <div class="box">
+            <img src="user/img/images/step-4.jpg" alt="">
+            <p>Thưởng thức món ngon nóng hổi</p>
+        </div>
+
+    </section>
+
 </div>
-<section class="popular">
-    <div class="listings" id="first_list">
-        <div class="container">
-            <div class="header">
-                <div class="header-title">
-                    <h3>Popular</h3>
-                    <span>Products that they buy a lot &#127831;</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card-container col-lg-3 col-sm-6 ">
-                    <div class="card-item">
-                        <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=992&q=80"
-                             alt="">
-                        <h4>Noodles</h4>
-                        <div class="price">30k</div>
-                        <button>Add to cart</button>
-                    </div>
-                </div>
-                <div class="card-container col-lg-3 col-sm-6 ">
-                    <div class="card-item">
-                        <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-                             alt="">
-                        <h4>Fried chicken</h4>
-                        <div class="price">30k</div>
-                        <button>Add to cart</button>
-                    </div>
-                </div>
-                <div class="card-container col-lg-3 col-sm-6 ">
-                    <div class="card-item">
 
-                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                             alt="">
-                        <h4>Salad</h4>
-                        <div class="price">35k</div>
-                        <button>Add to cart</button>
-                    </div>
-                </div>
-                <div class="card-container col-lg-3 col-sm-6 ">
-                    <div class="card-item">
+<!-- steps section ends -->
 
-                        <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1074&q=80"
-                             alt="">
-                        <h4>Pho bo</h4>
-                        <div class="price">25k</div>
-                        <button>Add to cart</button>
+<!-- review section starts  -->
 
-                    </div>
-                </div>
+<section class="review" id="review">
+
+    <h1 class="heading pt-5 pb-5"> Khách hàng nói gì về <span>VietKitchen</span></h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <img src="user/img/images/billie.jpg" alt="">
+            <h3>Chị Billie người Việt gốc cây</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
             </div>
-            <div class="view-more-button">
-                <button type="button">
-                    <span>View more popular products</span>
-                </button>
-            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti delectus, ducimus facere quod ratione
+                vel laboriosam? Est, maxime rem. Itaque.</p>
         </div>
-        <!--        <div class="view-more-button">-->
-        <!--            <button type="button">-->
-        <!--                <span>View more featured products</span>-->
-        <!--            </button>-->
-        <!--        </div>-->
+        <div class="box">
+            <img src="user/img/images/anne.jpg" alt="">
+            <h3>Chị An nhà khu Mỹ Đình</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti delectus, ducimus facere quod ratione
+                vel laboriosam? Est, maxime rem. Itaque.</p>
+        </div>
+        <div class="box">
+            <img src="user/img/images/gal.jpg" alt="">
+            <h3>Huê hậu người Do Thái</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti delectus, ducimus facere quod ratione
+                vel laboriosam? Est, maxime rem. Itaque.</p>
+        </div>
+
     </div>
+
 </section>
-<section class="promotion">
-    <div class="listings" id="first_list">
-        <div class="container">
-            <div class="header">
-                <div class="header-title">
-                    <h3>Promo</h3>
-                    <span>Cheap af product</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card-container col-lg-3 col-sm-6 ">
-                    <div class="card-item">
-                        <img src="https://images.unsplash.com/photo-1578160112054-954a67602b88?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1074&q=80"
-                             alt="">
-                        <h4>Egg fried rice</h4>
-                        <div class="price">30k</div>
-                        <button>Add to cart</button>
-                    </div>
-                </div>
-                <div class="card-container col-lg-3 col-sm-6 ">
-                    <div class="card-item">
-                        <img src="https://images.unsplash.com/photo-1599719455360-ff0be7c4dd06?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1149&q=80"
-                             alt="">
-                        <h4>Banh mi</h4>
-                        <div class="price">20k</div>
-                        <button>Add to cart</button>
-                    </div>
-                </div>
-                <div class="card-container col-lg-3 col-sm-6 ">
-                    <div class="card-item">
 
-                        <img src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-                             alt="">
-                        <h4>Bun bo Hue</h4>
-                        <div class="price">35k</div>
-                        <button>Add to cart</button>
-                    </div>
-                </div>
-                <div class="card-container col-lg-3 col-sm-6 ">
-                    <div class="card-item">
+<!-- review section ends -->
 
-                        <img src="https://images.unsplash.com/photo-1607329367978-0a651fdd8edb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80"
-                             alt="">
-                        <h4>Chicken nugget</h4>
-                        <div class="price">35k</div>
-                        <button>Add to cart</button>
+<!-- gallery section starts  -->
 
-                    </div>
-                </div>
-            </div>
-            <div class="view-more-button">
-                <button type="button">
-                    <span>View more promotions</span>
-                </button>
-            </div>
+<section style="padding: 0 1rem" class="gallery" id="gallery">
+
+    <h1 class="heading pt-5 pb-5"><span> Gallery </span></h1>
+    <div class="containerG">
+        <div class="boxG a">
+            <img src="../user/img/images/g-1.jpg" alt="">
+        </div>
+        <div class="boxG b">
+            <img src="../user/img/images/g-2.jpg" alt="">
+        </div>
+        <div class="boxG c">
+            <img src="../user/img/images/g-3.jpg" alt="">
+        </div>
+        <div class="boxG d">
+            <img src="../user/img/images/g-4.jpg" alt="">
+        </div>
+        <div class="boxG e">
+            <img src="../user/img/images/g-5.jpg" alt="">
+
+        </div>
+        <div class="boxG f">
+            <img src="../user/img/images/g-6.jpg" alt="">
+
+        </div>
+        <div class="boxG g">
+            <img src="../user/img/images/g-7.jpg" alt="">
+
+        </div>
+        <div class="boxG h">
+            <img src="../user/img/images/g-8.jpg" alt="">
+
+        </div>
+        <div class="boxG i">
+            <img src="../user/img/images/g-9.jpg" alt="">
+
+        </div>
+        <div class="boxG j">
+            <img src="../user/img/images/g-10.jpg" alt="">
+
         </div>
     </div>
-    </div>
 </section>
-<section class="category">
-    <div class="listings">
-        <div class="container">
-            <div class="header">
-                <div class="header-title">
-                    <h3>Explore by category</h3>
-                    <span></span>
-                </div>
+
+<!-- gallery section ends -->
+
+
+
+<!-- order section starts  -->
+
+<section class="" id="">
+
+    <h1 class="heading"><span>Food</span> blog </h1>
+
+    <div class="row text-center pt-5 pb-5">
+
+        <div class="col-md-4 col-sm-6 col-12 float-left ">
+            <div class="blog-img">
+                <a href="">
+                    <img src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                         alt="" width="100%" height="100%">
+                </a>
             </div>
-            <div class="row">
-                <div class="listings-grid col-lg-3 col-sm-6 col-6 col-6">
-                    <div class="listings-grid-element">
-                        <div class="image">
-                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                                 alt="">
-                        </div>
-                        <div class="text">
-                            <h4>Salad</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="listings-grid col-lg-3 col-sm-6 col-6 col-6">
-                    <div class="listings-grid-element">
-                        <div class="image">
-                            <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-                                 alt="">
-                        </div>
-                        <div class="text">
-                            <h4>Ga ran</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="listings-grid col-lg-3 col-sm-6 col-6 col-6">
-                    <div class="listings-grid-element">
-                        <div class="image">
-                            <img src="https://images.unsplash.com/photo-1578160112054-954a67602b88?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1074&q=80"
-                                 alt="">
-                        </div>
-                        <div class="text">
-                            <h4>Com chien</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="listings-grid col-lg-3 col-sm-6 col-6 col-6">
-                    <div class="listings-grid-element">
-                        <div class="image">
-                            <img src="https://images.unsplash.com/photo-1578160112054-954a67602b88?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1074&q=80"
-                                 alt="">
-                        </div>
-                        <div class="text">
-                            <h4>Com chien</h4>
-                        </div>
-                    </div>
-                </div>
+            <div class="blog-content">
+                <h2>Tittle</h2>
+                <p>Description</p></div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12 float-left ">
+            <div class="blog-img">
+
+                <img src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                     alt="" width="100%" height="100%">
             </div>
-            <!-- =========Footer Area=========== -->
+            <div class="blog-content">
+                <a href="">
+                    <h2>Tittle</h2>
+                </a>
+                <p>Description</p></div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12 float-left ">
+            <div class="blog-img">
+
+                <img src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                     alt="" width="100%" height="100%">
+            </div>
+            <div class="blog-content">
+                <a href="">
+                    <h2>Tittle</h2>
+                </a>
+                <p>Description</p></div>
         </div>
     </div>
 
 </section>
-<section id="footer-fixed">
-    <div class="big-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="footer-logo">
-                        <h2 id="colorize">LOGO</h2>
-                        <p> We cook, we deliver.</p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="footer-heading">
-                        <h3><a href="/viet_kitchen/about-us.php">About Us</a></h3>
-                        <h3>Contact us</h3>
-                        <h3>Term & policy</h3>
-                    </div>
 
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="footer-heading">
-                        <h3>Blog</h3>
-                        <h3>Careers</h3>
-                        <h3>FAQ</h3>
-                    </div>
+<!-- order section ends -->
 
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
-                    <div class="footer-heading">
-                        <h3 id="colorize">Get Updates</h3>
-                    </div>
-                    <div class="footer-content footer-cont-mar-40">
-                        <form action="#">
-                            <input id="leadgenaration" type="email" placeholder="Enter your email">
-                            <input id="subscribe" type="submit" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- footer section  -->
+
+<section class="footer">
+
+    <div class="share">
+        <a href="#" class="btn">facebook</a>
+        <a href="#" class="btn">twitter</a>
+        <a href="#" class="btn">instagram</a>
+        <a href="#" class="btn">pinterest</a>
+        <a href="#" class="btn">linkedin</a>
     </div>
-    <!--copyright-->
+
+    <h1 class="credit"> created by <span> mr. web designer </span> | no rights reserved! </h1>
+
 </section>
 
+<!-- scroll top button  -->
+<a href="#home" class="fas fa-angle-up" id="scroll-top"></a>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-<script src="user/js/home.js"></script>
+<script src="/assets/vendors/js/base/jquery.min.js"></script>
+<script src="/assets/vendors/js/base/core.min.js"></script>
+
+<script src="/assets/vendors/js/app/app.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="user/js/main.js"></script>
+
 </body>
 </html>
