@@ -49,7 +49,7 @@
                     <img src="{{$product->thumbnail}}" alt="Sandwich" style="width:100%">
                     <h3>{{ $product->name }}</h3>
                     <p>${{$product->price}}</p>
-                    <a class="add-to-cart-button" id="add-to-cart-{{ $product->id }}" data-id="{{$product->id}}">Thêm vào giỏ</a>
+                    <a class="add-to-cart-button" id="add-to-cart-{{ $product->id }}" data-name="{{ $product->name }}" data-id="{{$product->id}}">Thêm vào giỏ</a>
                 </a>
             </div>
         @endforeach
@@ -156,7 +156,8 @@
     $(document).ready(function () {
         $('.add-to-cart-button').click(function () {
             let data = {
-                id: this.getAttribute('data-id')
+                id: this.getAttribute('data-id'),
+                name: this.getAttribute('data-name')
             }
             addToCart(data);
         })
@@ -169,7 +170,7 @@
             success: function () {
                 $.toast({
                     heading: 'Thành công',
-                    text: 'Sản phẩm đã được thêm vào giỏ hàng',
+                    text: 'Sản phẩm ' + data.name + ' đã được thêm vào giỏ hàng' ,
                     position: 'top-center',
                     showHideTransition: 'slide',
                     hideAfter: 5000,

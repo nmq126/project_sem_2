@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatus;
 use App\Helpers\Helper;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -62,6 +63,12 @@ class OrderController extends Controller
                 'msg' => 'Không có sản phẩm nào trong giỏ hàng!!'
             ]);
         }
+        $status = OrderStatus::Waiting;
+
+        if ($request->get('shipPayment') == 1){
+            $status = OrderStatus::WaitForCheckout;
+        }
+
         $shipName = $request->get('shipName');
         $shipAddress = $request->get('shipAddress');
         $shipPhone = $request->get('shipPhone');
@@ -73,6 +80,7 @@ class OrderController extends Controller
         $order->ship_address = $shipAddress;
         $order->ship_phone = $shipPhone;
         $order->ship_note = $shipNote;
+        $order->status = $status;
         $order->checkout = false;
 
         //tạo thông tin order detail
@@ -181,7 +189,7 @@ class OrderController extends Controller
 
 
  ### Transaction
-    $invoice = $order->id + 300;
+    $invoice = $order->id + 400;
     $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)
@@ -272,6 +280,7 @@ class OrderController extends Controller
             try {
                 $payment = Payment::get($paymentId, $apiContext);
                 $order->checkout = true;
+                $order->status = OrderStatus::Waiting;
                 $order->updated_at = Carbon::now();
                 $order->save();
             } catch (Exception $ex) {

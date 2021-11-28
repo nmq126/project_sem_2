@@ -114,12 +114,15 @@
                                             <td align="left"
                                                 style="padding: 20px 15px 0 15px; font-size: 15px; line-height: 25px; font-family: Noto Sans, Arial, sans-serif; color: #aea9c3;"
                                                 class="padding-copy">
-                                                @if(!$order->checkout)
+                                                @if($order->status == \App\Enums\OrderStatus::WaitForCheckout)
                                                     Chỉ còn một bước cuối cùng!! Vui lòng thanh toán đơn hàng của bạn để
                                                     hoàn tất đơn hàng bạn nhé.
-                                                @else
+                                                @elseif($order->checkout)
                                                     Thanh toán thành công <br> Đơn hàng sẽ được giao tới bạn trong thời gian sớm nhất, cảm ơn bạn
-                                                    đã sử dụng dịch vụ của ""
+                                                    đã sử dụng dịch vụ của VietKitchen
+                                                @else
+                                                    Đơn hàng sẽ được giao tới bạn trong thời gian sớm nhất, cảm ơn bạn
+                                                    đã sử dụng dịch vụ của VietKitchen
                                                 @endif
                                             </td>
                                         </tr>
@@ -137,7 +140,7 @@
                                                 <table border="0" cellspacing="0" cellpadding="0"
                                                        class="responsive-table">
                                                     <tr>
-                                                        @if(!$order->checkout)
+                                                        @if($order->status == \App\Enums\OrderStatus::WaitForCheckout)
                                                             <div id="paypal-button"></div>
                                                         @else
                                                             <td align="center"><a href="/product" target="_blank" style="font-size: 16px; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #66E9AE; border-top: 15px solid #66E9AE; border-bottom: 15px solid #66E9AE; border-left: 35px solid #66E9AE; border-right: 35px solid #66E9AE; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; display: inline-block;" class="mobile-button">Tiếp tục mua hàng</a></td>
