@@ -35,11 +35,11 @@
                     <td>{{$cartItem->unitPrice}}</td>
                     <td>
                         <input type="hidden" name="id" value="{{$cartItem->id}}">
-                        <input name="quantity" data-id="{{$cartItem->id}}" class="w3-input w3-border w3-quarter quantitys" type="number" min="1" value="{{$cartItem->quantity}}">
+                        <input name="quantity" data-id="{{$cartItem->id}}" class="w3-input w3-border w3-quarter quantity-input" type="number" min="1" value="{{$cartItem->quantity}}">
                     </td>
-                    <td id="prices-{{$cartItem->id}}">{{$cartItem->unitPrice * $cartItem->quantity}}</td>
+                    <td id="item-price-{{$cartItem->id}}">{{$cartItem->unitPrice * $cartItem->quantity}}</td>
                     <td>
-                        <button class="w3-button w3-indigo">Update</button>
+{{--                        <button class="w3-button w3-indigo">Update</button>--}}
                         <a href="/cart/remove?id={{$cartItem->id}}" onclick="return confirm('Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng?')" class="w3-button w3-red">Delete</a>
                     </td>
                 </form>
@@ -57,13 +57,13 @@
         crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
-        $('.quantitys').change(function () {
+        $('.quantity-input').change(function () {
             let data = {
                 id: this.getAttribute('data-id'),
                 quantity: this.value
             }
             updateCart(data);
-            $('#prices-'+data.id).load(' #prices-'+data.id);
+            $('#item-price-'+data.id).load(' #item-price-'+data.id);
             $('#total-price').load(' #total-price');
         })
     })
@@ -73,16 +73,7 @@
             method: 'POST',
             data: data,
             success: function (res) {
-                $.toast({
-                    heading: 'Thành công',
-                    text: 'Sản phẩm đã được thêm vào giỏ hàng',
-                    position: 'top-center',
-                    showHideTransition: 'slide',
-                    hideAfter: 5000,
-                    icon: 'success',
-                    stack: 5
-
-                })
+                return res;
 
             },
             error: function (data) {

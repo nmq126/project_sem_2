@@ -99,6 +99,6 @@ class ShoppingCartController extends Controller
             $shoppingCart[$productId] = $existingCartItem;
         }
         Session::put('shoppingCart', $shoppingCart);
-        return redirect('/cart/show');
+        return Session::get('shoppingCart');
     }
 }

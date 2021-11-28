@@ -97,7 +97,7 @@ class OrderController extends Controller
             $orderDetail->order_id = $product->id;
             $orderDetail->quantity = $cartItem->quantity;
             $orderDetail->unit_price = $product->price * (100 - $product->discount) / 100;
-            $order->total_price += $orderDetail->unit_price;
+            $order->total_price += $orderDetail->unit_price * $orderDetail->quantity;
             array_push($array_order_detail, $orderDetail);
         }
         if ($hasError) {

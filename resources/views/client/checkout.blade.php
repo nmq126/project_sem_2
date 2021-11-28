@@ -120,11 +120,11 @@
                         <input class="quantity-checkout" type="number" min="1" data-id="{{ $cartItem->id }}" value={{ $cartItem->quantity }}>
                         {{--                        <div class="quantity">{{ $cartItem->quantity }}</div>--}}
                         <div class="name"> {{ $cartItem->name }}</div>
-                        <div class="price">
+                        <div class="price item-price-{{$cartItem->id}}">
                             <?php if (isset($cartItem) && $cartItem->price != $cartItem->unitPrice): ?>
-                            <del>{{ $cartItem->price * $cartItem->quantity }}</del>
+                            <del style="color: grey">{{ \App\Helpers\Helper::formatVnd($cartItem->price * $cartItem->quantity) }}</del>
                             <?php endif; ?>
-                            {{ $cartItem->unitPrice * $cartItem->quantity }} vnđ
+                            {{ \App\Helpers\Helper::formatVnd($cartItem->unitPrice * $cartItem->quantity)  }} vnđ
                         </div>
                     </div>
                     <hr>
@@ -143,11 +143,11 @@
             <ul>
                 <li class="text">
                     <p>Tạm tính</p>
-                    <span>{{ $totalPrice + $totalPromo }} vnđ</span>
+                    <span class="sub-total">{{\App\Helpers\Helper::formatVnd($totalPrice + $totalPromo)  }} vnđ</span>
                 </li>
                 <li class="text">
                     <p>Khuyến mại</p>
-                    <span class="promo">- {{ $totalPromo }} vnđ</span>
+                    <span class="promo-price">- {{ App\Helpers\Helper::formatVnd($totalPromo) }} vnđ</span>
                 </li>
 
                 <li class="text">
@@ -158,7 +158,7 @@
             <hr>
             <div class="total">
                 <p>Tổng</p>
-                <span id="total-price">{{ $totalPrice }} vnđ</span>
+                <span class="total-price">{{ App\Helpers\Helper::formatVnd($totalPrice) }} vnđ</span>
             </div>
         </div>
     </div>
@@ -204,8 +204,10 @@
                 quantity: this.value
             }
             updateCart(data);
-            $('#total-price').load(' #total-price');
-            $('.price').load(' .price');
+            $('.total-price').load(' .total-price');
+            $('.sub-total').load(' .sub-total');
+            $('.promo-price').load(' .promo-price');
+            $('.item-price-'+data.id).load(' .item-price-'+data.id);
         })
     })
     function updateCart(data) {

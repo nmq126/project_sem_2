@@ -118,7 +118,7 @@
                                                     Chỉ còn một bước cuối cùng!! Vui lòng thanh toán đơn hàng của bạn để
                                                     hoàn tất đơn hàng bạn nhé.
                                                 @elseif($order->checkout)
-                                                    Thanh toán thành công <br> Đơn hàng sẽ được giao tới bạn trong thời gian sớm nhất, cảm ơn bạn
+                                                    Bạn đã thanh toán thành công <br> Đơn hàng sẽ được giao tới bạn trong thời gian sớm nhất, cảm ơn bạn
                                                     đã sử dụng dịch vụ của VietKitchen
                                                 @else
                                                     Đơn hàng sẽ được giao tới bạn trong thời gian sớm nhất, cảm ơn bạn
@@ -162,6 +162,27 @@
                                             <td align="left"
                                                 style="padding: 50px 15px 0 15px; font-size: 15px; line-height: 25px; font-family: Noto Sans, Arial, sans-serif; color: #aea9c3;"
                                                 class="padding-copy">Order #{{ $order->id }}<br>{{ $order->created_at }}
+                                                <br>
+                                                @switch($order->status)
+                                                    @case(\App\Enums\OrderStatus::WaitForCheckout)
+                                                        <p style="color: red">Chưa thanh toán</p>
+                                                        @break
+                                                    @case(\App\Enums\OrderStatus::Waiting)
+                                                        <p style="color: #85ff7f">Chờ xác nhận</p>
+                                                        @break
+                                                    @case(\App\Enums\OrderStatus::Processing)
+                                                        <p style="color: #85ff7f">Đang xử lý</p>
+                                                        @break
+                                                    @case(\App\Enums\OrderStatus::Delivering)
+                                                        <p style="color: #85ff7f">Đang giao</p>
+                                                        @break
+                                                    @case(\App\Enums\OrderStatus::Done)
+                                                        <p style="color: #85ff7f">Hoàn tất</p>
+                                                        @break
+                                                    @case(\App\Enums\OrderStatus::Cancel)
+                                                        <p style="color: grey">Đã hủy</p>
+                                                        @break
+                                                @endswitch
                                                 <br><br><span
                                                     style="color: #2c304d;">Giao tới:</span><br>{{ $order->ship_address }}
                                             </td>
@@ -257,7 +278,7 @@
                                                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                                         <tr>
                                                             <td align="right"
-                                                                style="padding: 10px 0 0 0; font-family: Noto Sans, Arial, sans-serif; color: #2c304d; font-size: 15px; line-height: 24px;">{{ $orderDetail->unit_price * $orderDetail->quantity }}
+                                                                style="padding: 10px 0 0 0; font-family: Noto Sans, Arial, sans-serif; color: #2c304d; font-size: 15px; line-height: 24px;">{{ \App\Helpers\Helper::formatVnd($orderDetail->unit_price * $orderDetail->quantity) }}
                                                                 vnđ
                                                             </td>
                                                         </tr>
@@ -287,9 +308,9 @@
                                                     <tr>
                                                         <td align="right"
                                                             style="padding: 40px 0 0 0; font-family: Noto Sans, Arial, sans-serif; color: #2c304d; font-size: 15px; line-height: 20px; border-top: 2px solid #eee;">
-                                                            Tạm tính: {{ $order->total_price }} vnđ<br>Phí vận chuyển:
+                                                            Tạm tính: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} vnđ<br>Phí vận chuyển:
                                                             MIỄN PHÍ<br><br><span
-                                                                style="font-size: 20px; color: #66E9AE;">Tổng: {{ $order->total_price }} vnđ</span>
+                                                                style="font-size: 20px; color: #66E9AE;">Tổng: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} vnđ</span>
                                                         </td>
                                                     </tr>
                                                 </table>
