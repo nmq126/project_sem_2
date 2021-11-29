@@ -57,7 +57,7 @@
 
     <nav class="navbar">
         <a href="/sign_in"> Đăng Nhập </a>
-        <a href="/sign_in"> Cửa Hàng </a>
+        <a href="/products"> Cửa Hàng </a>
         <a href="/sign_in"> Liên Hệ </a>
         <a href="/sign_in"> Blog </a>
         <a href="/cart">
