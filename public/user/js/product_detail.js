@@ -1,3 +1,37 @@
+const container = document.querySelector(".cart-wrapper");
+const cards = document.querySelector(".carts");
+
+let isPressDown = false;
+let cursorXSapce;
+
+container.addEventListener("mousedown", function(e) {
+    isPressDown = true;
+    cursorXSapce = e.offsetX - cards.offsetLeft;
+
+});
+window.addEventListener("mouseup", function(e) {
+    isPressDown = false;
+});
+container.addEventListener("mousemove", function(e) {
+    if (!isPressDown) return;
+    e.preventDefault();
+    cards.style.left = `${e.offsetX - cursorXSapce}px`
+    boundCards();
+});
+
+function boundCards() {
+    const container_rect = container.getBoundingClientRect();
+    const cards_rect = cards.getBoundingClientRect();
+
+    if (parseInt(cards.style.left) > 0) {
+
+        cards.style.left = 0;
+    } else if (cards_rect.right < container_rect.right) {
+        cards.style.left = `-${cards_rect.width - container_rect.width}px`
+    }
+
+
+}
 window.addEventListener("load", function() {
     const slider = this.document.querySelector(".slider");
     const sliderMain = this.document.querySelector(".slider-main");

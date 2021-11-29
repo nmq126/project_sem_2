@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/user/css/product_detail.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
-    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=618600ef20e65f001281c8c1&product=sticky-share-buttons" async="async"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Google Fonts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-    <script>
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/user/css/product_detail.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+        />
+        <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=618600ef20e65f001281c8c1&product=sticky-share-buttons" async="async"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Google Fonts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+        <script>
         WebFont.load({
-            google: {
-                "families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"]
-            },
-            active: function() {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script>
-
+    google: {
+        "families": [ "Montserrat:400,500,600,700", "Noto+Sans:400,700" ]
+    },
+    active: function() {
+        sessionStorage.fonts = true;
+    }
+    });
+        </script>
 </head>
 
 <body>
@@ -43,7 +43,7 @@
                 <div class="discount">
                     <span> 13%</span>
                 </div>
-                <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/3_def16cc3-962c-4302-bdb5-f74613eae6d3_570x575_crop_center.jpg?v=1536552281" alt="">
+                <img src="https://res.cloudinary.com/du0vz0npz/image/upload/v1638198688/buger_king-removebg_f1jddo.png" alt="">
             </div>
             <div class="content">
                 <div class="info">
@@ -87,33 +87,35 @@
             </div>
         </div>
         <div class="slider">
-            <i class="fas fa-chevron-circle-right"></i>
-            <div class="slider-wrapper">
-                <div class="slider-main">
-                    <div class="slider-item">
-                        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_631df1a3-d29e-4971-9a51-36ae4df78146_compact.jpg?v=1536552284" alt="">
-                    </div>
-                    <div class="slider-item">
-                        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/8_a55a6db9-2459-4a7d-baa6-41e155059d45_compact.jpg?v=1536552286" alt="">
-                    </div>
-                    <div class="slider-item">
-                        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/9_da0e5810-403d-4f1e-9d9b-a522319b9687_compact.jpg?v=1536552288" alt="">
-                    </div>
-                    <div class="slider-item">
-                        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_631df1a3-d29e-4971-9a51-36ae4df78146_compact.jpg?v=1536552284" alt="">
-                    </div>
-                    <div class="slider-item">
-                        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/8_a55a6db9-2459-4a7d-baa6-41e155059d45_compact.jpg?v=1536552286" alt="">
-                    </div>
-                    <div class="slider-item">
-                        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/9_da0e5810-403d-4f1e-9d9b-a522319b9687_compact.jpg?v=1536552288" alt="">
-                    </div>
-                </div>
-                <i class="fas fa-chevron-circle-left"></i>
-            </div>
+
+        <i class="fas fa-chevron-circle-right"></i>
+        <div class="slider-wrapper">
+        <div class="slider-main">
+<div class="slider-item">
+        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_631df1a3-d29e-4971-9a51-36ae4df78146_compact.jpg?v=1536552284" alt="">
         </div>
-    </div>
-    <div class="main2">
+        <div class="slider-item">
+        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/8_a55a6db9-2459-4a7d-baa6-41e155059d45_compact.jpg?v=1536552286" alt="">
+        </div>
+        <div class="slider-item">
+        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/9_da0e5810-403d-4f1e-9d9b-a522319b9687_compact.jpg?v=1536552288" alt="">
+        </div>
+        <div class="slider-item">
+        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_631df1a3-d29e-4971-9a51-36ae4df78146_compact.jpg?v=1536552284" alt="">
+        </div>
+        <div class="slider-item">
+        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/8_a55a6db9-2459-4a7d-baa6-41e155059d45_compact.jpg?v=1536552286" alt="">
+        </div>
+        <div class="slider-item">
+        <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/9_da0e5810-403d-4f1e-9d9b-a522319b9687_compact.jpg?v=1536552288" alt="">
+        </div>
+        </div>
+        <i class="fas fa-chevron-circle-left"></i>
+        </div>
+        </div>
+        </div>
+        <div class="main2">
+
         <div class="container">
             <div class="title">
                 <div class="detail active">
@@ -181,6 +183,7 @@
             </div>
             <div class="cart-wrapper">
                 <div class="carts">
+
                     <div class="cart-item">
                         <div class="img-cart">
                             <div class="discount">
@@ -188,7 +191,7 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> <span> Add to cart</span>
+                                <i class="fas fa-shopping-cart"></i> 
                             </div>
                         </div>
                         <div class="info-cart">
@@ -205,7 +208,7 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> <span> Add to cart</span>
+                                <i class="fas fa-shopping-cart"></i> 
                             </div>
                         </div>
                         <div class="info-cart">
@@ -222,7 +225,7 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> <span> Add to cart</span>
+                                <i class="fas fa-shopping-cart"></i> 
                             </div>
                         </div>
                         <div class="info-cart">
@@ -239,7 +242,7 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> <span> Add to cart</span>
+                                <i class="fas fa-shopping-cart"></i> 
                             </div>
                         </div>
                         <div class="info-cart">
@@ -256,7 +259,24 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> <span> Add to cart</span>
+                                <i class="fas fa-shopping-cart"></i> 
+                            </div>
+                        </div>
+                        <div class="info-cart">
+                            <div class="name-price">
+                                <div class="name">Leyendo Distintos</div>
+                                <div class="price">$585.00</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-item">
+                        <div class="img-cart">
+                            <div class="discount">
+                                <span> 13%</span>
+                            </div>
+                            <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
+                            <div class="add-cart">
+                                <i class="fas fa-shopping-cart"></i> 
                             </div>
                         </div>
                         <div class="info-cart">
@@ -275,6 +295,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <script src="/user/js/product_detail.js"></script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> TrinhHuy
 </body>
 
 </html>

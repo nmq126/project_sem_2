@@ -23,6 +23,7 @@ class OrderSeeder extends Seeder
                     'ship_phone' => '0123456789',
                     'ship_address' => 'Xuan Khanh',
                     'ship_note' => '9h ngay 20/12/2021',
+                    'checkout'=>1,
                     'total_price' => 5,
                     'status' => 2,
                 ],
@@ -34,6 +35,7 @@ class OrderSeeder extends Seeder
                     'ship_address' => 'Ha Noi',
                     'ship_note' => '12h ngay 15/12/2021',
                     'total_price' => 5,
+                    'checkout'=>1,
                     'status' => 2,
                 ],
 
@@ -44,6 +46,7 @@ class OrderSeeder extends Seeder
                     'ship_address' => 'Ha Noi',
                     'ship_note' => '9h ngay 20/12/2021',
                     'total_price' => 4,
+                    'checkout'=>1,
                     'status' => 1,
                 ],
 
@@ -54,6 +57,7 @@ class OrderSeeder extends Seeder
                     'ship_address' => 'Ha Noi',
                     'ship_note' => '9h ngay 20/12/2021',
                     'total_price' => 5,
+                    'checkout'=>1,
                     'status' => 1,
                 ],
 
@@ -64,6 +68,7 @@ class OrderSeeder extends Seeder
                     'ship_address' => 'Ha Noi',
                     'ship_note' => '9h ngay 11/12/2021',
                     'total_price' => 6,
+                    'checkout'=>1,
                     'status' => 0,
                 ]
             ]

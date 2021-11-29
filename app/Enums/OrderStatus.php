@@ -18,4 +18,5 @@ final class OrderStatus extends Enum
     const Done = 4;
     const Cancel = -2;
     const All = -1;
+
 }

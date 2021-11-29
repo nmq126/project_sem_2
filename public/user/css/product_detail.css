@@ -14,7 +14,6 @@
 
 .home {
     display: flex;
-    background-color: #f6f6f6;
     height: 80px;
     line-height: 80px;
     font-size: 15.5px;
@@ -73,9 +72,7 @@
     border-bottom: 2px solid black;
 }
 
-.main {
-    background-color: #f6f6f6;
-}
+.main {}
 
 .image-main img {
     width: 80%;
@@ -240,12 +237,21 @@
     margin: 30px auto;
 }
 
-.cart-wrapper {}
+.cart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+}
 
 .carts {
-    display: flex;
-    width: 80%;
-    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 300px);
+    grid-gap: 30px;
+    pointer-events: none;
     transition: transform 0.27s linear;
 }
 
@@ -259,7 +265,6 @@
 
 .img-cart {
     position: relative;
-    overflow: hidden;
 }
 
 .name-price {
@@ -274,20 +279,18 @@
 .add-cart {
     position: absolute;
     top: 100%;
+    left: 80%;
     transition: all 0.5s ease;
-    width: 100%;
+    width: 10%;
     line-height: 35px;
     height: 13%;
     font-size: 20px;
+    pointer-events: all;
     cursor: pointer;
 }
 
 .add-cart:hover {
     color: #f3b804;
-}
-
-.cart-item:hover .add-cart {
-    top: 80%;
 }
 
 .add-cart button {
