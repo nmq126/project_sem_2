@@ -18,7 +18,6 @@ class IngredientSeeder extends Seeder
         DB::table('ingredients')->truncate();
         DB::table('ingredients')->insert([
             [
-<<<<<<< HEAD
                 'name' => 'Trà xanh Matcha',
                 'description' => 'Là loại nguyên liệu tuyệt vời trong công thức làm nên các món tráng miệng, món bánh hay pha chế đồ uống',
             ],
@@ -71,41 +70,15 @@ class IngredientSeeder extends Seeder
             [
                 'name' => 'Nấm Matsutake',
                 'description' => 'Loại nấm này được tìm thấy tại các quốc gia như Trung Quốc, Hàn Quốc, Nhật Bản, Canada, Phần Lan, Thụy Điển',
-            ],     [
+            ],
+            [
                 'name' => 'Tôm hùm Scotland',
                 'description' => 'Hương vị thơm ngon tuyệt hảo của thớ thịt tôm hùm Scotland nóng hổi giúp nó được xếp vào danh sách những loại nguyên liệu nấu ăn đắt nhất hành tinh',
             ],
 
 
-=======
-                'id' => '1',
-                'name' => 'chicken',
-                'description' => 'gia cam'
-            ],
-            [
-                'id' => '2',
-                'name' => 'beef',
-                'description' => 'gia suc'
-            ]
-            ,
-            [
-                'id' => '3',
-                'name' => 'fish',
-                'description' => 'ca'
-            ]
-            ,
-            [
-                'id' => '4',
-                'name' => 'lemon',
-                'description' => 'chanh'
-            ]
-            ,
-            [
-                'id' => '5',
-                'name' => 'strawberry',
-                'description' => 'dau'
-            ]
->>>>>>> e989e9b194e31916beb543cf43daddbd7c3fd682
+
+
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Ingredient;
-use App\Models\IngrendientModel;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

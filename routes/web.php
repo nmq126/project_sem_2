@@ -39,8 +39,11 @@ Route::get('/admin/product/list/category',[ProductAdminController::class, 'ListC
 Route::get('/admin/product/list/category/delete/{id}',[ProductAdminController::class, 'DeleteCategory']);
 Route::get('/admin/product/update/category/{id}',[ProductAdminController::class, 'UpdateViewCate']);
 Route::post('/admin/product/update/category/{id}',[ProductAdminController::class, 'UpdateCategory']);
-
+Route::get('/admin/orders/search/{keyword}', [OrderAdminController::class, 'JsonSearch']);
 Route::get('/admin/orders', [OrderAdminController::class, 'fetchOrders']);
+Route::get('/admin/orders/json', [OrderAdminController::class, 'fetchOrdersJson']);
+Route::post('/admin/orders/destroy', [OrderAdminController::class, 'Destroy']);
+Route::get('/admin/orders/delete/{id}', [OrderAdminController::class, 'DeleteOrder']);
 Route::get('/admin/orders/search', [OrderAdminController::class, 'search']);
 Route::get('/admin/orders/{id}/detail', [OrderDetailsAdminController::class, 'orderDetail']);
 Route::put('admin/orders/{id}/update', [OrderDetailsAdminController::class, 'updateStatus']);
