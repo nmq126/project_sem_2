@@ -1,6 +1,6 @@
-let menu = document.querySelector('#menu-bar');
-let navbar = document.querySelector('.navbar');
-let prevScrollpos = window.pageYOffset;
+var menu = document.querySelector('#menu-bar');
+var navbar = document.querySelector('.navbar');
+var prevScrollpos = window.pageYOffset;
 
 
 menu.onclick = () => {

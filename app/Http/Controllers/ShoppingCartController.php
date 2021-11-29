@@ -15,7 +15,7 @@ class ShoppingCartController extends Controller
         if (Session::has('shoppingCart')) {
             $shoppingCart = Session::get('shoppingCart');
         }
-        return view('client.test.cart', [
+        return view('client.cart', [
             'shoppingCart' => $shoppingCart
         ]);
     }
@@ -49,6 +49,7 @@ class ShoppingCartController extends Controller
         }else{
             $cartItem = new stdClass();
             $cartItem->id = $obj->id;
+            $cartItem->	thumbnail = $obj->	thumbnail;
             $cartItem->name = $obj->name;
             $cartItem->price = $obj->price;
             $cartItem->unitPrice = $obj->price * (100 - $obj->discount)/100;
@@ -56,7 +57,7 @@ class ShoppingCartController extends Controller
             $shoppingCart[$productId] = $cartItem;
         }
         Session::put('shoppingCart', $shoppingCart);
-        return redirect('/cart/show');
+        return redirect('/cart');
     }
 
     public function remove(Request $request)
@@ -68,7 +69,7 @@ class ShoppingCartController extends Controller
         }
         unset($shoppingCart[$productId]);
         Session::put('shoppingCart', $shoppingCart);
-        return redirect('/cart/show');
+        return redirect('/cart');
     }
 
     public function update(Request $request)
@@ -99,6 +100,6 @@ class ShoppingCartController extends Controller
             $shoppingCart[$productId] = $existingCartItem;
         }
         Session::put('shoppingCart', $shoppingCart);
-        return Session::get('shoppingCart');
+        return redirect('/cart');
     }
 }
