@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Trang chủ</title>
     <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -93,67 +93,19 @@
 
 <section class="speciality" id="speciality">
 
-    <h1 class="heading pb-5"> Món ngon <span>nổi bật</span></h1>
+    <h1 class="heading pb-5"> <span>Danh mục </span>món ăn</h1>
 
     <div class="box-container">
-
+        @foreach($categories as $category)
         <div class="box">
-            <img class="image" src="user/img/images/s-img-1.jpg" alt="">
             <div class="content">
-                <img src="user/img/images/s-1.png" alt="">
-                <h3>tasty burger</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
-                    voluptates aperiam tempore libero labore aut.</p>
+                <img height="50px" src="{{ $category->thumbnail }}" alt="">
+                <h3>{{ $category->name }}</h3>
+                <p>{{ $category->description }}</p>
             </div>
         </div>
-        <div class="box">
-            <img class="image" src="user/img/images/s-img-2.jpg" alt="">
-            <div class="content">
-                <img src="user/img/images/s-2.png" alt="">
-                <h3>tasty pizza</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
-                    voluptates aperiam tempore libero labore aut.</p>
-            </div>
-        </div>
-        <div class="box">
-            <img class="image" src="user/img/images/s-img-3.jpg" alt="">
-            <div class="content">
-                <img src="user/img/images/s-3.png" alt="">
-                <h3>cold ice-cream</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
-                    voluptates aperiam tempore libero labore aut.</p>
-            </div>
-        </div>
-        <div class="box">
-            <img class="image" src="user/img/images/s-img-4.jpg" alt="">
-            <div class="content">
-                <img src="user/img/images/s-4.png" alt="">
-                <h3>cold drinks</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
-                    voluptates aperiam tempore libero labore aut.</p>
-            </div>
-        </div>
-        <div class="box">
-            <img class="image" src="user/img/images/s-img-5.jpg" alt="">
-            <div class="content">
-                <img src="user/img/images/s-5.png" alt="">
-                <h3>tasty sweets</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
-                    voluptates aperiam tempore libero labore aut.</p>
-            </div>
-        </div>
-        <div class="box">
-            <img class="image" src="user/img/images/s-img-6.jpg" alt="">
-            <div class="content">
-                <img src="user/img/images/s-6.png" alt="">
-                <h3>healty breakfast</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore neque amet ipsa tenetur
-                    voluptates aperiam tempore libero labore aut.</p>
-            </div>
-        </div>
-
+        @endforeach
     </div>
-
 </section>
 
 <!-- speciality section ends -->
@@ -162,88 +114,25 @@
 
 <section class="popular" id="popular">
 
-    <h1 class="heading pt-5 pb-5"> Món <span>khuyến mãi</span></h1>
+    <h1 class="heading pt-5 pb-5"> Món ngon <span>khuyến mãi</span></h1>
 
     <div class="box-container">
+        @foreach($discountProducts as $product)
+        <div class="box">
+            <span class="price"> -{{ $product->discount }}% </span>
+            <img src="{{ $product->thumbnail  }}" alt="">
+            <h3>{{ $product->name }}</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <a href="#" class="btn">Đặt hàng</a>
+        </div>
+        @endforeach
 
-        <div class="box">
-            <span class="price"> $5 - $20 </span>
-            <img src="user/img/images/p-1.jpg" alt="">
-            <h3>tasty burger</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-            </div>
-            <a href="#" class="btn">order now</a>
-        </div>
-        <div class="box">
-            <span class="price"> $5 - $20 </span>
-            <img src="user/img/images/p-2.jpg" alt="">
-            <h3>tasty cakes</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-            </div>
-            <a href="#" class="btn">order now</a>
-        </div>
-        <div class="box">
-            <span class="price"> $5 - $20 </span>
-            <img src="user/img/images/p-3.jpg" alt="">
-            <h3>tasty sweets</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-            </div>
-            <a href="#" class="btn">order now</a>
-        </div>
-        <div class="box">
-            <span class="price"> $5 - $20 </span>
-            <img src="user/img/images/p-4.jpg" alt="">
-            <h3>tasty cupcakes</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-            </div>
-            <a href="#" class="btn">order now</a>
-        </div>
-        <div class="box">
-            <span class="price"> $5 - $20 </span>
-            <img src="user/img/images/p-5.jpg" alt="">
-            <h3>cold drinks</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-            </div>
-            <a href="#" class="btn">order now</a>
-        </div>
-        <div class="box">
-            <span class="price"> $5 - $20 </span>
-            <img src="user/img/images/p-6.jpg" alt="">
-            <h3>cold ice-cream</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-            </div>
-            <a href="#" class="btn">order now</a>
-        </div>
 
     </div>
 
@@ -343,39 +232,39 @@
     <h1 class="heading pt-5 pb-5"><span> Gallery </span></h1>
     <div class="containerG">
         <div class="boxG a">
-            <img src="../user/img/images/g-1.jpg" alt="">
+            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168695/gallery/lucas-hoang-Yb2Sb9bdgPk-unsplash_1_skkh0u.jpg" alt="">
         </div>
         <div class="boxG b">
-            <img src="../user/img/images/g-2.jpg" alt="">
+            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168775/gallery/ben-lei-ubBWnvrsARk-unsplash_xw3eri.jpg" alt="">
         </div>
         <div class="boxG c">
-            <img src="../user/img/images/g-3.jpg" alt="">
+            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169351/gallery/hong-anh-duong-EK--nAm-CYM-unsplash_itgbyk.jpg" alt="">
         </div>
         <div class="boxG d">
-            <img src="../user/img/images/g-4.jpg" alt="">
+            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169069/gallery/nikolay-smeh-gPpbFaEkl00-unsplash_gb5oe3.jpg" alt="">
         </div>
         <div class="boxG e">
-            <img src="../user/img/images/g-5.jpg" alt="">
+            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169145/gallery/sonny-mauricio-yhc4pSbl01A-unsplash_a6qsc4.jpg" alt="">
 
         </div>
         <div class="boxG f">
-            <img src="../user/img/images/g-6.jpg" alt="">
+            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168847/gallery/lynda-hinton-q_eyFSd2W3M-unsplash_xrypqq.jpg" alt="">
 
         </div>
         <div class="boxG g">
-            <img src="../user/img/images/g-7.jpg" alt="">
+            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168942/gallery/rosalind-chang-P_wPicZYoPI-unsplash_m4vtie.jpg  " alt="">
 
         </div>
         <div class="boxG h">
-            <img src="../user/img/images/g-8.jpg" alt="">
+            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169405/gallery/markus-winkler-dq03aws4SmY-unsplash_o2atrr.jpg" alt="">
 
         </div>
         <div class="boxG i">
-            <img src="../user/img/images/g-9.jpg" alt="">
+            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169207/gallery/haseeb-jamil-J9lD6FS6_cs-unsplash_axdtau.jpg" alt="">
 
         </div>
         <div class="boxG j">
-            <img src="../user/img/images/g-10.jpg" alt="">
+            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169025/gallery/andraz-lazic-iy_MT2ifklc-unsplash_tohd1p.jpg" alt="">
 
         </div>
     </div>

@@ -204,11 +204,11 @@ header .container {
     display: flex;
     justify-content: space-between;
 }
-.total{
+.total-price{
     font-size: 20px;
     font-weight: 600;
 }
-.promo{
+.promo-price{
     color: rgb(5, 148, 79);
 }
 footer{

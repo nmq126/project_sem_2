@@ -9,6 +9,6 @@ class Helper
         return number_format((float) $vnd / Helper::$usdToVndRate,2,'.','' );
     }
     public static function formatVnd($vnd){
-        return number_format($vnd, 2);
+        return number_format($vnd, 0);
     }
 }

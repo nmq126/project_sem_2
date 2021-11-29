@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
     public function show(){
-        $shoppingCart = [];
-        if (Session::has('shoppingCart')) {
-            $shoppingCart = Session::get('shoppingCart');
-        }
+//
+        $discountProducts = Product::all()->where('discount', '>', 0)->random(4);
+        $categories = Category::all();
         return view('client.home', [
-            'shoppingCart' => $shoppingCart
+            'categories' => $categories,
+            'discountProducts' => $discountProducts
         ]);
     }
 }

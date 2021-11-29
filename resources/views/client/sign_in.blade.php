@@ -30,9 +30,9 @@
 <!-- Begin Preloader -->
 <div id="preloader">
     <div class="canvas">
-        <img src="" alt="logo" class="loader-logo">
-        <div class="spinner"></div>
+        <img src="user/img/loader.gif" alt="">
     </div>
+</div>v>
 </div>
 <!-- End Preloader -->
 <!-- Begin Container -->
