@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class   AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -24,5 +25,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        view()->composer('*',function ($view){
+            $shoppingCart = [];
+            if (Session::has('shoppingCart')) {
+                $shoppingCart = Session::get('shoppingCart');
+            }
+            $totalQuantity = 0;
+            foreach ($shoppingCart as $cartItem){
+                $totalQuantity += $cartItem->quantity;
+            }
+            $view->with('totalQuantity', $totalQuantity);
+        });
     }
 }

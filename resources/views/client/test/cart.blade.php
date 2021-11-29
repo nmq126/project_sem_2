@@ -63,8 +63,8 @@
                 quantity: this.value
             }
             updateCart(data);
-            $('#item-price-'+data.id).load(' #item-price-'+data.id);
-            $('#total-price').load(' #total-price');
+            // $('#item-price-'+data.id).load(' #item-price-'+data.id);
+            // $('#total-price').load(' #total-price');
         })
     })
     function updateCart(data) {
@@ -73,13 +73,23 @@
             method: 'POST',
             data: data,
             success: function (res) {
-                return res;
-
+                updatePrice(res);
             },
             error: function (data) {
                 console.log(data)
             }
         })
+    }
+
+    function updatePrice(data){
+        let totalPrice = 0;
+        for (let key in data){
+            console.log(data[key]);
+            let itemPrice = data[key].unitPrice * data[key].quantity
+            totalPrice += itemPrice
+            $('#item-price-'+data[key].id).html(itemPrice);
+        }
+        $('#total-price').html('Total price ' + totalPrice + ' VNĐ');
     }
 </script>
 </body>

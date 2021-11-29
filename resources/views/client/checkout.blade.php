@@ -53,7 +53,6 @@
         </div>
         <div class="searchBar">
             <div class="header-option">
-                <img src="/viet_kitchen/img/search.svg" alt="">
                 <span>Search</span>
             </div>
             <div class="header-option">
@@ -121,9 +120,9 @@
                         {{--                        <div class="quantity">{{ $cartItem->quantity }}</div>--}}
                         <div class="name"> {{ $cartItem->name }}</div>
                         <div class="price item-price-{{$cartItem->id}}">
-                            <?php if (isset($cartItem) && $cartItem->price != $cartItem->unitPrice): ?>
-                            <del style="color: grey">{{ \App\Helpers\Helper::formatVnd($cartItem->price * $cartItem->quantity) }}</del>
-                            <?php endif; ?>
+{{--                            <?php if (isset($cartItem) && $cartItem->price != $cartItem->unitPrice): ?>--}}
+{{--                            <del class ="del-price-{{$cartItem->id}}" style="color: grey">{{ \App\Helpers\Helper::formatVnd($cartItem->price * $cartItem->quantity) }}</del>--}}
+{{--                            <?php endif; ?>--}}
                             {{ \App\Helpers\Helper::formatVnd($cartItem->unitPrice * $cartItem->quantity)  }} vnđ
                         </div>
                     </div>
@@ -204,23 +203,41 @@
                 quantity: this.value
             }
             updateCart(data);
-            $('.total-price').load(' .total-price');
-            $('.sub-total').load(' .sub-total');
-            $('.promo-price').load(' .promo-price');
-            $('.item-price-'+data.id).load(' .item-price-'+data.id);
+            // $('.total-price').load(' .total-price');
+            // $('.sub-total').load(' .sub-total');
+            // $('.promo-price').load(' .promo-price');
+            // // $('.item-price-'+data.id).load(' .item-price-'+data.id);
         })
     })
     function updateCart(data) {
         $.ajax({
             url: '/cart/update?id='+ data.id + '&quantity=' +data.quantity,
             method: 'POST',
-            success: function (data) {
-                console.log(data)
+            success: function (res) {
+                updatePrice(res)
+                console.log(res)
             },
-            error: function (data) {
-                console.log(data)
+            error: function (res) {
+                console.log(res)
             }
         })
+    }
+    function updatePrice(data){
+        let subTotal = 0;
+        let promoPrice = 0;
+        for (let key in data){
+            console.log(data[key]);
+            let itemDelPrice = data[key].price * data[key].quantity;
+            let itemPrice = data[key].unitPrice * data[key].quantity;
+            promoPrice = (data[key].price - data[key].unitPrice) * data[key].quantity;
+            subTotal += itemPrice
+            // $('.del-price-'+data[key].id).html(itemDelPrice.toLocaleString("en-US"));
+            $('.item-price-'+data[key].id).html(itemPrice.toLocaleString("en-US") + ' vnđ');
+        }
+        let totalPrice = subTotal - promoPrice;
+        $('.total-price').html(totalPrice.toLocaleString("en-US") + ' vnđ');
+        $('.sub-total').html(subTotal.toLocaleString("en-US") + ' vnđ');
+        $('.promo-price').html(promoPrice.toLocaleString("en-US") + ' vnđ');
     }
 </script>
 

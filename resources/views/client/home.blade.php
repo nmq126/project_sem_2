@@ -36,23 +36,6 @@
         <img src="user/img/loader.gif" alt="">
     </div>
 </div>
-@php
-    use Illuminate\Support\Facades\Session;
-        $shoppingCart = [];
-        if (Session::has('shoppingCart')) {
-            $shoppingCart = Session::get('shoppingCart');
-        }
-@endphp
-@php
-    $totalQuantity = 0;
-@endphp
-@foreach($shoppingCart as $cartItem)
-    @php
-        if (isset($totalQuantity) && isset($cartItem)) {
-            $totalQuantity += $cartItem->quantity;
-        }
-    @endphp
-@endforeach
 <header id="nav">
 
     <a href="#" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
