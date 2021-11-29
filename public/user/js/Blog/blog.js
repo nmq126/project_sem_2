@@ -37,7 +37,7 @@ $(".search-input").keyup(function() {
             url: "http://127.0.0.1:8000/blog-json?key=" + _text,
             method: "GET",
             success: function(res) {
-                var _html = `
+                var _html = `;
 
 `
                 res.forEach(element => {

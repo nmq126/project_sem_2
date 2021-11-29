@@ -18,6 +18,7 @@ class CategorySeeder extends Seeder
         DB::table('categories')->truncate();
         DB::table('categories')->insert([
             [
+
                 'id' => '1',
                 'name' => 'Bánh mì - xôi',
                 'description' => 'Các món bánh mì, xôi truyền thống mang hương vị ba miền',
@@ -82,8 +83,10 @@ class CategorySeeder extends Seeder
                 'id' => '11',
                 'name' => 'Hải sản',
                 'description' => 'Các món hải sản tươi sống',
-                'thumbnail' => 'https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638116673/categories/seafood_fj7rhe.png'
+                'thumbnail' => 'https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638116673/categories/seafood_fj7rhe.png',
+
             ],
+
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
