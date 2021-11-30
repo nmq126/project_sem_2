@@ -89,9 +89,7 @@ Route::get('/sign_in', function () {
 Route::get('/sign_up', function () {
     return view('client.sign_up');
 });
-Route::get('/home', function () {
-    return view('client.home');
-});
+
 
 Route::get('/cart', function () {
     return view('client.cart');

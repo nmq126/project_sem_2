@@ -57,7 +57,7 @@ class ShoppingCartController extends Controller
             $shoppingCart[$productId] = $cartItem;
         }
         Session::put('shoppingCart', $shoppingCart);
-        return redirect('/cart');
+        return Session::get('shoppingCart');
     }
 
     public function remove(Request $request)
@@ -100,6 +100,6 @@ class ShoppingCartController extends Controller
             $shoppingCart[$productId] = $existingCartItem;
         }
         Session::put('shoppingCart', $shoppingCart);
-        return redirect('/cart');
+        return Session::get('shoppingCart');
     }
 }
