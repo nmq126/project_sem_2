@@ -260,12 +260,14 @@
         })
     }
     function updatePrice(data){
+        let totalQuantity = 0;
         let subTotal = 0;
         let promoPrice = 0;
         for (let key in data){
             console.log(data[key]);
             let itemDelPrice = data[key].price * data[key].quantity;
             let itemPrice = data[key].unitPrice * data[key].quantity;
+            totalQuantity += data[key].quantity * 1;
             promoPrice += (data[key].price - data[key].unitPrice) * data[key].quantity;
             subTotal += itemDelPrice
             // $('.del-price-'+data[key].id).html(itemDelPrice.toLocaleString("en-US"));
@@ -275,6 +277,7 @@
         $('.total-price').html(totalPrice.toLocaleString("en-US") + ' vnđ');
         $('.sub-total').html(subTotal.toLocaleString("en-US") + ' vnđ');
         $('.promo-price').html('- ' + promoPrice.toLocaleString("en-US") + ' vnđ');
+        $('#lblCartCount').html(totalQuantity);
     }
 </script>
 
