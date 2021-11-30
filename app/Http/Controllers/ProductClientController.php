@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Session;
 
 class ProductClientController extends Controller
 {
+    public  function  getProductDetail(Request $request){
+        $id = $request->id;
+        $product = Product::find($id);
+        return view('client.product_detail.product_detail',['product'=>$product]);
+    }
     public function getList()
     {
         $products = Product::all();
