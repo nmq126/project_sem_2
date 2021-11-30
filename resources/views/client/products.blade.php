@@ -90,7 +90,7 @@
                         <div class="search-content mt-1" id="search-content" style="display: block">
                             <hr class="mt-5">
                             <h5 class="ml-3 float-left">Categories</h5>
-                            <div class="list d-flex flex-column" id="show1">
+                            <div class="list d-flex flex-column">
                                 @foreach($categories as $category)
                                     <label for="{{$category->name}}" class="mt-2">
                                         <input type="checkbox" id="{{$category->name}}" name="categories[]"
@@ -100,7 +100,7 @@
                             </div>
                             <hr class="mt-3">
                             <h5 class="ml-3">Ingredient</h5>
-                            <div class="list d-flex flex-column" id="show2">
+                            <div class="list d-flex flex-column">
                                 @foreach($ingredients as $ingredient)
                                     <label for="{{$ingredient->name}}" class="mt-2">
                                         <input type="checkbox" id="{{$ingredient->name}}"
@@ -158,7 +158,7 @@
                         <p class="card-text fw-bolder font-monospace item-name name-item">{{$product->name}}</p>
                         <div class="price">
                             $
-                            <p class="item-price price-reseve">{{$product->price - ($product->price * $product->discount / 100)}}</p>
+                            <p class="item-price price-item">{{$product->price - ($product->price * $product->discount / 100)}}</p>
                             @if($product->discount > 0)
                                 <p class="ps-3" style="color: red"><s>${{$product->price}}</s></p>
                             @endif
@@ -329,6 +329,5 @@
         })
     }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js"></script>
 </body>
 </html>
