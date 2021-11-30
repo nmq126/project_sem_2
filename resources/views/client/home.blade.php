@@ -39,7 +39,7 @@
 </div>
 <header id="nav">
 
-    <a href="#" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
+    <a href="/home" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
@@ -62,7 +62,7 @@
     <div class="content">
         <h3 style="text-transform: capitalize">Đặt món nào cũng <span>FREESHIP</span></h3>
         <p style="font-size: 2rem"> Nhiều món ngon cho bạn thoải mái lựa chọn.</p>
-        <a href="/product" class="btn">Đặt hàng ngay</a>
+        <a href="/products" class="btn">Đặt hàng ngay</a>
     </div>
 
     <div class="image">

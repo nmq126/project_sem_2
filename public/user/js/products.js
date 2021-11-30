@@ -143,7 +143,7 @@ function addToCart(data) {
     $.ajax({
         url: '/cart/add?id=' + data.id + '&quantity=1',
         method: 'GET',
-        success: function () {
+        success: function (res) {
             $.toast({
                 heading: 'Thành công',
                 text: 'Sản phẩm ' + data.name + ' đã được thêm vào giỏ hàng',
@@ -153,6 +153,7 @@ function addToCart(data) {
                 icon: 'success',
                 stack: 5
             })
+            updatePrice(res)
         },
         error: function (data) {
             $.toast({
@@ -166,4 +167,11 @@ function addToCart(data) {
             })
         }
     })
+    function updatePrice(data) {
+        let totalQuantity = 0;
+        for (let key in data) {
+            totalQuantity += data[key].quantity * 1;
+        }
+        $('#lblCartCount').html(totalQuantity);
+    }
 }

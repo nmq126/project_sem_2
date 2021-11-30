@@ -53,7 +53,7 @@
 @endforeach
 <header id="nav">
 
-    <a href="#" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
+    <a href="/home" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
