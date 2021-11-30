@@ -18,7 +18,7 @@ class IngredientSeeder extends Seeder
         DB::table('ingredients')->truncate();
         DB::table('ingredients')->insert([
             [
-                'name' => 'Trà xanh Matcha',
+                'name' => 'Gà Châu Phi, bột ngô, bột nấm trắng',
                 'description' => 'Là loại nguyên liệu tuyệt vời trong công thức làm nên các món tráng miệng, món bánh hay pha chế đồ uống',
             ],
             [

@@ -96,6 +96,10 @@ Route::get('/cart', function () {
 });
 
 
-Route::get('/product_detail_1.2', function () {
-    return view('client.product_detail.product_detail');
-});
+
+
+Route::get('/product_detail/{id}', [ProductClientController::class, 'getProductDetail']);
+
+Route::get('/products', function (){
+   return view('client.products-and-cart.products');
+

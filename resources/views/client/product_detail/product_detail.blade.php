@@ -34,38 +34,37 @@
 </div>
 <div class="main">
     <div class="home">
-        <a href="#">Home</a>
-        <p>/</p> <span>Humberger</span>
+        <a href="/products">Home</a>
+        <p>/</p> <span>{{$product->category->name}} </span>
     </div>
     <div class="container">
         <div class="face">
             <div class="image-main">
                 <div class="discount">
-                    <span> 13%</span>
+                    <span> {{$product->discount}}%</span>
                 </div>
-                <img src="https://res.cloudinary.com/du0vz0npz/image/upload/v1638198688/buger_king-removebg_f1jddo.png" alt="">
+                <img src="{{$product->thumbnail}}" alt="">
             </div>
             <div class="content">
                 <div class="info">
                     <div class="name-product">
-                        Quedando Esencialmente
+                        {{$product->name}}
                     </div>
                     <div class="price">
                         <div class="new-price">
-                            <p> $526.00</p>
+                            <p>{{$product->price -($product->price*$product->discount/100)}} đ </p>
                         </div>
                         <div class="old-price">
-                            <p> $559.00</p>
+                            <p> {{$product->price}} đ</p>
                         </div>
                     </div>
                     <div class="description">
-                        <p>En el valle, la vivienda en la vigilancia específica, el reemplazo o la consolidación de la cama, un hombre obsesionado con la reducción de opciones de apuestas ilegales. Wow, mercado muy atractivo, de mis visitantes. Tiempo
-                            de desarrollo reciente para odiar, un bar beef tiempo.</p>
+                        <p>{{$product->description}}.</p>
                     </div>
                     <div class="material">
                         <p> Material:</p>
-                        <p>Wool</p>
-                        <p>Fiber</p>
+                        <p>{{$product->ingredient->name}}</p>
+                
                     </div>
                 </div>
                 <div class="cart-add">
@@ -79,7 +78,7 @@
                     </div>
                 </div>
                 <div class="category">
-                    Categories: Drink, Food, Juice
+                    Categories: {{$product->category->name}}
                 </div>
                 <!-- ShareThis BEGIN -->
                 <div class="sharethis-inline-share-buttons"></div>
@@ -161,14 +160,7 @@
                 <div class="detail-item-2">
 
                     <div class="detail-content container mt-5">
-                        <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Mañana, a partir de los botones de opción, sino un poco de dolor. Escribir en el freno ahora. No hay comentarios eran, en el mejor, pero el
-                            financiamiento de la atención de la salud o la risa. Bienvenido a aprender más acerca de la cultura popular, y el tiempo, no, ni a crecer fuerte. Miramos a los miembros de televisión por cable de televisión.</p>
-                        <div class="img"> <img src="https://burgerking.vn/media/catalog/product/cache/1/small_image/300x/9df78eab33525d08d6e5fb8d27136e95/d/b/dbl_crunchy_whp-min_1.jpg" alt=""></div>
-                        <p>Por otra parte, denunciamos con indignación a los hombres que son engañados y desmoralizados por los encantos del placer del momento, tan cegados por el deseo, que no pueden prever el dolor y la molestia que se va a producir,
-                            y la misma culpa es de los que faltan a su deber por debilidad de la voluntad, que es lo mismo que decir que fallan por la fatiga y el dolor. Estos casos son muy simples y fácil de distinguir. En una hora libre, sin las
-                            trabas de nuestro poder de elección y cuando nada impida que seamos capaces de hacer lo que más nos gusta, todo placer es de agradecer y cada dolor se puede evitar. Pero en ciertas circunstancias y debido a las exigencias
-                            del deber o de las obligaciones de la empresa, estos placeres tienen que ser repudiados y sus molestias aceptadas .El hombre sabio, por lo tanto, siempre tiene en estos asuntos una elección: rechaza placeres para asegurar
-                            otros placeres mayores, o de lo contrario evita los dolores para evitar dolores peores.</p>
+                        {!!$product->detail!!}
                     </div>
 
 
