@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 class ProductClientController extends Controller
 {
-    public function getList(Request $request)
+    public function getList(Request $request): string
     {
         $products = Product::paginate(3);
         $categories = Category::all();
@@ -57,6 +57,7 @@ class ProductClientController extends Controller
         $ingredientId = $request->input('ingredients');
         $fromPrice = $request->input('fromPrice');
         $toPrice = $request->input('toPrice');
+        $sorted = $request->input('sort');
         $products = Product::query();
         if ($categoryId != []) {
             $products->whereIn('category_id', $categoryId);
@@ -65,12 +66,26 @@ class ProductClientController extends Controller
             $products->whereIn('ingredient_id', $ingredientId);
         }
         if ($fromPrice != '') {
-            $products->where('price', '>=', $fromPrice);
+            $products->whereRaw('(price - (price * discount / 100)) >= ?', $fromPrice);
         }
         if ($toPrice != '') {
-            $products->where('price', '<=', $toPrice);
+            $products->whereRaw('(price - (price * discount / 100)) <= ?', $toPrice);
         }
-        $products = $products->get();
+        switch ($sorted) {
+            case 'item-price':
+                $products->orderBy('price');
+                break;
+            case 'price-item':
+                $products->orderBy('price', 'desc');
+                break;
+            case 'item-name':
+                $products->orderBy('name');
+                break;
+            case 'name-item':
+                $products->orderBy('name', 'desc');
+                break;
+        }
+            $products = $products->get();
         return response()->json([
             'products' => $products
         ]);
