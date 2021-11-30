@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Giỏ hàng</title>
     <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -62,28 +62,29 @@
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        <a href="/sign_in"> Đăng Nhập </a>
-        <a href="/products"> Cửa Hàng </a>
-        <a href="/sign_in"> Liên Hệ </a>
-        <a href="/sign_in"> Blog </a>
+{{--        <a href="/products"> Cửa Hàng </a>--}}
+{{--        <a href="/sign_in"> Liên Hệ </a>--}}
+{{--        <a href="/sign_in"> Blog </a>--}}
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
             <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
         </a>
+        <a href="/sign_in"> Đăng nhập </a>
+
     </nav>
 </header>
 
 <div class="col-12 text-center mb-1" style="margin-top: 150px">
-    <h2 class="fw-bolder fst-italic" style="font-size: 40px">Shopping Cart</h2>
+    <h2 class="fw-bolder fst-italic" style="font-size: 40px">Giỏ hàng</h2>
 </div>
 <div class="product-cart">
     <div class="wrapper">
         <div class="cart-collection">
             <div class="cart-header">
-                <p>Item</p>
-                <p>Quantity</p>
-                <p>Unit Price</p>
-                <p>Total</p>
+                <p>Sản phẩm</p>
+                <p>Số lượng</p>
+                <p>Đơn giá</p>
+                <p>Số tiền</p>
             </div>
             <div class="item">
                 @php
@@ -105,27 +106,27 @@
                             <div class="cart-product-info pl-5" style="padding-left: 20px">
                                 <input type="hidden" name="id" value="{{$cartItem->id}}">
                                 <p class="cart-product-name">{{$cartItem->name}}</p>
-                                <p class="cart-price">${{$cartItem->unitPrice}}</p>
+                                <p class="cart-price">{{\App\Helpers\Helper::formatVnd($cartItem->unitPrice)}} vnđ</p>
                                 <div class="remove-md">
                                     <a href="/cart/remove?id={{$cartItem->id}}"
                                        onclick="return confirm('Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng?')"><span
-                                            class="fas fa-trash"></span> Remove</a>
+                                            class="fas fa-trash"></span> Xóa</a>
                                 </div>
                             </div>
                         </div>
                         <div class="cart-quantity">
                             <div class="cart-quantity-controls">
-                                <button>-</button>
-                                <input class="text-center quantitys" data-id="{{$cartItem->id}}" name="quantity" type="number"
+{{--                                <button>-</button>--}}
+                                <input class="text-center quantity-input" data-id="{{$cartItem->id}}" name="quantity" type="number"
                                        value="{{$cartItem->quantity}}">
-                                <button>+</button>
+{{--                                <button>+</button>--}}
                             </div>
                         </div>
                         <div class="cart-unit-price">
-                            <h5>${{$cartItem->unitPrice}}</h5>
+                            <h5>{{\App\Helpers\Helper::formatVnd($cartItem->unitPrice)}}</h5>
                         </div>
-                        <div class="cart-product-total" id="prices-{{$cartItem->id}}">
-                            <h5>${{$cartItem->unitPrice * $cartItem->quantity}}</h5>
+                        <div class="cart-product-total" >
+                            <h5 id="item-price-{{$cartItem->id}}">{{\App\Helpers\Helper::formatVnd($cartItem->unitPrice * $cartItem->quantity)}}</h5>
                         </div>
                         <div class="cart-controls">
                             <div class="remove">
@@ -133,7 +134,7 @@
                                    onclick="return confirm('Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng?')"><span
                                         class="fas fa-trash"></span> Remove</a>
                             </div>
-                            <div class="quantity-controls-sm">
+                                <div class="quantity-controls-sm">
                                 <button>-</button>
                                 <input class="text-center" name="quantity" type="number" value="{{$cartItem->quantity}}"
                                        readonly>
@@ -146,12 +147,12 @@
         </div>
         <div class="cart-total-holder">
             <div class="cart-total fw-bold">
-                <p>Total:</p>
-                <p>${{$totalPrice}}</p>
+                <p>Tổng: </p>
+                <p class="total-price">{{\App\Helpers\Helper::formatVnd($totalPrice)}} vnđ</p>
             </div>
             <div class="cart-action-button">
-                <a href="">Continue Shopping</a>
-                <a href="/checkout" class="main-button">Proceed To CheckOut</a>
+                <a href="/products">Thêm sản phẩm khác</a>
+                <a href="/checkout" class="main-button">Thanh toán</a>
             </div>
         </div>
     </div>
@@ -183,39 +184,42 @@
 <script src="user/js/main.js"></script>
 <script>
     $(document).ready(function () {
-        $('.quantitys').change(function () {
+        $('.quantity-input').change(function () {
             let data = {
                 id: this.getAttribute('data-id'),
                 quantity: this.value
             }
             updateCart(data);
-            $('#prices-' + data.id).load(' #prices-' + data.id);
-            $('#total-price').load(' #total-price');
+            // $('#item-price-'+data.id).load(' #item-price-'+data.id);
+            // $('#total-price').load(' #total-price');
         })
     })
-
     function updateCart(data) {
         $.ajax({
-            url: '/cart/update?id=' + data.id + '&quantity=' + data.quantity,
+            url: '/cart/update?id='+ data.id + '&quantity=' +data.quantity,
             method: 'POST',
             data: data,
             success: function (res) {
-                $.toast({
-                    heading: 'Thành công',
-                    text: 'Sản phẩm đã được thêm vào giỏ hàng',
-                    position: 'top-center',
-                    showHideTransition: 'slide',
-                    hideAfter: 5000,
-                    icon: 'success',
-                    stack: 5
-
-                })
-
+                updatePrice(res);
             },
             error: function (data) {
                 console.log(data)
             }
         })
+    }
+
+    function updatePrice(data){
+        let totalPrice = 0;
+        let totalQuantity = 0;
+        for (let key in data){
+            console.log(data[key]);
+            let itemPrice = data[key].unitPrice * data[key].quantity
+            $('#item-price-'+data[key].id).html(itemPrice.toLocaleString("en-US"));
+            totalQuantity += data[key].quantity * 1;
+            totalPrice += itemPrice
+        }
+        $('.total-price').html(totalPrice.toLocaleString("en-US") + ' vnđ');
+        $('#lblCartCount').html(totalQuantity);
     }
 </script>
 </body>

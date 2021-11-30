@@ -5,7 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <title>Sản phẩm</title>
+    <!-- Favicon -->
     <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -56,14 +58,15 @@
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        <a href="/sign_in"> Đăng Nhập </a>
-        <a href="/products"> Cửa Hàng </a>
-        <a href="/sign_in"> Liên Hệ </a>
-        <a href="/sign_in"> Blog </a>
+{{--        <a href="/products"> Cửa Hàng </a>--}}
+{{--        <a href="/sign_in"> Liên Hệ </a>--}}
+{{--        <a href="/sign_in"> Blog </a>--}}
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
             <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
         </a>
+        <a href="/sign_in"> Đăng nhập </a>
+
     </nav>
 </header>
 
@@ -133,10 +136,10 @@
             <h5 class="pt-1 pr" style="padding-right: 20px">Sorted By: </h5>
             <select class="form-select align-self-center" style="width: 200px" id="sort"
                     onchange="sort(this.value)">
-                <option value="item-price">Price, low to high</option>
-                <option value="price-item">Price, high to low</option>
-                <option value="item-name">Alphabetically, A-Z</option>
-                <option value="name-item">Alphabetically, Z-A</option>
+                <option value="item-price">Giá: thấp đến cao</option>
+                <option value="price-item">Giá: cao đến thấp</option>
+                <option value="item-name">Tên: A-Z</option>
+                <option value="name-item">Tên: Z-A</option>
             </select>
         </div>
         <div class="products-list mt-4 col-12" id="products-list">
@@ -157,10 +160,10 @@
                     <div class="card-body text-center">
                         <p class="card-text fw-bolder font-monospace item-name name-item">{{$product->name}}</p>
                         <div class="price">
-                            $
-                            <p class="item-price price-reseve">{{$product->price - ($product->price * $product->discount / 100)}}</p>
+                            <p class="item-price price-item">{{$product->price - ($product->price * $product->discount / 100)}}</p>
+{{--                            <p class="item-price price-item">{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount / 100))}} đ</p>--}}
                             @if($product->discount > 0)
-                                <p class="ps-3" style="color: red"><s>${{$product->price}}</s></p>
+                                <p class="ps-3" style="color: red"><s>{{\App\Helpers\Helper::formatVnd($product->price)}} đ</s></p>
                             @endif
                         </div>
                         <p class="description">{{$product->description}}</p>
@@ -304,7 +307,7 @@
         $.ajax({
             url: '/cart/add?id=' + data.id + '&quantity=1',
             method: 'GET',
-            success: function () {
+            success: function (res) {
                 $.toast({
                     heading: 'Thành công',
                     text: 'Sản phẩm ' + data.name + ' đã được thêm vào giỏ hàng',
@@ -314,6 +317,7 @@
                     icon: 'success',
                     stack: 5
                 })
+                updatePrice(res);
             },
             error: function (data) {
                 $.toast({
@@ -327,6 +331,13 @@
                 })
             }
         })
+    }
+    function updatePrice(data) {
+        let totalQuantity = 0;
+        for (let key in data) {
+            totalQuantity += data[key].quantity * 1;
+        }
+        $('#lblCartCount').html(totalQuantity);
     }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js"></script>

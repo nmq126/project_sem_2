@@ -1,8 +1,7 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');*/
 
 :root{
-  --color-green:#ff3838;
-    --color-greenLighter: #F7FFF7;
+        --color-greenLighter: #F7FFF7;
     --color-green: #66E9AE;
     --color-greenDarker: #85ff7f;
 }
@@ -406,7 +405,9 @@ section{
 }
 /* Blog */
 
-
+.blog{
+    margin-bottom: 90px;
+}
 .blog-img {
     overflow: hidden;
 }
