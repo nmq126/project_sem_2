@@ -5,9 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>Sản phẩm</title>
-    <!-- Favicon -->
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
+    <title>Home</title>
     <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -58,15 +57,14 @@
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-{{--        <a href="/products"> Cửa Hàng </a>--}}
-{{--        <a href="/sign_in"> Liên Hệ </a>--}}
-{{--        <a href="/sign_in"> Blog </a>--}}
+        <a href="/sign_in"> Đăng Nhập </a>
+        <a href="/products"> Cửa Hàng </a>
+        <a href="/sign_in"> Liên Hệ </a>
+        <a href="/sign_in"> Blog </a>
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
             <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
         </a>
-        <a href="/sign_in"> Đăng nhập </a>
-
     </nav>
 </header>
 
@@ -79,21 +77,22 @@
 <div class="col-12 text-center pt-5 mt-3 pb-3">
     <h2 class="fw-bolder fst-italic" style="font-size: 40px">Our Products</h2>
 </div>
-<div class="content mb-3">
+<div class="content mb-5">
     <div class="col-lg-3 col-md-4">
         <div class="categories">
             <div class="keyword">
-                <div>
-                    <div class="search">
-                        <div class="pb-5">
-                            <span>Filter</span>
-                            <span class="fas fa-minus" id="search-b" onclick="show()"
-                                  style="font-size: 30px"></span>
-                        </div>
-                        <div class="search-content mt-1" id="search-content" style="display: block">
+                <div class="search-title">
+                    <div class="text-center">
+                        <span>Search Filter</span>
+                    </div>
+                </div>
+                <div class="search">
+                    <div class="search-content mt-1">
+                        <h5>Categories</h5>
+                        <span class="fas fa-plus" id="category-button" onclick="showCategorySearch()"></span>
+                        <div id="category-search" style="display: none">
                             <hr class="mt-5">
-                            <h5 class="ml-3 float-left">Categories</h5>
-                            <div class="list d-flex flex-column" id="show1">
+                            <div class="list d-flex flex-column">
                                 @foreach($categories as $category)
                                     <label for="{{$category->name}}" class="mt-2">
                                         <input type="checkbox" id="{{$category->name}}" name="categories[]"
@@ -101,9 +100,16 @@
                                         {{$category->name}}</label>
                                 @endforeach
                             </div>
-                            <hr class="mt-3">
-                            <h5 class="ml-3">Ingredient</h5>
-                            <div class="list d-flex flex-column" id="show2">
+                        </div>
+                    </div>
+                </div>
+                <div class="search">
+                    <div class="search-content mt-1">
+                        <h5 class="ml-3">Ingredient</h5>
+                        <span class="fas fa-plus" id="ingredient-button" onclick="showIngredientSearch()"></span>
+                        <div id="ingredient-search" style="display: none">
+                            <hr class="mt-5">
+                            <div class="list d-flex flex-column">
                                 @foreach($ingredients as $ingredient)
                                     <label for="{{$ingredient->name}}" class="mt-2">
                                         <input type="checkbox" id="{{$ingredient->name}}"
@@ -111,8 +117,15 @@
                                                value="{{$ingredient->id}}"> {{$ingredient->name}}</label>
                                 @endforeach
                             </div>
-                            <hr class="mt-3">
-                            <h5 class="ml-3">Price</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="search">
+                    <div class="search-content mt-1">
+                        <h5 class="ml-3">Price</h5>
+                        <span class="fas fa-plus" id="price-button" onclick="showPriceSearch()"></span>
+                        <div id="price-search" style="display: none">
+                            <hr class="mt-5">
                             <div class="list search-price mb-2 pt-3">
                                 <h3>From: </h3>
                                 <label for="fromPrice">
@@ -123,34 +136,42 @@
                                     <input type="number" id="toPrice" name="toPrice">
                                 </label>
                             </div>
-                            <hr class="mt-3 text-center">
-                            <button class="search-button btn mb-2" id="search-button">Search</button>
                         </div>
                     </div>
+                </div>
+                <div class="search">
+                    <div class="search-content mt-1">
+                        <h5 class="ml-3">Sorted By: </h5>
+                        <span class="fas fa-plus" id="sort-button" onclick="showSortSearch()"></span>
+                        <div id="sorted" style="display: none">
+                            <hr class="mt-5">
+                            <select class="form-select align-self-center" id="sort">
+                                <option value="no-sorted">No Sorted</option>
+                                <option value="item-price">Price, low to high</option>
+                                <option value="price-item">Price, high to low</option>
+                                <option value="item-name">Alphabetically, A-Z</option>
+                                <option value="name-item">Alphabetically, Z-A</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="search-button btn mb-2" id="search-button">Search</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-9 col-md-8 products mt-md-0 mt-4">
-        <div class="d-flex align-items-center pl-3 sort" style="margin-left: 50px">
-            <h5 class="pt-1 pr" style="padding-right: 20px">Sorted By: </h5>
-            <select class="form-select align-self-center" style="width: 200px" id="sort"
-                    onchange="sort(this.value)">
-                <option value="item-price">Giá: thấp đến cao</option>
-                <option value="price-item">Giá: cao đến thấp</option>
-                <option value="item-name">Tên: A-Z</option>
-                <option value="name-item">Tên: Z-A</option>
-            </select>
-        </div>
-        <div class="products-list mt-4 col-12" id="products-list">
+    <div class="col-lg-9 col-md-8 products mt-md-0">
+        <div class="products-list col-12" id="products-list">
             @foreach($products as $product)
-                <div class="card col-lg-4 col-sm-12 col-12 mb-2 product">
+                <div class="card col-lg-4 col-sm-12 col-12 mb-5 product">
                     <img class="card-img-top text-center"
                          src="{{$product->thumbnail}}"
                          alt="Card image cap">
                     <div class="button">
                         <i class="fas fa-heart button1"></i>
-                        <i class="fas fa-shopping-cart button2 add-to-cart-button" id="add-to-cart-{{ $product->id }}"
+                        <i class="fas fa-shopping-cart button2 add-to-cart-button"
+                           id="add-to-cart-{{ $product->id }}"
                            data-name="{{ $product->name }}" data-id="{{$product->id}}"></i>
                         <i class="fas fa-info-circle button3"></i>
                     </div>
@@ -160,10 +181,10 @@
                     <div class="card-body text-center">
                         <p class="card-text fw-bolder font-monospace item-name name-item">{{$product->name}}</p>
                         <div class="price">
+                            $
                             <p class="item-price price-item">{{$product->price - ($product->price * $product->discount / 100)}}</p>
-{{--                            <p class="item-price price-item">{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount / 100))}} đ</p>--}}
                             @if($product->discount > 0)
-                                <p class="ps-3" style="color: red"><s>{{\App\Helpers\Helper::formatVnd($product->price)}} đ</s></p>
+                                <p class="ps-3" style="color: red"><s>${{$product->price}}</s></p>
                             @endif
                         </div>
                         <p class="description">{{$product->description}}</p>
@@ -216,130 +237,9 @@
 <!-- custom js file link  -->
 <script src="user/js/main.js"></script>
 <script src="user/js/products.js"></script>
-<script>
-    $(document).ready(function () {
-        $(document).on('click', '.pagination a', function (event){
-            event.preventDefault();
-            let page = $(this).attr('href').split('page=')[1];
-            fetch_data(page);
-        })
-
-        function fetch_data(page){
-            $.ajax({
-                type: "GET",
-                url: "?page=" + page,
-                success: function (data) {
-                    console.log(data)
-                    $("body").empty().html(data);
-                }
-            })
-        }
-    })
-</script>
-<script>
-    $(document).ready(function () {
-        $(document).on('click', '#search-button', function () {
-            let categories = [];
-            let ingredients = [];
-            let fromPrice = $('input[name=fromPrice]').val();
-            let toPrice = $('input[name=toPrice]').val();
-            $('input[name="categories[]"]:checked').each(function () {
-                categories.push($(this).val());
-            });
-            $('input[name="ingredients[]"]:checked').each(function () {
-                ingredients.push($(this).val());
-            });
-            let data = {
-                _token: "{{ csrf_token() }}",
-                categories: categories,
-                ingredients: ingredients,
-                fromPrice: fromPrice,
-                toPrice: toPrice
-            }
-            console.log(data)
-            $.ajax({
-                type: 'POST',
-                url: 'products/search',
-                data: data,
-                dataType: 'json',
-                success: function (response) {
-                    $('#products-list').html('');
-                    let htmlDiscount = '';
-                    let htmlPrice = '';
-                    $.each(response.products, function (key, item) {
-                        if (item.discount > 0) {
-                            htmlDiscount = '<span>-' + item.discount + '%</span>';
-                            htmlPrice = '<p class="ps-3" style="color: red"><s>$' + item.price + '</s></p>';
-                        } else {
-                            htmlDiscount = '';
-                            htmlPrice = '';
-                        }
-                        $('#products-list').append(
-                            '<div class="card col-lg-4 col-sm-6 col-12 product"><img class="card-img-top" src="' + item.thumbnail + '" width="200px" height="200px" alt="Card image cap"> <div class="button"> <i class="fas fa-heart button1"></i> <i class="fas fa-shopping-cart add-cart button2"></i> <i class="fas fa-info-circle button3"></i></div>' + htmlDiscount + '<div class="card-body text-center"> <p class="card-text fw-bolder font-monospace item-name name-item">' + item.name + '</p> <div class="price"> $<p class="item-price price-item">' + (item.price - (item.price * item.discount / 100)) + '</p>' + htmlPrice + ' </div> </div></div>'
-                        );
-                    });
-                }
-            })
-        })
-    })
-</script>
-<script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
 <script>
-    $(document).ready(function () {
-        $('.add-to-cart-button').click(function () {
-            let data = {
-                id: this.getAttribute('data-id'),
-                name: this.getAttribute('data-name')
-            }
-            addToCart(data);
-        })
-    })
-
-    function addToCart(data) {
-        $.ajax({
-            url: '/cart/add?id=' + data.id + '&quantity=1',
-            method: 'GET',
-            success: function (res) {
-                $.toast({
-                    heading: 'Thành công',
-                    text: 'Sản phẩm ' + data.name + ' đã được thêm vào giỏ hàng',
-                    position: 'top-center',
-                    showHideTransition: 'slide',
-                    hideAfter: 5000,
-                    icon: 'success',
-                    stack: 5
-                })
-                updatePrice(res);
-            },
-            error: function (data) {
-                $.toast({
-                    heading: 'Thất bại',
-                    text: 'Có lỗi xảy ra, vui lòng thử lại sau',
-                    position: 'top-center',
-                    showHideTransition: 'slide',
-                    hideAfter: 5000,
-                    icon: 'error',
-                    stack: 5
-                })
-            }
-        })
-    }
-    function updatePrice(data) {
-        let totalQuantity = 0;
-        for (let key in data) {
-            totalQuantity += data[key].quantity * 1;
-        }
-        $('#lblCartCount').html(totalQuantity);
-    }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js"></script>
 </body>
 </html>
