@@ -53,13 +53,14 @@ Route::put('admin/orders/{id}/update', [OrderDetailsAdminController::class, 'upd
 //client side
 
 //product list
-Route::get('/product',[ProductClientController::class, 'getList']);
 Route::get('/product/recent-view',[ProductClientController::class, 'getRecent']);
 Route::get('/product/{id}',[ProductClientController::class, 'getDetail']);
+Route::post('products/search', [ProductClientController::class, 'search']);
+Route::get('/products', [ProductClientController::class, 'getList']);
 
 //cart
 Route::get('/cart/add',[ShoppingCartController::class, 'add']);
-Route::get('/cart/show',[ShoppingCartController::class, 'show']);
+Route::get('/cart',[ShoppingCartController::class, 'show']);
 Route::get('/cart/remove',[ShoppingCartController::class, 'remove']);
 Route::post('/cart/update',[ShoppingCartController::class, 'update']);
 
@@ -90,12 +91,10 @@ Route::get('/sign_up', function () {
 });
 
 
-Route::get('/products', function () {
-    return view('client.products-and-cart.products');
-});
 Route::get('/cart', function () {
-    return view('client.products-and-cart.cart');
+    return view('client.cart');
 });
+
 
 
 
@@ -103,4 +102,4 @@ Route::get('/product_detail/{id}', [ProductClientController::class, 'getProductD
 
 Route::get('/products', function (){
    return view('client.products-and-cart.products');
-});
+

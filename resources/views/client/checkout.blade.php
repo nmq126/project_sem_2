@@ -3,9 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Đặt hàng</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Đặt hàng</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+
     <!-- Google Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script>
@@ -16,15 +20,16 @@
             }
         });
     </script>
-    <!-- Favicon -->
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/vendors/css/base/bootstrap.min.css">
-{{--    <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">--}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="user/css/main.css">
+    <link rel="stylesheet" href="user/css/home.css">
     <link rel="stylesheet" href="user/css/checkout.css">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
 </head>
 <body class="bg-white">
 <!-- Begin Preloader -->
@@ -46,23 +51,23 @@
         }
     @endphp
 @endforeach
-<header>
-    <div class="container">
-        <div class="logo">
-            <h2>VietKitchen</h2>
-        </div>
-        <div class="searchBar">
-            <div class="header-option">
-                <span>Search</span>
-            </div>
-            <div class="header-option">
-                Login
-            </div>
-        </div>
-    </div>
+<header id="nav">
+
+    <a href="#" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
+
+    <div id="menu-bar" class="fas fa-bars"></div>
+
+    <nav class="navbar">
+        <a href="/cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+        </a>
+        <a href="/sign_in"> Đăng nhập</a>
+    </nav>
+
 </header>
 <div role="main" class="checkout-body">
-    <div class="shipping col-md-8">
+    <div class="shipping col-md-8" style="padding-top: 120px">
         <div class="information">
             <h3>Thông tin vận chuyển</h3>
             <div class="authentication-form">
@@ -112,7 +117,7 @@
             <div class="order col-lg-12">
                 <div class="order-title">
                     <h3>Chi tiết đơn hàng</h3>
-                    <a class="add-more" href="/product  ">Chọn thêm sản phẩm</a>
+                    <a style="color: black" class="add-more" href="/products  ">Chọn thêm sản phẩm</a>
                 </div>
                 @foreach($shoppingCart as $cartItem)
                     <div class="list-item mt-4">
@@ -132,7 +137,7 @@
 
         </div>
     </div>
-    <div class="cart col-md-4">
+    <div class="cart col-md-4"  style="padding-top: 120px">
         <div class="place-order">
             <div class="place-order-button">
                 <button form="checkout-form" type="submit">Đặt hàng</button>
@@ -163,17 +168,49 @@
     </div>
 </div>
 
-<footer>
-
+<footer class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-6">
+            <h3><strong>Project Sem 2</strong></h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.</p>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 information">
+            <h3><strong>INFORMATION</strong></h3>
+            <a href="/about-us.php"><p>About Us</p></a>
+            <a href="/contact-us.php"><p>Contact Us</p></a>
+            <a href=""><p>Privacy Policy</p></a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 mt-md-0 mt-5 address">
+            <h3><strong>GET IN TOUCH</strong></h3>
+            <p>Address: 123 Main Your address goes here.</p>
+            <p>Telephone Enquiry: (012) 800 456 789-987</p>
+            <p>Email: Info@example.com</p>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 mt-lg-0 mt-5 share">
+            <h3><strong>FOLLOW US</strong></h3>
+            <i class="fab fa-facebook fa-2x"></i>
+            <i class="fab fa-twitter fa-2x"></i>
+            <i class="fab fa-youtube fa-2x"></i>
+            <i class="fab fa-instagram fa-2x"></i>
+        </div>
+        <div class="col-12 copyright">
+            <h3>Copyright © 2021 Project Sem 2</h3>
+        </div>
+    </div>
 </footer>
 
+<!-- scroll top button  -->
+<a href="#" class="fas fa-angle-up" id="scroll-top"></a>
 
-<script src="assets/vendors/js/base/jquery.min.js"></script>
-{{--<script src="assets/vendors/js/base/core.min.js"></script>--}}
+<script src="/assets/vendors/js/base/jquery.min.js"></script>
+<script src="/assets/vendors/js/base/core.min.js"></script>
 
-<script src="assets/vendors/js/app/app.min.js"></script>
+<script src="/assets/vendors/js/app/app.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+<script src="user/js/main.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -223,21 +260,24 @@
         })
     }
     function updatePrice(data){
+        let totalQuantity = 0;
         let subTotal = 0;
         let promoPrice = 0;
         for (let key in data){
             console.log(data[key]);
             let itemDelPrice = data[key].price * data[key].quantity;
             let itemPrice = data[key].unitPrice * data[key].quantity;
-            promoPrice = (data[key].price - data[key].unitPrice) * data[key].quantity;
-            subTotal += itemPrice
+            totalQuantity += data[key].quantity * 1;
+            promoPrice += (data[key].price - data[key].unitPrice) * data[key].quantity;
+            subTotal += itemDelPrice
             // $('.del-price-'+data[key].id).html(itemDelPrice.toLocaleString("en-US"));
             $('.item-price-'+data[key].id).html(itemPrice.toLocaleString("en-US") + ' vnđ');
         }
         let totalPrice = subTotal - promoPrice;
         $('.total-price').html(totalPrice.toLocaleString("en-US") + ' vnđ');
         $('.sub-total').html(subTotal.toLocaleString("en-US") + ' vnđ');
-        $('.promo-price').html(promoPrice.toLocaleString("en-US") + ' vnđ');
+        $('.promo-price').html('- ' + promoPrice.toLocaleString("en-US") + ' vnđ');
+        $('#lblCartCount').html(totalQuantity);
     }
 </script>
 

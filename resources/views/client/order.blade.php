@@ -3,10 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Đơn hàng</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="orderId" content="{{$order->id}}">
+    <title>Đơn hàng</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+
     <!-- Google Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script>
@@ -17,15 +21,14 @@
             }
         });
     </script>
-    <!-- Favicon -->
-
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="/assets/vendors/css/base/bootstrap.min.css">
-{{--    <link rel="stylesheet" href="/assets/vendors/css/base/elisyam-1.5.min.css">--}}
-    <link rel="stylesheet" href="/user/css/checkout.css">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/user/css/main.css">
+    <link rel="stylesheet" href="/user/css/home.css">
+
 </head>
 <body class="bg-white">
 <!-- Begin Preloader -->
@@ -36,31 +39,31 @@
 </div>
 <!-- End Preloader -->
 
-<header>
-    <div class="container col-12">
-        <div class="logo">
-            <h2>VietKitchen</h2>
-        </div>
-        <div class="searchBar">
-            <div class="header-option">
-                <span>Search</span>
-            </div>
-            <div class="header-option">
-                Login
-            </div>
-        </div>
-    </div>
+<header id="nav">
+
+    <a href="#" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
+
+    <div id="menu-bar" class="fas fa-bars"></div>
+
+    <nav class="navbar">
+        <a href="/cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+        </a>
+        <a href="/sign_in"> Đăng nhập</a>
+    </nav>
+
 </header>
 
 <!-- Begin Header -->
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+<table class="" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
     <tr>
         <td bgcolor="#f2f3f8">
             <div align="center" style="padding: 0 15px 0 15px;">
                 <table border="0" cellpadding="0" cellspacing="0" width="600" class="wrapper">
                     <!-- Begin Logo -->
                     <tr>
-                        <td class="logo">
+                        <td class="logo" style="padding-top: 80px">
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td bgcolor="#ffffff" width="100" align="left" style="border-radius: 4px 0 0 0;">
@@ -143,7 +146,7 @@
                                                         @if($order->status == \App\Enums\OrderStatus::WaitForCheckout)
                                                             <div id="paypal-button"></div>
                                                         @else
-                                                            <td align="center"><a href="/product" target="_blank" style="font-size: 16px; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #66E9AE; border-top: 15px solid #66E9AE; border-bottom: 15px solid #66E9AE; border-left: 35px solid #66E9AE; border-right: 35px solid #66E9AE; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; display: inline-block;" class="mobile-button">Tiếp tục mua hàng</a></td>
+                                                            <td align="center"><a href="/products" target="_blank" style="font-size: 16px; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #66E9AE; border-top: 15px solid #66E9AE; border-bottom: 15px solid #66E9AE; border-left: 35px solid #66E9AE; border-right: 35px solid #66E9AE; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; display: inline-block;" class="mobile-button">Tiếp tục mua hàng</a></td>
 
                                                         @endif
                                                     </tr>
@@ -371,7 +374,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
     <tr>
         <td bgcolor="#f2f3f8" align="center">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+            <table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
                 <tr>
                     <td style="padding: 0 15px 0 15px;">
                         <!-- UNSUBSCRIBE COPY -->
@@ -411,7 +414,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
     <tr>
         <td bgcolor="#f2f3f8" align="center">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+            <table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
                 <tr>
                     <td style="padding: 0 15px 0 15px;">
                         <!-- UNSUBSCRIBE COPY -->
@@ -440,6 +443,9 @@
     </tr>
 </table>
 
+<!-- scroll top button  -->
+<a href="#home" class="fas fa-angle-up" id="scroll-top"></a>
+
 <footer>
 
 </footer>
@@ -448,6 +454,9 @@
 <script src="/assets/vendors/js/base/core.min.js"></script>
 
 <script src="/assets/vendors/js/app/app.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="/user/js/main.js"></script>
 
 
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
