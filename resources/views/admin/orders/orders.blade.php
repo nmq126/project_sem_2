@@ -33,15 +33,18 @@
     @endif
                 <div class="widget-body">
                     <div class="table-responsive">
-                      
+
                             <h2 class="page-header-title mb-3">Filter:</h2>
                             <div class="text-sm-center">
                                 <label for="status" class="text-left mr-5">Status:
                                     <select class="form-control 100" name="status">
                                         <option value="-1">All</option>
-                                        <option value="2">Success</option>
+                                        <option value="0">WaitForCheckout</option>
                                         <option value="1">Waiting</option>
-                                        <option value="0">Failed</option>
+                                        <option value="2">Processing</option>
+                                        <option value="3">Delivering</option>
+                                        <option value="4">Done</option>
+
                                     </select></label>
                                 <label for="start-date" class="text-left mr-sm-5">Start Date:
                                     <input class="form-control w-100"  name="start-date"
@@ -54,14 +57,14 @@
                                 <button class="btn btn-info mb-3"name="search" type="button" style="width: 200px">Search</button>
                               <button class="btn btn-secondary mb-3"name="reset" type="button" style="width: 200px">Refresh</button>
                             </div>
-        
+
                         <h2 class="page-header-title mb-2">Orders List:</h2>
                         <div class="page-header-title mb-3 search">
-                        
+
                             <input type="text" class="search-input"  >
                             <i class="la la-search "></i>
                           </div>
-                          
+
                         <table class="table mb-0 text-center">
                             <thead>
                             <tr>
@@ -119,9 +122,9 @@
                                 </tr>
                                 <div id="delete_order">
                                     <h2>Are You Sure You Want To Delete This</h2>
-                            
+
                                     <a href="/admin/orders/delete/{{$order->id}}"id="delete-item">Delete</a>
-                            
+
                                     <a id="cancel-item">Cancel</a>
                                 </div>
                             @endforeach
@@ -133,12 +136,12 @@
                        <button name="deleteall"style="background:none;border:none;color:#b56186" type="button">Xóa bỏ</button>
                        <div id="delete_message">
                         <h2>Are You Sure You Want To <strong style="color: red">Destroy</strong> This</h2>
-                
+
                         <a  id="delete-all">Delete</a>
-                
+
                         <a id="cancel">Cancel</a>
                     </div>
-             
+
                     </h3>
                         <h3 class="font-weight-bold text-right mr-5 mt-2">
                             Total Revenue: ${{$total}}</h3>

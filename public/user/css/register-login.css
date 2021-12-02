@@ -1,10 +1,10 @@
-.sign-btn a{
+.sign-btn button{
     background: linear-gradient(252.62deg, #48D6F2 8.92%, #84FC6A 96.59%) !important;
     -webkit-transition: all .5s;
     transition: all .5s;
 }
 
-.sign-btn a:hover{
+.sign-btn button:hover{
     background: linear-gradient(252.62deg, #84FC6A 8.92%, #48D6F2 96.59%)!important;
 }
 
@@ -18,3 +18,11 @@
     background: url(../../../../user/img/sign_up_background.jpg) no-repeat;
     background-size: cover
 }
+
+.error {
+    color: red!important;
+    /*font-size: 0.75em!important;*/
+    padding-left: 150px;
+    /*right: 0;*/
+}
+

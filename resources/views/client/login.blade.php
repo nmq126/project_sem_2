@@ -21,7 +21,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="assets/vendors/css/base/bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">
-    <link rel="stylesheet" href="user/css/sign-in.css">
+    <link rel="stylesheet" href="user/css/register-login.css">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -32,7 +32,7 @@
     <div class="canvas">
         <img src="user/img/loader.gif" alt="">
     </div>
-</div>v>
+</div>
 </div>
 <!-- End Preloader -->
 <!-- Begin Container -->
@@ -63,18 +63,19 @@
                     </a>
                 </div>
                 <h3>Đăng nhập</h3>
-                <form>
+                <form method="post" action="/login" name="login-form" id="login-form">
+                    @csrf
                     <div class="group material-input">
-                        <input type="text" required>
+                        <input type="text" name="email">
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>Email</label>
+                        <label for="email">Email</label>
                     </div>
                     <div class="group material-input">
-                        <input type="password" required>
+                        <input type="password" name="password">
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>Mật khẩu</label>
+                        <label for="email">Mật khẩu</label>
                     </div>
                 </form>
                 <div class="row">
@@ -83,14 +84,14 @@
                     </div>
                 </div>
                 <div class="sign-btn text-center">
-                    <a href="" class="btn btn-lg btn-gradient-01">
+                    <button form="login-form" type="submit" class="btn btn-lg btn-gradient-01">
                         Đăng nhập
-                    </a>
+                    </button>
                 </div>
                 <div class="register">
                     Bạn chưa có tài khoản?
                     <br>
-                    <a class="badge badge-success" href="/sign_up">Đăng ký</a>
+                    <a class="badge badge-success" href="/register">Đăng ký</a>
                 </div>
             </div>
             <!-- End Form -->
@@ -107,5 +108,35 @@
 <!-- Begin Page Vendor Js -->
 <script src="assets/vendors/js/app/app.min.js"></script>
 <!-- End Page Vendor Js -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //validate form
+        $("form[name=login-form]").validate({
+            rules: {
+                email:{
+                    required: true,
+                    email: true
+                },
+                password:{
+                    required: true,
+                },
+            },
+            messages: {
+                email:{
+                    required:  "Vui lòng nhập vào email",
+                    email: "Email không đúng định dạng"
+                },
+                password:{
+                    required: "Vui lòng nhập mật khẩu",
+                },
+            },
+
+        });
+    })
+
+</script>
 </body>
 </html>

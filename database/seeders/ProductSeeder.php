@@ -53,6 +53,7 @@ class ProductSeeder extends Seeder
                 'isFeatured' => 0,
                 'status' => 1
             ],
+
             [
                 'id' => '3',
                 'name' => 'Fried Fish',

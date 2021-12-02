@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->double("total_price");
             $table->tinyInteger("status")->default(OrderStatus::Waiting);
             $table->boolean("checkout")->default(false);
@@ -26,6 +27,8 @@ class CreateOrdersTable extends Migration
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->softDeletes();
+            $table->foreign('user_id')->references('id')->on('users');
+
         });
     }
 

@@ -29,7 +29,7 @@ Author: SAEROX
     <!-- Stylesheet -->
     <link rel="stylesheet" href="assets/vendors/css/base/bootstrap.min.css">
     <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">
-    <link rel="stylesheet" href="user/css/sign-in.css">
+    <link rel="stylesheet" href="user/css/register-login.css">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -70,30 +70,31 @@ Author: SAEROX
                     </a>
                 </div>
                 <h3>Đăng ký</h3>
-                <form>
+                <form method="post" action="/register" name="register-form" id="register-form">
+                    @csrf
                     <div class="group material-input">
-                        <input type="text" required>
+                        <input type="text" name="email">
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>Email</label>
+                        <label for="email">Email</label>
                     </div>
                     <div class="group material-input">
-                        <input type="text" required>
+                        <input type="text" name="phone">
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>Số điện thoại</label>
+                        <label for="phone">Số điện thoại</label>
                     </div>
                     <div class="group material-input">
-                        <input type="password" required>
+                        <input type="password" name="password" id="password">
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>Mật khẩu</label>
+                        <label for="pwd">Mật khẩu</label>
                     </div>
                     <div class="group material-input">
-                        <input type="password" required>
+                        <input type="password" name="confirmPassword">
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>Nhập lại mật khẩu</label>
+                        <label for="confirmPassword">Nhập lại mật khẩu</label>
                     </div>
                 </form>
                 <div class="row">
@@ -103,14 +104,14 @@ Author: SAEROX
                     </div>
                 </div>
                 <div class="sign-btn text-center">
-                    <a href="" class="btn btn-lg btn-gradient-01">
+                    <button form="register-form" type="submit" class="btn btn-lg btn-gradient-01">
                         Tạo tài khoản
-                    </a>
+                    </button>
                 </div>
                 <div class="register">
                     Bạn đã có tài khoản?
                     <br>
-                    <a class="badge badge-success" href="/sign_in">Đăng nhập</a>
+                    <a class="badge badge-success" href="/login">Đăng nhập</a>
                 </div>
             </div>
             <!-- End Form -->
@@ -127,5 +128,50 @@ Author: SAEROX
 <!-- Begin Page Vendor Js -->
 <script src="assets/vendors/js/app/app.min.js"></script>
 <!-- End Page Vendor Js -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //validate form
+        $("form[name=register-form]").validate({
+            rules: {
+                email:{
+                    required: true,
+                    email: true
+                },
+                phone:{
+                    required: true,
+                    digits: true
+                },
+                password:{
+                    required: true,
+                },
+                "confirmPassword":{
+                    required: true,
+                    equalTo: "#password"
+                }
+            },
+            messages: {
+                email:{
+                    required:  "Vui lòng nhập vào email",
+                    email: "Email không đúng định dạng"
+                },
+                phone:{
+                    required:  "Vui lòng nhập số điện thoại",
+                },
+                password:{
+                    required: "Vui lòng nhập mật khẩu",
+                },
+                confirmPassword:{
+                    required: "Vui lòng xác nhận mật khẩu",
+                    equalTo: "Mật khẩu xác nhận không đúng"
+                },
+            },
+
+        });
+    })
+
+</script>
 </body>
 </html>

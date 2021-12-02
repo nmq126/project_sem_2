@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatus;
 use App\Helpers\Helper;
+use App\Mail\SendMail;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -82,6 +85,7 @@ class OrderController extends Controller
         $order->ship_note = $shipNote;
         $order->status = $status;
         $order->checkout = false;
+        $order->user_id = Auth::user()->id;
 
         //tạo thông tin order detail
         $hasError = false;
@@ -110,18 +114,28 @@ class OrderController extends Controller
             DB::beginTransaction();
             $order->save();
             $order_id = $order->id;
-//            $order_details = [];
             foreach ($array_order_detail as $orderDetail) {
                 $orderDetail->order_id = $order_id;
                 $orderDetail->save();
             }
-//            OrderDetail::insert($order_details);
             DB::commit();
             Session::forget('shoppingCart');
         } catch (\Exception $e) {
             DB::rollBack();
             return $e;
         }
+
+        //gui mail thong bao
+        try {
+            $subject = 'Đặt hàng thành công';
+            Mail::to(Auth::user()->email)->send(new SendMail([
+                'id' => $order->id,
+                'subject' => $subject
+            ]));
+        }catch (\Exception $e){
+            error_log($e);
+        }
+
         return redirect('/order/' . $order_id);
     }
 
@@ -295,4 +309,18 @@ class OrderController extends Controller
 
         return $payment;
     }
+
+//    public function testMail(){
+//        try {
+//            $subject = 'Thông tin đơn hàng';
+//            Mail::to('minhquangngo.98@gmail.com')->send(new SendMail([
+//                'id' => 1,
+//                'subject' => $subject
+//            ]));
+//            echo Order::find(1);
+//        }catch (\Exception $e){
+//            error_log($e);
+//        }
+//
+//    }
 }

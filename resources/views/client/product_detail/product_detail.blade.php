@@ -52,10 +52,10 @@
                     </div>
                     <div class="price">
                         <div class="new-price">
-                            <p>{{$product->price -($product->price*$product->discount/100)}} đ </p>
+                            <p>{{\App\Helpers\Helper::formatVnd($product->price -($product->price*$product->discount/100))}} đ </p>
                         </div>
                         <div class="old-price">
-                            <p> {{$product->price}} đ</p>
+                            <p> {{\App\Helpers\Helper::formatVnd($product->price)}} đ</p>
                         </div>
                     </div>
                     <div class="description">
@@ -64,7 +64,7 @@
                     <div class="material">
                         <p> Material:</p>
                         <p>{{$product->ingredient->name}}</p>
-                
+
                     </div>
                 </div>
                 <div class="cart-add">
@@ -291,3 +291,4 @@
 </body>
 
 </html>
+

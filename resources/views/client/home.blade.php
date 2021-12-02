@@ -48,7 +48,14 @@
             <i class="fas fa-shopping-cart"></i>
             <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
         </a>
-        <a href="/sign_in"> Đăng nhập</a>
+        @if(Auth::check())
+            <a href="">
+                <i class="fas fa-user"></i>
+                {{ Auth::user()->email }}
+            </a>
+        @else
+            <a href="/login"> Đăng nhập</a>
+        @endif
     </nav>
 
 </header>
@@ -77,17 +84,17 @@
 
 <section class="speciality" id="speciality">
 
-    <h1 class="heading pb-5"> <span>Danh mục </span>món ăn</h1>
+    <h1 class="heading pb-5"><span>Danh mục </span>món ăn</h1>
 
     <div class="box-container">
         @foreach($categories as $category)
-        <div class="box">
-            <div class="content">
-                <img height="50px" src="{{ $category->thumbnail }}" alt="">
-                <h3>{{ $category->name }}</h3>
-                <p>{{ $category->description }}</p>
+            <div class="box">
+                <div class="content">
+                    <img height="50px" src="{{ $category->thumbnail }}" alt="">
+                    <h3>{{ $category->name }}</h3>
+                    <p>{{ $category->description }}</p>
+                </div>
             </div>
-        </div>
         @endforeach
     </div>
 </section>
@@ -102,19 +109,19 @@
 
     <div class="box-container">
         @foreach($discountProducts as $product)
-        <div class="box">
-            <span class="price"> -{{ $product->discount }}% </span>
-            <img src="{{ $product->thumbnail  }}" alt="">
-            <h3>{{ $product->name }}</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
+            <div class="box">
+                <span class="price"> -{{ $product->discount }}% </span>
+                <img src="{{ $product->thumbnail  }}" alt="">
+                <h3>{{ $product->name }}</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <a href="#" class="btn">Đặt hàng</a>
             </div>
-            <a href="#" class="btn">Đặt hàng</a>
-        </div>
         @endforeach
 
 
@@ -216,46 +223,65 @@
     <h1 class="heading pt-5 pb-5"><span> Gallery </span></h1>
     <div class="containerG">
         <div class="boxG a">
-            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168695/gallery/lucas-hoang-Yb2Sb9bdgPk-unsplash_1_skkh0u.jpg" alt="">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168695/gallery/lucas-hoang-Yb2Sb9bdgPk-unsplash_1_skkh0u.jpg"
+                alt="">
         </div>
         <div class="boxG b">
-            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168775/gallery/ben-lei-ubBWnvrsARk-unsplash_xw3eri.jpg" alt="">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168775/gallery/ben-lei-ubBWnvrsARk-unsplash_xw3eri.jpg"
+                alt="">
         </div>
         <div class="boxG c">
-            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169351/gallery/hong-anh-duong-EK--nAm-CYM-unsplash_itgbyk.jpg" alt="">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169351/gallery/hong-anh-duong-EK--nAm-CYM-unsplash_itgbyk.jpg"
+                alt="">
         </div>
         <div class="boxG d">
-            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169069/gallery/nikolay-smeh-gPpbFaEkl00-unsplash_gb5oe3.jpg" alt="">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169069/gallery/nikolay-smeh-gPpbFaEkl00-unsplash_gb5oe3.jpg"
+                alt="">
         </div>
         <div class="boxG e">
-            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169145/gallery/sonny-mauricio-yhc4pSbl01A-unsplash_a6qsc4.jpg" alt="">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169145/gallery/sonny-mauricio-yhc4pSbl01A-unsplash_a6qsc4.jpg"
+                alt="">
 
         </div>
         <div class="boxG f">
-            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168847/gallery/lynda-hinton-q_eyFSd2W3M-unsplash_xrypqq.jpg" alt="">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168847/gallery/lynda-hinton-q_eyFSd2W3M-unsplash_xrypqq.jpg"
+                alt="">
 
         </div>
         <div class="boxG g">
-            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168942/gallery/rosalind-chang-P_wPicZYoPI-unsplash_m4vtie.jpg  " alt="">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168942/gallery/rosalind-chang-P_wPicZYoPI-unsplash_m4vtie.jpg  "
+                alt="">
 
         </div>
         <div class="boxG h">
-            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169405/gallery/markus-winkler-dq03aws4SmY-unsplash_o2atrr.jpg" alt="">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169405/gallery/markus-winkler-dq03aws4SmY-unsplash_o2atrr.jpg"
+                alt="">
 
         </div>
         <div class="boxG i">
-            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169207/gallery/haseeb-jamil-J9lD6FS6_cs-unsplash_axdtau.jpg" alt="">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169207/gallery/haseeb-jamil-J9lD6FS6_cs-unsplash_axdtau.jpg"
+                alt="">
 
         </div>
         <div class="boxG j">
-            <img src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169025/gallery/andraz-lazic-iy_MT2ifklc-unsplash_tohd1p.jpg" alt="">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169025/gallery/andraz-lazic-iy_MT2ifklc-unsplash_tohd1p.jpg"
+                alt="">
 
         </div>
     </div>
 </section>
 
 <!-- gallery section ends -->
-
 
 
 <!-- order section starts  -->
@@ -269,8 +295,9 @@
         <div class="col-md-4 col-sm-6 col-12 float-left ">
             <div class="blog-img">
                 <a href="">
-                    <img src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                         alt="" width="100%" height="100%">
+                    <img
+                        src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                        alt="" width="100%" height="100%">
                 </a>
             </div>
             <div class="blog-content">
@@ -280,8 +307,9 @@
         <div class="col-md-4 col-sm-6 col-12 float-left ">
             <div class="blog-img">
 
-                <img src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                     alt="" width="100%" height="100%">
+                <img
+                    src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                    alt="" width="100%" height="100%">
             </div>
             <div class="blog-content">
                 <a href="">
@@ -292,8 +320,9 @@
         <div class="col-md-4 col-sm-6 col-12 float-left ">
             <div class="blog-img">
 
-                <img src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                     alt="" width="100%" height="100%">
+                <img
+                    src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                    alt="" width="100%" height="100%">
             </div>
             <div class="blog-content">
                 <a href="">

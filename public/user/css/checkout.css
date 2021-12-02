@@ -19,11 +19,59 @@
 
 .shipping .information h3 {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 2rem;
 }
 
-.shipping .information .authentication-form {
-    padding-top: 20px;
+/*.shipping .information .authentication-form {*/
+/*    padding-top: 2rem;*/
+/*}*/
+#checkout-form{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5rem;
+}
+
+.input-line{
+    font-size: 1.6rem   ;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+label{
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+input[type=text], textarea, select{
+    width: 100%;
+    padding: 0 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.6rem;
+}
+input[type=text], select{
+    height: 4rem;
+}
+textarea{
+    padding: 10px;
+}
+
+input[type=text]::placeholder, textarea::placeholder{
+    /*padding-top: 10px;*/
+    font-size: 1.4rem;
+    color: #b9b9b9;
+}
+
+.input-line{
+    width: 75%;
 }
 
 .order-title {
@@ -32,7 +80,7 @@
 
 .order-title h3 {
     flex-grow: 1;
-    padding-top: 10px;
+    padding-top: 1rem;
 }
 
 .order-title .add-more {
@@ -40,8 +88,8 @@
     border-radius: 500px;
     background: rgb(238, 238, 238);
     width: fit-content;
-    font-size: 14px;
-    line-height: 36px;
+    font-size: 1.4rem;
+    line-height: 3.6rem;
 }
 
 .order .list-item {
@@ -50,25 +98,25 @@
 }
 
 .order .list-item .name {
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
     color: black;
 }
 
 .order .list-item .price {
     flex-grow: 0;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: normal;
     color: black;
 }
 
 .quantity-checkout {
-    width: 70px;
-    height: 36px;
+    width: 7rem;
+    height: 3.6rem;
     padding: 0px 12px 0px 16px;
     border-radius: 300px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 1.4rem;
     background: #EEEEEE;
     color: #000000;
 }
@@ -93,7 +141,7 @@
 
 .place-order-button {
     margin-top: 2rem;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: normal;
 }
 
@@ -127,7 +175,7 @@
     padding: 8px 12px;
     color: rgb(4, 136, 72);
     background-color: rgb(230, 242, 237);
-    font-size: 12px;
+    font-size: 1.2rem;
     justify-content: center;
     display: flex;
 }
@@ -140,13 +188,14 @@
 
 .place-order ul li, .total {
     color: black;
-    font-size: 16px;
+    font-size: 1.6rem;
     display: flex;
     justify-content: space-between;
+    padding-top: 1rem;
 }
 
 .total-price {
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 600;
 }
 

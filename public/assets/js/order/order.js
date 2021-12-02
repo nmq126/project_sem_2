@@ -34,7 +34,7 @@
                 alert("Xóa tất cả thành công")
                 location.reload()
             },
-            error: function(data) { alert("Bạn phải chưa chọn mục tiêu") }
+            error: function(data) { alert("Bạn phải chọn mục tiêu") }
         });
 
     });
@@ -132,7 +132,7 @@
                 let contentHTML = "";
                 data.forEach(element => {
 
-                    contentHTML += ` 
+                    contentHTML += `
 <tr>
                             <td><span class="text-primary"><input type="checkbox" class="checkitem"value=${element.id} style="margin-right: 20px">${element.id}</span></td>
                             <td>${element.ship_name}</td>
@@ -210,7 +210,7 @@
                     res.forEach(element => {
 
 
-                        contentHTML += ` 
+                        contentHTML += `
                         <tr>
                                                     <td><span class="text-primary"><input type="checkbox" class="checkitem"value=${element.id} style="margin-right: 20px">${element.id}</span></td>
                                                     <td>${element.ship_name}</td>
@@ -281,7 +281,7 @@
                     let contentHTML = "";
                     data.forEach(element => {
 
-                        contentHTML += ` 
+                        contentHTML += `
     <tr>
                                 <td><span class="text-primary"><input type="checkbox" class="checkitem"value=${element.id} style="margin-right: 20px">${element.id}</span></td>
                                 <td>${element.ship_name}</td>

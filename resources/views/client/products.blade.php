@@ -164,6 +164,7 @@
     <div class="col-lg-9 col-md-8 products mt-md-0">
         <div class="products-list col-12" id="products-list">
             @foreach($products as $product)
+                <a href="/product/{{ $product->id }}">
                 <div class="card col-lg-4 col-sm-12 col-12 mb-5 product">
                     <img class="card-img-top text-center"
                          src="{{$product->thumbnail}}"
@@ -181,15 +182,15 @@
                     <div class="card-body text-center">
                         <p class="card-text fw-bolder font-monospace item-name name-item">{{$product->name}}</p>
                         <div class="price">
-                            $
-                            <p class="item-price price-item">{{$product->price - ($product->price * $product->discount / 100)}}</p>
+                            <p class="item-price price-item">{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount / 100))}} đ</p>
                             @if($product->discount > 0)
-                                <p class="ps-3" style="color: red"><s>${{$product->price}}</s></p>
+                                <p class="ps-3" style="color: red"><s>{{\App\Helpers\Helper::formatVnd($product->price)}} đ</s></p>
                             @endif
                         </div>
                         <p class="description">{{$product->description}}</p>
                     </div>
                 </div>
+                </a>
             @endforeach
         </div>
         <div class="paginate text-center">

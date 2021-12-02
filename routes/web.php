@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailsAdminController;
@@ -26,7 +28,7 @@ Route::get('/admin/product/create',[ProductAdminController::class, 'getForm']);
 Route::post('/admin/product/create',[ProductAdminController::class, 'processForm']);
 Route::get('/admin/product/list',[ProductAdminController::class, 'getList']);
 
-//Ingrendient
+//Ingredient
 Route::get('/admin/product/create/ingredient',[ProductAdminController::class, 'getFormIngredient']);
 Route::post('/admin/product/create/ingredient',[ProductAdminController::class, 'addIngredient']);
 Route::get('/admin/product/list/ingredient',[ProductAdminController::class, 'ListIngredient']);
@@ -50,7 +52,7 @@ Route::get('/admin/orders/{id}/detail', [OrderDetailsAdminController::class, 'or
 Route::put('admin/orders/{id}/update', [OrderDetailsAdminController::class, 'updateStatus']);
 
 
-//client side
+//CLIENT SIDE
 
 //product list
 Route::get('/product/recent-view',[ProductClientController::class, 'getRecent']);
@@ -71,11 +73,14 @@ Route::get('/order/{id}', [OrderController::class, 'getDetail']);
 Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
 Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
 
-//home page
-//Route::get('/home', function () {
-//    return view('client.home');
-//});
-Route::get('/home', [HomeController::class, 'show']);
+Route::get('/home', [HomePageController::class, 'show']);
+
+Route::get('/register', [RegisterController::class, 'create']);
+Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/login', [LoginController::class, 'create']);
+Route::post('/login', [LoginController::class, 'store']);
+
 
 
 //blog
@@ -83,12 +88,10 @@ Route::get('/blog',[BlogController::class, 'getBlog']);
 Route::get('/blog-json',[BlogController::class, 'JsonBlog']);
 Route::get('/blog_detail/{id}',[BlogController::class, 'getBlogDetail']);
 
-Route::get('/sign_in', function () {
-    return view('client.sign_in');
+Route::get('/login', function () {
+    return view('client.login');
 });
-Route::get('/sign_up', function () {
-    return view('client.sign_up');
-});
+
 
 
 Route::get('/cart', function () {
@@ -98,8 +101,6 @@ Route::get('/cart', function () {
 
 
 
-Route::get('/product_detail/{id}', [ProductClientController::class, 'getProductDetail']);
+Route::get('/product/{id}', [ProductClientController::class, 'getProductDetail']);
 
-Route::get('/products', function (){
-   return view('client.products-and-cart.products');
-
+Route::get('/test_mail', [OrderController::class, 'testMail']);

@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
-class HomeController extends Controller
+class HomePageController extends Controller
 {
     public function show(){
 //

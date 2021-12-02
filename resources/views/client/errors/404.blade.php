@@ -45,7 +45,7 @@
                 <h2>{{$msg}} </h2>
                 <p></p>
                 <a href="{{ url()->previous() }}" class="btn btn-shadow">
-                    Go Back
+                    Quay lại
                 </a>
             </div>
             <!-- End Container -->
