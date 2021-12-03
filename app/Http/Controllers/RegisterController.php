@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,16 +11,15 @@ use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
-    //
     public function create(){
         return view('client.register');
     }
 
-    public function store(Request $request){
+    public function store(RegisterRequest $request){
         $user = new User();
         $user->email = $request->get('email');
         $user->phone = $request->get('phone');
-        $user->password = bcrypt($request->get('password'));
+        $user->setPasswordAttribute($request->get('password'));
 
         $profile = new Profile();
 
@@ -36,8 +36,8 @@ class RegisterController extends Controller
             DB::rollBack();
             return $e;
         }
-//        $user->save();
-        return redirect('/login');
+        Auth::loginUsingId($user->id);
+        return redirect('/home');
     }
 
 

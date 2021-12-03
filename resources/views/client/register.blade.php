@@ -51,7 +51,7 @@ Author: SAEROX
                 <div class="elisyam-overlay overlay-06"></div>
                 <div class="authentication-col-content mx-auto">
                     <h1 class="gradient-text-01">
-                        Đăng ký đê!
+                        Đăng ký đê!!
                     </h1>
                     <span class="description">
                                 Tạo tài khoản để có thể đặt mua những món ăn không giống hình cho lắm.
@@ -69,6 +69,16 @@ Author: SAEROX
                         <img src="" alt="logo">
                     </a>
                 </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Có lỗi xảy ra trong quá trình đăng ký:</strong>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>- {{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <h3>Đăng ký</h3>
                 <form method="post" action="/register" name="register-form" id="register-form">
                     @csrf
@@ -146,6 +156,8 @@ Author: SAEROX
                 },
                 password:{
                     required: true,
+                    minlength: 8,
+                    maxlength: 16
                 },
                 "confirmPassword":{
                     required: true,
@@ -159,9 +171,12 @@ Author: SAEROX
                 },
                 phone:{
                     required:  "Vui lòng nhập số điện thoại",
+                    digits:  "Số điện thoại không đúng định dạng",
                 },
                 password:{
                     required: "Vui lòng nhập mật khẩu",
+                    minlength: "Mật khẩu chứa ít nhất 8 ký tự",
+                    maxlength: "Mật khẩu chứa nhiều nhất 16 ký tự",
                 },
                 confirmPassword:{
                     required: "Vui lòng xác nhận mật khẩu",

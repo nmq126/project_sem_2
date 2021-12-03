@@ -38,3 +38,13 @@ function scrollFunction() {
         prevScrollpos = currentScrollPos;
     }
 }
+
+
+var profilePic = document.querySelector('.profile');
+profilePic.onclick = () => {
+    var toggleMenu = document.querySelector('.menu');
+    toggleMenu.classList.toggle('active')
+}
+
+
+

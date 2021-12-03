@@ -19,11 +19,11 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             [
                 'id' => '1',
-                'name' => 'Fried Chicken',
+                'name' => 'Gà rán',
                 'price' => 50000,
                 'category_id' => '10',
                 'ingredient_id' => '1',
-                'thumbnail' => 'https://cdn.statically.io/img/gachaybo.com/f=auto/wp-content/uploads/2021/07/4-ga-ran-kfc.jpg',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638459165/products/9d7987e0332348b3be499934d3275194_1600094574029264113-removebg-preview_dwo6on.png',
                 'description' => 'A floral fragrance with Lavender, Orange Blossom, & Musk Accord',
                 'detail' => '
                 <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Mañana, a partir de los botones de opción, sino un poco de dolor. Escribir en el freno ahora. No hay comentarios eran, en el mejor, pero el
