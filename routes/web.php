@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomePageController;
@@ -23,8 +24,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [HomePageController::class, 'show']);
 
-Route::get('/admin/product/create',[ProductAdminController::class, 'getForm']);
+
+Route::get('/admin/product/create',[ProductAdminController::class, 'getForm'])->middleware('auth.admin');
 Route::post('/admin/product/create',[ProductAdminController::class, 'processForm']);
 Route::get('/admin/product/list',[ProductAdminController::class, 'getList']);
 
@@ -66,20 +69,32 @@ Route::get('/cart',[ShoppingCartController::class, 'show']);
 Route::get('/cart/remove',[ShoppingCartController::class, 'remove']);
 Route::post('/cart/update',[ShoppingCartController::class, 'update']);
 
-//checkout, order
-Route::get('/checkout', [OrderController::class, 'show']);
-Route::post('/order', [OrderController::class, 'process']);
-Route::get('/order/{id}', [OrderController::class, 'getDetail']);
-Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
-Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
+//nhóm các route phải đăng nhập mới zô dc
+Route::group(['middleware' => 'auth'],function (){
+    //checkout
+    Route::get('/checkout', [OrderController::class, 'show']);
+    Route::post('/checkout', [OrderController::class, 'process']);
+    //order
+    Route::get('/order/{id}', [OrderController::class, 'getDetail']);
+    Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
+    Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
+});
+
 
 Route::get('/home', [HomePageController::class, 'show']);
 
-Route::get('/register', [RegisterController::class, 'create']);
-Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/login', [LoginController::class, 'create']);
-Route::post('/login', [LoginController::class, 'store']);
+//nhóm các route phải CHƯA đăng nhập mới zô dc
+Route::group(['middleware' => 'guest'],function (){
+    //đăng ký
+    Route::get('/register', [RegisterController::class, 'create']);
+    Route::post('/register', [RegisterController::class, 'store']);
+    //đăng nhập
+    Route::get('/login', [LoginController::class, 'create']);
+    Route::post('/login', [LoginController::class, 'store']);
+});
+
+Route::get('/logout', [LoginController::class, 'destroy']);
 
 
 
@@ -88,9 +103,6 @@ Route::get('/blog',[BlogController::class, 'getBlog']);
 Route::get('/blog-json',[BlogController::class, 'JsonBlog']);
 Route::get('/blog_detail/{id}',[BlogController::class, 'getBlogDetail']);
 
-Route::get('/login', function () {
-    return view('client.login');
-});
 
 
 
@@ -102,5 +114,3 @@ Route::get('/cart', function () {
 
 
 Route::get('/product/{id}', [ProductClientController::class, 'getProductDetail']);
-
-Route::get('/test_mail', [OrderController::class, 'testMail']);

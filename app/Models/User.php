@@ -13,6 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
+    static $default_thumbnail_url = 'user/img/default-thumbnail.jpg';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -51,5 +53,19 @@ class User extends Authenticatable
 
     public function orders(){
         return $this->hasMany(Order::class, 'user_id', 'id');
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function getDefaultThumbnailAttribute()
+    {
+        $thumbnail = User::$default_thumbnail_url;
+        if ($this->profile->thumbnail != null) {
+            return $this->profile->thumbnail;
+        }
+        return $thumbnail;
     }
 }

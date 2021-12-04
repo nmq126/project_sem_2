@@ -50,9 +50,31 @@
         </a>
         @if(Auth::check())
             <a href="">
-                <i class="fas fa-user"></i>
-                {{ Auth::user()->email }}
+                <i class="fas fa-bell"></i>
+                <span class='badge badge-warning' id='NotiCount'>12</span>
             </a>
+            <div>
+                <div class="profile">
+                    <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-user"></i>
+                                Người dùng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         @else
             <a href="/login"> Đăng nhập</a>
         @endif

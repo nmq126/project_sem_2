@@ -21,7 +21,7 @@ class ProductClientController extends Controller
 
     public function getList(Request $request): string
     {
-        $products = Product::paginate(3);
+        $products = Product::paginate(9);
         $categories = Category::all();
         $ingredients = Ingredient::all();
         if ($request->ajax()) {
