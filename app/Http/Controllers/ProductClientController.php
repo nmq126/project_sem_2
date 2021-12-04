@@ -13,20 +13,49 @@ use Illuminate\Support\Facades\Session;
 class ProductClientController extends Controller
 {
 
-    public  function  getProductDetail(Request $request){
+    public function getProductDetail(Request $request)
+    {
         $id = $request->id;
         $product = Product::find($id);
-        return view('client.product_detail.product_detail',['product'=>$product]);
+        return view('client.product_detail.product_detail', ['product' => $product]);
     }
 
     public function getList(Request $request): string
     {
-        $products = Product::paginate(9);
+        $products = Product::query();
         $categories = Category::all();
         $ingredients = Ingredient::all();
-        if ($request->ajax()) {
-            return view('client.products', compact('products', 'categories', 'ingredients'))->render();
+        if ($request->has('categories')) {
+            $checkC = $_GET['categories'];
+            $products = $products->whereIn('category_id', $checkC);
         }
+        if ($request->has('ingredients')) {
+            $checkI = $_GET['ingredients'];
+            $products = $products->whereIn('ingredient_id', $checkI);
+        }
+        if ($request->has('from-price')) {
+            $fromPrice = $request->input('from-price');
+            if ($fromPrice != null)
+                $products = $products->whereRaw('price - (price * discount / 100) >= ?', $fromPrice);
+        }
+        if ($request->has('to-price')) {
+            $toPrice = $request->input('to-price');
+            if ($toPrice != null)
+                $products = $products->whereRaw('price - (price * discount / 100) <= ?', $toPrice);
+        }
+        if ($request->has('sort-by')) {
+            $sort = $request->input('sort-by');
+            switch ($sort) {
+                case 'price':
+                    $products = $products->orderByRaw('price - (price * discount / 100)');
+                    break;
+                case 'name':
+                    $products = $products->orderBy('name');
+                    break;
+            }
+        }
+        $products = $products->paginate(6);
+        $products->appends($request->all());
         return view('client.products', compact('products', 'categories', 'ingredients'))->render();
     }
 
@@ -34,6 +63,7 @@ class ProductClientController extends Controller
     public function getDetail($id)
     {
         $product = Product::find($id);
+        $products = Product::all();
         $array = [];
         if (Session::has('recent_view')) {
             $array = Session::get('recent_view');
@@ -45,7 +75,7 @@ class ProductClientController extends Controller
             array_push($array, $id);
         }
         Session::put('recent_view', $array);
-        return view('client.test.detail', ['product' => $product]);
+        return view('client.product-details', compact('product', 'products'));
     }
 
     public function getRecent()
@@ -55,46 +85,5 @@ class ProductClientController extends Controller
             return view('client.test.products', ['products' => $products]);
         }
         return view('client.errors.404', ['msg' => 'Không có sản phẩm nào xem gần đây']);
-    }
-
-
-    public function search(Request $request): JsonResponse
-    {
-        $categoryId = $request->input('categories');
-        $ingredientId = $request->input('ingredients');
-        $fromPrice = $request->input('fromPrice');
-        $toPrice = $request->input('toPrice');
-        $sorted = $request->input('sort');
-        $products = Product::query();
-        if ($categoryId != []) {
-            $products->whereIn('category_id', $categoryId);
-        }
-        if ($ingredientId != []) {
-            $products->whereIn('ingredient_id', $ingredientId);
-        }
-        if ($fromPrice != '') {
-            $products->whereRaw('(price - (price * discount / 100)) >= ?', $fromPrice);
-        }
-        if ($toPrice != '') {
-            $products->whereRaw('(price - (price * discount / 100)) <= ?', $toPrice);
-        }
-        switch ($sorted) {
-            case 'item-price':
-                $products->orderBy('price');
-                break;
-            case 'price-item':
-                $products->orderBy('price', 'desc');
-                break;
-            case 'item-name':
-                $products->orderBy('name');
-                break;
-            case 'name-item':
-                $products->orderBy('name', 'desc');
-                break;
-        }
-            $products = $products->get();
-        return response()->json([
-            'products' => $products
-        ]);
     }
 }

@@ -2,7 +2,6 @@ var menu = document.querySelector('#menu-bar');
 var navbar = document.querySelector('.navbar');
 var prevScrollpos = window.pageYOffset;
 
-
 menu.onclick = () => {
 
     menu.classList.toggle('fa-times');
@@ -37,6 +36,10 @@ function scrollFunction() {
         }
         prevScrollpos = currentScrollPos;
     }
+}
+
+function onScrollUp() {
+    window.scrollTo(0, 0);
 }
 
 

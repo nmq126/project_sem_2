@@ -5,10 +5,16 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>Giỏ Hàng</title>
+    <title>Thông Tin Tài Khoản</title>
+    <!-- Favicon -->
     <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <!-- Google Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script>
@@ -19,52 +25,20 @@
             }
         });
     </script>
+    {{--    <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">--}}
+
     <link rel="stylesheet" href="Hung/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Hung/css/animate.css">
-    <link rel="stylesheet" href="Hung/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="Hung/css/slick.css">
-    <link rel="stylesheet" href="Hung/css/chosen.min.css">
-    <link rel="stylesheet" href="Hung/css/ionicons.min.css">
-    <link rel="stylesheet" href="Hung/css/font-awesome.min.css">
-    <link rel="stylesheet" href="Hung/css/simple-line-icons.css">
-    <link rel="stylesheet" href="Hung/css/jquery-ui.css">
-    <link rel="stylesheet" href="Hung/css/meanmenu.min.css">
     <link rel="stylesheet" href="Hung/css/style.css">
     <link rel="stylesheet" href="Hung/css/responsive.css">
+    <link rel="stylesheet" href="{{asset('Hung/css/theme-default.css')}}">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script src="Hung/js/modernizr-2.8.3.min.js"></script>
     <link rel="stylesheet" href="user/css/main.css">
     <link rel="stylesheet" href="user/css/home.css">
-    <script>
-        WebFont.load({
-            google: {"families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"]},
-            active: function () {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script>
-
-    {{--    <link rel="stylesheet" href="user/Hung/css/responsive.css">--}}
+    {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
 </head>
 <body>
-@php
-    use Illuminate\Support\Facades\Session;
-        $shoppingCart = [];
-        if (Session::has('shoppingCart')) {
-            $shoppingCart = Session::get('shoppingCart');
-        }
-@endphp
-@php
-    $totalQuantity = 0;
-@endphp
-@foreach($shoppingCart as $cartItem)
-    @php
-        if (isset($totalQuantity) && isset($cartItem)) {
-            $totalQuantity += $cartItem->quantity;
-        }
-    @endphp
-@endforeach
 <header id="nav">
 
     <a href="/home" class="logo"><i class="fas fa-utensils"></i>VietKitchen</a>
@@ -94,107 +68,124 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
-                <li class="active">Giỏ Hàng</li>
+                <li class="active">Thông Tin Tài Khoản</li>
             </ul>
         </div>
     </div>
 </div>
-<div class="text-center">
-    <h1 class="fw-bold" style="font-style: italic">Giỏ Hàng</h1>
-</div>
-
-<div class="cart-main-area pt-70 pb-70">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                <form action="#">
-                    <div class="table-content table-responsive">
+@if(Auth::check())
+    <div class="customer-page theme-default-margin my-account-page pt-50 pb-50">
+        <div class="container">
+            <h1>Tài Khoản Của Tôi
+                <span class="logout-title"><a href="/my-account/logout">Đăng Xuất</a></span>
+            </h1>
+            <hr class="hr--small">
+            <div class="grid">
+                <div class="grid__item one-third medium-down--one-whole mt-md-0 mt-5">
+                    <h2 class="text-center" style="font-size: 25px">Thông Tin Tài Khoản</h2>
+                    <p><strong>Tên:</strong> {{Auth::user()->email}}</p>
+                    <p><strong>Số Điện Thoại:</strong> {{Auth::user()->phone}}</p>
+                </div>
+                <div class="grid__item two-thirds medium-down--one-whole">
+                    <h2 class="text-center" style="font-size: 25px">Lịch Sử Đặt Hàng</h2>
+                    <form action="/my-account" method="get" class="mb-20">
+                        <ul id="faq">
+                            <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-3"
+                                   style="font-size: 20px">Bộ Lọc Đơn Hàng
+                                    <i class="fa fa-angle-down ml-20" style="font-size: 20px"></i></a>
+                                <ul id="shop-catigory-3" class="panel-collapse collapse mt-10 container-fluid">
+                                    <form class="price_filter mt-10" action="/my-account" method="get">
+                                        <div class="row">
+                                            <div class=" col-6">
+                                                <label for="keyword" style="">Từ Khóa:</label>
+                                                <input type="text" name="keyword" placeholder="Tên khách hàng, Địa chỉ hoặc SĐT">
+                                                <label for="from" class="mt-3">Từ Ngày:</label>
+                                                <input type="date" name="from">
+                                                <label for="to" class="mt-3">Đến Ngày:</label>
+                                                <input type="date" name="to">
+                                            </div>
+                                            <div class=" col-6">
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-12">
+                                                        <label for="keyword" class="col-6">Giá Trị Từ:</label>
+                                                        <input type="number" name="from-price">
+                                                    </div>
+                                                    <div class="col-xl-6 col-12 mt-xl-0 mt-3">
+                                                        <label for="from">Đến:</label>
+                                                        <input type="number" name="to-price"></div>
+                                                </div>
+                                                <label for="to" class="mt-10">Trạng Thái:</label>
+                                                <select name="status">
+                                                    <option value="all">Tất Cả</option>
+                                                    <option value="paid">Đã Thanh Toán</option>
+                                                    <option value="not-paid">Chưa Thanh Toán</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="price_slider_amount text-center mt-30">
+                                            <button class="mb-10" type="submit" style="font-size: 15px">Tìm Kiếm
+                                            </button>
+                                        </div>
+                                    </form>
+                                </ul>
+                            </li>
+                        </ul>
+                    </form>
+                    <div class="table-content table-responsive order-table">
                         <table>
                             <thead>
                             <tr>
-                                <th>Ảnh</th>
-                                <th>Tên Sản Phẩm</th>
-                                <th>Đơn Giá</th>
-                                <th>Số Lượng</th>
-                                <th>Tổng</th>
+                                <th>Tên Khách Hàng</th>
+                                <th>Địa Chỉ Nhận</th>
+                                <th>Số Điện Thoại</th>
+                                <th>Tổng Đơn Hàng</th>
                                 <th>Thao Tác</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @if(count($shoppingCart) > 0)
-                                @php
-                                    $totalPrice = 0;
-                                @endphp
-                                @foreach($shoppingCart as $cartItem)
-                                    @php
-                                        if (isset($cartItem) && isset($totalPrice)) {
-                                            $totalPrice += $cartItem->unitPrice * $cartItem->quantity;
-                                        }
-                                    @endphp
-                                    <input type="hidden" name="id" value="{{$cartItem->id}}">
-                                    <tr>
-                                        <td class="product-thumbnail">
-                                            <img
-                                                src="{{$cartItem->thumbnail}}" width="100px" height="100px"
-                                                alt="">
-                                        </td>
-                                        <td class="cart-product-name"><span>{{$cartItem->name}}</span></td>
-                                        <td class="cart-price"><span class="amount">{{\App\Helpers\Helper::formatVnd($cartItem->unitPrice)}} VND</span>
-                                        </td>
-                                        <td class="product-quantity" style="padding-left: 27px">
-                                            <div class="cart-plus-minus ">
-                                                <input class="text-center quantity-input cart-plus-minus-box"
-                                                       data-id="{{$cartItem->id}}" name="quantity" type="number"
-                                                       value="{{$cartItem->quantity}}">
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal"><span id="item-price-{{$cartItem->id}}">{{\App\Helpers\Helper::formatVnd($cartItem->unitPrice * $cartItem->quantity)}} VND</span>
-                                        </td>
-                                        <td class="product-remove">
-                                            <a href="#"><i class="fa fa-pencil"></i></a>
-                                            <a href="/cart/remove?id={{$cartItem->id}}"
-                                               onclick="return confirm('Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng?')"><span
-                                                    class="fas fa-trash"></span></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @else
+                            @foreach($orders as $order)
                                 <tr>
-                                    <td colspan="7" style="font-size: 30px" class="text-center">Bạn Chưa Có Sản Phẩm Trong Giỏ Hàng!
-                                        <div class="cart-shiping-update mt-10">
-                                            <a href="/products" style="background-color: #e02c2b; color: white"
-                                               class="fw-bold checkout ms-3">Mua Ngay</a>
-                                        </div>
+                                    <td>{{$order->ship_name}}</td>
+                                    <td>{{$order->ship_address}}</td>
+                                    <td>{{$order->ship_phone}}</td>
+                                    <td class="product-subtotal">{{\App\Helpers\Helper::formatVnd($order->total_price)}}
+                                        VND
+                                    </td>
+                                    <td class="product-remove">
+                                        <a href="/my-account/order/id={{$order->id}}"><i class="fa fa-info-circle fa-2x"></i></a>
                                     </td>
                                 </tr>
+                            @endforeach
                             </tbody>
-                            @endif
                         </table>
                     </div>
-                    @if(count($shoppingCart) > 0)
-                        <div class="float-end total-price mt-5 me-5"><h4>Tổng Giỏ Hàng: <span>{{\App\Helpers\Helper::formatVnd($totalPrice)}} VND</span>
-                            </h4></div>
-                        <div class="row" style="clear: both">
-                            <div class="col-lg-12">
-                                <div class="cart-shiping-update-wrapper text-center">
-                                    <div class="cart-shiping-update">
-                                        <a href="/products" class="fw-bold">Tiếp Tục Mua Sắm</a>
-                                    </div>
-                                    <div class="cart-clear">
-                                        <a href="#" class="fw-bold">Xóa Giỏ Hàng</a>
-                                        <a href="/checkout" style="background-color: #e02c2b; color: white"
-                                           class="fw-bold checkout ms-3">Thanh Toán</a>
-                                    </div>
-                                </div>
-                            </div>
+                    @if($orders->lastpage() > 1)
+                        <div class="pagination-style pt-20">
+                            <ul class="text-center" style="display: flex; justify-content: center; align-items: center">
+                                <li><a class="prev-next prev" href="{{$orders->url(1)}}"><i
+                                            class="fa fa-arrow-left {{($orders->currentPage() == 1) ? 'disabled': ''}}"></i>
+                                        Prev</a></li>
+                                @for($i = 1; $i <= $orders->lastPage(); $i++)
+                                    <li><a class="{{($orders->currentPage() == $i) ? 'active': ''}}"
+                                           href="{{$orders->url($i)}}">{{$i}}</a></li>
+                                @endfor
+                                <li>
+                                    <a class="prev-next next {{($orders->currentPage() == $orders->lastPage()) ? 'disabled': ''}}"
+                                       href="{{$orders->nextPageUrl()}}">Next<i class="fa fa-arrow-right"></i>
+                                    </a></li>
+                            </ul>
                         </div>
                     @endif
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+@else
+    <div class="text-center mb-40">
+        <h2 class="">Vui Lòng Đăng Nhập Vào Tài Khoản Của Bạn</h2>
+        <a href="/login" class="btn" style="padding-bottom: 35px">Đăng Nhập</a>
+    </div>
+@endif
 <div class="footer-area black-bg-2 pt-70">
     <div class="footer-top-area pb-18">
         <div class="container">
@@ -237,7 +228,7 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my/account">Thông tin tài khoản</a></li>
+                                <li><a href="my-account.html">Thông tin tài khoản</a></li>
                                 <li><a href="#">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
@@ -274,7 +265,7 @@
     <div class="footer-bottom-area border-top-4">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-lg-6 col-md-6 col-sm-7">
                     <div class="copyright text-center">
                         <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
                                 href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
@@ -284,15 +275,9 @@
         </div>
     </div>
 </div>
-
 <a href="#home" class="fas fa-angle-up" id="scroll-top" onclick="onScrollUp()"></a>
-
 <script src="Hung/js/bootstrap.min.js"></script>
-<script src="Hung/js/plugins.js"></script>
 <script src="Hung/js/main.js"></script>
 <script src="user/js/main.js"></script>
-<script src="user/js/products.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
 </body>
 </html>

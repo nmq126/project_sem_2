@@ -9,8 +9,6 @@
     <!-- Favicon -->
     <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -26,30 +24,23 @@
         });
     </script>
     {{--    <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">--}}
-
+    <link rel="stylesheet" href="Hung/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Hung/css/style.css">
+    <link rel="stylesheet" href="Hung/css/responsive.css">
     <link rel="stylesheet" href="user/css/home.css">
     <link rel="stylesheet" href="user/css/main.css">
     {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
 </head>
 <body>
-<div id="preloader">
-    <div class="canvas">
-        <img src="user/img/loader.gif" alt="">
-    </div>
-</div>
 <header id="nav">
 
-    <a href="/home" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
+    <a href="/home" class="logo"><i class="fas fa-utensils"></i>VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        <a href="/cart">
-            <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
-        </a>
         @if(Auth::check())
-            <a href="">
+            <a href="/my-account">
                 <i class="fas fa-bell"></i>
                 <span class='badge badge-warning' id='NotiCount'>12</span>
             </a>
@@ -78,10 +69,15 @@
         @else
             <a href="/login"> Đăng nhập</a>
         @endif
+        <a href="/products"> Cửa Hàng </a>
+        <a href="/contact-us"> Liên Hệ </a>
+        <a href="/blog"> Blog </a>
+        <a href="/cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+        </a>
     </nav>
-
 </header>
-
 <!-- header section ends -->
 
 <!-- home section starts  -->
@@ -91,7 +87,7 @@
     <div class="content">
         <h3 style="text-transform: capitalize">Đặt món nào cũng <span>FREESHIP</span></h3>
         <p style="font-size: 2rem"> Nhiều món ngon cho bạn thoải mái lựa chọn.</p>
-        <a href="/products" class="btn">Đặt hàng ngay</a>
+        <a href="/products" class="btn" style="padding-bottom: 40px">Đặt hàng ngay</a>
     </div>
 
     <div class="image">
@@ -142,7 +138,7 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </div>
-                <a href="#" class="btn">Đặt hàng</a>
+                <a href="/products" class="btn" style="padding-bottom: 40px">Đặt hàng</a>
             </div>
         @endforeach
 
@@ -309,112 +305,108 @@
 <!-- order section starts  -->
 
 <section class="blog" id="">
-
     <h1 class="heading"><span>Food</span> blog </h1>
-
-    <div class="row text-center pt-5 pb-5">
-
-        <div class="col-md-4 col-sm-6 col-12 float-left ">
-            <div class="blog-img">
-                <a href="">
-                    <img
-                        src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                        alt="" width="100%" height="100%">
-                </a>
-            </div>
-            <div class="blog-content">
-                <h2>Tittle</h2>
-                <p>Description</p></div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12 float-left ">
-            <div class="blog-img">
-
-                <img
-                    src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                    alt="" width="100%" height="100%">
-            </div>
-            <div class="blog-content">
-                <a href="">
-                    <h2>Tittle</h2>
-                </a>
-                <p>Description</p></div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12 float-left ">
-            <div class="blog-img">
-
-                <img
-                    src="https://images.unsplash.com/photo-1597345637412-9fd611e758f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                    alt="" width="100%" height="100%">
-            </div>
-            <div class="blog-content">
-                <a href="">
-                    <h2>Tittle</h2>
-                </a>
-                <p>Description</p></div>
-        </div>
-    </div>
-
 </section>
 
 <!-- order section ends -->
 
 <!-- footer section  -->
 
-<footer class="container-fluid">
-    <div class="row">
-        <div class="col-lg-3 col-md-4 col-6">
-            <h3><strong>Project Sem 2</strong></h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book.</p>
-        </div>
-        <div class="col-lg-3 col-md-4 col-6 information">
-            <h3><strong>INFORMATION</strong></h3>
-            <a href="/about-us.php"><p>About Us</p></a>
-            <a href="/contact-us.php"><p>Contact Us</p></a>
-            <a href=""><p>Privacy Policy</p></a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-6 mt-md-0 mt-5 address">
-            <h3><strong>GET IN TOUCH</strong></h3>
-            <p>Address: 123 Main Your address goes here.</p>
-            <p>Telephone Enquiry: (012) 800 456 789-987</p>
-            <p>Email: Info@example.com</p>
-        </div>
-        <div class="col-lg-3 col-md-4 col-6 mt-lg-0 mt-5 share">
-            <h3><strong>FOLLOW US</strong></h3>
-            <i class="fab fa-facebook fa-2x"></i>
-            <i class="fab fa-twitter fa-2x"></i>
-            <i class="fab fa-youtube fa-2x"></i>
-            <i class="fab fa-instagram fa-2x"></i>
-        </div>
-        <div class="col-12 copyright">
-            <h3>Copyright © 2021 Project Sem 2</h3>
+<div class="footer-area black-bg-2 pt-70">
+    <div class="footer-top-area pb-18">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer-about mb-40">
+                        <div class="footer-logo">
+                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <div class="payment-img">
+                            <a href="#">
+                                <img src="Hung/img/products/payment.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="footer-widget mb-40">
+                        <div class="footer-title mb-22">
+                            <h4 style="font-size: 20px">THÔNG TIN</h4>
+                        </div>
+                        <div class="footer-content">
+                            <ul>
+                                <li><a href="about-us.html">Về Chúng Tôi</a></li>
+                                <li><a href="#">Thông tin giao hàng</a></li>
+                                <li><a href="#">Chính sách bảo mật</a></li>
+                                <li><a href="#">Điều khoản và điều kiện</a></li>
+                                <li><a href="#">Dịch vụ khách hàng</a></li>
+                                <li><a href="#">Chính sách hoàn trả</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 ps-md-5">
+                    <div class="footer-widget mb-40">
+                        <div class="footer-title mb-22">
+                            <h4 style="font-size: 20px">TÀI KHOẢN CỦA TÔI</h4>
+                        </div>
+                        <div class="footer-content">
+                            <ul>
+                                <li><a href="my/account">Thông tin tài khoản</a></li>
+                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="wishlist.html">Ưa thích</a></li>
+                                <li><a href="#">Hòm thư</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer-widget mb-40">
+                        <div class="footer-title mb-22">
+                            <h4 style="font-size: 20px">LIÊN LẠC VỚI CHÚNG TÔI</h4>
+                        </div>
+                        <div class="footer-contact">
+                            <ul>
+                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Số điện thoại: (012) 800 456 789-987</li>
+                                <li>Email: <a href="#">Info@example.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="mt-35 footer-title mb-22">
+                            <h4 style="font-size: 20px">GIỜ MỞ CỬA</h4>
+                        </div>
+                        <div class="footer-time">
+                            <ul>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
+                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</footer>
+    <div class="footer-bottom-area border-top-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="copyright text-center">
+                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
+                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-{{--<section class="footer">--}}
-
-{{--    <div class="share">--}}
-{{--        <a href="#" class="btn">facebook</a>--}}
-{{--        <a href="#" class="btn">twitter</a>--}}
-{{--        <a href="#" class="btn">instagram</a>--}}
-{{--        <a href="#" class="btn">pinterest</a>--}}
-{{--        <a href="#" class="btn">linkedin</a>--}}
-{{--    </div>--}}
-
-{{--    <h1 class="credit"> created by <span> mr. web designer </span> | no rights reserved! </h1>--}}
-
-{{--</section>--}}
-
-<!-- scroll top button  -->
-<a href="#home" class="fas fa-angle-up" id="scroll-top"></a>
+<a href="#home" class="fas fa-angle-up" id="scroll-top" onclick="onScrollUp()"></a>
 
 <script src="/assets/vendors/js/base/jquery.min.js"></script>
 <script src="/assets/vendors/js/base/core.min.js"></script>
-
 <script src="/assets/vendors/js/app/app.min.js"></script>
-
 <!-- custom js file link  -->
 <script src="user/js/main.js"></script>
 

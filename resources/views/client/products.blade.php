@@ -6,14 +6,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>Home</title>
+    <title>Cửa Hàng</title>
     <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/Hung/css/all.min.css">
 
     <!-- Google Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
@@ -25,12 +21,33 @@
             }
         });
     </script>
-    {{--    <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">--}}
-
-    <link rel="stylesheet" href="user/css/home.css">
+    <link rel="stylesheet" href="Hung/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Hung/css/animate.css">
+    <link rel="stylesheet" href="Hung/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="Hung/css/slick.css">
+    <link rel="stylesheet" href="Hung/css/chosen.min.css">
+    <link rel="stylesheet" href="Hung/css/ionicons.min.css">
+    <link rel="stylesheet" href="Hung/css/font-awesome.min.css">
+    <link rel="stylesheet" href="Hung/css/simple-line-icons.css">
+    <link rel="stylesheet" href="Hung/css/jquery-ui.css">
+    <link rel="stylesheet" href="Hung/css/meanmenu.min.css">
+    <link rel="stylesheet" href="Hung/css/style.css">
+    <link rel="stylesheet" href="Hung/css/responsive.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="Hung/js/modernizr-2.8.3.min.js"></script>
     <link rel="stylesheet" href="user/css/main.css">
-    <link rel="stylesheet" href="user/css/products.css">
-    {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
+    <link rel="stylesheet" href="user/css/home.css">
+    <script>
+        WebFont.load({
+            google: {"families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"]},
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    {{--    <link rel="stylesheet" href="user/Hung/css/responsive.css">--}}
 </head>
 <body>
 @php
@@ -52,204 +69,343 @@
 @endforeach
 <header id="nav">
 
-    <a href="/home" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
+    <a href="/home" class="logo mt-sm-0 mt-4"><i class="fas fa-utensils"></i>VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-
+        @if(Auth::check())
+            <a href="/my-account">
+                <i class="fas fa-user"></i>
+                {{ Auth::user()->email }}
+            </a>
+        @else
+            <a href="/login"> Đăng nhập</a>
+        @endif
         <a href="/products"> Cửa Hàng </a>
-        <a href="/sign_in"> Liên Hệ </a>
-        <a href="/sign_in"> Blog </a>
+        <a href="/contact-us"> Liên Hệ </a>
+        <a href="/blog"> Blog </a>
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
             <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
         </a>
-        @auth
-            <a href="">
-                <i class="fas fa-user"></i>
-                {{ Auth::user()->email }}
-            </a>
-        @endauth
-        @guest
-            <a href="/login"> Đăng Nhập </a>
-        @endguest
     </nav>
 </header>
-
-<div class="mb-5 banner">
-    <div class="text-center banner-text">
-        <h1 class="fw-bolder fst-italic text-white">Food - Drink Shop</h1>
-        <p class="fst-italic bold">We always bring you the best food and drinks</p>
-    </div>
-</div>
-<div class="col-12 text-center pt-5 mt-3 pb-3">
-    <h2 class="fw-bolder fst-italic" style="font-size: 40px">Our Products</h2>
-</div>
-<div class="content mb-5">
-    <div class="col-lg-3 col-md-4">
-        <div class="categories">
-            <div class="keyword">
-                <div class="search-title">
-                    <div class="text-center">
-                        <span>Search Filter</span>
-                    </div>
-                </div>
-                <div class="search">
-                    <div class="search-content mt-1">
-                        <h5>Categories</h5>
-                        <span class="fas fa-plus" id="category-button" onclick="showCategorySearch()"></span>
-                        <div id="category-search" style="display: none">
-                            <hr class="mt-5">
-                            <div class="list d-flex flex-column">
-                                @foreach($categories as $category)
-                                    <label for="{{$category->name}}" class="mt-2">
-                                        <input type="checkbox" id="{{$category->name}}" name="categories[]"
-                                               value="{{$category->id}}">
-                                        {{$category->name}}</label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="search">
-                    <div class="search-content mt-1">
-                        <h5 class="ml-3">Ingredient</h5>
-                        <span class="fas fa-plus" id="ingredient-button" onclick="showIngredientSearch()"></span>
-                        <div id="ingredient-search" style="display: none">
-                            <hr class="mt-5">
-                            <div class="list d-flex flex-column">
-                                @foreach($ingredients as $ingredient)
-                                    <label for="{{$ingredient->name}}" class="mt-2">
-                                        <input type="checkbox" id="{{$ingredient->name}}"
-                                               name="ingredients[]"
-                                               value="{{$ingredient->id}}"> {{$ingredient->name}}</label>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="search">
-                    <div class="search-content mt-1">
-                        <h5 class="ml-3">Price</h5>
-                        <span class="fas fa-plus" id="price-button" onclick="showPriceSearch()"></span>
-                        <div id="price-search" style="display: none">
-                            <hr class="mt-5">
-                            <div class="list search-price mb-2 pt-3">
-                                <h3>From: </h3>
-                                <label for="fromPrice">
-                                    <input type="number" id="fromPrice" name="fromPrice">
-                                </label>
-                                <h3 class="pt-4">To: </h3>
-                                <label for="toPrice" class="label-to">
-                                    <input type="number" id="toPrice" name="toPrice">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="search">
-                    <div class="search-content mt-1">
-                        <h5 class="ml-3">Sorted By: </h5>
-                        <span class="fas fa-plus" id="sort-button" onclick="showSortSearch()"></span>
-                        <div id="sorted" style="display: none">
-                            <hr class="mt-5">
-                            <select class="form-select align-self-center" id="sort">
-                                <option value="no-sorted">No Sorted</option>
-                                <option value="item-price">Price, low to high</option>
-                                <option value="price-item">Price, high to low</option>
-                                <option value="item-name">Alphabetically, A-Z</option>
-                                <option value="name-item">Alphabetically, Z-A</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <button class="search-button btn mb-2" id="search-button">Search</button>
-                </div>
-            </div>
+<div class="breadcrumb-area gray-bg mt-80">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/home">Trang Chủ</a></li>
+                <li class="active">Cửa Hàng</li>
+            </ul>
         </div>
     </div>
-    <div class="col-lg-9 col-md-8 products mt-md-0">
-        <div class="products-list col-12" id="products-list">
-            @foreach($products as $product)
-
-                <div class="card col-lg-4 col-sm-12 col-12 mb-5 product">
-                    <img class="card-img-top text-center"
-                         src="{{$product->thumbnail}}"
-                         alt="Card image cap">
-                    <div class="button">
-                        <i class="fas fa-heart button1"></i>
-                        <i class="fas fa-shopping-cart button2 add-to-cart-button"
-                           id="add-to-cart-{{ $product->id }}"
-                           data-name="{{ $product->name }}" data-id="{{$product->id}}"></i>
-                        <i class="fas fa-info-circle button3"></i>
+</div>
+<div class="text-center">
+    <h1 class="fw-bold" style="font-style: italic">Cửa Hàng</h1>
+</div>
+<div class="shop-page-area pt-80 pb-100">
+    <div class="container">
+        <div class="row flex-row-reverse">
+            <div class="col-lg-9">
+                <div class="shop-topbar-wrapper">
+                    <div class="shop-topbar-left">
+                        <ul class="view-mode">
+                            <li class="active"><a href="#product-grid" data-view="product-grid"><i class="fa fa-th"></i></a></li>
+                            <li ><a href="#product-list" data-view="product-list"><i
+                                        class="fa fa-list-ul"></i></a></li>
+                        </ul>
                     </div>
-                    @if($product->discount > 0)
-                        <span>-{{$product->discount}}%</span>
-                    @endif
-                    <div class="card-body text-center">
-                        <p class="card-text fw-bolder font-monospace item-name name-item">{{$product->name}}</p>
-                        <div class="price">
-                            <p class="item-price price-item">{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount / 100))}} đ</p>
-                            @if($product->discount > 0)
-                                <p class="ps-3" style="color: red"><s>{{\App\Helpers\Helper::formatVnd($product->price)}} đ</s></p>
+                    <div class="product-sorting-wrapper">
+                        <form class="product-show shorting-style d-flex" action="/products" method="get">
+                            @php
+                                $checkC = [];
+                                if(isset($_GET['categories']))
+                                    $checkC = $_GET['categories'];
+                                $checkI = [];
+                                if(isset($_GET['ingredients']))
+                                    $checkI = $_GET['ingredients'];
+
+                            @endphp
+                            <label style="font-size: 20px">Sắp Xếp Theo:
+                                <select name="sort-by">
+                                    <option value="name">Tên</option>
+                                    <option value="price">Giá</option>
+                                </select>
+                            </label>
+                            @foreach($checkC as $C)
+                                <input type="hidden" name="categories[]" value="{{$C}}">
+                            @endforeach
+                            @foreach($checkI as $C)
+                                <input type="hidden" name="ingredients[]" value="{{$C}}">
+                            @endforeach
+                            @if(isset($_GET['from-price']))
+                                <input type="hidden" name="from-price" value="{{$_GET['from-price']}}">
                             @endif
-                        </div>
-                        <p class="description">{{$product->description}}</p>
+                            @if(isset($_GET['to-price']))
+                                <input type="hidden" name="to-price" value="{{$_GET['to-price']}}">
+                            @endif
+                            <div class="price_slider_amount">
+                                <button type="submit"><i class="fa fa-check"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-            @endforeach
-        </div>
-        <div class="paginate text-center">
-            <div>
-                <ul class="pagination">
-                    <li class="page-item {{($products->currentPage() == 1) ? 'disabled': ''}}">
-                        <a class="page-link" href="{{$products->url(1)}}" style="border-radius: 10px">Previous</a>
-                    </li>
-                    @for($i = 1; $i <= $products->lastPage(); $i++)
-                        <li class="page-item {{($products->currentPage() == $i) ? 'active': ''}}">
-                            <a class="page-link" href="{{$products->url($i)}}">{{$i}}</a>
-                        </li>
-                    @endfor
-                    <li class="page-item {{($products->currentPage() == $products->lastPage()) ? 'disabled': ''}}">
-                        <a class="page-link" href="{{$products->nextPageUrl()}}"
-                           style="border-radius: 10px">Next</a></li>
-                </ul>
+                <div class="grid-list-product-wrapper">
+                    <div class="product-grid product-view pb-20">
+                        <div class="row">
+                            @foreach($products as $product)
+                                <div class="product-width col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-30">
+                                    <div class="product-wrapper">
+                                        <div class="product-img">
+                                            <a href="/product/{{$product->id}}/details">
+                                                <img src="{{$product->thumbnail}}" alt="">
+                                            </a>
+                                            @if($product ->discount > 0)
+                                                <div class="onsale">
+                                                    <span>-{{$product->discount}}%</span></div>
+                                            @endif
+                                            <div class="product-action">
+                                                <div class="pro-action-left" style="margin-top: 6px">
+                                                    <a title="Thêm Vào Giỏ" class="add-to-cart-button" style="padding-bottom: 10px"
+                                                       id="add-to-cart-{{ $product->id }}"
+                                                       data-name="{{ $product->name }}" data-id="{{$product->id}}"><i
+                                                        class="fa fa-shopping-cart"></i>Thêm Vào Giỏ</a>
+                                                </div>
+                                                <div class="pro-action-right">
+                                                    <a title="Thích" href="wishlist.html"><i
+                                                            class="fa fa-heart"></i></a>
+                                                    <a title="Chi Tiết Sản Phẩm" href="/product/{{$product->id}}/details"><i class="fa fa-external-link"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-content text-center">
+                                            <h4>
+                                                <a href="/product/{{$product->id}}/details" class="fw-bold"
+                                                   style="font-size: 20px">{{$product->name}}</a>
+                                            </h4>
+                                            <div class="product-price-wrapper">
+                                                <span style="font-size: 15px">{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount /100))}} VND</span>
+                                                @if($product->discount > 0)
+                                                    <span style="font-size: 15px" class="product-price-old">{{\App\Helpers\Helper::formatVnd($product->price)}} VND</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="product-list-details">
+                                            <h4>
+                                                <a class="fw-bold" href="/product/{{$product->id}}/details"
+                                                   style="font-size: 20px">{{$product->name}}</a>
+                                            </h4>
+                                            <div class="product-price-wrapper">
+                                                <span style="font-size: 15px">{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount /100))}} VND</span>
+                                                @if($product->discount > 0)
+                                                    <span style="font-size: 15px" class="product-price-old">{{\App\Helpers\Helper::formatVnd($product->price)}} VND</span>
+                                                @endif
+                                            </div>
+                                            <p>{{$product->description}}</p>
+                                            <div class="shop-list-cart-wishlist">
+                                                <a href="#" title="Wishlist"><i class="fa fa-heart"></i></a>
+                                                <a title="Add To Cart" class="add-to-cart-button" id="add-to-cart-{{ $product->id }}" data-name="{{ $product->name }}" data-id="{{$product->id}}"><i class="fa fa-shopping-cart"></i></a>
+                                                <a href="/product/{{$product->id}}/details"><i class="fa fa-external-link"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @if($products->lastpage() > 1)
+                        <div class="pagination-total-pages">
+                            <div class="pagination-style">
+                                <ul class="text-center" style="display: flex; justify-content: center; align-items: center">
+                                    <li><a class="prev-next prev" href="{{$products->url(1)}}"><i
+                                                class="fa fa-arrow-left {{($products->currentPage() == 1) ? 'disabled': ''}}"></i>
+                                            Prev</a></li>
+                                    @for($i = 1; $i <= $products->lastPage(); $i++)
+                                        <li><a class="{{($products->currentPage() == $i) ? 'active': ''}}"
+                                               href="{{$products->url($i)}}">{{$i}}</a></li>
+                                    @endfor
+                                    <li>
+                                        <a class="prev-next next {{($products->currentPage() == $products->lastPage()) ? 'disabled': ''}}"
+                                           href="{{$products->nextPageUrl()}}">Next<i class="fa fa-arrow-right"></i>
+                                        </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <form class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
+                    <div class="shop-widget">
+                        <h4 class="shop-sidebar-title" style="font-size: 30px">Bộ Lọc</h4>
+                        <div class="shop-catigory">
+                            <ul id="faq">
+                                <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-1"
+                                       style="font-size: 20px">Danh Mục
+                                        <i class="fa fa-angle-down pt-2" style="font-size: 20px"></i></a>
+                                    <ul id="shop-catigory-1" class="panel-collapse collapse show">
+                                        @foreach($categories as $category)
+                                            @php
+                                                $checkC = [];
+                                                if(isset($_GET['categories'])){
+                                                    $checkC = $_GET['categories'];
+                                                }
+                                            @endphp
+                                            <li class="d-flex">
+                                                <input type="checkbox" name="categories[]"
+                                                       value="{{$category->id}}"
+                                                       @if(in_array($category->id , $checkC)) checked @endif>
+                                                <span class="ms-1" style="font-size: 15px;"> {{$category->name}}</span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                                <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-2"
+                                       style="font-size: 20px">Thành phần
+                                        <i class="fa fa-angle-down pt-2" style="font-size: 20px"></i></a>
+                                    <ul id="shop-catigory-2" class="panel-collapse collapse">
+                                        @foreach($ingredients as $ingredient)
+                                            @php
+                                                $checkI = [];
+                                                if(isset($_GET['ingredients'])){
+                                                    $checkC = $_GET['ingredients'];
+                                                }
+                                            @endphp
+                                            <li class="d-flex">
+                                                <input type="checkbox" name="ingredients[]" value="{{$ingredient->id}}"
+                                                       @if(in_array($ingredient->id , $checkI)) checked @endif>
+                                                <span class="ms-1" style="font-size: 15px;">{{$ingredient->name}}</span>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                                <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-3"
+                                       style="font-size: 20px">Giá
+                                        <i class="fa fa-angle-down pt-2" style="font-size: 20px"></i></a>
+                                    <ul id="shop-catigory-3" class="panel-collapse collapse">
+                                        <div class="price_filter mt-10 ml-15">
+                                            <label for="from-price">Từ
+                                                <input type="number" name="from-price">
+                                            </label>
+                                            <label for="to-price" class="mt-10">Đến
+                                                <input type="number" name="to-price">
+                                            </label>
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="price_slider_amount text-center mt-30">
+                        <button type="submit" style="font-size: 15px">Tìm Kiếm</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-<section class="footer">
-
-    <div class="share">
-        <a href="#" class="btn">facebook</a>
-        <a href="#" class="btn">twitter</a>
-        <a href="#" class="btn">instagram</a>
-        <a href="#" class="btn">pinterest</a>
-        <a href="#" class="btn">linkedin</a>
+<div class="footer-area black-bg-2 pt-70">
+    <div class="footer-top-area pb-18">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer-about mb-40">
+                        <div class="footer-logo">
+                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <div class="payment-img">
+                            <a href="#">
+                                <img src="Hung/img/products/payment.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="footer-widget mb-40">
+                        <div class="footer-title mb-22">
+                            <h4 style="font-size: 20px">THÔNG TIN</h4>
+                        </div>
+                        <div class="footer-content">
+                            <ul>
+                                <li><a href="about-us.html">Về Chúng Tôi</a></li>
+                                <li><a href="#">Thông tin giao hàng</a></li>
+                                <li><a href="#">Chính sách bảo mật</a></li>
+                                <li><a href="#">Điều khoản và điều kiện</a></li>
+                                <li><a href="#">Dịch vụ khách hàng</a></li>
+                                <li><a href="#">Chính sách hoàn trả</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 ps-md-5">
+                    <div class="footer-widget mb-40">
+                        <div class="footer-title mb-22">
+                            <h4 style="font-size: 20px">TÀI KHOẢN CỦA TÔI</h4>
+                        </div>
+                        <div class="footer-content">
+                            <ul>
+                                <li><a href="my-account.html">Thông tin tài khoản</a></li>
+                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="wishlist.html">Ưa thích</a></li>
+                                <li><a href="#">Hòm thư</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer-widget mb-40">
+                        <div class="footer-title mb-22">
+                            <h4 style="font-size: 20px">LIÊN LẠC VỚI CHÚNG TÔI</h4>
+                        </div>
+                        <div class="footer-contact">
+                            <ul>
+                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Số điện thoại: (012) 800 456 789-987</li>
+                                <li>Email: <a href="#">Info@example.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="mt-35 footer-title mb-22">
+                            <h4 style="font-size: 20px">GIỜ MỞ CỬA</h4>
+                        </div>
+                        <div class="footer-time">
+                            <ul>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
+                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <h1 class="credit"> created by <span> mr. web designer </span> | no rights reserved! </h1>
-
-</section>
-
-<!-- scroll top button  -->
-<a href="#" class="fas fa-angle-up" id="scroll-top"></a>
-
-<script src="/assets/vendors/js/base/jquery.min.js"></script>
-<script src="/assets/vendors/js/base/core.min.js"></script>
-
-<script src="/assets/vendors/js/app/app.min.js"></script>
-
-<!-- custom js file link  -->
-<script src="user/js/main.js"></script>
+    <div class="footer-bottom-area border-top-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-7">
+                    <div class="copyright text-center">
+                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
+                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="#home" class="fas fa-angle-up" id="scroll-top" onclick="onScrollUp()"></a>
+<script src="{{asset('Hung/js/popper.js')}}"></script>
+<script src="{{asset('Hung/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('Hung/js/imagesloaded.pkgd.min.js')}}"></script>
+<script src="{{asset('Hung/js/isotope.pkgd.min.js')}}"></script>
+<script src="{{asset('Hung/js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('Hung/js/plugins.js')}}"></script>
+<script src="{{asset('Hung/js/main.js')}}"></script>
 <script src="user/js/products.js"></script>
+<script src="user/js/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
-<script>
-</script>
 </body>
 </html>

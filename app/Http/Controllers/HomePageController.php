@@ -10,7 +10,7 @@ class HomePageController extends Controller
 {
     public function show(){
 //
-        $discountProducts = Product::all()->where('discount', '>', 0)->random(4);
+        $discountProducts = Product::all()->where('discount', '>', 0)->random(3);
         $categories = Category::all();
         return view('client.home', [
             'categories' => $categories,
