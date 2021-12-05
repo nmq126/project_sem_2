@@ -26,3 +26,9 @@
     /*right: 0;*/
 }
 
+.alert-login{
+    color: red;
+    padding-bottom: 10px;
+    text-align: center;
+}
+

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatus;
 use App\Helpers\Helper;
-use App\Mail\SendMail;
+use App\Jobs\SendMail;
+use App\Mail\NotificationMail;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
@@ -30,6 +31,7 @@ use PayPal\Rest\ApiContext;
 
 class OrderController extends Controller
 {
+
     public function show()
     {
 
@@ -68,7 +70,7 @@ class OrderController extends Controller
         }
         $status = OrderStatus::Waiting;
 
-        if ($request->get('shipPayment') == 1){
+        if ($request->get('shipPayment') == 1) {
             $status = OrderStatus::WaitForCheckout;
         }
 
@@ -126,15 +128,13 @@ class OrderController extends Controller
         }
 
         //gui mail thong bao
-        try {
-            $subject = 'Đặt hàng thành công';
-            Mail::to(Auth::user()->email)->send(new SendMail([
-                'id' => $order->id,
-                'subject' => $subject
-            ]));
-        }catch (\Exception $e){
-            error_log($e);
-        }
+        $details = [
+            'id' => $order->id,
+            'subject' => 'Đặt hàng thành công',
+            'receiver' => 'minhquangngo.98@gmail.com'
+        ];
+        dispatch(new SendMail($details));
+
 
         return redirect('/order/' . $order_id);
     }
@@ -143,7 +143,6 @@ class OrderController extends Controller
     {
 //        $clientId = 'AZqirfWqV2F1C9rz5DUUXC63jDUXggrZ_7tBdjkxK_6kzJUC25UcwU0j3E5OYCEkIJNDCf9oOQWQ1I1r';
 //        $clientSecret = 'EIQ6hCG0IbFg9DJD4Z1YH530f30BNFCW4T79RN-Z311mKRSfw7ZhhEWaU5nMOfJf5kP0Nj0h0KHpyVfS';
-
 
 
         $orderId = $request->get('orderID');
@@ -178,7 +177,7 @@ class OrderController extends Controller
                 ->setQuantity($orderDetail->quantity)
                 ->setSku($orderDetail->product->id) // Similar to `item_number` in Classic API
                 ->setPrice(Helper::convertVndToUsd($orderDetail->unit_price));
-            $total_price +=  Helper::convertVndToUsd($orderDetail->unit_price) * $orderDetail->quantity;
+            $total_price += Helper::convertVndToUsd($orderDetail->unit_price) * $orderDetail->quantity;
             array_push($array_items, $item);
         }
         $itemList = new ItemList();
@@ -187,7 +186,7 @@ class OrderController extends Controller
 
         ### Additional payment details
 
-    $details = new Details();
+        $details = new Details();
         $details->setShipping(0)
             ->setTax(0)
             ->setSubtotal($total_price);
@@ -202,9 +201,9 @@ class OrderController extends Controller
             ->setDetails($details);
 
 
- ### Transaction
-    $invoice = $order->id + 600;
-    $transaction = new Transaction();
+        ### Transaction
+        $invoice = $order->id + 600;
+        $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)
             ->setDescription("Checkout order #$order->id")
@@ -310,17 +309,5 @@ class OrderController extends Controller
         return $payment;
     }
 
-//    public function testMail(){
-//        try {
-//            $subject = 'Thông tin đơn hàng';
-//            Mail::to('minhquangngo.98@gmail.com')->send(new SendMail([
-//                'id' => 1,
-//                'subject' => $subject
-//            ]));
-//            echo Order::find(1);
-//        }catch (\Exception $e){
-//            error_log($e);
-//        }
-//
-//    }
+
 }

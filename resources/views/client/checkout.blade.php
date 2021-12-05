@@ -74,7 +74,7 @@
         <div class="information">
             <h3>Thông tin vận chuyển</h3>
             <div class="">
-                <form method="post" action="/order" name="checkout-form" id="checkout-form">
+                <form method="post" action="/checkout" name="checkout-form" id="checkout-form">
                     @csrf
                     <div class="input-line">
                         <label for="shipName" class=" ">Người nhận</label>

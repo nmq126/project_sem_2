@@ -62,6 +62,11 @@
                         <img src="" alt="logo">
                     </a>
                 </div>
+                @if (session('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <h3>Đăng nhập</h3>
                 <form method="post" action="/login" name="login-form" id="login-form">
                     @csrf
@@ -122,6 +127,8 @@
                 },
                 password:{
                     required: true,
+                    minlength: 8,
+                    maxlength: 16
                 },
             },
             messages: {
@@ -131,9 +138,10 @@
                 },
                 password:{
                     required: "Vui lòng nhập mật khẩu",
+                    minlength: "Mật khẩu chứa ít nhất 8 ký tự",
+                    maxlength: "Mật khẩu chứa nhiều nhất 16 ký tự"
                 },
-            },
-
+            }
         });
     })
 

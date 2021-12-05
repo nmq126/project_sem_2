@@ -57,7 +57,7 @@
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        <a href="/sign_in"> Đăng Nhập </a>
+
         <a href="/products"> Cửa Hàng </a>
         <a href="/sign_in"> Liên Hệ </a>
         <a href="/sign_in"> Blog </a>
@@ -65,6 +65,15 @@
             <i class="fas fa-shopping-cart"></i>
             <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
         </a>
+        @auth
+            <a href="">
+                <i class="fas fa-user"></i>
+                {{ Auth::user()->email }}
+            </a>
+        @endauth
+        @guest
+            <a href="/login"> Đăng Nhập </a>
+        @endguest
     </nav>
 </header>
 
@@ -164,7 +173,7 @@
     <div class="col-lg-9 col-md-8 products mt-md-0">
         <div class="products-list col-12" id="products-list">
             @foreach($products as $product)
-                <a href="/product/{{ $product->id }}">
+
                 <div class="card col-lg-4 col-sm-12 col-12 mb-5 product">
                     <img class="card-img-top text-center"
                          src="{{$product->thumbnail}}"
@@ -190,7 +199,7 @@
                         <p class="description">{{$product->description}}</p>
                     </div>
                 </div>
-                </a>
+
             @endforeach
         </div>
         <div class="paginate text-center">

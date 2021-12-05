@@ -1,7 +1,3 @@
-@php
-    if (isset($data))
-        $order = \App\Models\Order::find( $data['id'])
-@endphp
 
 <body class="bg-white">
 <!-- Begin Header -->
