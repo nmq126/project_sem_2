@@ -24,7 +24,11 @@
     <link rel="stylesheet" href="user/css/register-login.css">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- firebase stuff -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 </head>
 <body class="bg-white">
 <!-- Begin Preloader -->
@@ -70,6 +74,7 @@
                 <h3>Đăng nhập</h3>
                 <form method="post" action="/login" name="login-form" id="login-form">
                     @csrf
+                    <input type="hidden" name="device_token" id="device_token">
                     <div class="group material-input">
                         <input type="text" name="email">
                         <span class="highlight"></span>
@@ -146,5 +151,8 @@
     })
 
 </script>
+
+{{--    Firebase stuff--}}
+<script src="{{ asset('js/firebase.js') }}"></script>
 </body>
 </html>

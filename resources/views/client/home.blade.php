@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="user/css/home.css">
     <link rel="stylesheet" href="user/css/main.css">
     {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
+<!-- firebase stuff -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 </head>
 <body>
 <div id="preloader">
@@ -46,12 +49,12 @@
     <nav class="navbar">
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
         </a>
-        @if(Auth::check())
+        @auth
             <a href="">
                 <i class="fas fa-bell"></i>
-                <span class='badge badge-warning' id='NotiCount'>12</span>
+                <span class='badge badge-warning' id='NotiCount'>{{ $numberAlert }}</span>
             </a>
             <div>
                 <div class="profile">
@@ -75,9 +78,10 @@
                 </div>
             </div>
 
-        @else
+        @endauth
+        @guest
             <a href="/login"> Đăng nhập</a>
-        @endif
+        @endguest
     </nav>
 
 </header>
@@ -417,6 +421,9 @@
 
 <!-- custom js file link  -->
 <script src="user/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
+<script src="{{ asset('js/firebase.js') }}"></script>
 
 </body>
 </html>

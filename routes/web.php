@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\JobController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomePageController;
@@ -46,7 +45,7 @@ Route::get('/admin/product/list/category/delete/{id}',[ProductAdminController::c
 Route::get('/admin/product/update/category/{id}',[ProductAdminController::class, 'UpdateViewCate']);
 Route::post('/admin/product/update/category/{id}',[ProductAdminController::class, 'UpdateCategory']);
 Route::get('/admin/orders/search/{keyword}', [OrderAdminController::class, 'JsonSearch']);
-Route::get('/admin/orders', [OrderAdminController::class, 'fetchOrders']);
+Route::get('/admin/orders', [OrderAdminController::class, 'fetchOrders'])->middleware('auth.admin');
 Route::get('/admin/orders/json', [OrderAdminController::class, 'fetchOrdersJson']);
 Route::post('/admin/orders/destroy', [OrderAdminController::class, 'Destroy']);
 Route::get('/admin/orders/delete/{id}', [OrderAdminController::class, 'DeleteOrder']);

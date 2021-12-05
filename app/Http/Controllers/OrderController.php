@@ -6,6 +6,7 @@ use App\Enums\OrderStatus;
 use App\Helpers\Helper;
 use App\Jobs\SendMail;
 use App\Mail\NotificationMail;
+use App\Models\Notification;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;

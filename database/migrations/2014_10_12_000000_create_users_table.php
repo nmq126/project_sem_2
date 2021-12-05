@@ -21,6 +21,7 @@ class   CreateUsersTable extends Migration
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('level')->default(0);
             $table->rememberToken();
+            $table->string('device_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP'));

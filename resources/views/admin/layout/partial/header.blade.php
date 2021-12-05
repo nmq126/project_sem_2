@@ -36,7 +36,7 @@
                     <ul aria-labelledby="notifications" class="dropdown-menu notification">
                         <li>
                             <div class="notifications-header">
-                                <div class="title">Notifications (4)</div>
+                                <div class="title" id="NotiCount">Notifications ({{ $numberAlert }})</div>
                                 <div class="notifications-overlay"></div>
                                 <img src="/assets/img/notifications/01.jpg" alt="..." class="img-fluid">
                             </div>
@@ -100,11 +100,11 @@
                 </li>
                 <!-- End Notifications -->
                 <!-- User -->
-                <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><img src="/assets/img/avatar/avatar-01.jpg" alt="..." class="avatar rounded-circle"></a>
+                <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><img src="{{ Auth::user()->DefaultThumbnail }}" alt="..." class="avatar rounded-circle"></a>
                     <ul aria-labelledby="user" class="user-size dropdown-menu">
                         <li class="welcome">
                             <a href="#" class="edit-profil"><i class="la la-gear"></i></a>
-                            <img src="/assets/img/avatar/avatar-01.jpg" alt="..." class="rounded-circle">
+                            <img src="{{ Auth::user()->DefaultThumbnail }}" alt="..." class="rounded-circle">
                         </li>
                         <li>
                             <a href="pages-profile.html" class="dropdown-item">

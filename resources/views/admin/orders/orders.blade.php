@@ -4,6 +4,9 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="/assets/css/datatables/datatables.min.css">
     <link rel="stylesheet" href="/assets/css/ingrendient/ingrendient.css">
+    <!-- firebase stuff -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 @endsection
 @section('breadcrumb')
     <div class="row">
@@ -168,5 +171,9 @@
     <!-- Begin Page Snippets -->
     <script src="/assets/js/components/tables/tables.js"></script>
     <!-- End Page Snippets -->
-<script src="/assets/js/order/order.js"></script>
+    <script src="/assets/js/order/order.js"></script>
+
+    {{--    Firebase stuff--}}
+    <script src="{{ asset('js/firebase.js') }}"></script>
+
 @endsection
