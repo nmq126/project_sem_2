@@ -46,13 +46,13 @@ class ShoppingCartController extends Controller
             $existingCartItem = $shoppingCart[$productId];
             $existingCartItem->quantity += $productQuantity;
             $shoppingCart[$productId] = $existingCartItem;
-        }else{
+        } else {
             $cartItem = new stdClass();
             $cartItem->id = $obj->id;
-            $cartItem->	thumbnail = $obj->	thumbnail;
+            $cartItem->thumbnail = $obj->thumbnail;
             $cartItem->name = $obj->name;
             $cartItem->price = $obj->price;
-            $cartItem->unitPrice = $obj->price * (100 - $obj->discount)/100;
+            $cartItem->unitPrice = $obj->price * (100 - $obj->discount) / 100;
             $cartItem->quantity = $productQuantity;
             $shoppingCart[$productId] = $cartItem;
         }
@@ -63,12 +63,17 @@ class ShoppingCartController extends Controller
     public function remove(Request $request)
     {
         $productId = $request->get('id');
-        $shoppingCart = [];
-        if (Session::has('shoppingCart')) {
-            $shoppingCart = Session::get('shoppingCart');
+        if ($productId != 'all') {
+            $shoppingCart = [];
+            if (Session::has('shoppingCart')) {
+                $shoppingCart = Session::get('shoppingCart');
+            }
+            unset($shoppingCart[$productId]);
+            Session::put('shoppingCart', $shoppingCart);
         }
-        unset($shoppingCart[$productId]);
-        Session::put('shoppingCart', $shoppingCart);
+        else {
+            Session::flush();
+        }
         return redirect('/cart');
     }
 

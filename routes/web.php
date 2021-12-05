@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\JobController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomePageController;
@@ -24,10 +23,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomePageController::class, 'show']);
 
-
-Route::get('/admin/product/create',[ProductAdminController::class, 'getForm'])->middleware('auth.admin');
+Route::get('/admin/product/create',[ProductAdminController::class, 'getForm']);
 Route::post('/admin/product/create',[ProductAdminController::class, 'processForm']);
 Route::get('/admin/product/list',[ProductAdminController::class, 'getList']);
 
@@ -59,7 +56,7 @@ Route::put('admin/orders/{id}/update', [OrderDetailsAdminController::class, 'upd
 
 //product list
 Route::get('/product/recent-view',[ProductClientController::class, 'getRecent']);
-Route::get('/product/{id}',[ProductClientController::class, 'getDetail']);
+Route::get('/product/{id}/details',[ProductClientController::class, 'getDetail']);
 Route::post('products/search', [ProductClientController::class, 'search']);
 Route::get('/products', [ProductClientController::class, 'getList']);
 
@@ -69,32 +66,26 @@ Route::get('/cart',[ShoppingCartController::class, 'show']);
 Route::get('/cart/remove',[ShoppingCartController::class, 'remove']);
 Route::post('/cart/update',[ShoppingCartController::class, 'update']);
 
-//nhóm các route phải đăng nhập mới zô dc
-Route::group(['middleware' => 'auth'],function (){
-    //checkout
-    Route::get('/checkout', [OrderController::class, 'show']);
-    Route::post('/checkout', [OrderController::class, 'process']);
-    //order
-    Route::get('/order/{id}', [OrderController::class, 'getDetail']);
-    Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
-    Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
-});
-
+//checkout, order
+Route::get('/checkout', [OrderController::class, 'show']);
+Route::post('/order', [OrderController::class, 'process']);
+Route::get('/order/{id}', [OrderController::class, 'getDetail']);
+Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
+Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
 
 Route::get('/home', [HomePageController::class, 'show']);
+Route::get('/my-account', function (){
+    return view('client.my-account');
+} );
 
+Route::get('/register', [RegisterController::class, 'create']);
+Route::post('/register', [RegisterController::class, 'store']);
 
-//nhóm các route phải CHƯA đăng nhập mới zô dc
-Route::group(['middleware' => 'guest'],function (){
-    //đăng ký
-    Route::get('/register', [RegisterController::class, 'create']);
-    Route::post('/register', [RegisterController::class, 'store']);
-    //đăng nhập
-    Route::get('/login', [LoginController::class, 'create']);
-    Route::post('/login', [LoginController::class, 'store']);
-});
-
-Route::get('/logout', [LoginController::class, 'destroy']);
+Route::get('/login', [LoginController::class, 'create']);
+Route::get('my-account', [LoginController::class, 'showOrder']);
+Route::get('/my-account/logout', [LoginController::class, 'logout']);
+Route::get('/my-account/order/id={id}', [LoginController::class, 'showOrderDetails']);
+Route::post('/login', [LoginController::class, 'store']);
 
 
 
@@ -103,14 +94,22 @@ Route::get('/blog',[BlogController::class, 'getBlog']);
 Route::get('/blog-json',[BlogController::class, 'JsonBlog']);
 Route::get('/blog_detail/{id}',[BlogController::class, 'getBlogDetail']);
 
-
+Route::get('/login', function () {
+    return view('client.login');
+});
 
 
 Route::get('/cart', function () {
     return view('client.cart');
 });
 
+Route::get('/contact-us', function () {
+    return view('client.contact-us');
+});
+
+Route::get('/blog-details', function () {
+    return view('client.blog-details');
+});
 
 
-
-Route::get('/product/{id}', [ProductClientController::class, 'getProductDetail']);
+Route::get('/test_mail', [OrderController::class, 'testMail']);

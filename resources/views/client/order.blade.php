@@ -10,6 +10,9 @@
 
     <!-- Favicon -->
     <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+    <link rel="stylesheet" href="Hung/css/style.css">
+    <link rel="stylesheet" href="{{asset('user/css/home.css')}}">
+    <link rel="stylesheet" href="user/css/main.css">
 
     <!-- Google Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
@@ -31,28 +34,29 @@
 
 </head>
 <body class="bg-white">
-<!-- Begin Preloader -->
-<div id="preloader">
-    <div class="canvas">
-        <img src="/user/img/loader.gif" alt="">
-    </div>
-</div>
-<!-- End Preloader -->
-
 <header id="nav">
 
-    <a href="#" class="logo"><i class="fas fa-utensils"></i>vietkitchen</a>
+    <a href="/home" class="logo"><i class="fas fa-utensils"></i>VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
+        @if(Auth::check())
+            <a href="/my-account">
+                <i class="fas fa-user"></i>
+                {{ Auth::user()->email }}
+            </a>
+        @else
+            <a href="/login"> Đăng nhập</a>
+        @endif
+        <a href="/products"> Cửa Hàng </a>
+        <a href="/contact-us"> Liên Hệ </a>
+        <a href="/blog"> Blog </a>
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
             <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
         </a>
-        <a href="/sign_in"> Đăng nhập</a>
     </nav>
-
 </header>
 
 <!-- Begin Header -->
@@ -66,23 +70,9 @@
                         <td class="logo" style="padding-top: 80px">
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
-                                    <td bgcolor="#ffffff" width="100" align="left" style="border-radius: 4px 0 0 0;">
-                                        <a href="/home" target="_blank">
-                                            <img alt="Logo" src="" width="180" height="120"
-                                                 style="display: block; font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 16px; padding: 30px 0 30px 15px;"
-                                                 border="0">
-                                        </a>
-                                    </td>
-                                    <td bgcolor="#ffffff" width="400" align="right" class="mobile-hide"
-                                        style="border-radius: 0 4px 0 0;">
-                                        <table border="0" cellpadding="0" cellspacing="0">
-                                            <tr>
-                                                <td align="right"
-                                                    style="padding: 30px 15px 30px 0; font-size: 15px; font-family: Noto Sans, Arial, sans-serif; color: #94a4b0; text-decoration: none;">
-                                                    <span style="color: #94a4b0; text-decoration: none;"></span>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <td bgcolor="#ffffff" style="text-align: center; padding-top: 30px">
+                                        <a href="/home" style="font-size: 40px; color: #666"><i class="fas fa-utensils" style="color: #e02c2b"></i>
+                                            VietKitchen</a>
                                     </td>
                                 </tr>
                             </table>
@@ -121,7 +111,8 @@
                                                     Chỉ còn một bước cuối cùng!! Vui lòng thanh toán đơn hàng của bạn để
                                                     hoàn tất đơn hàng bạn nhé.
                                                 @elseif($order->checkout)
-                                                    Bạn đã thanh toán thành công <br> Đơn hàng sẽ được giao tới bạn trong thời gian sớm nhất, cảm ơn bạn
+                                                    Bạn đã thanh toán thành công <br> Đơn hàng sẽ được giao tới bạn
+                                                    trong thời gian sớm nhất, cảm ơn bạn
                                                     đã sử dụng dịch vụ của VietKitchen
                                                 @else
                                                     Đơn hàng sẽ được giao tới bạn trong thời gian sớm nhất, cảm ơn bạn
@@ -146,7 +137,10 @@
                                                         @if($order->status == \App\Enums\OrderStatus::WaitForCheckout)
                                                             <div id="paypal-button"></div>
                                                         @else
-                                                            <td align="center"><a href="/products" target="_blank" style="font-size: 16px; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #66E9AE; border-top: 15px solid #66E9AE; border-bottom: 15px solid #66E9AE; border-left: 35px solid #66E9AE; border-right: 35px solid #66E9AE; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; display: inline-block;" class="mobile-button">Tiếp tục mua hàng</a></td>
+                                                            <td align="center"><a href="/products" target="_blank"
+                                                                                  style="font-size: 18px; font-weight: bolder; color: #ffffff; text-decoration: none; background-color: #e02c2b; border-top: 15px solid #e02c2b; border-bottom: 15px solid #e02c2b; border-left: 35px solid #e02c2b; border-right: 35px solid #e02c2b; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; display: inline-block;"
+                                                                                  class="mobile-button">Tiếp tục mua
+                                                                    hàng</a></td>
 
                                                         @endif
                                                     </tr>
@@ -168,23 +162,23 @@
                                                 <br>
                                                 @switch($order->status)
                                                     @case(\App\Enums\OrderStatus::WaitForCheckout)
-                                                        <p style="color: red">Chưa thanh toán</p>
-                                                        @break
+                                                    <p style="color: #e02c2b">Chưa thanh toán</p>
+                                                    @break
                                                     @case(\App\Enums\OrderStatus::Waiting)
-                                                        <p style="color: #85ff7f">Chờ xác nhận</p>
-                                                        @break
+                                                    <p style="color: #e02c2b">Chờ xác nhận</p>
+                                                    @break
                                                     @case(\App\Enums\OrderStatus::Processing)
-                                                        <p style="color: #85ff7f">Đang xử lý</p>
-                                                        @break
+                                                    <p style="color: #e02c2b">Đang xử lý</p>
+                                                    @break
                                                     @case(\App\Enums\OrderStatus::Delivering)
-                                                        <p style="color: #85ff7f">Đang giao</p>
-                                                        @break
+                                                    <p style="color: #e02c2b">Đang giao</p>
+                                                    @break
                                                     @case(\App\Enums\OrderStatus::Done)
-                                                        <p style="color: #85ff7f">Hoàn tất</p>
-                                                        @break
+                                                    <p style="color:#e02c2b">Hoàn tất</p>
+                                                    @break
                                                     @case(\App\Enums\OrderStatus::Cancel)
-                                                        <p style="color: grey">Đã hủy</p>
-                                                        @break
+                                                    <p style="color: grey">Đã hủy</p>
+                                                    @break
                                                 @endswitch
                                                 <br><br><span
                                                     style="color: #2c304d;">Giao tới:</span><br>{{ $order->ship_address }}
@@ -311,9 +305,11 @@
                                                     <tr>
                                                         <td align="right"
                                                             style="padding: 40px 0 0 0; font-family: Noto Sans, Arial, sans-serif; color: #2c304d; font-size: 15px; line-height: 20px; border-top: 2px solid #eee;">
-                                                            Tạm tính: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} vnđ<br>Phí vận chuyển:
+                                                            Tạm
+                                                            tính: {{ \App\Helpers\Helper::formatVnd($order->total_price) }}
+                                                            vnđ<br>Phí vận chuyển:
                                                             MIỄN PHÍ<br><br><span
-                                                                style="font-size: 20px; color: #66E9AE;">Tổng: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} vnđ</span>
+                                                                style="font-size: 25px; color: #e02c2b;">TỔNG: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} vnđ</span>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -424,13 +420,14 @@
                                 <td align="center" valign="middle"
                                     style="font-size: 12px; line-height: 24px; font-family: Noto Sans, Arial, sans-serif; color:#aea9c3; padding-bottom: 35px; border-radius: 0 0 4px 4px;"
                                     bgcolor="#ffffff">
-                                    <span class="appleFooter" style="color:#aea9c3;">8 Tôn Thất Thuyết, Mỹ Đình, Hà Nội</span><br><a
+                                    <span class="appleFooter"
+                                          style="color:#aea9c3;">8 Tôn Thất Thuyết, Mỹ Đình, Hà Nội</span><br><a
                                         class="original-only" style="color: #5d5386; text-decoration: underline;"
                                         href="/about-us">About us</a><span class="original-only"
-                                                                      style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><a
+                                                                           style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><a
                                         class="original-only" style="color: #5d5386; text-decoration: underline;"
                                         href="/contact-us">Contact</a><span class="original-only"
-                                                                  style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><a
+                                                                            style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span><a
                                         class="original-only" style="color: #5d5386; text-decoration: underline;"
                                         href="/home">Home</a>
                                 </td>

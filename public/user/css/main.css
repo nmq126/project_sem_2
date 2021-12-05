@@ -1,59 +1,14 @@
 :root {
     --color-greenLighter: #F7FFF7;
-    --color-green: #66E9AE;
     --color-greenDarker: #85ff7f;
 }
 
 *::selection {
-    background: var(--color-green);
-    color: #fff;
+    background: black;
+    color: white;
 }
 
-/*fontawesome icon*/
-i{
-    font-size: 2rem;
-}
 
-/*1. PRE LOADER*/
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #fff;
-    z-index: 999999;
-}
-
-.canvas {
-    position: absolute;
-    margin: auto;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
-/*2. BODY FONT*/
-body {
-    font-family: "Montserrat", sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.5;
-    color: #98a8b4;
-    background-color: #f2f3f8;
-}
-
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-    margin-bottom: 0.5rem;
-    font-family: "Noto Sans", sans-serif;
-    line-height: 1.1;
-    color: #2c304d;
-}
-
-/*3. HEADER*/
 #nav {
     transition: all 0.4s ease 0s;
 }
@@ -80,17 +35,17 @@ header .logo {
 
 header .logo i {
     padding-right: .5rem;
-    color: var(--color-green);
+    color: #e02c2b;
 }
 
 header .navbar a {
     font-size: 1.5rem;
-    margin-right: 2rem;
+    margin-left: 2rem;
     color: #666;
 }
 
 header .navbar a:hover {
-    color: var(--color-green);
+    color: #e02c2b;
 }
 
 .badge {
@@ -106,9 +61,9 @@ header .navbar a:hover {
     background-color: #c67605;
 }
 
-#lblCartCount, #NotiCount {
+#lblCartCount {
     font-size: 12px;
-    background: #ff0000;
+    background: #e02c2b;
     color: #fff;
     padding: 0 5px;
     vertical-align: top;
@@ -125,65 +80,6 @@ header .navbar a:hover {
     display: none;
 }
 
-/*profile toggle menu*/
-.profile {
-    position: relative;
-    height: 3rem;
-    width: 3rem;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.profile img {
-
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.menu {
-    position: absolute;
-    top: 20px;
-    right: -80px;
-    padding: 20px;
-    background: #fff;
-    width: 200px;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-    border-radius: 15px;
-    transition: 0.5s;
-    visibility: hidden;
-    opacity: 0;
-}
-
-.menu.active {
-    top: 40px;
-    visibility: visible;
-    opacity: 1;
-}
-.menu ul{
-    padding-left: 0!important;
-}
-.menu ul li {
-    list-style: none;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-
-.menu ul li:last-child{
-    margin-bottom: 0px!important;
-}
-
-.menu ul li a {
-    display: flex;
-    margin-left: 10px!important;
-}
-
-.menu ul li a i{
-    margin-right: 10px;
-    font-size: 2rem;
-}
-
 /*4.TO TOP BUTTON*/
 #scroll-top {
     position: fixed;
@@ -191,7 +87,7 @@ header .navbar a:hover {
     right: 2rem;
     padding: .5rem 1.5rem;
     font-size: 4rem;
-    background: var(--color-green);
+    background: #e02c2b;
     color: #fff;
     border-radius: .5rem;
     transition: 1s linear;
@@ -202,7 +98,6 @@ header .navbar a:hover {
     top: calc(100% - 12rem)
 }
 
-
 /* Menu duoi 768px */
 @media (max-width: 768px) {
 
@@ -212,7 +107,7 @@ header .navbar a:hover {
 
     header .navbar {
         position: absolute;
-        display: block;
+        display: inline;
         top: 100%;
         left: 0;
         right: 0;
@@ -225,68 +120,16 @@ header .navbar a:hover {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     }
 
-    header .navbar a, header .navbar div {
+    .header .logo{
+        margin-top: 20px;
+    }
+
+    header .navbar a {
         margin: 1.5rem;
         padding: 1.5rem;
         display: block;
         border: .2rem solid rgba(0, 0, 0, .1);
-        border-left: .5rem solid var(--color-green);
+        border-left: .5rem solid #e02c2b;
         background: #fff;
     }
-}
-
-/*footer*/
-/*---------------------------------------Footer----------------------------------------*/
-footer {
-    width: 100%;
-    /*margin-top: 90px;*/
-    background-color: black;
-    color: white;
-}
-
-footer h3 {
-    padding-bottom: 20px;
-    color: white !important;
-}
-
-footer .row {
-    padding: 50px 30px 0;
-}
-
-footer p {
-    margin-bottom: 20px;
-}
-
-.information {
-    padding-left: 30px;
-}
-
-.information a {
-    color: white;
-    text-decoration: none;
-}
-
-.information a:hover {
-    color: green;
-    transition: 0.5s;
-}
-
-.copyright {
-    margin-top: 30px;
-    padding: 0;
-    text-align: center;
-    bottom: 0;
-}
-
-.copyright i {
-    color: white;
-}
-
-.share {
-    text-align: center;
-}
-
-.share i {
-    padding-right: 10px;
-    padding-bottom: 15px;
 }
