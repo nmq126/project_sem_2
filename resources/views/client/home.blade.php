@@ -29,7 +29,10 @@
     <link rel="stylesheet" href="Hung/css/responsive.css">
     <link rel="stylesheet" href="user/css/home.css">
     <link rel="stylesheet" href="user/css/main.css">
-    {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
+{{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
+<!-- firebase stuff -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 </head>
 <body>
 <header id="nav">
@@ -39,10 +42,14 @@
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        @if(Auth::check())
-            <a href="/my-account">
+        <a href="/cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+        </a>
+        @auth
+            <a href="">
                 <i class="fas fa-bell"></i>
-                <span class='badge badge-warning' id='NotiCount'>12</span>
+                <span class='badge badge-warning' id='NotiCount'>{{ $numberAlert }}</span>
             </a>
             <div>
                 <div class="profile">
@@ -66,16 +73,10 @@
                 </div>
             </div>
 
-        @else
+        @endauth
+        @guest
             <a href="/login"> Đăng nhập</a>
-        @endif
-        <a href="/products"> Cửa Hàng </a>
-        <a href="/contact-us"> Liên Hệ </a>
-        <a href="/blog"> Blog </a>
-        <a href="/cart">
-            <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
-        </a>
+        @endguest
     </nav>
 </header>
 <!-- header section ends -->
@@ -333,7 +334,7 @@
                 <div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-                            <h4 >THÔNG TIN</h4>
+                            <h4>THÔNG TIN</h4>
                         </div>
                         <div class="footer-content">
                             <ul>
@@ -365,7 +366,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-                            <h4 >LIÊN LẠC VỚI CHÚNG TÔI</h4>
+                            <h4>LIÊN LẠC VỚI CHÚNG TÔI</h4>
                         </div>
                         <div class="footer-contact">
                             <ul>
@@ -375,7 +376,7 @@
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
-                            <h4 >GIỜ MỞ CỬA</h4>
+                            <h4>GIỜ MỞ CỬA</h4>
                         </div>
                         <div class="footer-time">
                             <ul>
@@ -409,6 +410,9 @@
 <script src="/assets/vendors/js/app/app.min.js"></script>
 <!-- custom js file link  -->
 <script src="user/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
+<script src="{{ asset('js/firebase.js') }}"></script>
 
 </body>
 </html>

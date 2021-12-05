@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Notification;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class   AppServiceProvider extends ServiceProvider
@@ -36,5 +38,7 @@ class   AppServiceProvider extends ServiceProvider
             }
             $view->with('totalQuantity', $totalQuantity);
         });
+
+        View::share('numberAlert', Notification::numberAlert());
     }
 }
