@@ -9,9 +9,6 @@
 
 
 /*main part*/
-.checkout-body {
-    display: flex;
-}
 
 .shipping {
     padding: 80px 80px 80px 40px;
@@ -19,7 +16,7 @@
 
 .shipping .information h3 {
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
 /*.shipping .information .authentication-form {*/
@@ -31,7 +28,7 @@
     align-items: flex-start;
     flex-direction: column;
     width: 100%;
-    margin-top: 5rem;
+    margin-top: 4rem;
 }
 
 .input-line{
@@ -42,11 +39,6 @@
     flex-direction: column;
     margin-bottom: 2rem;
     width: 100%;
-}
-
-label{
-    font-size: 1.6rem;
-    margin-bottom: 0.5rem;
 }
 
 input[type=text], textarea, select{
@@ -70,8 +62,9 @@ input[type=text]::placeholder, textarea::placeholder{
     color: #b9b9b9;
 }
 
-.input-line{
-    width: 75%;
+.input-line label{
+    font-size: 17px;
+    margin-bottom: 0.5rem;
 }
 
 .order-title {
@@ -80,7 +73,7 @@ input[type=text]::placeholder, textarea::placeholder{
 
 .order-title h3 {
     flex-grow: 1;
-    padding-top: 1rem;
+    padding-top: 2rem;
 }
 
 .order-title .add-more {
@@ -110,10 +103,14 @@ input[type=text]::placeholder, textarea::placeholder{
     color: black;
 }
 
+.input-quantity{
+    margin-left: 40px;
+    margin-top: 27px;
+}
+
 .quantity-checkout {
     width: 7rem;
-    height: 3.6rem;
-    padding: 0px 12px 0px 16px;
+    padding: 0px 12px 0px 20px;
     border-radius: 300px;
     font-weight: 500;
     font-size: 1.4rem;
@@ -130,7 +127,7 @@ input[type=text]::placeholder, textarea::placeholder{
 
 
 .cart {
-    padding: 80px 40px 80px 80px;
+    padding: 80px 60px 80px 50px;
     background-color: rgb(246, 246, 246);
 }
 
@@ -154,15 +151,11 @@ input[type=text]::placeholder, textarea::placeholder{
     -webkit-box-align: center;
     text-align: center;
     border-width: 0;
-    background: linear-gradient(252.62deg, #48D6F2 8.92%, #84FC6A 96.59%) !important;
+    background: #e02c2b;
     -webkit-transition: all .5s;
     transition: all .5s;
 }
 
-.place-order-button button:hover {
-    background: linear-gradient(252.62deg, #84FC6A 8.92%, #48D6F2 96.59%) !important;
-
-}
 
 .place-order hr, .order hr {
     margin: 16px 0;
@@ -173,11 +166,15 @@ input[type=text]::placeholder, textarea::placeholder{
 
 .place-order .promo-text {
     padding: 8px 12px;
-    color: rgb(4, 136, 72);
+    color: #e02c2b;
     background-color: rgb(230, 242, 237);
     font-size: 1.2rem;
     justify-content: center;
     display: flex;
+}
+
+.submit-text{
+    font-weight: bold;
 }
 
 .place-order ul {
@@ -194,12 +191,17 @@ input[type=text]::placeholder, textarea::placeholder{
     padding-top: 1rem;
 }
 
-.total-price {
-    font-size: 2rem;
+.total p{
+    padding-top: 6px;
+    font-size: 25px;
     font-weight: 600;
 }
 
-.promo-price {
-    color: rgb(5, 148, 79);
+.total-price {
+    font-weight: 600;
+    font-size: 25px;
 }
 
+.promo-price {
+    color: #e02c2b;
+}
