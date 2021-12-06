@@ -13,7 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
-    static $default_thumbnail_url = 'user/img/default-thumbnail.jpg';
+    static $default_thumbnail_url = '/user/img/default-thumbnail.jpg';
 
     /**
      * The attributes that are mass assignable.

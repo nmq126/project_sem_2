@@ -7,9 +7,9 @@
 <h2 class="page-header-title">Cập nhật nguyên liệu</h2>
 <div>
 <ul class="breadcrumb">
-<li class="breadcrumb-item"><a href=""><i class="ti ti-home"></i></a></li>
-<li class="breadcrumb-item"><a href="#">Components</a></li>
-<li class="breadcrumb-item active">Forms Basic</li>
+
+<li class="breadcrumb-item"><a href="/admin/product/list/ingredient">Quay lại</a></li>
+
 </ul>
 </div>
 </div>

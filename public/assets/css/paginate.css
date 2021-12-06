@@ -1,0 +1,41 @@
+.pagination {
+    justify-content: center;
+    font-size: 15px;
+}
+
+.pagination a {
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+}
+
+.pagination li {
+    display: inline;
+    margin-left: 30px;
+    list-style: none;
+    text-align: center;
+    padding: 8px;
+}
+
+.pagination li {
+    border-radius: 50%;
+    transition: all 0.5s ease;
+    opacity: 0.9;
+}
+
+.pagination li.active a {
+    color: red;
+}
+
+th.status {
+    min-width: 180px;
+}
+
+th.name,
+th.address,
+th.phone,
+th.money,
+th.checkout,
+th.date {
+    width: 100px;
+}

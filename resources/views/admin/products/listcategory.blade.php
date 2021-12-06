@@ -43,6 +43,7 @@
     <th style="width: 150px"> ID</th>
     <th style="width: 180px"> Tên</th>
         <th>Mô tả</th>
+        <th>Ảnh</th>
     <th style="width: 100px">Hành động</th>
 
 
@@ -54,7 +55,7 @@
         <td>{{$i->id}}</td>
         <td>{{$i->name}}</td>
         <td>{!!$i->description!!}</td>
-
+        <td><img width="50px" height="50px" src="{{$i->thumbnail}}" alt=""></td>
         <td class="td-actions">
         <a href="/admin/product/update/category/{{$i->id}}"><i  class="la la-edit edit"></i></a>
         <a ><i  class="la la-close delete test_delete"></i></a>

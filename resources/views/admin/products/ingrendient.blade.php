@@ -7,9 +7,7 @@
         <h2 class="page-header-title">Thêm mới nguyên liệu</h2>
         <div>
         <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href=""><i class="ti ti-home"></i></a></li>
-        <li class="breadcrumb-item"><a href="#">Components</a></li>
-        <li class="breadcrumb-item active">Forms Basic</li>
+   
         </ul>
         </div>
         </div>

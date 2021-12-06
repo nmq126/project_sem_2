@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Exports\OrderExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Enums\OrderStatus;
 use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\Product;
+use BenSampo\Enum\Enum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class OrderAdminController extends Controller
 {
@@ -16,100 +23,159 @@ class OrderAdminController extends Controller
 
     public function fetchOrders()
     {
-        $orders = DB::table('orders')->get();
-        $ordersSuccess = $orders->where('status', '=', 2);
+        $orders = Order::paginate(10);
+        $ordersSuccess = $orders->where('checkout', '=', 1);
         $total = 0;
         foreach ($ordersSuccess as $order) {
             $total += $order->total_price;
         }
-        return view('admin.orders.orders', compact('orders', 'total'));
+        $products = Product::all();
+
+        return view('admin.orders.orders', ["orders"=>$orders,"total"=>$total,"products"=>$products]);
 
 
     }
-    public function fetchOrdersJson()
+    public function Change(Request $request)
     {
-        $orders = DB::table('orders')->get();
-        $ordersSuccess = $orders->where('status', '=', 2);
-        $total = 0;
-        foreach ($ordersSuccess as $order) {
-            $total += $order->total_price;
-        }
-        return $orders;
+        $id = $request->id;
+        $order = Order::find($id);
 
+
+$status= $request->status;
+
+        $order->status = $status;
+        $order->update();
+        return redirect('/admin/orders')->with("msg", "Thay đổi thành công");
 
     }
-    public function JsonSearch(Request $request){
-        $key = $request->keyword;
-        $query = DB::table('orders')->where('id','=', $key)
-            ->orWhere('ship_name','like', '%' . $key . '%')
-            ->orWhere('ship_phone','like', '%' . $key . '%')
-            ->orWhere('ship_address','like', '%' . $key . '%')
-            ->orWhere('total_price','like', '%' . $key . '%')->get();
-        return $query;
+public function UpdateView(Request $request){
+        $order = Order::find($request->id);
+        return view("admin.orders.order_update",["order"=>$order]);
+}
+    public function UpdateOrder(Request $request){
+        $order = Order::find($request->id);
+        $order->ship_name = $request->ship_name;
+        $order->ship_address = $request->ship_address;
+        $order->ship_phone= $request->ship_phone;
+        $order->checkout = $request->checkout;
+        $order->status = $request->status;
+        $order->ship_note =$request->ship_note;
+        $order->update();
+        return redirect('/admin/orders')->with("msg", "Thay đổi thành công");
     }
     public function Destroy(Request $request){
     $ids =    $request->id;
-
+$status = OrderStatus::Cancel;
         for ($i = 0; $i <  sizeof($ids) ; $i++) {
-            DB::table('orders')->where('id', $ids[$i])->delete();
-
-
+            DB::table('orders')->where([ ['id','=',$ids[$i]]])->update(['status'=>$status]);
         }
 
 return "Xóa Tất cả thành công ";
 }
-public function DeleteOrder(Request $request){
-    $id = $request->id;
-    DB::table('orders')->where('id', $id)->delete();
-
-    return redirect('/admin/orders')->with("msg", "Xóa thành công");
-}
-    public function search(Request $request)
-    {
-      $status=$request->status;
-
-        $startDate = $request->start_date;
-
-        $endDate = $request->end_date;
-
-        if ($status == OrderStatus::All) {
-            if ($startDate != '' && $endDate != '') {
-                $orders = DB::table('orders')->select()
-                    ->where('created_at', '>=', $startDate)
-                    ->where('created_at', '<=', $endDate)->get();
-            } elseif ($startDate != '') {
-                $orders = DB::table('orders')->select()
-                    ->where('created_at', '<=', $startDate)->get();
-            } elseif ($endDate != '') {
-                $orders = DB::table('orders')->select()
-                    ->where('created_at', '<=', $endDate)->get();
-            } else {
-                $orders = Order::all();
-            }
-        } else {
-            if ($startDate != '' && $endDate != '') {
-                $orders = DB::table('orders')->select()
-                    ->where('created_at', '>=', $startDate)
-                    ->where('created_at', '<=', $endDate)
-                    ->where('status', '=', $status)->get();
-            } elseif ($startDate != '') {
-                $orders = DB::table('orders')->select()
-                    ->where('created_at', '<=', $startDate)
-                    ->where('status', '=', $status)->get();
-            } elseif ($endDate != '') {
-                $orders = DB::table('orders')->select()
-                    ->where('created_at', '<=', $endDate)
-                    ->where('status', '=', $status)->get();
-            } else {
-                $orders = Order::where('status', '=', $status)->get();
-            }
+    public function Done(Request $request){
+        $ids =    $request->id;
+        $status = OrderStatus::Done;
+        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+            DB::table('orders')->where([ ['id','=',$ids[$i]]])->update(['status'=>$status]);
         }
 
-        $ordersSuccess = $orders->where('status', '=', 2);
+        return "Xóa Tất cả thành công ";
+    }
+    public function Wait(Request $request){
+        $ids =    $request->id;
+        $status = OrderStatus::Waiting;
+        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+            DB::table('orders')->where([ ['id','=',$ids[$i]]])->update(['status'=>$status]);
+        }
+
+        return "Xóa Tất cả thành công ";
+    }
+    public function waircheckout(Request $request){
+        $ids =    $request->id;
+        $status = OrderStatus::WaitForCheckout;
+        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+            DB::table('orders')->where([ ['id','=',$ids[$i]]])->update(['status'=>$status]);
+        }
+
+        return "Xóa Tất cả thành công ";
+    }
+    public function process(Request $request){
+        $ids =    $request->id;
+        $status = OrderStatus::Processing;
+        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+            DB::table('orders')->where([ ['id','=',$ids[$i]]])->update(['status'=>$status]);
+        }
+
+        return "Xóa Tất cả thành công ";
+    }
+    public function deliver(Request $request){
+        $ids =    $request->id;
+        $status = OrderStatus::Delivering;
+        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+            DB::table('orders')->where([ ['id','=',$ids[$i]]])->update(['status'=>$status]);
+        }
+
+        return "Xóa Tất cả thành công ";
+    }
+    public function checkall(Request $request){
+        $ids =    $request->id;
+        $checkout = 1;
+        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+            DB::table('orders')->where([ ['id','=',$ids[$i]]])->update(['checkout'=>$checkout]);
+        }
+
+        return "Xóa Tất cả thành công ";
+    }
+    public function checkallnon(Request $request){
+        $ids =    $request->id;
+        $checkout = 0;
+        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+            DB::table('orders')->where([ ['id','=',$ids[$i]]])->update(['checkout'=>$checkout]);
+        }
+
+        return "Xóa Tất cả thành công ";
+    }
+    public function Deleteall(Request $request){
+        $ids =    $request->id;
+
+        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+            Order::find($ids[$i])->delete();
+        }
+
+        return "Xóa Tất cả thành công ";
+    }
+public function DeleteOrder(Request $request){
+    $id = $request->id;
+    Order::find($id)->delete();
+    return redirect('/admin/orders')->with("msg", "Xóa thành công");
+}
+
+
+    public function search(Request $request)
+    {
+
+    $orders = Order::query()->checkout($request)
+        ->search($request)
+        ->address($request)
+        ->phone($request)
+        ->startDate($request)
+        ->endDate($request)
+        ->product($request)
+        ->trash($request)
+        ->status($request)->paginate(10);
+
+        $ordersSuccess = $orders->where('checkout', '=', 1);
         $total = 0;
         foreach ($ordersSuccess as $order) {
             $total += $order->total_price;
         }
-        return  $orders ;
+        $products = Product::all();
+        return view('admin.orders.orders', ["orders"=>$orders,"total"=>$total,"products"=>$products]);
+
+
+    }
+    public function export()
+    {
+        return Excel::download(new OrderExport, 'orders.xlsx');
     }
 }

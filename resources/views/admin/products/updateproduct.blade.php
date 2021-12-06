@@ -1,14 +1,14 @@
 @extends('admin.layout.master')
-@section('title', 'Update Category | Admin')
+@section('title', 'Update Product | Admin')
 @section('breadcrumb')
 <div class="row">
 <div class="page-header">
 <div class="d-flex align-items-center">
-<h2 class="page-header-title">Cập nhật lại món</h2>
+<h2 class="page-header-title">Cập nhật Sản phẩm</h2>
 <div>
 <ul class="breadcrumb">
 
-<li class="breadcrumb-item"><a href="/admin/product/list/category">Quay lại</a></li>
+<li class="breadcrumb-item"><a href="/admin/product/list">Quay lại</a></li>
 
 </ul>
 </div>
@@ -30,25 +30,25 @@
 @endif
 
 <div class="widget-header bordered no-actions d-flex align-items-center">
-<h4>Cập nhật món</h4>
+<h4>Cập Sản phẩm </h4>
 
 
 </div>
 
 <div class="widget-body">
-<form class="form-horizontal" action="/admin/product/update/category/{{$category->id}}" name="product-form" method="post">
+<form class="form-horizontal" action="/admin/product/update/{{$product->id}}" name="product-form" method="post">
 @csrf
 <div class="form-group row d-flex align-items-center mb-5">
 <label class="col-lg-3 form-control-label">Id</label>
 <div class="col-lg-9">
-{{$category->id}}
+{{$product->id}}
 
 </div>
 </div>
 <div class="form-group row d-flex align-items-center mb-5">
 <label class="col-lg-3 form-control-label">Tên</label>
 <div class="col-lg-9">
-<input type="text" value="{{$category->name}}" name="name" class="form-control" placeholder="Enter product name"
+<input type="text" value="{{$product->name}}" name="name" class="form-control" placeholder="Enter product name"
 name="name">
 </div>
 </div>
@@ -65,7 +65,7 @@ name="name">
 <div class="col-lg-9">
 <textarea  type="text" class="form-control" rows="7"
 placeholder="Enter description"
-name="description">{{$category->description}}</textarea>
+name="description">{{$product->description}}</textarea>
 </div>
 </div>
 
