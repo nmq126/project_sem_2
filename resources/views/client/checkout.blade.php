@@ -84,14 +84,14 @@
         </div>
     </div>
 </div>
-@if(Auth::check())
+@auth
     @if(count($shoppingCart) > 0)
         <div role="main" class="checkout-body d-md-flex d-block">
             <div class="shipping col-xl-8 col-md-7" style="padding-top: 50px">
                 <div class="information">
                     <h3>Thông tin vận chuyển</h3>
                     <div>
-                        <form method="post" action="/order" name="checkout-form" id="checkout-form">
+                        <form method="post" action="/checkout" name="checkout-form" id="checkout-form">
                             @csrf
                             <div class="input-line">
                                 <label for="shipName" class=" ">Người nhận</label>
@@ -215,13 +215,13 @@
             </div>
         </div>
     @endif
-@endif
-@if(!Auth::check())
+@endauth
+@guest
     <div class="text-center mb-40">
         <h2 style="font-size: 2em">Vui Lòng Đăng Nhập Vào Tài Khoản Của Bạn</h2>
         <a href="/login" class="btn" style="padding-bottom: 40px">Đăng Nhập</a>
     </div>
-@endif
+@endguest
 <div class="footer-area black-bg-2 pt-70">
     <div class="footer-top-area pb-18">
         <div class="container">

@@ -88,7 +88,7 @@ class OrderController extends Controller
         $order->ship_note = $shipNote;
         $order->status = $status;
         $order->checkout = false;
-        $order->user_id = Auth::user()->id;
+        $order->user_id = auth()->id();
 
         //tạo thông tin order detail
         $hasError = false;
@@ -132,7 +132,7 @@ class OrderController extends Controller
         $details = [
             'id' => $order->id,
             'subject' => 'Đặt hàng thành công',
-            'receiver' => 'minhquangngo.98@gmail.com'
+            'receiver' => auth()->user()->email
         ];
         dispatch(new SendMail($details));
 

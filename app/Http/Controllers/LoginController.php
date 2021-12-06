@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,9 @@ class LoginController extends Controller
         if (!strcmp(URL::previous(), 'http://127.0.0.1:8000/login') ){
             Session::put('link', URL::previous());
         }
+        return view('client.login');
     }
+
 
     public function store(Request $request){
         if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])){
@@ -136,7 +139,6 @@ class LoginController extends Controller
 
     public function logout()
     {
-        Session::flush();
         Auth::logout();
         return redirect('home');
     }

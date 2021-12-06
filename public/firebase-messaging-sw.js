@@ -27,9 +27,7 @@ messaging.onBackgroundMessage(function(payload) {
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
         body: payload.notification.body,
-        vibrate: [200, 100, 200, 100, 200, 100, 200],
         icon: 'https://cdn.icon-icons.com/icons2/2248/PNG/512/login_icon_137429.png',
-        tag: 'vibration-sample'
     };
 
     self.registration.showNotification(notificationTitle,

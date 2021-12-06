@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trang chủ</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">
 
 
     <!-- font awesome cdn link  -->
@@ -37,11 +37,17 @@
 <body>
 <header id="nav">
 
-    <a href="/home" class="logo"><i class="fas fa-utensils"></i>VietKitchen</a>
+    <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
+        <a href="/products"> Cửa Hàng</a>
+        <a href="/contact-us"> Liên Hệ </a>
+        <a href="/blog"> Blog </a>
+        @guest
+            <a href="/login"> Đăng nhập</a>
+        @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
             <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
@@ -58,13 +64,13 @@
                 <div class="menu">
                     <ul>
                         <li>
-                            <a href="">
+                            <a href="/my-account">
                                 <i class="fas fa-user"></i>
                                 Người dùng
                             </a>
                         </li>
                         <li>
-                            <a href="/logout">
+                            <a href="/my-account/logout">
                                 <i class="fas fa-sign-out-alt"></i>
                                 Đăng xuất
                             </a>
@@ -74,9 +80,7 @@
             </div>
 
         @endauth
-        @guest
-            <a href="/login"> Đăng nhập</a>
-        @endguest
+
     </nav>
 </header>
 <!-- header section ends -->
@@ -243,12 +247,12 @@
     <div class="containerG">
         <div class="boxG a">
             <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168695/gallery/lucas-hoang-Yb2Sb9bdgPk-unsplash_1_skkh0u.jpg"
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758438/home_page_gallery/lucas-hoang-Yb2Sb9bdgPk-unsplash_1_1_fg2ddy.jpg"
                 alt="">
         </div>
         <div class="boxG b">
             <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168775/gallery/ben-lei-ubBWnvrsARk-unsplash_xw3eri.jpg"
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/ben-lei-ubBWnvrsARk-unsplash_e5xqkd.jpg"
                 alt="">
         </div>
         <div class="boxG c">
@@ -258,12 +262,12 @@
         </div>
         <div class="boxG d">
             <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169069/gallery/nikolay-smeh-gPpbFaEkl00-unsplash_gb5oe3.jpg"
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/hong-anh-duong-EK_-_nAm-CYM-unsplash_ahpaos.jpg"
                 alt="">
         </div>
         <div class="boxG e">
             <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169145/gallery/sonny-mauricio-yhc4pSbl01A-unsplash_a6qsc4.jpg"
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758595/home_page_gallery/sonny-mauricio-yhc4pSbl01A-unsplash_g2fmhg.jpg"
                 alt="">
 
         </div>
@@ -275,25 +279,25 @@
         </div>
         <div class="boxG g">
             <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168942/gallery/rosalind-chang-P_wPicZYoPI-unsplash_m4vtie.jpg  "
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/lynda-hinton-q_eyFSd2W3M-unsplash_w4xcnb.jpg"
                 alt="">
 
         </div>
         <div class="boxG h">
             <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169405/gallery/markus-winkler-dq03aws4SmY-unsplash_o2atrr.jpg"
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/markus-winkler-dq03aws4SmY-unsplash_dcgyps.jpg"
                 alt="">
 
         </div>
         <div class="boxG i">
             <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169207/gallery/haseeb-jamil-J9lD6FS6_cs-unsplash_axdtau.jpg"
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/haseeb-jamil-J9lD6FS6_cs-unsplash_rlggsj.jpg"
                 alt="">
 
         </div>
         <div class="boxG j">
             <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169025/gallery/andraz-lazic-iy_MT2ifklc-unsplash_tohd1p.jpg"
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/andraz-lazic-iy_MT2ifklc-unsplash_ssuntp.jpg"
                 alt="">
 
         </div>
