@@ -136,6 +136,18 @@ class OrderController extends Controller
         ];
         dispatch(new SendMail($details));
 
+        //gui noti
+        $noti = new Notification();
+        $noti->user_id = auth()->id();
+        $noti->save();
+//        if ($noti->save()){
+//            $number_of_noti = Notification::where('user_id', auth()->id())
+//                ->where('read_at', null)
+//                ->count();
+//            $title = 'Đặt hàng thành công';
+//            $body = 'Đơn hàng #' . $order->id . ' đã được đặt thành công và đang chờ xử lý';
+//            $noti->toSingleDevice(auth()->user()->device_token, $title, $body, $number_of_noti, null);
+//        }
 
         return redirect('/order/' . $order_id);
     }

@@ -36,7 +36,7 @@
                     <ul aria-labelledby="notifications" class="dropdown-menu notification">
                         <li>
                             <div class="notifications-header">
-                                <div class="title" id="NotiCount">Notifications ({{ $numberAlert }})</div>
+                                <div class="title" id="NotiCount">Notifications</div>
                                 <div class="notifications-overlay"></div>
                                 <img src="/assets/img/notifications/01.jpg" alt="..." class="img-fluid">
                             </div>

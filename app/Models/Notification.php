@@ -15,25 +15,20 @@ class Notification extends Model
 
     protected $fillable = ['user_id', 'read_at'];
 
-    public function scopeToSingleDevice($sToken=null, $title=null, $body=null, $icon, $click_action){
+    public function scopeToSingleDevice($token, $title, $body, $number_of_noti, $click_action){
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
 
         $notificationBuilder = new PayloadNotificationBuilder($title);
-        $notificationBuilder->setBody($body)
-            ->setSound('default')
-            ->setBadge($this->where('read_at', null)->count())
-            ->setIcon($icon)
-            ->setClickAction($click_action);
+        $notificationBuilder->setBody($body);
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData(['a_data' => 'my_data']);
+        $dataBuilder->addData(['number_of_noti' => $number_of_noti]);
 
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
         $data = $dataBuilder->build();
 
-        $token = $sToken;
 
         $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
 
@@ -50,19 +45,15 @@ class Notification extends Model
         $downstreamResponse->tokensWithError();
     }
 
-    public function scopeToMultiDevice($query, $model, $title, $body, $icon, $click_action){
+    public function scopeToMultiDevice($query, $model, $title, $body, $number_of_noti, $click_action){
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
 
         $notificationBuilder = new PayloadNotificationBuilder($title);
-        $notificationBuilder->setBody($body)
-            ->setSound('default')
-            ->setBadge($this->where('read_at', null)->count())
-            ->setIcon($icon)
-            ->setClickAction($click_action);
+        $notificationBuilder->setBody($body);
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData(['a_data' => $model->pluck('device_token')->toArray()]);
+        $dataBuilder->addData(['number_of_noti' => $number_of_noti]);
 
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
