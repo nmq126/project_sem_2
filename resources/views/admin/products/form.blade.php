@@ -1,4 +1,7 @@
 @extends('admin.layout.master')
+@section('style')
+<link rel="stylesheet" href="/assets/css/product/product.css">
+        @endsection
 @section('title', 'Thêm sản phẩm | Admin')
 @section('breadcrumb')
     <div class="row">
@@ -7,9 +10,7 @@
                 <h2 class="page-header-title">Thêm sản phẩm</h2>
                 <div>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href=""><i class="ti ti-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="#">Components</a></li>
-                        <li class="breadcrumb-item active">Forms Basic</li>
+
                     </ul>
                 </div>
             </div>
@@ -21,6 +22,11 @@
         <div class="col-12">
             <!-- Form -->
             <div class="widget has-shadow">
+                @if (\Session::has('msg'))
+                <div class="alert alert-success" role="alert">
+                <span>{{\Session::get('msg')}}</span>
+                </div>
+                @endif
                 <div class="widget-header bordered no-actions d-flex align-items-center">
                     <h4>Thêm mới sản phẩm</h4>
                 </div>
@@ -32,6 +38,9 @@
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" placeholder="Nhập tên sản phẩm"
                                        name="name">
+                                       @error('name')
+                                       <div class="text-danger">* {{ $message }}</div>
+                                       @enderror
                             </div>
                         </div>
 
@@ -40,14 +49,32 @@
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" placeholder="Nhập giá sản phẩm"
                                        name="price">
+                                       @error('price')
+<div class="text-danger">* {{ $message }}</div>
+@enderror
                             </div>
                         </div>
 
                         <div class="form-group row d-flex align-items-center mb-5">
                             <label class="col-lg-3 form-control-label">Giảm giá</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" placeholder="Nhập % giảm giá"
-                                       name="discount">
+                     
+                                       <select name="discount" class="custom-select form-control">
+                                        <option value="0">0%</option>
+                                        <option value="10">10%</option>
+                                        <option value="20">20%</option>
+                                        <option value="30">30%</option>
+                                        <option value="40">40%</option>
+                                        <option value="50">50%</option>
+                                        <option value="60">60%</option>
+                                        <option value="70">70%</option>
+                                        <option value="80">80%</option>
+                                        <option value="90">90%</option>
+                                  
+                                  
+                   
+
+                  </select>
                             </div>
                         </div>
 
@@ -56,6 +83,9 @@
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" placeholder="Mô tả ngắn về sản phẩm"
                                        name="description">
+                                       @error('description')
+                                       <div class="text-danger">* {{ $message }}</div>
+                                       @enderror
                             </div>
                         </div>
 
@@ -63,9 +93,9 @@
                             <label class="col-lg-3 form-control-label">Sản phẩm nổi bật</label>
                             <div class="col-lg-9 select mb-3">
                                 <select name="isFeatured" class="custom-select form-control">
-                                    <option value="" selected disabled>Sản phẩm này có phải sản phẩm nổi bật</option>
-                                    <option value="true">Có</option>
-                                    <option value="false">Không</option>
+                                                      <option value="0">Không</option>
+                                    <option value="1">Có</option>
+              
                                 </select>
                             </div>
                         </div>
@@ -74,25 +104,47 @@
                             <label class="col-lg-3 form-control-label">Trạng thái</label>
                             <div class="col-lg-9 select mb-3">
                                 <select name="status" class="custom-select form-control">
-                                    <option value="" selected disabled>Trạng thái của sản phẩm</option>
+               
                                     <option value="1">Còn hàng</option>
-                                    <option value="false">Hết hàng</option>
+                                    <option value="0">Hết hàng</option>
                                 </select>
                             </div>
                         </div>
-
+                        <div class="form-group row mb-5">
+                            <label class="col-lg-3 form-control-label">Chọn Món</label>
+                            <div class="col-lg-9 select mb-3">
+                                <select name="category_id" class="custom-select form-control">
+                                  
+                           @foreach ($categorys as $category)
+                           <option value="{{$category->id}}" >{{$category->name}}</option>
+                           @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-5">
+                            <label class="col-lg-3 form-control-label">Chọn Nguyên liệu</label>
+                            <div class="col-lg-9 select mb-3">
+                                <select name="ingredient" class="custom-select form-control">
+        
+                           @foreach ($ingredients as $ingredient)
+                           <option value="{{$ingredient->id}}" >{{$ingredient->name}}</option>
+                           @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group row d-flex align-items-center mb-5">
-                            <label class="col-lg-3 form-control-label">Thumbnail</label>
+                            <label  id="thumbnail_upload_widget" class="col-lg-3 form-control-label">Thumbnail <i class="fas fa-plus-circle"></i></label>
+         
                             <div class="col-lg-9">
                                 <div id="preview-img">
-
+                                    @error('thumbnail')
+                                    <div class="text-danger">* {{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <input type="hidden" class="form-control"
                                        placeholder="Enter avatar"
                                        name="thumbnail">
-                                <button class="btn btn-primary"
-                                        type="button" id="thumbnail_upload_widget">Tải lên ảnh thumbnail
-                                </button>
+                     
                             </div>
                         </div>
 
@@ -106,7 +158,7 @@
                         </div>
                         <div class="text-right">
                             <button class="btn btn-gradient-01" type="submit">Tạo mới</button>
-                            <button class="btn btn-shadow" type="reset">Reset</button>
+                       
                         </div>
                     </form>
                 </div>

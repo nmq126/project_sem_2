@@ -1,0 +1,30 @@
+#preview-img {}
+
+#thumbnail_upload_widget {
+    cursor: pointer;
+}
+
+.img-upload {
+    position: relative;
+}
+
+.img-upload img {
+    width: 115px;
+    padding: 2px;
+    border: 2px solid black;
+    height: 200px;
+}
+
+button.cls_btn {
+    position: absolute;
+    background-color: rgb(232, 62, 62);
+    border-radius: 100%;
+    border: 2px solid black;
+    color: black;
+    opacity: 0.5;
+    right: 10px;
+}
+
+button.cls_btn:hover {
+    opacity: 1;
+}

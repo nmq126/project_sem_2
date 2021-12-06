@@ -104,7 +104,7 @@
                     <ul aria-labelledby="user" class="user-size dropdown-menu">
                         <li class="welcome">
                             <a href="#" class="edit-profil"><i class="la la-gear"></i></a>
-                            <img src="{{ Auth::user()->DefaultThumbnail }}" alt="..." class="rounded-circle">
+                            <img src="/{{ Auth::user()->DefaultThumbnail }}" alt="..." class="rounded-circle">
                         </li>
                         <li>
                             <a href="pages-profile.html" class="dropdown-item">

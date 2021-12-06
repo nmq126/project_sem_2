@@ -1,0 +1,55 @@
+.morris-donut-inverse {
+    display: flex;
+}
+
+#donut-example {
+    width: 100%;
+}
+
+.morris-donut-inverse a {
+    width: 50%;
+}
+
+.morris-donut-inverse .donut {
+    margin-top: 25px;
+    text-align: center;
+    height: 100%;
+    width: 50%;
+}
+
+.morris-donut-inverse .donut h3 {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+}
+
+.parameter {
+    display: flex;
+    width: 100%;
+    columns: 3;
+}
+
+.pramater-item {
+    width: 30%;
+    display: flex;
+    margin-right: 50px;
+    height: 150px;
+    border-radius: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.pramater-content {
+    text-align: center;
+}
+
+.pramater-content .title {
+    font-size: 16px;
+}
+
+.number {
+    font-size: 24px;
+    color: #08a6c3;
+}
