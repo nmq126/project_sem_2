@@ -133,9 +133,14 @@ Route::get('/cart', function () {
 
 Route::get('/product_detail/{id}', [ProductClientController::class, 'getProductDetail']);
 
+<<<<<<< HEAD
 Route::get('/products', function () {
     return view('client.products-and-cart.products');
 });
 
 
+=======
+Route::get('/products', function (){
+   return view('client.products-and-cart.products');
+>>>>>>> 3495b7203e5f6248b0ca38e6d2ac19053e1e81e7
 
