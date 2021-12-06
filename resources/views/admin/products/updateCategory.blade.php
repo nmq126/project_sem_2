@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title', 'Update Ingredient | Admin')
+@section('title', 'Update Category | Admin')
 @section('breadcrumb')
 <div class="row">
 <div class="page-header">
@@ -7,9 +7,9 @@
 <h2 class="page-header-title">Cập nhật lại món</h2>
 <div>
 <ul class="breadcrumb">
-<li class="breadcrumb-item"><a href=""><i class="ti ti-home"></i></a></li>
-<li class="breadcrumb-item"><a href="#">Components</a></li>
-<li class="breadcrumb-item active">Forms Basic</li>
+
+<li class="breadcrumb-item"><a href="/admin/product/list/category">Quay lại</a></li>
+
 </ul>
 </div>
 </div>
@@ -36,34 +36,41 @@
 </div>
 
 <div class="widget-body">
-<form class="form-horizontal" action="/admin/product/update/category/{{$ingrendient->id}}" name="product-form" method="post">
+<form class="form-horizontal" action="/admin/product/update/category/{{$category->id}}" name="product-form" method="post">
 @csrf
 <div class="form-group row d-flex align-items-center mb-5">
 <label class="col-lg-3 form-control-label">Id</label>
 <div class="col-lg-9">
-{{$ingrendient->id}}
+{{$category->id}}
 
 </div>
 </div>
 <div class="form-group row d-flex align-items-center mb-5">
 <label class="col-lg-3 form-control-label">Tên</label>
 <div class="col-lg-9">
-<input type="text" value="{{$ingrendient->name}}" name="name" class="form-control" placeholder="Enter product name"
+<input type="text" value="{{$category->name}}" name="name" class="form-control" placeholder="Enter product name"
 name="name">
 </div>
 </div>
+<div class="form-group row d-flex align-items-center mb-5">
+    <label class="col-lg-3 form-control-label">Links ảnh</label>
+    <div class="col-lg-9">
+    <input type="text" value="{{$category->thumbnail}}" name="image" class="form-control" placeholder="Enter product image url"
+    name="name">
+    </div>
+    </div>
 
 <div class="form-group row d-flex align-items-center mb-5">
 <label class="col-lg-3 form-control-label">Mô tả</label>
 <div class="col-lg-9">
 <textarea  type="text" class="form-control" rows="7"
 placeholder="Enter description"
-name="description">{{$ingrendient->description}}</textarea>
+name="description">{{$category->description}}</textarea>
 </div>
 </div>
 
 <div class="text-right">
-<button class="btn btn-gradient-01" type="submit">Thay đổi</button>
+<button class="btn btn-gradient-01" type="submit">Gửi</button>
 
 </div>
 </form>

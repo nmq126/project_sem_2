@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trang chủ</title>
+    <!-- Favicon -->
     <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -43,7 +44,7 @@
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        <a href="/cart/show">
+        <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
             <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
         </a>
@@ -259,7 +260,7 @@
 
 <!-- order section starts  -->
 
-<section class="" id="">
+<section class="blog" id="">
 
     <h1 class="heading"><span>Food</span> blog </h1>
 
@@ -308,19 +309,52 @@
 
 <!-- footer section  -->
 
-<section class="footer">
-
-    <div class="share">
-        <a href="#" class="btn">facebook</a>
-        <a href="#" class="btn">twitter</a>
-        <a href="#" class="btn">instagram</a>
-        <a href="#" class="btn">pinterest</a>
-        <a href="#" class="btn">linkedin</a>
+<footer class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-6">
+            <h3><strong>Project Sem 2</strong></h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.</p>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 information">
+            <h3><strong>INFORMATION</strong></h3>
+            <a href="/about-us.php"><p>About Us</p></a>
+            <a href="/contact-us.php"><p>Contact Us</p></a>
+            <a href=""><p>Privacy Policy</p></a>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 mt-md-0 mt-5 address">
+            <h3><strong>GET IN TOUCH</strong></h3>
+            <p>Address: 123 Main Your address goes here.</p>
+            <p>Telephone Enquiry: (012) 800 456 789-987</p>
+            <p>Email: Info@example.com</p>
+        </div>
+        <div class="col-lg-3 col-md-4 col-6 mt-lg-0 mt-5 share">
+            <h3><strong>FOLLOW US</strong></h3>
+            <i class="fab fa-facebook fa-2x"></i>
+            <i class="fab fa-twitter fa-2x"></i>
+            <i class="fab fa-youtube fa-2x"></i>
+            <i class="fab fa-instagram fa-2x"></i>
+        </div>
+        <div class="col-12 copyright">
+            <h3>Copyright © 2021 Project Sem 2</h3>
+        </div>
     </div>
+</footer>
 
-    <h1 class="credit"> created by <span> mr. web designer </span> | no rights reserved! </h1>
+{{--<section class="footer">--}}
 
-</section>
+{{--    <div class="share">--}}
+{{--        <a href="#" class="btn">facebook</a>--}}
+{{--        <a href="#" class="btn">twitter</a>--}}
+{{--        <a href="#" class="btn">instagram</a>--}}
+{{--        <a href="#" class="btn">pinterest</a>--}}
+{{--        <a href="#" class="btn">linkedin</a>--}}
+{{--    </div>--}}
+
+{{--    <h1 class="credit"> created by <span> mr. web designer </span> | no rights reserved! </h1>--}}
+
+{{--</section>--}}
 
 <!-- scroll top button  -->
 <a href="#home" class="fas fa-angle-up" id="scroll-top"></a>

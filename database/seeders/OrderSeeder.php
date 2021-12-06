@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+
 class OrderSeeder extends Seeder
 {
     /**
@@ -14,63 +15,275 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
+        $faker = \Faker\Factory::create();
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         DB::table('orders')->truncate();
         DB::table('orders')->insert([
-                [
-                    'id' => '1',
-                    'ship_name' => 'Quoc Hung',
-                    'ship_phone' => '0123456789',
-                    'ship_address' => 'Xuan Khanh',
-                    'ship_note' => '9h ngay 20/12/2021',
-                    'checkout'=>1,
-                    'total_price' => 5,
-                    'status' => 2,
-                ],
+
+
+
+
 
                 [
-                    'id' => '2',
-                    'ship_name' => 'Trinh Huy',
-                    'ship_phone' => '0125436719',
-                    'ship_address' => 'Ha Noi',
-                    'ship_note' => '12h ngay 15/12/2021',
-                    'total_price' => 5,
-                    'checkout'=>1,
-                    'status' => 2,
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2018-06-14 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-01-17 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-09-11 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-03-13 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-01-23 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-01-01 00:00:00",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-07-18 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-06-06 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-01-23 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-04-15 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-09-25 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-02-12 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-06-14 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-01-08 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-04-30 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-05-01 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2019-05-28 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2020-03-24 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2020-01-14 00:00:00.000000",
+
+                ],      [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2020-06-07 00:00:00.000000",
+
+                ],[
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2021-12-04 00:00:00.000000",
+
+                ],
+                [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2021-11-15 00:00:00.000000",
+
+                ],
+                [
+
+                    'ship_name' => $faker->name,
+                    'ship_phone' => $faker->phoneNumber,
+                    'ship_address' => $faker->address,
+                    'ship_note' => $faker->paragraph,
+                    'total_price' => $faker->numberBetween(100000,5000000),
+                    'checkout'=>$faker->numberBetween(0,1),
+                    'status' => $faker->numberBetween(0,4),
+                    'created_at'=>"2021-10-12 00:00:00.000000",
+
                 ],
 
-                [
-                    'id' => '3',
-                    'ship_name' => 'Minh Quang',
-                    'ship_phone' => '4353682461',
-                    'ship_address' => 'Ha Noi',
-                    'ship_note' => '9h ngay 20/12/2021',
-                    'total_price' => 4,
-                    'checkout'=>1,
-                    'status' => 1,
-                ],
 
-                [
-                    'id' => '4',
-                    'ship_name' => 'Nhat Huy',
-                    'ship_phone' => '0125436719',
-                    'ship_address' => 'Ha Noi',
-                    'ship_note' => '9h ngay 20/12/2021',
-                    'total_price' => 5,
-                    'checkout'=>1,
-                    'status' => 1,
-                ],
 
-                [
-                    'id' => '5',
-                    'ship_name' => 'Bui Ai',
-                    'ship_phone' => '043252141',
-                    'ship_address' => 'Ha Noi',
-                    'ship_note' => '9h ngay 11/12/2021',
-                    'total_price' => 6,
-                    'checkout'=>1,
-                    'status' => 0,
-                ]
+
             ]
         );
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');

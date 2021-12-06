@@ -189,7 +189,7 @@ class OrderController extends Controller
 
 
  ### Transaction
-    $invoice = $order->id + 500;
+    $invoice = $order->id + 600;
     $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)

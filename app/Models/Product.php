@@ -10,6 +10,85 @@ class Product extends Model
 {
     use HasFactory,SoftDeletes;
 
+
+
+    public function scopeStatus($query, $request)
+    {
+        if ($request->has("status")) {
+            if ($request->status != null) {
+
+                    $query->where('status', '=', $request->status);
+                }
+            }
+
+        return $query;
+    }
+    public function scopeDiscount($query,$request)
+    {
+        if ($request->has("discount")) {
+            if ($request->discount != null) {
+
+                $query->where('discount', '>=', $request->discount)->where('discount','<', $request->discount + 10);
+            }
+        }
+
+        return $query;
+    }
+    public function scopeIsFeatured($query,$request)
+    {
+        if ($request->has("isFeatured")) {
+            if ($request->isFeatured != null) {
+
+                $query->where('isFeatured', '=', $request->isFeatured);
+            }
+        }
+
+        return $query;
+    }
+    public function scopeCategoryId($query,$request)
+    {
+        if ($request->has("category")) {
+            if ($request->category != null) {
+
+                $query->where('category_id', '=', $request->category);
+            }
+        }
+
+        return $query;
+    }
+    public function scopeName($query,$request)
+    {
+        if ($request->has("name")) {
+            if ($request->name != null) {
+
+                $query->where('name', 'like', $request->name);
+            }
+        }
+
+        return $query;
+    }
+    public function scopeMinprice($query,$request)
+    {
+        if ($request->has("min")) {
+            if ($request->min != null) {
+
+                $query->where('price', '>', $request->min);
+            }
+        }
+
+        return $query;
+    }
+    public function scopeMaxprice($query,$request)
+    {
+        if ($request->has("max")) {
+            if ($request->max != null) {
+
+                $query->where('price', '<', $request->max);
+            }
+        }
+
+        return $query;
+    }
     public function category(){
         return $this->belongsTo(Category::class, "category_id", "id");
 

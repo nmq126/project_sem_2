@@ -3,6 +3,15 @@
 @extends('admin.layout.master')
 @section('title', 'Order Details | Admin')
 @section('style')
+<style>
+    .mt-0{
+
+    }
+    .mt-0 span{
+   margin-left: 5px
+        
+    }
+</style>
     <link rel="stylesheet" href="/assets/css/datatables/datatables.min.css">
 @endsection
 @section('breadcrumb')
@@ -28,41 +37,74 @@
                 <div class="widget-body">
                     <div class="table-responsive">
                         <h3 class="pb-2 font-weight-bold">Order ID: {{$orders->id}}</h3>
-                        <p><strong>Created At:</strong> {{$orders->created_at}}</p>
-                        <p><strong>Customer Name:</strong> {{$orders->ship_name}}</p>
-                        <p><strong>Address:</strong> {{$orders->ship_address}}</p>
-                        <div class="d-flex mt-0">
-                            <p class="pr-2"><strong>Status: </strong></p>
-                            <div id="show-status">
-                                @if($orders->status == 1)
-                                    <span style="width:100px;"><span class="badge-text badge-text-small info">Waiting</span></span>
-                                @endif
-                                @if($orders->status == 2)
-                                    <span style="width:100px;"><span
-                                            class="badge-text badge-text-small success">Success</span></span>
-                                @endif
-                                @if($orders->status == 0)
-                                    <span style="width:100px;"><span
-                                            class="badge-text badge-text-small danger">Failed</span></span>@endif
-                            </div>
-                            <select class="form-control-sm w-auto ml-2" id="status">
-                                <option @if($orders -> status == 0)
-                                        selected="selected"
-                                    @endif>Failed
-                                </option>
-                                <option @if($orders -> status == 2)
-                                        selected="selected"
-                                    @endif>Success
-                                </option>
-                                <option @if($orders -> status == 1)
-                                        selected="selected"
-                                    @endif>Waiting
-                                </option>
-                            </select>
-                            <button class="btn btn-dark btn-sm ml-2 align-items-center pb-1" style="height: 27px" id="update">Change Status</button>
-                        </div>
-                        <p><strong>Note:</strong> {{$orders->ship_note}}</p>
-                        <h3 class="font-weight-bold mt-2 text-center">Cart: </h3>
+             <div class="container">
+                 <div class="content-left">
+                    <p><strong>Created At:</strong> {{$orders->created_at}}</p>
+                    <p><strong>Update At:</strong> {{$orders->updated_at}}</p>
+                    <p><strong>Delete At:</strong> {{$orders->deleted_at}}</p>
+                    <div class="d-flex mt-0">
+                   
+                        <p><strong>Status:</strong> </p>
+                        @if($orders->status == 1)
+                
+                
+                                <span>Đợi </span>
+        
+               
+                    @endif
+                    @if($orders->status == 0)
+            
+              
+      
+
+                            <span>Chờ thanh toán</span>
+                  
+   
+        
+                @endif
+                    @if($orders->status == 2)
+          
+  
+               
+                            <span>Đang xử lý</span>
+        
+
+                    </span>
+         
+                @endif
+                @if($orders->status == 3)
+
+        
+                        <span>Giao hàng</span>
+            
+
+            @endif
+                    @if($orders->status == 4)
+    
+                             
+                                    <span>Hoàn thành</span>
+                            
+
+     
+                    @endif
+                    @if($orders->status == -2)
+
+                    
+                                <span>Đã Hủy</span>
+                      
+                    @endif
+
+                    </div>
+                 
+         
+                 </div>
+                 <div class="content-right">
+                    <p><strong>Customer Name:</strong> {{$orders->ship_name}}</p>
+                    <p><strong>Phone:</strong> {{$orders->ship_phone}}</p>
+                    <p><strong>Address:</strong> {{$orders->ship_address}}</p>
+                    <p><strong>Note:</strong> {{$orders->ship_note}}</p>
+                 </div>
+             </div>
                         <table id="sorting-table" class="table mb-0">
                             <thead>
                             <tr class="text-center">
@@ -74,26 +116,26 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($orders -> orderDetails as $orderDetail)
+                            @foreach($orders-> orderDetails as $orderDetail)
                                 <tr class="text-center">
                                     <td>
-                                        <img width="100px" height="100px" src="{{$orderDetail-> product -> thumbnail}}"
+                                        <img width="100px" height="100px" src="{{$orderDetail->product->thumbnail}}"
                                              alt="">
                                     </td>
-                                    <td>{{$orderDetail-> product -> name}}</td>
-                                    <td>${{$orderDetail->unit_price}}</td>
+                                    <td>{{$orderDetail->product->name}}</td>
+                                    <td>{{$orderDetail->unit_price}}đ</td>
                                     <td>{{$orderDetail->quantity}}</td>
-                                    <td>${{$orderDetail->unit_price * $orderDetail->quantity}}</td>
+                                    <td>{{$orderDetail->unit_price * $orderDetail->quantity}}đ</td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                         <hr>
                         <h3 class="font-weight-bold text-right mr-5 mt-2">
-                            Total: ${{$totalPrice}}</h3>
+                           Tổng: {{$totalPrice}} đ</h3>
                     </div>
                     <div class="text-right mt-5">
-                        <a href="/admin/orders"><button class="btn btn-primary">Back</button></a>
+                        <a href="/admin/orders"><button class="btn btn-primary">Quay lại</button></a>
                     </div>
                 </div>
             </div>

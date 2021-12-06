@@ -7,9 +7,9 @@
 <h2 class="page-header-title">Thêm món ăn</h2>
 <div>
 <ul class="breadcrumb">
-<li class="breadcrumb-item"><a href=""><i class="ti ti-home"></i></a></li>
-<li class="breadcrumb-item"><a href="#">Components</a></li>
-<li class="breadcrumb-item active">Forms Basic</li>
+
+
+
 </ul>
 </div>
 </div>
@@ -45,7 +45,13 @@
 name="name">
 </div>
 </div>
-
+<div class="form-group row d-flex align-items-center mb-5">
+    <label class="col-lg-3 form-control-label">Ảnh</label>
+    <div class="col-lg-9">
+    <input type="text" name="image" class="form-control" placeholder="Nhập tên URL "
+    name="name">
+    </div>
+    </div>
 
 <div class="form-group row d-flex align-items-center mb-5">
 <label class="col-lg-3 form-control-label">Mô tả</label>
@@ -58,7 +64,7 @@ name="description"></textarea>
 
 <div class="text-right">
 <button class="btn btn-gradient-01" type="submit">Thêm mới</button>
-<button class="btn btn-shadow" type="reset">Lại</button>
+
 </div>
 </form>
 </div>

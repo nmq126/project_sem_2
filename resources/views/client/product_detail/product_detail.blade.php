@@ -183,7 +183,7 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> 
+                                <i class="fas fa-shopping-cart"></i>
                             </div>
                         </div>
                         <div class="info-cart">
@@ -200,7 +200,7 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> 
+                                <i class="fas fa-shopping-cart"></i>
                             </div>
                         </div>
                         <div class="info-cart">
@@ -217,7 +217,7 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> 
+                                <i class="fas fa-shopping-cart"></i>
                             </div>
                         </div>
                         <div class="info-cart">
@@ -234,7 +234,7 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> 
+                                <i class="fas fa-shopping-cart"></i>
                             </div>
                         </div>
                         <div class="info-cart">
@@ -251,7 +251,7 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> 
+                                <i class="fas fa-shopping-cart"></i>
                             </div>
                         </div>
                         <div class="info-cart">
@@ -268,7 +268,7 @@
                             </div>
                             <img src="https://cdn.shopify.com/s/files/1/0037/1818/5030/products/4_7aea6bc7-c789-4c79-a472-b63f4e77e0d8_large.jpg?v=1536551762" alt="">
                             <div class="add-cart">
-                                <i class="fas fa-shopping-cart"></i> 
+                                <i class="fas fa-shopping-cart"></i>
                             </div>
                         </div>
                         <div class="info-cart">
@@ -287,10 +287,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <script src="/user/js/product_detail.js"></script>
-<<<<<<< HEAD
-=======
 
->>>>>>> TrinhHuy
 </body>
 
 </html>
