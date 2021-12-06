@@ -54,9 +54,16 @@ numInputs.forEach(function (input) {
 
 
 var profilePic = document.querySelector('.profile');
+var notification = document.querySelector('.notifications');
 profilePic.onclick = () => {
     var toggleMenu = document.querySelector('.menu');
     toggleMenu.classList.toggle('active')
+    $(".notification_dd").removeClass('active')
+}
+notification.onclick = () => {
+    var toggleMenu = document.querySelector('.notification_dd');
+    toggleMenu.classList.toggle('active')
+    $(".menu").removeClass("active");
 }
 
 

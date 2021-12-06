@@ -32,6 +32,13 @@ messaging.onBackgroundMessage(function(payload) {
 
     self.registration.showNotification(notificationTitle,
         notificationOptions);
+    self.clients.matchAll({includeUncontrolled: true}).then(function (clients) {
+        console.log(clients);
+        //you can see your main window client in this list.
+        clients.forEach(function(client) {
+            client.postMessage('YOUR_MESSAGE_HERE');
+        })
+    })
 
 });
 
