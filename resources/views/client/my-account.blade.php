@@ -83,8 +83,18 @@
             <div class="grid">
                 <div class="grid__item one-third medium-down--one-whole mt-md-0 mt-5">
                     <h2 class="text-center">Thông Tin Tài Khoản</h2>
+                    @if (session('success'))
+                        <div class="alert alert-success text-center" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <p><strong>Tên:</strong> {{Auth::user()->email}}</p>
                     <p><strong>Số Điện Thoại:</strong> {{Auth::user()->phone}}</p>
+                    <div class="text-center mt-40">
+                        <a href="/my-account/change-information">
+                            <button class="btn"> Thay Đổi Thông Tin</button>
+                        </a>
+                    </div>
                 </div>
                 <div class="grid__item two-thirds medium-down--one-whole">
                     <h2 class="text-center">Lịch Sử Đặt Hàng</h2>
@@ -97,8 +107,8 @@
                                     <form class="price_filter mt-10" action="/my-account" method="get">
                                         <div class="row">
                                             <div class=" col-6">
-                                                <label for="keyword" style="">Từ Khóa:</label>
-                                                <input type="text" name="keyword" placeholder="Tên khách hàng, Địa chỉ hoặc SĐT">
+                                                <label for="keyword" style="">Tên Khách Hàng:</label>
+                                                <input type="text" name="name">
                                                 <label for="from" class="mt-3">Từ Ngày:</label>
                                                 <input type="date" name="from">
                                                 <label for="to" class="mt-3">Đến Ngày:</label>
@@ -136,26 +146,33 @@
                             <thead>
                             <tr>
                                 <th>Tên Khách Hàng</th>
-                                <th>Địa Chỉ Nhận</th>
-                                <th>Số Điện Thoại</th>
+                                <th>Ngày Tạo Đơn Hàng</th>
                                 <th>Tổng Đơn Hàng</th>
-                                <th>Thao Tác</th>
+                                <th>Trạng Thái</th>
+                                <th>Chi Tiết</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @if(count($orders) > 0)
                             @foreach($orders as $order)
                                 <tr>
                                     <td>{{$order->ship_name}}</td>
-                                    <td>{{$order->ship_address}}</td>
-                                    <td>{{$order->ship_phone}}</td>
-                                    <td class="product-subtotal">{{\App\Helpers\Helper::formatVnd($order->total_price)}}
+                                    <td>{{$order->created_at}}</td>
+                                    <td>{{\App\Helpers\Helper::formatVnd($order->total_price)}}
                                         VND
                                     </td>
+                                    <td class="product-subtotal">@if($order->checkout == 0) Chưa Thanh Toán @else Đã Thanh Toán @endif</td>
                                     <td class="product-remove">
-                                        <a href="/my-account/order/id={{$order->id}}"><i class="fa fa-info-circle fa-2x"></i></a>
+                                        <a href="/my-account/order/id={{$order->id}}"><i
+                                                class="fa fa-info-circle fa-2x"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="5" style="font-size: 20px">Không Tìm Thấy Đơn Hàng</td>
+                                </tr>
+                            @endif
                             </tbody>
                         </table>
                     </div>

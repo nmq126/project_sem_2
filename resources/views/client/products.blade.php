@@ -102,7 +102,7 @@
     </div>
 </div>
 <div class="text-center title">
-    <h1><span>Cửa</span> Hàng</h1>
+    <h1>Cửa Hàng</h1>
 </div>
 <div class="shop-page-area pt-80 pb-100">
     <div class="container">

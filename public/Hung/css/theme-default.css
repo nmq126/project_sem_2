@@ -5,6 +5,10 @@
     cursor: default
 }
 
+.return:hover .btn-grey{
+    color: white;
+}
+
 .swatch .header {
     display: inline-block;
     float: left;
@@ -466,9 +470,13 @@ a.button.another-button {
     border-top: 1px solid #ddd
 }
 
+.input-line{
+    margin-bottom: 30px;
+}
+
 .my-account-page input, .my-account-page select, .my-account-page textarea {
     border-top: 1px solid #ddd;
-    border-radius: 0
+    border-radius: 0;
 }
 
 .ajax-popup .modal-content-text {
@@ -4160,8 +4168,9 @@ label.error {
 }
 
 .order-table thead th {
-    font-weight: bolder;
+    font-weight: 700;
     color: white;
+    background-color: #e02c2b;
 }
 
 .order-table thead th tr {

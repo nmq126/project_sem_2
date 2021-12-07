@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blog Ăn Uống</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{asset('user/img/food.svg')}}" sizes="any" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
     <!-- font awesome cdn link  -->
@@ -24,11 +25,12 @@
         });
     </script>
     {{--    <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">--}}
-    <link rel="stylesheet" href="Hung/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Hung/css/style.css">
-    <link rel="stylesheet" href="Hung/css/responsive.css">
-    <link rel="stylesheet" href="user/css/home.css">
-    <link rel="stylesheet" href="user/css/main.css">
+    <link rel="stylesheet" href="{{asset('Hung/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('Hung/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('Hung/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('Hung/css/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('user/css/home.css')}}">
+    <link rel="stylesheet" href="{{asset('user/css/main.css')}}">
     {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
 </head>
 <body>
@@ -70,62 +72,59 @@
 <div><!-- blog-area start -->
     <div class="blog-area ptb-100">
         <div class="container">
-            <div class="row flex-row-reverse">
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <div class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
+                        <div class="sidebar-search">
+                            <form class="header-search-form" action="/blog" method="get">
+                                <input id="search" type="search" name="keyword" class="input_text" value=""
+                                       placeholder="Tìm Kiếm">
+                                <button id="blogsearchsubmit" type="submit" class="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
+                            <h4 class="shop-sidebar-title">Bài Đăng Gần Đây</h4>
+                            <div class="sidebar-list-style mt-20">
+                                <ul>
+                                    @foreach($blogs as $blog)
+                                        <li><a href="/blog/{{$blog->id}}/details">{{$blog->title}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
+                            <h4 class="shop-sidebar-title">Tags</h4>
+                            <div class="shop-tags mt-25">
+                                <ul>
+                                    <li><a href="/blogs/news/tagged/bouquet" class="">Món Ăn</a></li>
+                                    <li><a href="/blogs/news/tagged/joy" class="">Đồ Uống</a></li>
+                                    <li><a href="/blogs/news/tagged/event" class="">Địa Điểm</a></li>
+                                    <li><a href="/blogs/news/tagged/gift" class="">Nấu Ăn</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-9 col-md-8">
                     <div class="blog-details-wrapper">
                         <div class="blog-img mb-20">
-                            <img src="//cdn.shopify.com/s/files/1/0037/1818/5030/articles/blog-5_1000x600_crop_center.jpg?v=1537012565"
-                                 alt="Lorem ipsum dolor amet">
-                            <div class="blog-date">
-                                <span>15 <br> Sep</span>
-                            </div>
+                            <img
+                                src="{{$blog->image}}"
+                                alt="Lorem ipsum dolor amet">
                         </div>
                         <div class="blog-content">
-                            <h2>Lorem ipsum dolor amet</h2>
+                            <h2>{{$blog->title}}</h2>
                             <div class="blog-date-categori">
                                 <ul>
-                                    <li><i class="fa fa-user"></i> Fudink Admin</li>
+                                    <li><i class="fa fa-user"></i> {{$blog->author}}</li>
                                     <li>
-                                        <a href="/blogs/news/lorem-ipsum-dolor-amet#comments">
-                                            <i class="fa fa-comment"></i>
-                                            7 comments
-                                        </a>
+                                        <i class="fa fa-calendar"></i> {{$blog->created}}
                                     </li>
                                 </ul>
                             </div>
-                            <p>There are many variations of passages of Lorem Ipsum available, <span>but the majority have suffered alteration in some form</span>
-                                , by injected humou, ors randomised words which don't look even sl If you are going to
-                                use a passage of Lorem Ipsum, you need to be sure there isn't are anything embarrassing
-                                hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to
-                                repeat predefined chunks as necessary, making this the first true generator on the
-                                Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model
-                                sentence structures, to generate Lorem Ipsum which looks reasonable. <span>The generated Lorem Ipsum is therefore always free from repetition,</span>
-                            </p>
-                            <blockquote>Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor
-                                incididunt labo dolor magna aliqua. Ut enim ad minim veniam quis nostrud
-                            </blockquote>
-                            <div class="text-content-img">
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="text-single">
-                                            <p>It is a long established fact that a reader will be distracted by the
-                                                readable ish content of a page when looking at its layout. The point of
-                                                using Lorem Ipsum is that it has a more-or-less normal distribution of
-                                                letters,</p>
-                                            <p>as opposed to using 'Content here, content here', making it look like
-                                                readable English. Many desktop publishing packages and web page editors
-                                                now uses Lorem Ipsum as their default model text, and a search for
-                                                'lorem ipsum' will uncover many web sites still in their infancy.
-                                                Various versions have evolved over the years, sometimes by accident,</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="content-img"><img
-                                                src="//cdn.shopify.com/s/files/1/0037/1818/5030/files/blog-dec-img1_large.jpg?v=1537004331"
-                                                alt=""></div>
-                                    </div>
-                                </div>
-                            </div>
+                            {!!$blog->details !!}
                         </div>
                         <div class="social-network text-center">
                             <ul class=" "
@@ -152,185 +151,18 @@
                                 </li>
                             </ul>
                         </div>
-                        <div id="comments" class="comment-success">
-                            <div class="blog-comment-wrapper mt-55">
-                                <h4 class="blog-dec-title">7 comments</h4>
-                                <div class="single-comment-wrapper mt-35">
-                                    <div class="blog-comment-img">
-                                        <img src="//cdn.shopify.com/s/files/1/0037/1818/5030/t/4/assets/default-user-image_small.png?v=7273182385729636987"
-                                             alt="author">
-                                    </div>
-                                    <div class="blog-comment-content">
-                                        <h4>axiwenus</h4>
-                                        <span>Nov 29, 2020 at 20:01</span>
-                                        <p></p>
-                                        <p>http://mewkid.net/when-is-xuxlya2/ – Amoxicillin 500mg Capsules Amoxicillin
-                                            500mg obt.kctk.fudink.myshopify.com.zmv.pn
-                                            http://mewkid.net/when-is-xuxlya2/</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="single-comment-wrapper mt-35">
-                                    <div class="blog-comment-img">
-                                        <img src="//cdn.shopify.com/s/files/1/0037/1818/5030/t/4/assets/default-user-image_small.png?v=7273182385729636987"
-                                             alt="author">
-                                    </div>
-                                    <div class="blog-comment-content">
-                                        <h4>fafizeqip</h4>
-                                        <span>Nov 29, 2020 at 19:44</span>
-                                        <p></p>
-                                        <p>http://mewkid.net/when-is-xuxlya2/ – Amoxil Dose For 55 Pounds Amoxicillin No
-                                            Prescription qlq.stdd.fudink.myshopify.com.anq.cp
-                                            http://mewkid.net/when-is-xuxlya2/</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="single-comment-wrapper mt-35">
-                                    <div class="blog-comment-img">
-                                        <img src="//cdn.shopify.com/s/files/1/0037/1818/5030/t/4/assets/default-user-image_small.png?v=7273182385729636987"
-                                             alt="author">
-                                    </div>
-                                    <div class="blog-comment-content">
-                                        <h4>eduyczixe</h4>
-                                        <span>Nov 29, 2020 at 19:42</span>
-                                        <p></p>
-                                        <p>http://mewkid.net/when-is-xuxlya2/ – Amoxicillin No Prescription Amoxicillin
-                                            500mg Capsules ikd.nwun.fudink.myshopify.com.wrt.dk
-                                            http://mewkid.net/when-is-xuxlya2/</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="single-comment-wrapper mt-35">
-                                    <div class="blog-comment-img">
-                                        <img src="//cdn.shopify.com/s/files/1/0037/1818/5030/t/4/assets/default-user-image_small.png?v=7273182385729636987"
-                                             alt="author">
-                                    </div>
-                                    <div class="blog-comment-content">
-                                        <h4>mexeolujemure</h4>
-                                        <span>Nov 29, 2020 at 19:27</span>
-                                        <p></p>
-                                        <p>http://mewkid.net/when-is-xuxlya2/ – Amoxicillin Amoxicillin No Prescription
-                                            vsc.nfxx.fudink.myshopify.com.ltu.nj http://mewkid.net/when-is-xuxlya2/</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="single-comment-wrapper mt-35">
-                                    <div class="blog-comment-img">
-                                        <img src="//cdn.shopify.com/s/files/1/0037/1818/5030/t/4/assets/default-user-image_small.png?v=7273182385729636987"
-                                             alt="author">
-                                    </div>
-                                    <div class="blog-comment-content">
-                                        <h4>Farhad</h4>
-                                        <span>Sep 18, 2018 at 06:42</span>
-                                        <p></p>
-                                        <p>Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmod tempor
-                                            incididunt labo dolor magna aliqua. Ut enim ad minim veniam quis nostrud.
-                                            you need to be sure there isn’t are anything embarrassing hidden in the
-                                            middle of text. All the Lorem Ipsum generators on the Internet tend to
-                                            repeat predefined chunks as necessary, making this the first true generator
-                                            on the Internet. It uses a dictionary of over 200 Latin words, combined with
-                                            a handful of model sentence structures, to generate Lorem Ipsum which looks
-                                            reasonable.</p>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="comment-pagination">
-                                <div class="pagination-style theme-default-pagination">
-                                    <nav class="pagination">
-                                        <ul class="">
-                                            <li class="disabled prev">
-                                                <a>
-                                                    <span>Prev</span>
-                                                </a>
-                                            </li>
-                                            <li><a class="active" href="">1</a></li>
-                                            <li>
-                                                <a href="/blogs/news/lorem-ipsum-dolor-amet?page=2" title="">2</a>
-                                            </li>
-                                            <li><a class="prev-next next"
-                                                   href="/blogs/news/lorem-ipsum-dolor-amet?page=2">Next<i
-                                                        class="ion-ios-arrow-right"></i> </a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                            <form method="post" action="/blogs/news/lorem-ipsum-dolor-amet/comments#comment_form"
-                                  id="comment_form" accept-charset="UTF-8" class="comment-form"><input type="hidden"
-                                                                                                       name="form_type"
-                                                                                                       value="new_comment"><input
-                                    type="hidden" name="utf8" value="✓">
-                                <div class="blog-reply-wrapper mt-50">
-                                    <h4 class="blog-dec-title">Leave a comment</h4>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="leave-form">
-                                                <input type="text" class="" name="comment[author]" id="commentAuthor"
-                                                       value="" placeholder="Name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="leave-form">
-                                                <input type="text" class="" name="comment[email]" id="commentEmail"
-                                                       value="" placeholder="Email">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="text-leave">
-												<textarea class="custom-textarea" name="comment[body]" id="commentBody"
-                                                          placeholder="Message"></textarea>
-                                                <input type="submit" value="Post comment">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
-                        <div class="sidebar-search">
-                            <form class="header-search-form" action="/search" method="get" role="search">
-                                <input id="search" type="search" name="q" class="input_text" value=""
-                                       placeholder="Search...">
-                                <button id="blogsearchsubmit" type="submit" class="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
-                            <h4 class="shop-sidebar-title">Recent Post</h4>
-                            <div class="sidebar-list-style mt-20">
-                                <ul>
-                                    <li><a href="/blogs/news/lorem-ipsum-dolor-amet">Lorem ipsum dolor amet</a></li>
-                                    <li><a href="/blogs/news/spirit-of-adventure-rises">Spirit of Adventure Rises</a>
-                                    </li>
-                                    <li><a href="/blogs/news/familiar-with-the-countless-1">Familiar with the
-                                            countless</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
-                            <h4 class="shop-sidebar-title">Tags</h4>
-                            <div class="shop-tags mt-25">
-                                <ul>
-                                    <li><a href="/blogs/news/tagged/bouquet" class="">Bouquet</a></li>
-                                    <li><a href="/blogs/news/tagged/event" class="">Event</a></li>
-                                    <li><a href="/blogs/news/tagged/gift" class="">Gift</a></li>
-                                    <li><a href="/blogs/news/tagged/joy" class="">joy</a></li>
-                                    <li><a href="/blogs/news/tagged/love" class="">love</a></li>
-                                </ul>
-                            </div>
+                        <div class="tab-pane" id="review">
+                            <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/{{$blog->id}}/details"
+                                 data-width="100%"
+                                 data-numposts="10"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- blog-area end -->
 </div>
-
+<!-- blog-area end -->
 <div class="footer-area black-bg-2 pt-70">
     <div class="footer-top-area pb-18">
         <div class="container">
@@ -422,5 +254,8 @@
 </div>
 <a href="#home" class="fas fa-angle-up" id="scroll-top" onclick="onScrollUp()"></a>
 <script src="{{asset('user/js/main.js')}}"></script>
+<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=980205812730468&autoLogAppEvents=1"
+        nonce="tratXySK"></script>
 </body>
 </html>

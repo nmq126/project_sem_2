@@ -100,7 +100,7 @@
     </div>
 </div>
 <div class="text-center title">
-    <h1><span>Giỏ</span> Hàng</h1>
+    <h1>Giỏ Hàng</h1>
 </div>
 
 <div class="cart-main-area pt-70 pb-70">
@@ -183,12 +183,16 @@
                                     <div class="cart-shiping-update">
                                         <a href="/products" class="fw-bold">Tiếp Tục Mua Sắm</a>
                                     </div>
-                                    <div class="cart-clear">
-                                        <a href="/cart/remove?id=all"
-                                           onclick="return confirm('Bạn có chắc muốn xoá tất cả sản phẩm khỏi giỏ hàng?')"
-                                           class="fw-bold">Xóa Giỏ Hàng</a>
-                                        <a href="/checkout"
-                                           class="fw-bold checkout ms-3">Thanh Toán</a>
+                                    <div class="d-flex">
+                                        <div class="cart-clear">
+                                            <a href="/cart/remove?id=all"
+                                               onclick="return confirm('Bạn có chắc muốn xoá tất cả sản phẩm khỏi giỏ hàng?')"
+                                               class="fw-bold">Xóa Giỏ Hàng</a>
+                                        </div>
+                                        <div class="checkout-button">
+                                            <a href="/checkout"
+                                               class="fw-bold checkout ms-3">Thanh Toán</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

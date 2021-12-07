@@ -57,17 +57,10 @@ class LoginController extends Controller
             $user_id = Auth::id();
             $orders = Order::query();
             $orders = $orders->where('user_id', '=', $user_id);
-            if ($request->has('keyword')) {
-                $keyword = $request->input('keyword');
-                $orders = $orders->where('ship_name', 'LIKE', '%' . $keyword . '%')
-                    ->orWhere('ship_phone', 'LIKE', '%' . $keyword . '%')
-                    ->orWhere('ship_address', 'LIKE', '%' . $keyword . '%');
-            }
-            if ($request->has('from')) {
-                $fromDate = $request->input('from');
-                if ($fromDate != null) {
-                    $orders = $orders->where('created_at', '>=', $fromDate);
-                }
+            $name = $request->input('name');
+            $orders = $orders->where('ship_name', 'LIKE', '%' . $name . '%');
+            if ($request->has('fromDate')) {
+                $orders = $orders->startDate($request);
             }
             if ($request->has('to')) {
                 $toDate = $request->input('to');
@@ -98,7 +91,7 @@ class LoginController extends Controller
                 }
             }
             $orders = $orders->paginate(5);
-            $orders->appends($request->all());
+            $orders = $orders->appends($request->all());
             return view('client.my-account', compact('orders'));
         } else return view('client.my-account');
     }
@@ -136,9 +129,20 @@ class LoginController extends Controller
         return view('client.my-account-orderDetails', compact('orderDetails', 'orders'));
     }
 
+    public function updateUser(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required'
+        ]);
+        $data = $request->all();
+        unset($data['_token']);
+        User::where('id', '=', Auth::id())->update($data);
+        return redirect('/my-account')->with('success', 'Thông Tin Tài Khoản Của Bạn Đã Được Cập Nhật.');
+    }
 
     public function logout()
     {
+        Session::flush();
         Auth::logout();
         return redirect('home');
     }
