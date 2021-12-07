@@ -54,7 +54,7 @@ class ProductClientController extends Controller
                     break;
             }
         }
-        $products = $products->paginate(6);
+        $products = $products->paginate(12);
         $products->appends($request->all());
         return view('client.products', compact('products', 'categories', 'ingredients'))->render();
     }

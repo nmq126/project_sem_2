@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,36 +17,35 @@ use Illuminate\Support\Facades\URL;
 class LoginController extends Controller
 {
 
-    public function redirectPath(){
-        if (Auth::user()->level == 1){
+    public function redirectPath()
+    {
+        if (Auth::user()->level == 1) {
             return redirect('/admin/orders');
         }
     }
 
-    public function create(){
-        if (!strcmp(URL::previous(), 'http://127.0.0.1:8000/login') ){
+    public function create()
+    {
+        if (!strcmp(URL::previous(), 'http://127.0.0.1:8000/login')) {
             Session::put('link', URL::previous());
         }
         return view('client.login');
     }
 
 
-    public function store(Request $request){
-        if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])){
+    public function store(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
 //            if (Session::get('link') != null) {
 //                return redirect(Session::get('link'));
 //            }
             $user = Auth::user();
-            $user->update(['device_token'=>$request->get('device_token')]);
-            $noti = new Notification();
-            $noti->user_id = $user->id;
-            if ($noti->save()){
-                $body = 'Tài khoản ' . $user->email . ' đăng nhập vào hệ thống';
-                $noti->toMultiDevice(User::all(), 'Dang nhap thanh cong', $body, null, null);
-            }
+            $user->update(['device_token' => $request->get('device_token')]);
+
+
             return back();
 //            return redirect('/home');
-        }else{
+        } else {
             return back()->with('error', 'Thông tin đăng nhập chưa chính xác!');
         }
 
@@ -99,6 +99,7 @@ class LoginController extends Controller
     public function showOrderDetails($id, Request $request)
     {
         $orders = Order::where('id', '=', $id)->first();
+        Notification::where('order_id', $orders->id)->update(['read_at' => Carbon::now()]);
         $orderDetails = OrderDetail::query();
         $orderDetails = $orderDetails->where('order_id', '=', $id);
         if ($request->has('name')) {
@@ -126,6 +127,7 @@ class LoginController extends Controller
             }
         }
         $orderDetails = $orderDetails->paginate(5);
+
         return view('client.my-account-orderDetails', compact('orderDetails', 'orders'));
     }
 

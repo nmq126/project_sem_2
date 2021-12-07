@@ -53,10 +53,44 @@
             <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
         </a>
         @auth
-            <a href="">
+            <div class="notifications">
                 <i class="fas fa-bell"></i>
-                <span class='badge badge-warning' id='NotiCount'>{{ $numberAlert }}</span>
-            </a>
+                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+            </div>
+
+            <div class="notification_dd">
+                <ul class="notification_ul">
+                    @if(!$notifications->isEmpty())
+                        @foreach($notifications as $notification)
+                            <li>
+                                <a href="/my-account/order/id={{ $notification->order_id }}">
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            {{ $notification->title}}
+                                        </div>
+                                        <div class="sub_title">
+                                            User: {{ $notification->sub_title }}
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </li>
+                        @endforeach
+                        <li class="show_all">
+                            <p>Xem tất cả</p>
+                        </li>
+                    @else
+                        <li>
+                            <div class="notify_data">
+                                <div class="sub_title">
+                                    Không có thông báo
+                                </div>
+                            </div>
+                        </li>
+
+                    @endif
+                </ul>
+            </div>
             <div>
                 <div class="profile">
                     <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
@@ -490,6 +524,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
 <script src="{{ asset('js/firebase.js') }}"></script>
-
+<script>
+    navigator.serviceWorker.addEventListener('message', function (event) {
+        $('#NotiCount').html(payload.data.number_of_noti);
+        $.toast({
+            heading: payload.data.heading,
+            text: payload.data.text,
+            position: 'top-center',
+            showHideTransition: 'slide',
+            hideAfter: false,
+            icon: 'success',
+            stack: 5
+        })
+    });
+</script>
 </body>
 </html>

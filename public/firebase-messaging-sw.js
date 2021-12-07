@@ -27,11 +27,18 @@ messaging.onBackgroundMessage(function(payload) {
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
         body: payload.notification.body,
-        icon: 'https://cdn.icon-icons.com/icons2/2248/PNG/512/login_icon_137429.png',
+        icon: 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638807022/logo/logo-removebg-preview_fvw3oj.png'
     };
 
     self.registration.showNotification(notificationTitle,
         notificationOptions);
+    self.clients.matchAll({includeUncontrolled: true}).then(function (clients) {
+        console.log(clients);
+        //you can see your main window client in this list.
+        clients.forEach(function(client) {
+            client.postMessage('YOUR_MESSAGE_HERE');
+        })
+    })
 
 });
 

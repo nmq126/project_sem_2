@@ -36,8 +36,7 @@ class RegisterController extends Controller
             DB::rollBack();
             return $e;
         }
-        Auth::loginUsingId($user->id);
-        return redirect('/home');
+        return redirect('/login')->with('msg', 'Đăng ký thành công!!');
     }
 
 
