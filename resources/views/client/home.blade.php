@@ -63,13 +63,13 @@
                     @if(!$notifications->isEmpty())
                         @foreach($notifications as $notification)
                             <li>
-                                <a href="">
+                                <a href="/my-account/order/id={{ $notification->order_id }}">
                                     <div class="notify_data">
                                         <div class="title">
-                                            {{ $notification->id }}
+                                            {{ $notification->title}}
                                         </div>
                                         <div class="sub_title">
-                                            User: {{ $notification->user_id }}
+                                            User: {{ $notification->sub_title }}
                                         </div>
                                     </div>
                                 </a>
@@ -526,7 +526,16 @@
 <script src="{{ asset('js/firebase.js') }}"></script>
 <script>
     navigator.serviceWorker.addEventListener('message', function (event) {
-        console.log('event listener', event);
+        $('#NotiCount').html(payload.data.number_of_noti);
+        $.toast({
+            heading: payload.data.heading,
+            text: payload.data.text,
+            position: 'top-center',
+            showHideTransition: 'slide',
+            hideAfter: false,
+            icon: 'success',
+            stack: 5
+        })
     });
 </script>
 </body>

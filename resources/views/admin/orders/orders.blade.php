@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title', 'Orders List | Admin')
+@section('title', 'Danh sách đơn hàng | Admin')
 @section('style')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="/assets/css/datatables/datatables.min.css">
@@ -234,7 +234,7 @@
                                     <td>{{$order->created_at}}</td>
 
                                     <td class="td-actions">
-                                        <a href="/admin/orders/update/{{$order->id}}"><i
+                                        <a href="/admin/orders/{{$order->id}}/detail"><i
                                                 class="la la-edit edit"></i></a>
                                         <a href="#" class="delete"><i class="la la-close delete"></i></a>
                                     </td>

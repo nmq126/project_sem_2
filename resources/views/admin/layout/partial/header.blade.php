@@ -14,10 +14,10 @@
             <div class="navbar-header">
                 <a href="db-default.html" class="navbar-brand">
                     <div class="brand-image brand-big">
-                        <img src="/assets/img/logo-big.png" alt="logo" class="logo-big">
+                        <img style="height: 64px; width: 100%" src="/user/img/logo.png" alt="logo" class="logo-big">
                     </div>
                     <div class="brand-image brand-small">
-                        <img src="/assets/img/logo.png" alt="logo" class="logo-small">
+                        <img style="height: 64px; width: 100%" src="/user/img/logo.png" alt="logo" class="logo-small">
                     </div>
                 </a>
                 <!-- Toggle Button -->
@@ -104,7 +104,7 @@
                     <ul aria-labelledby="user" class="user-size dropdown-menu">
                         <li class="welcome">
                             <a href="#" class="edit-profil"><i class="la la-gear"></i></a>
-                            <img src="/{{ Auth::user()->DefaultThumbnail }}" alt="..." class="rounded-circle">
+                            <img src="{{ Auth::user()->DefaultThumbnail }}" alt="..." class="rounded-circle">
                         </li>
                         <li>
                             <a href="pages-profile.html" class="dropdown-item">

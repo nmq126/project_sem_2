@@ -138,6 +138,12 @@ class OrderController extends Controller
         //gui noti
         $noti = new Notification();
         $noti->user_id = auth()->id();
+        $noti->order_id = $order->id;
+        $noti->title = 'Đặt hàng thành công';
+        if ($status = OrderStatus::WaitForCheckout){
+            $noti->sub_title = 'Đơn hàng #' . $order->id . ' cần được thanh toán để tiếp tục xử lý';
+        }
+        $noti->sub_title = 'Đơn hàng #' . $order->id . ' đã được đặt thành công và đang chờ xử lý';
         $noti->save();
 //        if ($noti->save()){
 //            $number_of_noti = Notification::where('user_id', auth()->id())
