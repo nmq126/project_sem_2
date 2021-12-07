@@ -5,10 +5,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blog Ăn Uống</title>
+    <title>Thông Tin Tài Khoản</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{asset('user/img/food.svg')}}" sizes="any" type="image/svg+xml">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -24,11 +26,15 @@
         });
     </script>
     {{--    <link rel="stylesheet" href="assets/vendors/css/base/elisyam-1.5.min.css">--}}
-    <link rel="stylesheet" href="Hung/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Hung/css/style.css">
-    <link rel="stylesheet" href="Hung/css/responsive.css">
-    <link rel="stylesheet" href="user/css/home.css">
-    <link rel="stylesheet" href="user/css/main.css">
+
+    <link rel="stylesheet" href="{{asset('Hung/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('Hung/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('Hung/css/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('Hung/css/theme-default.css')}}">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{{asset('user/css/main.css')}}">
+    <link rel="stylesheet" href="{{asset('user/css/home.css')}}">
     {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
 </head>
 <body>
@@ -61,107 +67,53 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
-                <li class="active">Blog</li>
+                <li class="active">Thông Tin Tài Khoản</li>
             </ul>
         </div>
     </div>
 </div>
-<div class="text-center title">
-    <h1>Blog Ăn Uống</h1>
-</div>
-<div class="blog-area ptb-80">
-    <div class="container">
-        <div class="row ">
-            <div class="col-lg-8 col-xl-9 col-md-8">
-                <div class="row">
-                    @foreach($blogs as $blog)
-                        <div class="col-lg-6">
-                            <div class="single-blog-wrapper mb-50">
-                                <div class="blog-img mb-20">
-                                    <a href="blog/{{$blog->id}}/details">
-                                        <img src="{{$blog->image}}"
-                                             alt="Lorem ipsum dolor amet">
-                                    </a>
-                                </div>
-                                <div class="blog-content">
-                                    <h2><a href="blog/{{$blog->id}}/details">{{$blog->title}}</a></h2>
-                                    <div class="blog-date-categori">
-                                        <ul>
-                                            <li><i class="fa fa-user"></i> {{$blog->author}}</li>
-                                            <li>
-                                                <i class="fa fa-calendar"></i> {{$blog->created}}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="rte">
-                                        <p>{{$blog->description}}</p>
-                                    </div>
-                                </div>
-                                <div class="blog-btn mt-30">
-                                    <a href="/blogs/news/lorem-ipsum-dolor-amet">Đọc Thêm</a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                @if($blogs->lastpage() > 1)
-                    <div class="pagination-total-pages">
-                        <div class="pagination-style">
-                            <ul class="text-center" style="display: flex; justify-content: center; align-items: center">
-                                <li><a class="prev-next prev" href="{{$blogs->url(1)}}"><i
-                                            class="fa fa-arrow-left {{($blogs->currentPage() == 1) ? 'disabled': ''}}"></i>
-                                        Prev</a></li>
-                                @for($i = 1; $i <= $blogs->lastPage(); $i++)
-                                    <li><a class="{{($blogs->currentPage() == $i) ? 'active': ''}}"
-                                           href="{{$blogs->url($i)}}">{{$i}}</a></li>
-                                @endfor
-                                <li>
-                                    <a class="prev-next next {{($blogs->currentPage() == $blogs->lastPage()) ? 'disabled': ''}}"
-                                       href="{{$blogs->nextPageUrl()}}">Next<i class="fa fa-arrow-right"></i>
-                                    </a></li>
-                            </ul>
-                        </div>
+@if(Auth::check())
+    <div class="customer-page theme-default-margin my-account-page pt-50 pb-50">
+        <div class="container">
+            <h1>Tài Khoản Của Tôi
+                <span class="logout-title"><a href="/my-account/logout">Đăng Xuất</a></span>
+            </h1>
+            <hr class="hr--small">
+        </div>
+        <div class="text-center">
+            <h2>Thay Đổi Thông Tin Tài Khoản</h2>
+            <div>
+                <form method="post" action="/my-account/update">
+                    @csrf
+                    <div class="input-line mt-30">
+                        <label for="shipName" style="font-size: 20px">Tên: </label>
+                        <input type="text" style="margin-left: 94px">
                     </div>
-                @endif
-            </div>
-            <div class="col-lg-4 col-xl-3 col-md-4">
-                <div class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
-                    <div class="sidebar-search">
-                        <form class="header-search-form" action="/blog" method="get">
-                            <input id="search" type="search" name="keyword" class="input_text" value=""
-                                   placeholder="Tìm Kiếm">
-                            <button id="blogsearchsubmit" type="submit" class="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </form>
+                    <div class="input-line">
+                        <label for="shipAddress" style="font-size: 20px">Email: </label>
+                        <input type="text" style="margin-left: 83px">
                     </div>
-                </div>
-                <div class="shop-widget mt-25 shop-sidebar-border pt-25">
-                    <h4 class="shop-sidebar-title">Bài Viết Mới Nhất</h4>
-                    <div class="sidebar-list-style mt-20">
-                        <ul>
-                            @foreach($blogs as $blog)
-                                <li><a href="/blog/{{$blog->id}}/details">{{$blog->title}}</a></li>
-                            @endforeach
-                        </ul>
+                    <div class="input-line">
+                        <label for="shipPhone" style="font-size: 20px">Số điện thoại: </label>
+                        <input type="text" name="phone" value="{{Auth::user()->phone}}" style="margin-left: 20px">
+                        @if($errors->has('phone'))
+                            <div class="text-center text-red" style="color: red">{{ $errors->first('phone') }}</div>
+                        @endif
                     </div>
+                <div class="d-flex text-center justify-content-center">
+                    <button type="submit" class="btn" style="margin-right: 30px" >Cập Nhật</button>
+                    <a href="/my-account" class="return"><button type="button" class="btn-grey">Quay Về  </button></a>
                 </div>
-                <div class="shop-widget mt-25 shop-sidebar-border pt-25">
-                    <h4 class="shop-sidebar-title">Thẻ</h4>
-                    <div class="shop-tags mt-25">
-                        <ul>
-                            <li><a href="/blogs/news/tagged/bouquet" class="">Món Ăn</a></li>
-                            <li><a href="/blogs/news/tagged/joy" class="">Đồ Uống</a></li>
-                            <li><a href="/blogs/news/tagged/event" class="">Địa Điểm</a></li>
-                            <li><a href="/blogs/news/tagged/gift" class="">Nấu Ăn</a></li>
-                        </ul>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
-
+@else
+    <div class="text-center mb-40">
+        <h2 class="">Vui Lòng Đăng Nhập Vào Tài Khoản Của Bạn</h2>
+        <a href="/login" class="btn pb-35">Đăng Nhập</a>
+    </div>
+@endif
 <div class="footer-area black-bg-2 pt-70">
     <div class="footer-top-area pb-18">
         <div class="container">
@@ -175,7 +127,7 @@
                             labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
                         <div class="payment-img">
                             <a href="#">
-                                <img src="Hung/img/products/payment.png" alt="">
+                                <img src="Hung/img/payment.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -241,7 +193,7 @@
     <div class="footer-bottom-area border-top-4">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-lg-6 col-md-6 col-sm-7">
                     <div class="copyright text-center">
                         <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
                                 href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
@@ -252,6 +204,8 @@
     </div>
 </div>
 <a href="#home" class="fas fa-angle-up" id="scroll-top" onclick="onScrollUp()"></a>
+<script src="{{asset('Hung/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('Hung/js/main.js')}}"></script>
 <script src="{{asset('user/js/main.js')}}"></script>
 </body>
 </html>
