@@ -33,8 +33,8 @@ messaging.onMessage((payload) => {
     // $('.notification_dd').load(' .notification_dd');
     // console.log(payload.data.badgeCount);
     $.toast({
-        heading: 'Đặt hàng thành công',
-        text: 'oke pạn',
+        heading: payload.data.heading,
+        text: payload.data.text,
         position: 'top-center',
         showHideTransition: 'slide',
         hideAfter: false,

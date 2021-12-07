@@ -53,6 +53,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard/json', [DashboardController::class, 'DbJson']);
     Route::get('/dashboard/json/month', [DashboardController::class, 'DbJsonMonth']);
     Route::get('/orders', [OrderAdminController::class, 'fetchOrders']);
+    Route::get('/orders/{id}/detail', [OrderDetailsAdminController::class, 'orderDetail']);
     Route::get('/orders/update/{id}',[OrderAdminController::class, 'UpdateView']);
     Route::post('/orders/update/{id}',[OrderAdminController::class, 'UpdateOrder']);
     Route::get('/orders/change', [OrderAdminController::class, 'Change']);
@@ -81,7 +82,6 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/download', [OrderAdminController::class, 'export']);
 
-Route::get('/admin/orders/{id}/detail', [OrderDetailsAdminController::class, 'orderDetail']);
 
 
 
@@ -155,6 +155,4 @@ Route::get('/blog-details', function () {
 
 Route::get('/product_detail/{id}', [ProductClientController::class, 'getProductDetail']);
 
-Route::get('/products', function (){
-   return view('client.products-and-cart.products');
-});
+

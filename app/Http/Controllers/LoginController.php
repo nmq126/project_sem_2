@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -41,16 +42,7 @@ class LoginController extends Controller
             $user = Auth::user();
             $user->update(['device_token' => $request->get('device_token')]);
 
-            $noti = new Notification();
-            $noti->user_id = 1;
-            if ($noti->save()) {
-                $number_of_noti = Notification::where('user_id', 1)
-                    ->where('read_at', null)
-                    ->count();
-                $title = 'Đặt hàng thành công';
-                $body = 'oke';
-                $noti->toMultiDevice(User::all(), $title, $body, $number_of_noti, null);
-            }
+
             return back();
 //            return redirect('/home');
         } else {
@@ -114,6 +106,7 @@ class LoginController extends Controller
     public function showOrderDetails($id, Request $request)
     {
         $orders = Order::where('id', '=', $id)->first();
+        Notification::where('order_id', $orders->id)->update(['read_at' => Carbon::now()]);
         $orderDetails = OrderDetail::query();
         $orderDetails = $orderDetails->where('order_id', '=', $id);
         if ($request->has('name')) {
@@ -141,6 +134,7 @@ class LoginController extends Controller
             }
         }
         $orderDetails = $orderDetails->paginate(5);
+
         return view('client.my-account-orderDetails', compact('orderDetails', 'orders'));
     }
 

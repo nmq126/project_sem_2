@@ -15,7 +15,7 @@ class Notification extends Model
 
     protected $fillable = ['user_id', 'read_at'];
 
-    public function scopeToSingleDevice($token, $title, $body, $number_of_noti, $click_action){
+    public function scopeToSingleDevice($query, $token, $title, $body, $number_of_noti){
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
 
@@ -23,7 +23,10 @@ class Notification extends Model
         $notificationBuilder->setBody($body);
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData(['number_of_noti' => $number_of_noti]);
+        $dataBuilder->addData(['number_of_noti' => $number_of_noti,
+                                'heading'=> $title,
+                                'text' => $body
+                            ]);
 
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
@@ -45,7 +48,7 @@ class Notification extends Model
         $downstreamResponse->tokensWithError();
     }
 
-    public function scopeToMultiDevice($query, $model, $title, $body, $number_of_noti, $click_action){
+    public function scopeToMultiDevice($query, $model, $title, $body, $number_of_noti){
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
 
@@ -82,5 +85,13 @@ class Notification extends Model
 
     public function scopeNumberAlert(){
         return $this->where('read_at', null)->count();
+    }
+
+    public function order(){
+        return $this->belongsTo(Order::class, 'order_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

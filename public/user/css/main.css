@@ -110,14 +110,14 @@ header .navbar a:hover {
 
 .notification_dd li {
     border-bottom: 1px solid #f1f2f4;
-    padding: 10px 20px;
+    padding: 10px 10px;
     display: flex;
     align-items: center;
 }
 
 .notification_dd li .notify_data{
-    margin: 0 15px;
-    width: 185px;
+    margin: 0 0;
+    width: 300px;
 }
 
 .notification_dd li .notify_data .title{
@@ -126,7 +126,7 @@ header .navbar a:hover {
 }
 
 .notification_dd li .notify_data .sub_title{
-    font-size: 14px;
+    font-size: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
