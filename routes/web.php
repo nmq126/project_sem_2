@@ -88,57 +88,58 @@ Route::get('/admin/orders/{id}/detail', [OrderDetailsAdminController::class, 'or
 
 //CLIENT SIDE
 
-//home page
-Route::get('/home', [HomePageController::class, 'show']);
-
 //product list
-Route::get('/products', [ProductClientController::class, 'getList']);
+Route::get('/product/recent-view',[ProductClientController::class, 'getRecent']);
 Route::get('/product/{id}/details',[ProductClientController::class, 'getDetail']);
 Route::post('products/search', [ProductClientController::class, 'search']);
-Route::get('/product/recent-view',[ProductClientController::class, 'getRecent']);
+Route::get('/products', [ProductClientController::class, 'getList']);
 
 //cart
-Route::get('/cart',[ShoppingCartController::class, 'show']);
 Route::get('/cart/add',[ShoppingCartController::class, 'add']);
+Route::get('/cart',[ShoppingCartController::class, 'show']);
 Route::get('/cart/remove',[ShoppingCartController::class, 'remove']);
 Route::post('/cart/update',[ShoppingCartController::class, 'update']);
 
-Route::group(['middleware' => 'auth'],function (){
-
-
-    //order
-    Route::get('/order/{id}', [OrderController::class, 'getDetail']);
-    Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
-    Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
-    //account info
-    Route::get('/my-account', [LoginController::class, 'showOrder']);
-    Route::get('/my-account/order/id={id}', [LoginController::class, 'showOrderDetails']);
-});
-
-//checkout
+//checkout, order
 Route::get('/checkout', [OrderController::class, 'show']);
-Route::post('/checkout', [OrderController::class, 'process']);
+Route::post('/order', [OrderController::class, 'process']);
+Route::get('/order/{id}', [OrderController::class, 'getDetail']);
+Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
+Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
 
+Route::get('/home', [HomePageController::class, 'show']);
+Route::get('/my-account', function (){
+    return view('client.my-account');
+} );
 
-Route::group(['middleware' => 'guest'],function (){
-    //đăng ký
-    Route::get('/register', [RegisterController::class, 'create']);
-    Route::post('/register', [RegisterController::class, 'store']);
-    //đăng nhập
-    Route::get('/login', [LoginController::class, 'create']);
-    Route::post('/login', [LoginController::class, 'store']);
+Route::get('/register', [RegisterController::class, 'create']);
+Route::post('/register', [RegisterController::class, 'store']);
 
+Route::get('/login', [LoginController::class, 'create']);
+Route::get('my-account', [LoginController::class, 'showOrder']);
+Route::get('/my-account/change-information', function () {
+    return view('client.change-user-information');
 });
-//logout
+Route::post('my-account/update', [LoginController::class, 'updateUser']);
 Route::get('/my-account/logout', [LoginController::class, 'logout']);
+Route::get('/my-account/order/id={id}', [LoginController::class, 'showOrderDetails']);
+Route::post('/login', [LoginController::class, 'store']);
 
 
 
 //blog
 Route::get('/blog',[BlogController::class, 'getBlog']);
 Route::get('/blog-json',[BlogController::class, 'JsonBlog']);
-Route::get('/blog_detail/{id}',[BlogController::class, 'getBlogDetail']);
+Route::get('/blog/{id}/details',[BlogController::class, 'getBlogDetail']);
 
+Route::get('/login', function () {
+    return view('client.login');
+});
+
+
+Route::get('/cart', function () {
+    return view('client.cart');
+});
 
 Route::get('/contact-us', function () {
     return view('client.contact-us');

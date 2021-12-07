@@ -277,16 +277,28 @@
 
 <section style="padding: 0 1rem" class="gallery" id="gallery">
 
+<<<<<<< HEAD
     <h1 class="heading pt-5 pb-5"><span> Gallery </span></h1>
     <div class="containerG">
         <div class="boxG a">
             <img
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758438/home_page_gallery/lucas-hoang-Yb2Sb9bdgPk-unsplash_1_1_fg2ddy.jpg"
+=======
+    <h1 class="heading pt-5 pb-5"><span> Kho Ảnh </span></h1>
+    <div class="containerG">
+        <div class="boxG a">
+            <img
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168695/gallery/lucas-hoang-Yb2Sb9bdgPk-unsplash_1_skkh0u.jpg"
+>>>>>>> da52097 (final)
                 alt="">
         </div>
         <div class="boxG b">
             <img
+<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/ben-lei-ubBWnvrsARk-unsplash_e5xqkd.jpg"
+=======
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168775/gallery/ben-lei-ubBWnvrsARk-unsplash_xw3eri.jpg"
+>>>>>>> da52097 (final)
                 alt="">
         </div>
         <div class="boxG c">
@@ -296,12 +308,20 @@
         </div>
         <div class="boxG d">
             <img
+<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/hong-anh-duong-EK_-_nAm-CYM-unsplash_ahpaos.jpg"
+=======
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169069/gallery/nikolay-smeh-gPpbFaEkl00-unsplash_gb5oe3.jpg"
+>>>>>>> da52097 (final)
                 alt="">
         </div>
         <div class="boxG e">
             <img
+<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758595/home_page_gallery/sonny-mauricio-yhc4pSbl01A-unsplash_g2fmhg.jpg"
+=======
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169145/gallery/sonny-mauricio-yhc4pSbl01A-unsplash_a6qsc4.jpg"
+>>>>>>> da52097 (final)
                 alt="">
 
         </div>
@@ -313,25 +333,41 @@
         </div>
         <div class="boxG g">
             <img
+<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/lynda-hinton-q_eyFSd2W3M-unsplash_w4xcnb.jpg"
+=======
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168942/gallery/rosalind-chang-P_wPicZYoPI-unsplash_m4vtie.jpg  "
+>>>>>>> da52097 (final)
                 alt="">
 
         </div>
         <div class="boxG h">
             <img
+<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/markus-winkler-dq03aws4SmY-unsplash_dcgyps.jpg"
+=======
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169405/gallery/markus-winkler-dq03aws4SmY-unsplash_o2atrr.jpg"
+>>>>>>> da52097 (final)
                 alt="">
 
         </div>
         <div class="boxG i">
             <img
+<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/haseeb-jamil-J9lD6FS6_cs-unsplash_rlggsj.jpg"
+=======
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169207/gallery/haseeb-jamil-J9lD6FS6_cs-unsplash_axdtau.jpg"
+>>>>>>> da52097 (final)
                 alt="">
 
         </div>
         <div class="boxG j">
             <img
+<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/andraz-lazic-iy_MT2ifklc-unsplash_ssuntp.jpg"
+=======
+                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169025/gallery/andraz-lazic-iy_MT2ifklc-unsplash_tohd1p.jpg"
+>>>>>>> da52097 (final)
                 alt="">
 
         </div>
@@ -343,8 +379,41 @@
 
 <!-- order section starts  -->
 
-<section class="blog" id="">
-    <h1 class="heading"><span>Food</span> blog </h1>
+<section class="blog mt-30">
+    <h1 class="heading mb-20"><span>Blog</span> Ăn Uống </h1>
+    <div class="col-12">
+        <div class="row">
+            @foreach($blogs as $blog)
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-blog-wrapper mb-50">
+                        <div class="blog-img mb-20">
+                            <a href="blog/{{$blog->id}}/details">
+                                <img src="{{$blog->image}}"
+                                     alt="Lorem ipsum dolor amet">
+                            </a>
+                        </div>
+                        <div class="blog-content">
+                            <h2><a href="blog/{{$blog->id}}/details">{{$blog->title}}</a></h2>
+                            <div class="blog-date-categori">
+                                <ul>
+                                    <li><i class="fa fa-user"></i> {{$blog->author}}</li>
+                                    <li>
+                                        <i class="fa fa-calendar"></i> {{$blog->created}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="rte">
+                                <p>{{$blog->description}}</p>
+                            </div>
+                        </div>
+                        <div class="blog-btn mt-30">
+                            <a href="/blogs/news/lorem-ipsum-dolor-amet">Đọc Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </section>
 
 <!-- order section ends -->
@@ -372,7 +441,11 @@
                 <div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
+<<<<<<< HEAD
                             <h4>THÔNG TIN</h4>
+=======
+                            <h4 >THÔNG TIN</h4>
+>>>>>>> da52097 (final)
                         </div>
                         <div class="footer-content">
                             <ul>

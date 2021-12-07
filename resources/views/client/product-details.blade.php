@@ -180,91 +180,12 @@
             <div class="tab-content description-review-bottom">
                 <div id="des-details1" class="tab-pane active">
                     <div class="product-description-wrapper">
-                        <p style="font-size: 15px">{{$product->detail}}</p>
+                        <p style="font-size: 15px">{!! $product->detail !!}</p>
                     </div>
                 </div>
                 <div id="des-details3" class="tab-pane">
-                    <div class="rattings-wrapper">
-                        <div class="sin-rattings">
-                            <div class="star-author-all">
-                                <div class="ratting-star f-left">
-                                    <i class="fa fa-star" style="color: red"></i>
-                                    <i class="fa fa-star" style="color: red"></i>
-                                    <i class="fa fa-star" style="color: red"></i>
-                                    <i class="fa fa-star" style="color: red"></i>
-                                    <i class="fa fa-star" style="color: red"></i>
-                                    <span>(5)</span>
-                                </div>
-                                <div class="ratting-author f-right">
-                                    <h3>tayeb rayed</h3>
-                                    <span>12:24</span>
-                                    <span>9 March 2018</span>
-                                </div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nost rud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor
-                                sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore magna aliqua. Utenim ad minim veniam, quis nost.</p>
-                        </div>
-                        <div class="sin-rattings">
-                            <div class="star-author-all">
-                                <div class="ratting-star f-left">
-                                    <i class="fa fa-star" style="color: red"></i>
-                                    <i class="fa fa-star" style="color: red"></i>
-                                    <i class="fa fa-star" style="color: red"></i>
-                                    <i class="fa fa-star" style="color: red"></i>
-                                    <i class="fa fa-star" style="color: red"></i>
-                                    <span>(5)</span>
-                                </div>
-                                <div class="ratting-author f-right">
-                                    <h3>farhana shuvo</h3>
-                                    <span>12:24</span>
-                                    <span>9 March 2018</span>
-                                </div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nost rud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor
-                                sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore magna aliqua. Utenim ad minim veniam, quis nost.</p>
-                        </div>
-                    </div>
-                    <div class="ratting-form-wrapper">
-                        <h3>Add your Comments :</h3>
-                        <div class="ratting-form">
-                            <form action="#">
-                                <div class="star-box">
-                                    <h2>Rating:</h2>
-                                    <div class="ratting-star">
-                                        <i class="fa fa-star" style="color: red"></i>
-                                        <i class="fa fa-star" style="color: red"></i>
-                                        <i class="fa fa-star" style="color: red"></i>
-                                        <i class="fa fa-star" style="color: red"></i>
-                                        <i class="fa fa-star" style="color: red"></i>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="rating-form-style mb-20">
-                                            <input placeholder="Name" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="rating-form-style mb-20">
-                                            <input placeholder="Email" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="rating-form-style form-submit">
-                                            <textarea name="message" placeholder="Message"></textarea>
-                                            <input type="submit" value="add review">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    <div class="fb-comments" data-href="http://127.0.0.1:8000/product/{{$product->id}}/details" data-width="100%"
+                         data-numposts="10"></div>
                 </div>
             </div>
         </div>
@@ -409,6 +330,9 @@
     </div>
 </div>
 <a href="#home" class="fas fa-angle-up" id="scroll-top" onclick="onScrollUp()"></a>
+<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=980205812730468&autoLogAppEvents=1"
+        nonce="tratXySK"></script>
 <script src="{{asset('Hung/js/jquery-1.12.4.min.js')}}"></script>
 <script src="{{asset('Hung/js/popper.js')}}"></script>
 <script src="{{asset('Hung/js/bootstrap.min.js')}}"></script>
