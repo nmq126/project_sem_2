@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Thông Tin Tài Khoản</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{asset('user/img/food.svg')}}" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -95,8 +95,8 @@
                     @endif
                     <div class="mt-2 me-5"><h4>Tổng Giỏ Hàng: <span>{{\App\Helpers\Helper::formatVnd($orders->total_price)}} VND</span>
                         </h4></div>
-                    <div class="price_slider_amount text-center mt-30">
-                        <button class="mb-10" type="button" style="font-size: 15px" onclick="goBack()">Quay Về</button>
+                    <div class="text-center">
+                        <a href="/my-account" class="return"><button type="button" class="btn-grey">Quay Về  </button></a>
                     </div>
                 </div>
                 <div class="grid__item two-thirds medium-down--one-whole">
@@ -282,10 +282,5 @@
 <script src="{{asset('Hung/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('Hung/js/main.js')}}"></script>
 <script src="{{asset('user/js/main.js')}}"></script>
-<script>
-    function goBack() {
-        window.location = '/my-account';
-    }
-</script>
 </body>
 </html>

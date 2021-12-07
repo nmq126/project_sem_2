@@ -20,7 +20,6 @@ class ProductClientController extends Controller
         return view('client.product_detail.product_detail', ['product' => $product]);
     }
 
-
     public function getList(Request $request): string
     {
         $products = Product::query();

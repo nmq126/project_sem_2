@@ -9,23 +9,22 @@ use Illuminate\Support\Carbon;
 
 class BlogController extends Controller
 {
- public  function getBlog(){
-     $blog = Blog::paginate(6);
+    public function getBlog(Request $request)
+    {
+        $blog = Blog::query();
+        if ($request->has('keyword')) {
+            $keyword = $request->input('keyword');
+            $blog = $blog->where('title', 'LIKE', '%' . $keyword . '%');
+        }
+        $blog = $blog->paginate(4);
+        $blog->appends($request->all());
+        return view("client.blog", ["blogs" => $blog]);
+    }
 
-     return view("client.blog",["blogs"=>$blog]);
- }
- public function  JsonBlog(){
-     $data = Blog::search()->get();
-     return $data;
- }
- public  function getBlogDetail(Request $request){
-    $id= $request->id;
-
-    $blog = Blog::find($id);
-
-     $blog->created= \Carbon\Carbon::now()->format("d-m-Y");
-
-     return view("client.blog.blog_detail",["blog"=>$blog]);
-
- }
+    public function getBlogDetail($id)
+    {
+        $blogs = Blog::all();
+        $blog = Blog::find($id);
+        return view("client.blog-details", compact('blog', 'blogs'));
+    }
 }
