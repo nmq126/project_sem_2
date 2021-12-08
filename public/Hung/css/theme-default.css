@@ -1,3 +1,15 @@
+.user-thumbnail{
+    margin-bottom: 15px;
+}
+
+.user-thumbnail img{
+    display: block;
+    margin: 0 auto;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
 .product-sidebar-color li.active {
     border: 1px solid #fff;

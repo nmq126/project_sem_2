@@ -67,7 +67,8 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
-                <li class="active">Thông Tin Tài Khoản</li>
+                <li><a href="/home">Thông Tin Tài Khoản</a></li>
+                <li class="active">Thay đổi thông tin</li>
             </ul>
         </div>
     </div>
@@ -76,33 +77,40 @@
     <div class="customer-page theme-default-margin my-account-page pt-50 pb-50">
         <div class="container">
             <h1>Tài Khoản Của Tôi
-                <span class="logout-title"><a href="/my-account/logout">Đăng Xuất</a></span>
+                <span class="logout-title"><a href="/my-account">Trở lại</a></span>
             </h1>
             <hr class="hr--small">
         </div>
         <div class="text-center">
-            <h2>Thay Đổi Thông Tin Tài Khoản</h2>
+            <h2>Thay đổi thông tin tài khoản</h2>
             <div>
-                <form method="post" action="/my-account/update">
+                <form method="post" action="/my-account/update" name="update-form" id="update-form">
                     @csrf
                     <div class="input-line mt-30">
-                        <label for="shipName" style="font-size: 20px">Tên: </label>
-                        <input type="text" style="margin-left: 94px">
+                        <label for="name" style="font-size: 20px">Tên: </label>
+                        <input type="text" name="name" style="margin-left: 94px" value="{{Auth::user()->profile->name}}">
                     </div>
                     <div class="input-line">
-                        <label for="shipAddress" style="font-size: 20px">Email: </label>
-                        <input type="text" style="margin-left: 83px">
+                        <label for="address" style="font-size: 20px">Địa chỉ: </label>
+                        <input type="text" name="address" style="margin-left: 83px" value="{{Auth::user()->profile->address}}">
                     </div>
                     <div class="input-line">
-                        <label for="shipPhone" style="font-size: 20px">Số điện thoại: </label>
-                        <input type="text" name="phone" value="{{Auth::user()->phone}}" style="margin-left: 20px">
-                        @if($errors->has('phone'))
-                            <div class="text-center text-red" style="color: red">{{ $errors->first('phone') }}</div>
-                        @endif
+                        <label for="dob" style="font-size: 20px">Ngày sinh: </label>
+                        <input type="date" name="dob" value="{{Auth::user()->profile->dob}}" style="margin-left: 20px">
+                    </div>
+                    <div class="input-line">
+                        <label for="gender" style="font-size: 20px">Giới tính: </label>
+                        <select name="gender" id="">
+                            <option value="" disabled {{ Auth::user()->profile->gender == null ? 'selected' : '' }}>Giới tính</option>
+                            <option value="0" {{ Auth::user()->profile->gender == '0' ? 'selected' : '' }}>Nam</option>
+                            <option value="1" {{ Auth::user()->profile->gender == '1' ? 'selected' : '' }}>Nữ</option>
+                            <option value="-1" {{ Auth::user()->profile->gender == '-1'  ? 'selected' : '' }}>Khác</option>
+                        </select>
                     </div>
                 <div class="d-flex text-center justify-content-center">
                     <button type="submit" class="btn" style="margin-right: 30px" >Cập Nhật</button>
-                    <a href="/my-account" class="return"><button type="button" class="btn-grey">Quay Về  </button></a>
+{{--                    <button type="button" href="/my-account" class="btn" style="margin-right: 30px" >Trở lại</button>--}}
+{{--                    <a href="/my-account" class="return"><button type="button" class="btn-grey">Quay Về  </button></a>--}}
                 </div>
                 </form>
             </div>
@@ -207,5 +215,43 @@
 <script src="{{asset('Hung/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('Hung/js/main.js')}}"></script>
 <script src="{{asset('user/js/main.js')}}"></script>
-</body>
+<script src="/assets/vendors/js/base/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+<script>
+    $(document).ready(function () {
+        //validate form
+        $("form[name=update-form]").validate({
+            rules: {
+                name:{
+                    required: true,
+                    minlength: 8,
+                    maxlength: 250
+                },
+                address:{
+                    required: true,
+                    minlength: 8,
+                    maxlength: 250
+                },
+                dob: "required",
+                gender: "required",
+            },
+            messages: {
+                name: {
+                    required: "Vui lòng nhập vào tên ",
+                    minlength: "Tên chứa ít nhất 8 ký tự",
+                    maxlength: "Tên chứa nhiều nhất 250 ký tự",
+                },
+                address: {
+                    required: "Vui lòng nhập vào tên ",
+                    minlength: "Tên chứa ít nhất 8 ký tự",
+                    maxlength: "Tên chứa nhiều nhất 250 ký tự",
+                },
+                dob: "Vui lòng nhập ngày sinh",
+                gender: "Vui lòng chọn giới tính",
+            },
+        });
+    })
+
+</script>
+    </body>
 </html>

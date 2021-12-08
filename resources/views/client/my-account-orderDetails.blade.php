@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Thông Tin Tài Khoản</title>
     <!-- Favicon -->
-    <link rel="icon" href="{{asset('user/img/food.svg')}}" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -37,30 +37,91 @@
     <link rel="stylesheet" href="{{asset('user/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('user/css/home.css')}}">
     {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
+<!-- firebase stuff -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 </head>
 <body>
 <header id="nav">
 
-    <a href="/home" class="logo"><i class="fas fa-utensils"></i>VietKitchen</a>
+    <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        @if(Auth::check())
-            <a href="/my-account">
-                <i class="fas fa-user"></i>
-                {{ Auth::user()->email }}
-            </a>
-        @else
-            <a href="/login"> Đăng nhập</a>
-        @endif
-        <a href="/products"> Cửa Hàng </a>
+        <a href="/products"> Cửa Hàng</a>
         <a href="/contact-us"> Liên Hệ </a>
         <a href="/blog"> Blog </a>
+        @guest
+            <a href="/login"> Đăng nhập</a>
+        @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
         </a>
+        @auth
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+            </div>
+
+            <div class="notification_dd">
+                <ul class="notification_ul">
+                    @if(!$notifications->isEmpty())
+                        @foreach($notifications as $notification)
+                            <li>
+                                <a href="/my-account/order/id={{ $notification->order_id }}">
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            {{ $notification->title}}
+                                        </div>
+                                        <div class="sub_title">
+                                            {{ $notification->sub_title }}
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </li>
+                        @endforeach
+                        <li class="show_all">
+                            <p>Xem tất cả</p>
+                        </li>
+                    @else
+                        <li>
+                            <div class="notify_data">
+                                <div class="sub_title">
+                                    Không có thông báo
+                                </div>
+                            </div>
+                        </li>
+
+                    @endif
+                </ul>
+            </div>
+            <div>
+                <div class="profile">
+                    <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="/my-account">
+                                <i class="fas fa-user"></i>
+                                Người dùng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/my-account/logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        @endauth
+
     </nav>
 </header>
 <div class="breadcrumb-area gray-bg mt-70">
@@ -68,7 +129,8 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
-                <li class="active">Thông Tin Tài Khoản</li>
+                <li><a href="/my-account">Thông Tin Tài Khoản</a></li>
+                <li class="active">Chi tiết đơn hàng</li>
             </ul>
         </div>
     </div>
@@ -77,27 +139,57 @@
     <div class="customer-page theme-default-margin my-account-page pt-50 pb-50">
         <div class="container">
             <h1>Tài Khoản Của Tôi
-                <span class="logout-title"><a href="/my-account/logout">Đăng Xuất</a></span>
+                <span class="logout-title"><a href="/my-account">Trở lại</a></span>
             </h1>
             <hr class="hr--small">
             <div class="grid">
                 <div class="grid__item one-third medium-down--one-whole mt-md-0 mt-5">
                     <h2 class="text-center" style="font-size: 25px">Thông Tin Đơn Hàng</h2>
-                    <p><strong>Ngày Tạo Đơn Hàng:</strong> {{$orders->created_at}}</p>
-                    <p><strong>Tên Khách Hàng:</strong> {{$orders->ship_name}}</p>
-                    <p><strong>Địa Chỉ:</strong> {{$orders->ship_address}}</p>
-                    <p><strong>Số Điện Thoại:</strong> {{$orders->ship_phone}}</p>
-                    <p><strong>Ghi Chú:</strong> {{$orders->ship_note}}</p>
-                    @if($orders->checkout == 1)
-                        <p><strong>Trạng Thái:</strong> Đã Thanh Toán</p>
-                    @else
-                        <p><strong>Trạng Thái:</strong> Chưa Thanh Toán</p>
-                    @endif
-                    <div class="mt-2 me-5"><h4>Tổng Giỏ Hàng: <span>{{\App\Helpers\Helper::formatVnd($orders->total_price)}} VND</span>
-                        </h4></div>
-                    <div class="text-center">
-                        <a href="/my-account" class="return"><button type="button" class="btn-grey">Quay Về  </button></a>
+                    <p><strong>Ngày tạo đơn hàng: </strong> {{$orders->created_at->format('H:i:s d/m/Y')}}</p>
+                    <p><strong>Người nhận: </strong> {{$orders->ship_name}}</p>
+                    <p><strong>Địa chỉ :</strong> {{$orders->ship_address}}</p>
+                    <p><strong>Số điện thoại:</strong> {{$orders->ship_phone}}</p>
+                    <p><strong>Ghi chú:</strong> {{$orders->ship_note}}</p>
+                    <p><strong>Trạng Thái:</strong>
+                        @switch($orders->status)
+                            @case(-2)
+                            Đã hủy
+                            @break
+                            @case(0)
+                            Chờ thanh toán
+                            @break
+                            @case(1)
+                            Chờ xử lý
+                            @break
+                            @case(2)
+                            Đang xử lý
+                            @break
+                            @case(3)
+                            Đang giao hàng
+                            @break
+                            @case(4)
+                            Đã hoàn thành
+                            @break
+                        @endswitch
+                    </p>
+                    <p><strong>Thanh toán: </strong>
+                        @if($orders->checkout == 1) Đã thanh toán
+                        @else Chưa thanh toán
+                        @endif
+                    </p>
+                    <div class="mt-2 me-5"><h4>Tổng số tiền: <span>{{\App\Helpers\Helper::formatVnd($orders->total_price)}} đ</span>
+                        </h4>
                     </div>
+                    @if($orders->status == 0)
+                    <div class="text-center mt-40">
+                        <a href="/order/{{ $orders->id }}">
+                            <button class="btn">Đi tới trang thanh toán</button>
+                        </a>
+                    </div>
+                    @endif
+{{--                    <div class="text-center">--}}
+{{--                        <a href="/my-account" class="return"><button type="button" class="btn-grey">Quay Về  </button></a>--}}
+{{--                    </div>--}}
                 </div>
                 <div class="grid__item two-thirds medium-down--one-whole">
                     <h2 class="text-center" style="font-size: 25px">Chi Tiết Đơn Hàng</h2>
@@ -139,10 +231,10 @@
                             <thead>
                             <tr>
                                 <th style="min-width: 130px">Ảnh</th>
-                                <th>Tên Sản Phẩm</th>
-                                <th>Đơn Giá Sản Phẩm</th>
+                                <th>Sản Phẩm</th>
+                                <th>Đơn Giá</th>
                                 <th>Số Lượng</th>
-                                <th>Tổng Giá Sản Phẩm</th>
+                                <th>Số tiền</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -151,11 +243,11 @@
                                     <td><img width="100px" height="100px" src="{{$orderDetail-> product -> thumbnail}}"
                                              alt=""></td>
                                     <td>{{$orderDetail-> product -> name}}</td>
-                                    <td>{{\App\Helpers\Helper::formatVnd($orderDetail->unit_price)}} VND</td>
+                                    <td>{{\App\Helpers\Helper::formatVnd($orderDetail->unit_price)}} đ</td>
                                     <td>{{$orderDetail->quantity}}</td>
                                     <td class="product-subtotal">
                                         {{\App\Helpers\Helper::formatVnd($orderDetail->quantity * $orderDetail->unit_price)}}
-                                        VND
+                                        đ
                                     </td>
                                 </tr>
                             @endforeach
@@ -282,5 +374,7 @@
 <script src="{{asset('Hung/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('Hung/js/main.js')}}"></script>
 <script src="{{asset('user/js/main.js')}}"></script>
+<script src="{{ asset('js/firebase.js') }}"></script>
+
 </body>
 </html>

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Thông Tin Tài Khoản</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -36,31 +36,92 @@
     <script src="Hung/js/modernizr-2.8.3.min.js"></script>
     <link rel="stylesheet" href="user/css/main.css">
     <link rel="stylesheet" href="user/css/home.css">
-    {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
+{{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
+<!-- firebase stuff -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 </head>
 <body>
 <header id="nav">
 
-    <a href="/home" class="logo"><i class="fas fa-utensils"></i>VietKitchen</a>
+    <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        @if(Auth::check())
-            <a href="/my-account">
-                <i class="fas fa-user"></i>
-                {{ Auth::user()->email }}
-            </a>
-        @else
-            <a href="/login"> Đăng nhập</a>
-        @endif
-        <a href="/products"> Cửa Hàng </a>
+        <a href="/products"> Cửa Hàng</a>
         <a href="/contact-us"> Liên Hệ </a>
         <a href="/blog"> Blog </a>
+        @guest
+            <a href="/login"> Đăng nhập</a>
+        @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
         </a>
+        @auth
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+            </div>
+
+            <div class="notification_dd">
+                <ul class="notification_ul">
+                    @if(!$notifications->isEmpty())
+                        @foreach($notifications as $notification)
+                            <li>
+                                <a href="/my-account/order/id={{ $notification->order_id }}">
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            {{ $notification->title}}
+                                        </div>
+                                        <div class="sub_title">
+                                            {{ $notification->sub_title }}
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </li>
+                        @endforeach
+                        <li class="show_all">
+                            <p>Xem tất cả</p>
+                        </li>
+                    @else
+                        <li>
+                            <div class="notify_data">
+                                <div class="sub_title">
+                                    Không có thông báo
+                                </div>
+                            </div>
+                        </li>
+
+                    @endif
+                </ul>
+            </div>
+            <div>
+                <div class="profile">
+                    <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="/my-account">
+                                <i class="fas fa-user"></i>
+                                Người dùng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/my-account/logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        @endauth
+
     </nav>
 </header>
 <div class="breadcrumb-area gray-bg mt-70">
@@ -73,11 +134,11 @@
         </div>
     </div>
 </div>
-@if(Auth::check())
+@auth
     <div class="customer-page theme-default-margin my-account-page pt-50 pb-50">
         <div class="container">
             <h1>Tài Khoản Của Tôi
-                <span class="logout-title"><a href="/my-account/logout">Đăng Xuất</a></span>
+                {{--                <span class="logout-title"><a href="/my-account/logout">Đăng Xuất</a></span>--}}
             </h1>
             <hr class="hr--small">
             <div class="grid">
@@ -88,10 +149,50 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <p><strong>Tên:</strong> {{Auth::user()->email}}</p>
-                    <p><strong>Số Điện Thoại:</strong> {{Auth::user()->phone}}</p>
+                    <div class="user-thumbnail">
+                        <img src="{{ Auth::user()->DefaultThumbnail }}" alt="">
+                    </div>
+                    <p><strong>Email:</strong> {{Auth::user()->email}}</p>
+                    <p><strong>Số điện thoại:</strong> {{Auth::user()->phone}}</p>
+                    <p><strong>Tên:</strong>
+                        @if(Auth::user()->profile->name == null)
+                            Chưa cập nhật
+                        @else
+                            {{Auth::user()->profile->name}}
+                        @endif
+                    </p>
+                    <p><strong>Giới tính: </strong>
+                        @switch(Auth::user()->profile->gender)
+                            @case(null)
+                                Chưa cập nhật
+                                @break
+                            @case(0)
+                                Nam
+                                @break
+                            @case(1)
+                                Nữ
+                                @break
+                            @case(-1)
+                                Khác
+                                @break
+                        @endswitch
+                    </p>
+                    <p><strong>Ngày sinh: </strong>
+                        @if(Auth::user()->profile->dob == null)
+                            Chưa cập nhật
+                        @else
+                            {{Auth::user()->profile->dob}}
+                        @endif
+                    </p>
+                    <p><strong>Địa chỉ: </strong>
+                        @if(Auth::user()->profile->address == null)
+                            Chưa cập nhật
+                        @else
+                            {{Auth::user()->profile->address}}
+                        @endif
+                    </p>
                     <div class="text-center mt-40">
-                        <a href="/my-account/change-information">
+                        <a href="/my-account/update">
                             <button class="btn"> Thay Đổi Thông Tin</button>
                         </a>
                     </div>
@@ -145,29 +246,50 @@
                         <table>
                             <thead>
                             <tr>
-                                <th>Tên Khách Hàng</th>
+                                <th>Mã đơn hàng</th>
                                 <th>Ngày Tạo Đơn Hàng</th>
-                                <th>Tổng Đơn Hàng</th>
+                                <th>Tổng số tiền</th>
                                 <th>Trạng Thái</th>
                                 <th>Chi Tiết</th>
                             </tr>
                             </thead>
                             <tbody>
                             @if(count($orders) > 0)
-                            @foreach($orders as $order)
-                                <tr>
-                                    <td>{{$order->ship_name}}</td>
-                                    <td>{{$order->created_at}}</td>
-                                    <td>{{\App\Helpers\Helper::formatVnd($order->total_price)}}
-                                        VND
-                                    </td>
-                                    <td class="product-subtotal">@if($order->checkout == 0) Chưa Thanh Toán @else Đã Thanh Toán @endif</td>
-                                    <td class="product-remove">
-                                        <a href="/my-account/order/id={{$order->id}}"><i
-                                                class="fa fa-info-circle fa-2x"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach($orders as $order)
+                                    <tr>
+                                        <td>{{$order->id}}</td>
+                                        <td>{{$order->created_at->format('H:i:s d/m/Y')}}</td>
+                                        <td>{{\App\Helpers\Helper::formatVnd($order->total_price)}}
+                                            đ
+                                        </td>
+                                        <td class="product-subtotal">
+                                            @switch($order->status)
+                                                @case(-2)
+                                                Đã hủy
+                                                @break
+                                                @case(0)
+                                                Chờ thanh toán
+                                                @break
+                                                @case(1)
+                                                Chờ xử lý
+                                                @break
+                                                @case(2)
+                                                Đang xử lý
+                                                @break
+                                                @case(3)
+                                                Đang giao hàng
+                                                @break
+                                                @case(4)
+                                                Đã hoàn thành
+                                                @break
+                                            @endswitch
+                                        </td>
+                                        <td class="product-remove">
+                                            <a href="/my-account/order/id={{$order->id}}"><i
+                                                    class="fa fa-info-circle fa-2x"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @else
                                 <tr>
                                     <td colspan="5" style="font-size: 20px">Không Tìm Thấy Đơn Hàng</td>
@@ -197,12 +319,13 @@
             </div>
         </div>
     </div>
-@else
+@endauth
+@guest
     <div class="text-center mb-40">
         <h2 class="">Vui Lòng Đăng Nhập Vào Tài Khoản Của Bạn</h2>
         <a href="/login" class="btn pb-35">Đăng Nhập</a>
     </div>
-@endif
+@endguest
 <div class="footer-area black-bg-2 pt-70">
     <div class="footer-top-area pb-18">
         <div class="container">
@@ -296,5 +419,7 @@
 <script src="Hung/js/bootstrap.min.js"></script>
 <script src="Hung/js/main.js"></script>
 <script src="user/js/main.js"></script>
+<script src="{{ asset('js/firebase.js') }}"></script>
+
 </body>
 </html>

@@ -163,10 +163,6 @@ class OrderController extends Controller
 //        $clientSecret = 'EIQ6hCG0IbFg9DJD4Z1YH530f30BNFCW4T79RN-Z311mKRSfw7ZhhEWaU5nMOfJf5kP0Nj0h0KHpyVfS';
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> da52097 (final)
         $orderId = $request->get('orderID');
         $order = Order::find($orderId);
         if ($order == null) {
@@ -224,7 +220,7 @@ class OrderController extends Controller
 
 
         ### Transaction
-        $invoice = $order->id + 600;
+        $invoice = $order->id + 1600;
         $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)

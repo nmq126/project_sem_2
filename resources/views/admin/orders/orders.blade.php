@@ -65,11 +65,11 @@
                                 <label for="status" class="text-left mr-5">Trạng thái:
                                     <select class="form-control" name="statusz" id="status" >
                                         <option value="-1">Tất cả</option>
-                                        <option value="2">Đang xử lý</option>
-                                        <option value="1">Đợi </option>
-                                        <option value="3">Giao hàng</option>
-                                        <option value="4">Hoàn thành</option>
                                         <option value="0">Chờ thanh toán</option>
+                                        <option value="1">Chờ xác nhận </option>
+                                        <option value="2">Đang xử lý</option>
+                                        <option value="3">Đang giao hàng</option>
+                                        <option value="4">Hoàn thành</option>
                                         <option  value="-2">Đã Hủy</option>
                                     </select></label>
                                     <label for="status" class="text-left mr-5">Thanh toán:
@@ -140,12 +140,11 @@
                                     @if($order->status == 1)
                                     <td>
                                         <select class="form-control" name="status" >
-
+                                            <option value="0" disabled>Chờ thanh toán</option>
+                                            <option selected="selected" value="1">Chờ xác nhận </option>
                                             <option value="2">Đang xử lý</option>
-                                            <option selected="selected" value="1">Đợi </option>
-                                            <option value="3">Giao hàng</option>
+                                            <option value="3">Đang giao hàng</option>
                                             <option value="4">Hoàn thành</option>
-                                            <option value="0">Chờ thanh toán</option>
                                             <option  value="-2">Đã Hủy</option>
                                         </select>
                                     </td>
@@ -153,12 +152,11 @@
                                 @if($order->status == 0)
                                 <td>
                                     <select class="form-control" name="status" >
-
+                                        <option selected="selected" value="0" disabled>Chờ thanh toán</option>
+                                        <option  value="1">Chờ xác nhận </option>
                                         <option value="2">Đang xử lý</option>
-                                        <option  value="1">Đợi </option>
-                                        <option value="3">Giao hàng</option>
+                                        <option value="3">Đang giao hàng</option>
                                         <option value="4">Hoàn thành</option>
-                                        <option selected="selected" value="0">Chờ thanh toán</option>
                                         <option  value="-2">Đã Hủy</option>
                                     </select>
                                 </td>
@@ -166,12 +164,11 @@
                                 @if($order->status == 2)
                                 <td>
                                     <select class="form-control" name="status" >
-
+                                        <option  value="0" disabled>Chờ thanh toán</option>
+                                        <option  value="1">Chờ xác nhận </option>
                                         <option selected="selected" value="2">Đang xử lý</option>
-                                        <option  value="1">Đợi </option>
-                                        <option value="3">Giao hàng</option>
+                                        <option value="3">Đang giao hàng</option>
                                         <option value="4">Hoàn thành</option>
-                                        <option  value="0">Chờ thanh toán</option>
                                         <option  value="-2">Đã Hủy</option>
                                     </select>
 
@@ -181,12 +178,11 @@
                             @if($order->status == 3)
                             <td>
                                 <select class="form-control" name="status" >
-
+                                    <option  value="0" disabled>Chờ thanh toán</option>
+                                    <option  value="1">Chờ xác nhận </option>
                                     <option  value="2">Đang xử lý</option>
-                                    <option  value="1">Đợi </option>
-                                    <option selected="selected" value="3">Giao hàng</option>
+                                    <option selected="selected" value="3">Đang giao hàng</option>
                                     <option value="4">Hoàn thành</option>
-                                    <option  value="0">Chờ thanh toán</option>
                                     <option  value="-2">Đã Hủy</option>
                                 </select>
                             </td>
@@ -195,12 +191,11 @@
 
                                         <td>
                                             <select class="form-control" name="status" >
-
+                                                <option  value="0" disabled>Chờ thanh toán</option>
+                                                <option  value="1">Chờ xác nhận </option>
                                                 <option  value="2">Đang xử lý</option>
-                                                <option  value="1">Đợi </option>
-                                                <option  value="3">Giao hàng</option>
+                                                <option  value="3">Đang giao hàng</option>
                                                 <option selected="selected" value="4">Hoàn thành</option>
-                                                <option  value="0">Chờ thanh toán</option>
                                                 <option  value="-2">Đã Hủy</option>
                                             </select>
                                         </td>
@@ -209,12 +204,11 @@
                                 @if($order->status == -2)
                                     <td>
                                         <select class="form-control" name="status" >
-
+                                            <option  value="0" disabled>Chờ thanh toán</option>
+                                            <option  value="1">Chờ xác nhận </option>
                                             <option  value="2">Đang xử lý</option>
-                                            <option  value="1">Đợi </option>
-                                            <option  value="3">Giao hàng</option>
+                                            <option  value="3">Đang giao hàng</option>
                                             <option value="4">Hoàn thành</option>
-                                            <option  value="0">Chờ thanh toán</option>
                                             <option  selected="selected"  value="-2">Đã Hủy</option>
                                         </select>
                                     </td>

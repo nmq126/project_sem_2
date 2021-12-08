@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix('admin')->group(function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
     Route::get('/product/create',[ProductAdminController::class, 'getForm']);
     Route::post('/product/create',[ProductAdminController::class, 'processForm']);
     Route::get('/product/list',[ProductAdminController::class, 'getList']);
@@ -76,11 +76,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/product/update/category/{id}',[ProductAdminController::class, 'UpdateViewCate']);
     Route::post('/product/update/category/{id}',[ProductAdminController::class, 'UpdateCategory']);
 
+    Route::get('/download', [OrderAdminController::class, 'export']);
 
 });
 
 
-Route::get('/download', [OrderAdminController::class, 'export']);
 
 
 
@@ -102,28 +102,39 @@ Route::post('/cart/update',[ShoppingCartController::class, 'update']);
 
 //checkout, order
 Route::get('/checkout', [OrderController::class, 'show']);
-Route::post('/order', [OrderController::class, 'process']);
-Route::get('/order/{id}', [OrderController::class, 'getDetail']);
-Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
-Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
+
 
 Route::get('/home', [HomePageController::class, 'show']);
-Route::get('/my-account', function (){
-    return view('client.my-account');
-} );
+Route::group(['middleware' => 'auth'],function (){
 
-Route::get('/register', [RegisterController::class, 'create']);
-Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/login', [LoginController::class, 'create']);
-Route::get('my-account', [LoginController::class, 'showOrder']);
-Route::get('/my-account/change-information', function () {
-    return view('client.change-user-information');
+    //order
+    Route::post('/checkout', [OrderController::class, 'process']);
+    Route::get('/order/{id}', [OrderController::class, 'getDetail']);
+    Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
+    Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
+    //account info
+    Route::get('/my-account', [LoginController::class, 'showOrder']);
+    Route::get('/my-account/order/id={id}', [LoginController::class, 'showOrderDetails']);
+
+    Route::get('my-account/update', [LoginController::class, 'showUpdateUser']);
+    Route::post('my-account/update', [LoginController::class, 'processUpdateUser']);
+
+    Route::get('/my-account/logout', [LoginController::class, 'logout']);
+
 });
-Route::post('my-account/update', [LoginController::class, 'updateUser']);
-Route::get('/my-account/logout', [LoginController::class, 'logout']);
-Route::get('/my-account/order/id={id}', [LoginController::class, 'showOrderDetails']);
-Route::post('/login', [LoginController::class, 'store']);
+
+Route::group(['middleware' => 'guest'],function (){
+    //đăng ký
+    Route::get('/register', [RegisterController::class, 'create']);
+    Route::post('/register', [RegisterController::class, 'store']);
+    //đăng nhập
+    Route::get('/login', [LoginController::class, 'create']);
+    Route::post('/login', [LoginController::class, 'store']);
+
+});
+
+
 
 
 

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Notification;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Profile;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,10 +42,11 @@ class LoginController extends Controller
 //            }
             $user = Auth::user();
             $user->update(['device_token' => $request->get('device_token')]);
+            if ($user->level == 1){
+                return redirect('/admin/dashboard');
+            }
+            return redirect('/home');
 
-
-            return back();
-//            return redirect('/home');
         } else {
             return back()->with('error', 'Thông tin đăng nhập chưa chính xác!');
         }
@@ -56,7 +58,7 @@ class LoginController extends Controller
         if (Auth::check()) {
             $user_id = Auth::id();
             $orders = Order::query();
-            $orders = $orders->where('user_id', '=', $user_id);
+            $orders = $orders->where('user_id', '=', $user_id)->orderByDesc('id');
             $name = $request->input('name');
             $orders = $orders->where('ship_name', 'LIKE', '%' . $name . '%');
             if ($request->has('fromDate')) {
@@ -98,6 +100,12 @@ class LoginController extends Controller
 
     public function showOrderDetails($id, Request $request)
     {
+        $order = Order::find($id);
+        if ($order == null || $order->user_id != auth()->id()) {
+            return view('client.errors.404', [
+                'msg' => 'Đơn hàng không tồn tại!!'
+            ]);
+        }
         $orders = Order::where('id', '=', $id)->first();
         Notification::where('order_id', $orders->id)->update(['read_at' => Carbon::now()]);
         $orderDetails = OrderDetail::query();
@@ -131,15 +139,16 @@ class LoginController extends Controller
         return view('client.my-account-orderDetails', compact('orderDetails', 'orders'));
     }
 
-    public function updateUser(Request $request)
+    public function showUpdateUser(){
+        return view('client.change-user-information');
+    }
+
+    public function processUpdateUser(Request $request)
     {
-        $request->validate([
-            'phone' => 'required'
-        ]);
         $data = $request->all();
         unset($data['_token']);
-        User::where('id', '=', Auth::id())->update($data);
-        return redirect('/my-account')->with('success', 'Thông Tin Tài Khoản Của Bạn Đã Được Cập Nhật.');
+        Profile::where('user_id', '=', Auth::id())->update($data);
+        return redirect('/my-account')->with('success', 'Thông tin tài khoản vủa nạn đã được cập nhật.');
     }
 
     public function logout()

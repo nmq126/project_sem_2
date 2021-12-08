@@ -50,12 +50,16 @@
         @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
+            @if($totalQuantity !=0)
             <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @endif
         </a>
         @auth
             <div class="notifications">
                 <i class="fas fa-bell"></i>
+                @if($number_noti !=0)
                 <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @endif
             </div>
 
             <div class="notification_dd">
@@ -69,9 +73,14 @@
                                             {{ $notification->title}}
                                         </div>
                                         <div class="sub_title">
-                                            User: {{ $notification->sub_title }}
+                                            {{ $notification->sub_title }}
                                         </div>
                                     </div>
+                                    @if($notification->read_at == null)
+                                        <div class="notify_status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                    @endif
                                 </a>
 
                             </li>
@@ -277,97 +286,60 @@
 
 <section style="padding: 0 1rem" class="gallery" id="gallery">
 
-<<<<<<< HEAD
+
     <h1 class="heading pt-5 pb-5"><span> Gallery </span></h1>
     <div class="containerG">
         <div class="boxG a">
             <img
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758438/home_page_gallery/lucas-hoang-Yb2Sb9bdgPk-unsplash_1_1_fg2ddy.jpg"
-=======
-    <h1 class="heading pt-5 pb-5"><span> Kho Ảnh </span></h1>
-    <div class="containerG">
-        <div class="boxG a">
-            <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168695/gallery/lucas-hoang-Yb2Sb9bdgPk-unsplash_1_skkh0u.jpg"
->>>>>>> da52097 (final)
                 alt="">
         </div>
         <div class="boxG b">
             <img
-<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/ben-lei-ubBWnvrsARk-unsplash_e5xqkd.jpg"
-=======
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168775/gallery/ben-lei-ubBWnvrsARk-unsplash_xw3eri.jpg"
->>>>>>> da52097 (final)
                 alt="">
         </div>
         <div class="boxG c">
             <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169351/gallery/hong-anh-duong-EK--nAm-CYM-unsplash_itgbyk.jpg"
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758595/home_page_gallery/nikolay-smeh-gPpbFaEkl00-unsplash_rcduz6.jpg"
                 alt="">
         </div>
         <div class="boxG d">
             <img
-<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/hong-anh-duong-EK_-_nAm-CYM-unsplash_ahpaos.jpg"
-=======
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169069/gallery/nikolay-smeh-gPpbFaEkl00-unsplash_gb5oe3.jpg"
->>>>>>> da52097 (final)
                 alt="">
         </div>
         <div class="boxG e">
             <img
-<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758595/home_page_gallery/sonny-mauricio-yhc4pSbl01A-unsplash_g2fmhg.jpg"
-=======
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169145/gallery/sonny-mauricio-yhc4pSbl01A-unsplash_a6qsc4.jpg"
->>>>>>> da52097 (final)
                 alt="">
-
         </div>
         <div class="boxG f">
             <img
                 src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168847/gallery/lynda-hinton-q_eyFSd2W3M-unsplash_xrypqq.jpg"
                 alt="">
-
         </div>
         <div class="boxG g">
             <img
-<<<<<<< HEAD
-                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/lynda-hinton-q_eyFSd2W3M-unsplash_w4xcnb.jpg"
-=======
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168942/gallery/rosalind-chang-P_wPicZYoPI-unsplash_m4vtie.jpg  "
->>>>>>> da52097 (final)
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758595/home_page_gallery/rosalind-chang-P_wPicZYoPI-unsplash_etthar.jpg"
                 alt="">
 
         </div>
         <div class="boxG h">
             <img
-<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/markus-winkler-dq03aws4SmY-unsplash_dcgyps.jpg"
-=======
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169405/gallery/markus-winkler-dq03aws4SmY-unsplash_o2atrr.jpg"
->>>>>>> da52097 (final)
                 alt="">
 
         </div>
         <div class="boxG i">
             <img
-<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/haseeb-jamil-J9lD6FS6_cs-unsplash_rlggsj.jpg"
-=======
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169207/gallery/haseeb-jamil-J9lD6FS6_cs-unsplash_axdtau.jpg"
->>>>>>> da52097 (final)
                 alt="">
 
         </div>
         <div class="boxG j">
             <img
-<<<<<<< HEAD
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/andraz-lazic-iy_MT2ifklc-unsplash_ssuntp.jpg"
-=======
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169025/gallery/andraz-lazic-iy_MT2ifklc-unsplash_tohd1p.jpg"
->>>>>>> da52097 (final)
                 alt="">
 
         </div>
@@ -441,11 +413,7 @@
                 <div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-<<<<<<< HEAD
                             <h4>THÔNG TIN</h4>
-=======
-                            <h4 >THÔNG TIN</h4>
->>>>>>> da52097 (final)
                         </div>
                         <div class="footer-content">
                             <ul>
@@ -466,7 +434,7 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my/account">Thông tin tài khoản</a></li>
+                                <li><a href="my-account">Thông tin tài khoản</a></li>
                                 <li><a href="#">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
@@ -481,9 +449,9 @@
                         </div>
                         <div class="footer-contact">
                             <ul>
-                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Địa chỉ: 8A Tôn Thất Thuyết, Hà Nội</li>
                                 <li>Số điện thoại: (012) 800 456 789-987</li>
-                                <li>Email: <a href="#">Info@example.com</a></li>
+                                <li>Email: <a href="#">vietkitchen.hn@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
@@ -491,8 +459,7 @@
                         </div>
                         <div class="footer-time">
                             <ul>
-                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
-                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>22:00 PM</span> mọi ngày</li>
                             </ul>
                         </div>
                     </div>

@@ -48,7 +48,7 @@
                         @if($orders->status == 1)
 
 
-                                <span>Đợi </span>
+                                <span>Chờ xác nhận </span>
 
 
                     @endif
