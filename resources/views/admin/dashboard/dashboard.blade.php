@@ -175,7 +175,7 @@ Morris.Donut({
  *
  * Why not try some of the options above?
  */
-var chartArea = new Morris.Area({
+var chartArea = new Morris.Line({
   element: 'area-example',
 
   xkey: 'tw',

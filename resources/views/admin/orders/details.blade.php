@@ -42,6 +42,49 @@
                     <p><strong>Created At:</strong> {{$orders->created_at}}</p>
                     <p><strong>Update At:</strong> {{$orders->updated_at}}</p>
                     <p><strong>Delete At:</strong> {{$orders->deleted_at}}</p>
+                    <div style="position: relative" class="d-flex mt-0">
+                   <form action="/admin/orders/change" method="GET" name="status">
+                    <input type="hidden" name="id" value="{{$orders->id}}">
+                        <p><strong>Status:</strong> </p>
+                        <select style="width: 150px;position: absolute;left:80px;bottom:5px;border:2px solid black" class="form-control" name="status" >
+                            @if($orders->status == 2)
+                            <option selected="selected" value="2">Đang xử lý</option>
+                            @else
+                            <option value="2">Đang xử lý</option>
+                            @endif    
+                          @if ($orders->status == 1)
+                          <option selected="selected" value="1">Đợi </option>
+                          @else
+                          <option  value="1">Đợi </option>
+                           @endif    
+                           @if($orders->status == 3)
+                            <option selected="selected" value="3">Giao hàng</option>
+                           @else
+                            <option value="3">Giao hàng</option>
+                            @endif    
+                            @if($orders->status == 4)
+                            <option selected="selected" value="4">Hoàn thành</option>
+                            @else
+                            <option value="4">Hoàn thành</option>
+                            @endif    
+                            @if($orders->status == 0)
+                            <option selected="selected" value="0">Chờ thanh toán</option>
+                            @else
+                            <option value="0">Chờ thanh toán</option>
+                            @endif    
+                            @if($orders->status == -2)
+                            <option  selected="selected"  value="-2">Đã Hủy</option>
+                            @else
+                            <option  value="-2">Đã Hủy</option>
+                            @endif      
+                       </select>
+                    </form>
+                        {{-- @if($orders->status == 1)
+                
+                
+                                <span>Đợi </span>
+        
+               
                     <div class="d-flex mt-0">
 
                         <p><strong>Status:</strong> </p>
@@ -91,6 +134,8 @@
 
 
                                 <span>Đã Hủy</span>
+                      
+                    @endif --}}
 
                     @endif
 
@@ -163,6 +208,9 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous"></script>
     <script>
+        $("select[name=status]").change(function(){
+            $( "form[name=status]" ).submit();
+        });
         $(document).ready(function () {
             $(document).on('click', '#update', function (e) {
                 e.preventDefault();

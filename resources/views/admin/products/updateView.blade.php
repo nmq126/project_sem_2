@@ -36,7 +36,7 @@
 </div>
 
 <div class="widget-body">
-<form class="form-horizontal" action="/admin/product/update/ingredient/{{$ingrendient->id}}" name="product-form" method="post">
+<form class="form-horizontal" action="/admin/ingredient/update/{{$ingrendient->id}}" name="product-form" method="post">
 @csrf
 <div class="form-group row d-flex align-items-center mb-5">
 <label class="col-lg-3 form-control-label">Id</label>

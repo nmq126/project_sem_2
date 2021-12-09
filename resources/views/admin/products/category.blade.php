@@ -36,7 +36,7 @@
 </div>
 
 <div class="widget-body">
-<form class="form-horizontal" action="/admin/product/create/category" name="product-form" method="post">
+<form class="form-horizontal" action="/admin/category/create" name="product-form" method="post">
 @csrf
 <div class="form-group row d-flex align-items-center mb-5">
 <label class="col-lg-3 form-control-label">Tên</label>

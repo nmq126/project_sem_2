@@ -25,6 +25,7 @@ class ProductRequest extends FormRequest
     {
         return [
 //            'name' => 'required|max:50|min:10',
+        'discount'=>'max:100|min:0|numeric',
             'name' => 'required',
             'description' => 'required',
 //            'type' => 'required',
@@ -39,6 +40,9 @@ class ProductRequest extends FormRequest
 //            'Car_name.required' => 'Vui lòng nhập tên xe.',
             'name.required' => 'Vui lòng nhập tên sản phẩm.',
             'description.required' => 'Vui lòng nhập vào phần mô tả.',
+            'discount.min' => 'Giảm giá phải lơn hơn hoặc bằng 0.',
+            'discount.max' => 'Giảm giá nhỏ hơn 100.',
+            'discount.numeric' => 'Phải là số',
 //            'Car_name.min' => 'Tên phải lớn hơn 10 ký tự.',
 //            'Car_name.max' => 'Tên phải nhỏ hơn 50 ký tự.',
 //            'brand.required' => 'Vui lòng nhập hãng xe.',

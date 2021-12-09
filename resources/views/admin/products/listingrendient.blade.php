@@ -54,14 +54,14 @@
         <td>{!!$i->description!!}</td>
     
         <td class="td-actions">
-            <a href="/admin/product/update/category/{{$i->id}}"><i  class="la la-edit edit"></i></a>
+            <a href="/admin/ingredient/update/{{$i->id}}"><i  class="la la-edit edit"></i></a>
             <a ><i  class="la la-close delete test_delete"></i></a>
         </td>
     </tr>
     <div id="delete_message">
         <h2>Are You Sure You Want To Delete This</h2>
 
-        <a href="/admin/product/list/category/delete/{{$i->id}}"  id="delete">Delete</a>
+        <a href="/admin/ingredient/delete/{{$i->id}}"  id="delete">Delete</a>
 
         <a id="cancel">Cancel</a>
     </div>

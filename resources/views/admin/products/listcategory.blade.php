@@ -57,14 +57,14 @@
         <td>{!!$i->description!!}</td>
         <td><img width="50px" height="50px" src="{{$i->thumbnail}}" alt=""></td>
         <td class="td-actions">
-        <a href="/admin/product/update/category/{{$i->id}}"><i  class="la la-edit edit"></i></a>
+        <a href="/admin/category/update/{{$i->id}}"><i  class="la la-edit edit"></i></a>
         <a ><i  class="la la-close delete test_delete"></i></a>
         </td>
         </tr>
         <div id="delete_message">
         <h2>Bạn có chắc muốn xóa mục này</h2>
 
-        <a href="/admin/product/list/category/delete/{{$i->id}}"  id="delete">Xóa</a>
+        <a href="/admin/category/delete/{{$i->id}}"  id="delete">Xóa</a>
 
         <a id="cancel">Hủy</a>
         </div>

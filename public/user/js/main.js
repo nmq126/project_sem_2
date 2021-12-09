@@ -44,8 +44,8 @@ function onScrollUp() {
 
 const numInputs = document.querySelectorAll('input[type=number]')
 
-numInputs.forEach(function (input) {
-    input.addEventListener('change', function (e) {
+numInputs.forEach(function(input) {
+    input.addEventListener('change', function(e) {
         if (e.target.value == '') {
             e.target.value = 1
         }
@@ -58,6 +58,9 @@ var notification = document.querySelector('.notifications');
 profilePic.onclick = () => {
     var toggleMenu = document.querySelector('.menu');
     toggleMenu.classList.toggle('active')
+<<<<<<< HEAD
+}
+=======
     $(".notification_dd").removeClass('active')
 }
 notification.onclick = () => {
@@ -68,3 +71,4 @@ notification.onclick = () => {
 
 
 
+>>>>>>> 17a6ec2f83237904158cd27da6ef7f0974a5a294

@@ -3,6 +3,7 @@
 @section('style')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <link rel="stylesheet" href="/assets/css/product/list.css">
+<link rel="stylesheet" href="/assets/css/paginate.css">
     <link rel="stylesheet" href="/assets/css/datatables/datatables.min.css">
 @endsection
 @section('breadcrumb')
@@ -138,11 +139,13 @@
             <td><i class="fas fa-eye-slash"></i></td>
             @endif
                    <td>{{$product->category->name}}</td>
+
+
                    <td>{{$product->ingredient->name}}</td>
-                   <td><img src="{{$product->thumbnail}}" alt=""></td>
+                   <td><img src="{{$product->getFirstAttribute()}}" alt=""></td>
                    <td class="description">{{$product->description}}</td>
                    <td class="td-actions">
-                    <a href="#"><i class="la la-edit edit"></i></a>
+                    <a href="/admin/product/update/{{$product->id}}"><i class="la la-edit edit"></i></a>
                     <a href="#" class="delete"><i class="la la-close delete"></i></a>
                 </td>
             </tr>
@@ -172,6 +175,53 @@
                                <li class="unpopular-all">Không phổ biến</li>
                            </ul>
                        </div>
+                </div>
+            </div>
+            <div class="widget has-shadow">
+                <div class="widget-body">
+                    <?php
+                    // config
+                    $link_limit = 7; // maximum number of links (a little bit inaccurate, but will be ok for now)
+                    ?>
+            
+                    @if ($products->lastPage() > 1)
+                    <ul class="pagination">
+                <li class="{{ ($products->currentPage() == 1) ? ' disabled' : '' }}">
+                                      <a class="first" href="{{ $products->url(1) }}">First</a>
+                                  </li>
+                                  @if($products->currentPage() > 1)
+                                      <li  >
+                                          <a href="{{ $products->url($products->currentPage() - 1) }}">&#10094</a>
+                                      </li>
+                                  @endif
+                                  @for ($i = 1; $i <= $products->lastPage(); $i++)
+                                      <?php
+                                      $half_total_links = floor($link_limit / 2);
+                                      $from = $products->currentPage() - $half_total_links;
+                                      $to = $products->currentPage() + $half_total_links;
+                                      if ($products->currentPage() < $half_total_links) {
+                                          $to += $half_total_links - $products->currentPage();
+                                      }
+                                      if ($products->lastPage() -$products->currentPage() < $half_total_links) {
+                                          $from -= $half_total_links - ($products->lastPage() - $products->currentPage()) - 1;
+                                      }
+                                      ?>
+                                      @if ($from < $i && $i < $to)
+                                          <li class="{{ ($products->currentPage() == $i) ? ' active' : '' }}">
+                                              <a href="{{ $products->url($i) }}">{{ $i }}</a>
+                                          </li>
+                                      @endif
+                                  @endfor
+                                  @if($products->currentPage() < $products->lastPage())
+                                      <li >
+                                          <a  href="{{ $products->url($products->currentPage() + 1) }}">&#10095</a>
+                                      </li>
+                                  @endif
+                                  <li class="{{ ($products->currentPage() == $products->lastPage()) ? ' disabled' : '' }}">
+                                      <a class="last" href="{{ $products->url($products->lastPage()) }}">Last</a>
+                                  </li>
+                              </ul>
+                          @endif
                 </div>
             </div>
             <!-- End Export -->

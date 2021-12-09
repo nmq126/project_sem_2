@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             [
                 'id' => '1',
-                'name' => 'Gà rán',
+                'name' => 'Fried Chicken',
                 'price' => 50000,
                 'category_id' => '10',
                 'ingredient_id' => '1',
