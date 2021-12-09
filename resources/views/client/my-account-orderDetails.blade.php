@@ -174,7 +174,7 @@
                     </p>
                     <p><strong>Thanh toán: </strong>
                         @if($orders->checkout == 1) Đã thanh toán
-                        @else Chưa thanh toán
+                        @else Thanh toán khi nhận hàng
                         @endif
                     </p>
                     <div class="mt-2 me-5"><h4>Tổng số tiền: <span>{{\App\Helpers\Helper::formatVnd($orders->total_price)}} đ</span>

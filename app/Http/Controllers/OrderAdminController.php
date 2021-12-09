@@ -71,7 +71,8 @@ class OrderAdminController extends Controller
                 $number_of_noti = Notification::where('user_id', $user->id)
                     ->where('read_at', null)
                     ->count();
-                $notification->toSingleDevice($user->device_token, $title, $body, $number_of_noti, null);
+                $notifications = Notification::where('user_id', $user->id)->latest('id')->limit(5)->get();
+                $notification->toSingleDevice($user->device_token, $title, $body, $number_of_noti, $notifications);
             }
         }
         return redirect('/admin/orders')->with("msg", "Thay đổi thành công");

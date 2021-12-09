@@ -134,7 +134,7 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td bgcolor="#ffffff" style="text-align: center; padding-top: 30px">
-                                        <a href="/home" style="font-size: 40px; color: #666"><i class="fas fa-utensils" style="color: #e02c2b"></i>
+                                        <a href="/home" style="font-size: 40px; color: #666">
                                             VietKitchen</a>
                                     </td>
                                 </tr>
@@ -413,9 +413,9 @@
                                             <td align="left"
                                                 style="padding: 20px 15px 35px 15px; font-size: 15px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #aea9c3;"
                                                 class="padding-copy">Nếu bạn cần bất kì sự hỗ trợ nào, vui lòng liên hệ
-                                                "" qua tổng đài <strong>19000091</strong> hoặc tại địa chỉ email <a
+                                                VietKitchen qua tổng đài <strong>19000091</strong> hoặc tại địa chỉ email <a
                                                     class="original-only"
-                                                    style="color: #5d5386; text-decoration: underline;" href="#">contact@example.com</a>
+                                                    style="color: #5d5386; text-decoration: underline;" href="mailto:vietkitchen.hn@gmail.com">vietkitchen.hn@gmail.com</a>
                                             </td>
                                         </tr>
                                     </table>

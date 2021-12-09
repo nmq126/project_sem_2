@@ -106,8 +106,6 @@ Route::get('/checkout', [OrderController::class, 'show']);
 
 Route::get('/home', [HomePageController::class, 'show']);
 Route::group(['middleware' => 'auth'],function (){
-
-
     //order
     Route::post('/checkout', [OrderController::class, 'process']);
     Route::get('/order/{id}', [OrderController::class, 'getDetail']);

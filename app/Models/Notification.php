@@ -15,7 +15,7 @@ class Notification extends Model
 
     protected $fillable = ['user_id', 'read_at'];
 
-    public function scopeToSingleDevice($query, $token, $title, $body, $number_of_noti){
+    public function scopeToSingleDevice($query, $token, $title, $body, $number_of_noti, $notifications){
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
 
@@ -24,6 +24,7 @@ class Notification extends Model
 
         $dataBuilder = new PayloadDataBuilder();
         $dataBuilder->addData(['number_of_noti' => $number_of_noti,
+                                'notifications' => $notifications,
                                 'heading'=> $title,
                                 'text' => $body
                             ]);
