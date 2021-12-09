@@ -17,7 +17,7 @@ function addToCart(data) {
             $.toast({
                 heading: 'Thành công',
                 text: 'Sản phẩm ' + data.name + ' đã được thêm vào giỏ hàng',
-                position: 'top-center',
+                position: 'bottom-right',
                 showHideTransition: 'slide',
                 hideAfter: 5000,
                 icon: 'success',

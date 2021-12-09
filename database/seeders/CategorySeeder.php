@@ -51,7 +51,7 @@ class CategorySeeder extends Seeder
             [
                 'id' => '6',
                 'name' => 'Đồ chay',
-                'description' => 'drink',
+                'description' => 'Bạn tìm món chay, VietKitchen có ngay!',
                 'thumbnail' => 'https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638115205/categories/vegan-food_erj3cl.png'
             ],
             [
@@ -63,7 +63,7 @@ class CategorySeeder extends Seeder
             [
                 'id' => '8',
                 'name' => 'Món Quốc tế',
-                'description' => 'drink',
+                'description' => 'Món ngon năm châu, chất lượng năm sao',
                 'thumbnail' => 'https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638115433/categories/sushi_xxizwt.png'
             ],
 
@@ -82,7 +82,7 @@ class CategorySeeder extends Seeder
             [
                 'id' => '11',
                 'name' => 'Hải sản',
-                'description' => 'Các món hải sản tươi sống',
+                'description' => 'Các món hải sản tươi ngon hấp dẫn',
                 'thumbnail' => 'https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638116673/categories/seafood_fj7rhe.png',
 
             ],

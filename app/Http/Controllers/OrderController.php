@@ -32,7 +32,6 @@ use PayPal\Rest\ApiContext;
 
 class OrderController extends Controller
 {
-
     public function show()
     {
 
@@ -136,6 +135,24 @@ class OrderController extends Controller
         ];
         dispatch(new SendMail($details));
 
+        //gui noti
+        $noti = new Notification();
+        $noti->user_id = auth()->id();
+        $noti->order_id = $order->id;
+        $noti->title = 'Đặt hàng thành công';
+        if ($status = OrderStatus::WaitForCheckout){
+            $noti->sub_title = 'Đơn hàng #' . $order->id . ' cần được thanh toán để tiếp tục xử lý';
+        }
+        $noti->sub_title = 'Đơn hàng #' . $order->id . ' đã được đặt thành công và đang chờ xử lý';
+        $noti->save();
+//        if ($noti->save()){
+//            $number_of_noti = Notification::where('user_id', auth()->id())
+//                ->where('read_at', null)
+//                ->count();
+//            $title = 'Đặt hàng thành công';
+//            $body = 'Đơn hàng #' . $order->id . ' đã được đặt thành công và đang chờ xử lý';
+//            $noti->toSingleDevice(auth()->user()->device_token, $title, $body, $number_of_noti, null);
+//        }
 
         return redirect('/order/' . $order_id);
     }
@@ -203,7 +220,7 @@ class OrderController extends Controller
 
 
         ### Transaction
-        $invoice = $order->id + 600;
+        $invoice = $order->id + 1600;
         $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)

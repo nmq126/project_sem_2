@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Exports\OrderExport;
+use App\Models\Notification;
+use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Enums\OrderStatus;
 use App\Models\Order;
@@ -40,12 +42,38 @@ class OrderAdminController extends Controller
     {
         $id = $request->id;
         $order = Order::find($id);
-
-
-$status= $request->status;
+        $status= $request->status;
 
         $order->status = $status;
-        $order->update();
+        if ($order->update()){
+            $status_noti ='';
+            switch ($order->status){
+                case 1: $status_noti = 'Chờ xử lý';
+                    break;
+                case 2: $status_noti = 'Đang xử lý';
+                    break;
+                case 3: $status_noti = 'Đang giao hàng';
+                    break;
+                case 4: $status_noti = 'Đã hoàn thành';
+                    break;
+                case -2: $status_noti = 'Đã hủy';
+                    break;
+            }
+            $title = 'Trạng thái đơn hàng thay đổi';
+            $body = 'Đơn hàng #'. $order->id . " trạng thái thay đổi: " . $status_noti;
+            $notification = new Notification();
+            $user = $order->user;
+            $notification->user_id = $user->id;
+            $notification->order_id = $order->id;
+            $notification->title = $title;
+            $notification->sub_title = $body;
+            if ($notification->save()) {
+                $number_of_noti = Notification::where('user_id', $user->id)
+                    ->where('read_at', null)
+                    ->count();
+                $notification->toSingleDevice($user->device_token, $title, $body, $number_of_noti, null);
+            }
+        }
         return redirect('/admin/orders')->with("msg", "Thay đổi thành công");
 
     }

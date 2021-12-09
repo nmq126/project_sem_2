@@ -56,7 +56,7 @@ class ProductSeeder extends Seeder
 
             [
                 'id' => '3',
-                'name' => 'Fried Fish',
+                'name' => 'Cá chiên',
                 'price' => 30000,
                 'category_id' => '11',
                 'ingredient_id' => '3',
@@ -70,7 +70,7 @@ class ProductSeeder extends Seeder
 
             [
                 'id' => '4',
-                'name' => 'Lemon Juice',
+                'name' => 'Cam ép',
                 'price' => 10000,
                 'category_id' => '5',
                 'ingredient_id' => '4',
@@ -84,7 +84,7 @@ class ProductSeeder extends Seeder
 
             [
                 'id' => '5',
-                'name' => 'Strawberry Juice',
+                'name' => 'Nước dâu',
                 'price' => 20000,
                 'category_id' => '5',
                 'ingredient_id' => '5',

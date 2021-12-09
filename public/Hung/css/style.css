@@ -2777,6 +2777,7 @@ textarea:focus {
 }
 
 .product-action {
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7));
     bottom: -30px;
     display: flex;
     justify-content: space-between;
@@ -2798,10 +2799,11 @@ textarea:focus {
 
 .pro-action-left{
     margin-top: 6px;
+    padding-bottom: 10px;
 }
 
 .pro-action-left > a {
-    color: #000000;
+    color: white;
     font-size: 13px;
     font-weight: 500;
     text-transform: uppercase;
@@ -2824,7 +2826,7 @@ textarea:focus {
 }
 
 .pro-action-right > a {
-    color: #000000;
+    color: white;
     font-size: 20px;
     margin-left: 16px;
 }
@@ -4581,7 +4583,7 @@ h4.shop-sidebar-title {
     width: 100%;
     font-size: 16px;
     font-weight: bolder;
-    background-color: #e02c2b;
+    background-color: #666;
     color: white;
     padding: 21px 45px 22px;
     text-align: center;
@@ -4703,6 +4705,9 @@ h3.page-title {
     padding: 18px 63px 17px;
     text-transform: uppercase;
 }
+.checkout{
+    color: #e02c2b;
+}
 
 .cart-shiping-update > a,
 .cart-clear > button,
@@ -4717,6 +4722,20 @@ h3.page-title {
     padding: 18px 63px 17px;
     text-transform: uppercase;
 }
+
+.checkout-button > a{
+    background-color: #e02c2b;
+    border-radius: 3px;
+    color:white;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 18px 63px 17px;
+    text-transform: uppercase;
+}
+
+
 
 .cart-shiping-update > a:hover,
 .cart-clear > button:hover,

@@ -19,6 +19,7 @@ class CreateProfilesTable extends Migration
             $table->date('dob')->nullable();
             $table->tinyInteger('gender')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->string('address')->nullable();
             $table->primary('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 

@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>Giỏ Hàng</title>
-    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
-    <!-- font awesome cdn link  -->
+    <!-- Favicon -->
+    <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">    <!-- font awesome cdn link  -->
     <!-- Google Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script>
@@ -46,6 +46,9 @@
     </script>
 
     {{--    <link rel="stylesheet" href="user/Hung/css/responsive.css">--}}
+<!-- firebase stuff -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 </head>
 <body>
 @php
@@ -67,26 +70,84 @@
 @endforeach
 <header id="nav">
 
-    <a href="/home" class="logo"><i class="fas fa-utensils"></i>VietKitchen</a>
+    <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        @if(Auth::check())
-            <a href="/my-account">
-                <i class="fas fa-user"></i>
-                {{ Auth::user()->email }}
-            </a>
-        @else
-            <a href="/login"> Đăng nhập</a>
-        @endif
-        <a href="/products"> Cửa Hàng </a>
+        <a href="/products"> Cửa Hàng</a>
         <a href="/contact-us"> Liên Hệ </a>
         <a href="/blog"> Blog </a>
+        @guest
+            <a href="/login"> Đăng nhập</a>
+        @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
         </a>
+        @auth
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+            </div>
+
+            <div class="notification_dd">
+                <ul class="notification_ul">
+                    @if(!$notifications->isEmpty())
+                        @foreach($notifications as $notification)
+                            <li>
+                                <a href="/my-account/order/id={{ $notification->order_id }}">
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            {{ $notification->title}}
+                                        </div>
+                                        <div class="sub_title">
+                                            {{ $notification->sub_title }}
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </li>
+                        @endforeach
+                        <li class="show_all">
+                            <p>Xem tất cả</p>
+                        </li>
+                    @else
+                        <li>
+                            <div class="notify_data">
+                                <div class="sub_title">
+                                    Không có thông báo
+                                </div>
+                            </div>
+                        </li>
+
+                    @endif
+                </ul>
+            </div>
+            <div>
+                <div class="profile">
+                    <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="/my-account">
+                                <i class="fas fa-user"></i>
+                                Người dùng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/my-account/logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        @endauth
+
     </nav>
 </header>
 <div class="breadcrumb-area gray-bg mt-70">
@@ -100,7 +161,7 @@
     </div>
 </div>
 <div class="text-center title">
-    <h1><span>Giỏ</span> Hàng</h1>
+    <h1>Giỏ Hàng</h1>
 </div>
 
 <div class="cart-main-area pt-70 pb-70">
@@ -183,12 +244,16 @@
                                     <div class="cart-shiping-update">
                                         <a href="/products" class="fw-bold">Tiếp Tục Mua Sắm</a>
                                     </div>
-                                    <div class="cart-clear">
-                                        <a href="/cart/remove?id=all"
-                                           onclick="return confirm('Bạn có chắc muốn xoá tất cả sản phẩm khỏi giỏ hàng?')"
-                                           class="fw-bold">Xóa Giỏ Hàng</a>
-                                        <a href="/checkout"
-                                           class="fw-bold checkout ms-3">Thanh Toán</a>
+                                    <div class="d-flex">
+                                        <div class="cart-clear">
+                                            <a href="/cart/remove?id=all"
+                                               onclick="return confirm('Bạn có chắc muốn xoá tất cả sản phẩm khỏi giỏ hàng?')"
+                                               class="fw-bold">Xóa Giỏ Hàng</a>
+                                        </div>
+                                        <div class="checkout-button">
+                                            <a href="/checkout"
+                                               class="fw-bold checkout ms-3">Thanh Toán</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -347,5 +412,7 @@
         $('#lblCartCount').html(totalQuantity);
     }
 </script>
+<script src="{{ asset('js/firebase.js') }}"></script>
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Error 404</title>
+    <title>404 | VietKitchen</title>
     <meta name="description" content="Elisyam is a Web App and Admin Dashboard Template built with Bootstrap 4">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Google Fonts -->
@@ -27,12 +27,12 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
-<body class="bg-error-01">
+    <body class="bg-error-01">
 <!-- Begin Preloader -->
 <div id="preloader">
-    <div class="canvas">
-        <div class="spinner"></div>
-    </div>
+{{--    <div class="canvas">--}}
+{{--        <div class="spinner"></div>--}}
+{{--    </div>--}}
 </div>
 <!-- End Preloader -->
 <!-- Begin Container -->

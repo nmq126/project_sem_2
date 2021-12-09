@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title', 'Orders List | Admin')
+@section('title', 'Danh sách đơn hàng | Admin')
 @section('style')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="/assets/css/datatables/datatables.min.css">
@@ -28,7 +28,7 @@
             <!-- Sorting -->
             <div class="widget has-shadow">
                 <div class="widget-body">
-          
+
        <form action="/admin/orders/search" method="GET">
                         <div class="page-header-title mb-1 search_box">
                         <div class="search">
@@ -47,12 +47,12 @@
                             <button  name="excel" type="button"><i class="far fa-file-excel"></i></button>
                             <button class="reset" name="reset" type="button" ><i class="fas fa-sync-alt"></i></button>
                             <button  name="search" type="submit">Lọc</button>
-                
+
                         </div>
                       </div>
-           
-             
-               
+
+
+
                             <div class="text-sm-center">
                                 <label for="status" class="text-left mr-5">Sản phẩm:
                                     <select class="form-control" name="product" id="product" >
@@ -60,16 +60,16 @@
               @foreach ($products as $product)
               <option value="{{$product->id}}">{{$product->name}}</option>
               @endforeach
-              
+
                                     </select></label>
                                 <label for="status" class="text-left mr-5">Trạng thái:
                                     <select class="form-control" name="statusz" id="status" >
                                         <option value="-1">Tất cả</option>
-                                        <option value="2">Đang xử lý</option>
-                                        <option value="1">Đợi </option>
-                                        <option value="3">Giao hàng</option>
-                                        <option value="4">Hoàn thành</option>
                                         <option value="0">Chờ thanh toán</option>
+                                        <option value="1">Chờ xác nhận </option>
+                                        <option value="2">Đang xử lý</option>
+                                        <option value="3">Đang giao hàng</option>
+                                        <option value="4">Hoàn thành</option>
                                         <option  value="-2">Đã Hủy</option>
                                     </select></label>
                                     <label for="status" class="text-left mr-5">Thanh toán:
@@ -77,7 +77,7 @@
                                             <option value="2">Tất cả</option>
                                             <option value="1">Đã thanh toán</option>
                                             <option value="0">Chưa thanh toán</option>
-                          
+
                                         </select></label>
                                 <label for="start-date" class="text-left mr-sm-5">Ngày bắt đầu:
                                     <input class="form-control"  name="start_date"
@@ -86,17 +86,17 @@
                                             <select class="form-control" name="trash" id="trash" >
                                                 <option value="0">Chưa xóa</option>
                                                 <option value="1">Đã xóa</option>
-     
-                      
+
+
                                             </select></label>
-                                           
+
                                                  <label for="end-date" class="mt-2 text-left">Ngày kết thúc:
                                     <input class="form-control"  name="end_date"
                                            type="datetime-local"></label>
-                                     
+
                             </div>
        </form>
-                 
+
             </div>
         </div>
             <div class="widget has-shadow">
@@ -105,17 +105,17 @@
                     <span>{{\Session::get('msg')}}</span>
                   </div>
     @endif
-    
+
                 <div class="widget-body">
-        
-                    
+
+
                     <div class="table-responsive">
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                      
-        
+
+
                         <h2 class="page-header-title mb-2">Danh sách đơn hàng:</h2>
-        
-                          
+
+
                         <table class="table mb-0 text-center">
                             <thead>
                             <tr>
@@ -140,6 +140,7 @@
                            
                                     <td>
                                         <select class="form-control" name="status" >
+<<<<<<< HEAD
                                             @if($order->status == 2)
                                             <option selected="selected" value="2">Đang xử lý</option>
                                             @else
@@ -166,6 +167,77 @@
                                             <option value="0">Chờ thanh toán</option>
                                             @endif    
                                             @if($order->status == -2)
+=======
+                                            <option value="0" disabled>Chờ thanh toán</option>
+                                            <option selected="selected" value="1">Chờ xác nhận </option>
+                                            <option value="2">Đang xử lý</option>
+                                            <option value="3">Đang giao hàng</option>
+                                            <option value="4">Hoàn thành</option>
+                                            <option  value="-2">Đã Hủy</option>
+                                        </select>
+                                    </td>
+                                @endif
+                                @if($order->status == 0)
+                                <td>
+                                    <select class="form-control" name="status" >
+                                        <option selected="selected" value="0" disabled>Chờ thanh toán</option>
+                                        <option  value="1">Chờ xác nhận </option>
+                                        <option value="2">Đang xử lý</option>
+                                        <option value="3">Đang giao hàng</option>
+                                        <option value="4">Hoàn thành</option>
+                                        <option  value="-2">Đã Hủy</option>
+                                    </select>
+                                </td>
+                            @endif
+                                @if($order->status == 2)
+                                <td>
+                                    <select class="form-control" name="status" >
+                                        <option  value="0" disabled>Chờ thanh toán</option>
+                                        <option  value="1">Chờ xác nhận </option>
+                                        <option selected="selected" value="2">Đang xử lý</option>
+                                        <option value="3">Đang giao hàng</option>
+                                        <option value="4">Hoàn thành</option>
+                                        <option  value="-2">Đã Hủy</option>
+                                    </select>
+
+                                </span>
+                                </td>
+                            @endif
+                            @if($order->status == 3)
+                            <td>
+                                <select class="form-control" name="status" >
+                                    <option  value="0" disabled>Chờ thanh toán</option>
+                                    <option  value="1">Chờ xác nhận </option>
+                                    <option  value="2">Đang xử lý</option>
+                                    <option selected="selected" value="3">Đang giao hàng</option>
+                                    <option value="4">Hoàn thành</option>
+                                    <option  value="-2">Đã Hủy</option>
+                                </select>
+                            </td>
+                        @endif
+                                @if($order->status == 4)
+
+                                        <td>
+                                            <select class="form-control" name="status" >
+                                                <option  value="0" disabled>Chờ thanh toán</option>
+                                                <option  value="1">Chờ xác nhận </option>
+                                                <option  value="2">Đang xử lý</option>
+                                                <option  value="3">Đang giao hàng</option>
+                                                <option selected="selected" value="4">Hoàn thành</option>
+                                                <option  value="-2">Đã Hủy</option>
+                                            </select>
+                                        </td>
+
+                                @endif
+                                @if($order->status == -2)
+                                    <td>
+                                        <select class="form-control" name="status" >
+                                            <option  value="0" disabled>Chờ thanh toán</option>
+                                            <option  value="1">Chờ xác nhận </option>
+                                            <option  value="2">Đang xử lý</option>
+                                            <option  value="3">Đang giao hàng</option>
+                                            <option value="4">Hoàn thành</option>
+>>>>>>> 17a6ec2f83237904158cd27da6ef7f0974a5a294
                                             <option  selected="selected"  value="-2">Đã Hủy</option>
                                             @else
                                             <option  value="-2">Đã Hủy</option>
@@ -176,16 +248,22 @@
                                     <td>{{$order->ship_address}}</td>
                                     <td>{{$order->ship_phone}}</td>
                                     <td>{{$order->total_price}}</td>
-                     
+
                                     @if($order->checkout == 1)
                                     <td><i class="fas fa-check"></i></td>
+<<<<<<< HEAD
                                     @else
+=======
+
+                                    @endif
+                                @if($order->checkout == 0)
+>>>>>>> 17a6ec2f83237904158cd27da6ef7f0974a5a294
                                 <td><i class="fas fa-times"></i></td>
                                 @endif    
                                     <td>{{$order->created_at}}</td>
-                                  
+
                                     <td class="td-actions">
-                                        <a href="/admin/orders/update/{{$order->id}}"><i
+                                        <a href="/admin/orders/{{$order->id}}/detail"><i
                                                 class="la la-edit edit"></i></a>
                                         <a href="#" class="delete"><i class="la la-close delete"></i></a>
                                     </td>
@@ -193,9 +271,9 @@
                      </form>
                                 <div id="delete_order">
                                     <h2>Bạn có chắc muốn xóa đơn hàng này</h2>
-                            
+
                                     <a href="/admin/orders/delete/{{$order->id}}"id="delete-item">Delete</a>
-                            
+
                                     <a id="cancel-item">Cancel</a>
                                 </div>
                             @endforeach
@@ -203,9 +281,9 @@
                         </table>
                         <hr>
                         <h3 class="button-select">
-                     <button>  <input type="checkbox" id="checkall"> 
+                     <button>  <input type="checkbox" id="checkall">
                      <i id="sort-down" class="fas fa-sort-down"></i></button>
-                   
+
                     </h3>
                     <div class="select-all">
                         <ul class="select">
@@ -234,7 +312,7 @@
             // config
             $link_limit = 7; // maximum number of links (a little bit inaccurate, but will be ok for now)
             ?>
-    
+
             @if ($orders->lastPage() > 1)
             <ul class="pagination">
         <li class="{{ ($orders->currentPage() == 1) ? ' disabled' : '' }}">

@@ -54,7 +54,21 @@ numInputs.forEach(function(input) {
 
 
 var profilePic = document.querySelector('.profile');
+var notification = document.querySelector('.notifications');
 profilePic.onclick = () => {
     var toggleMenu = document.querySelector('.menu');
     toggleMenu.classList.toggle('active')
+<<<<<<< HEAD
 }
+=======
+    $(".notification_dd").removeClass('active')
+}
+notification.onclick = () => {
+    var toggleMenu = document.querySelector('.notification_dd');
+    toggleMenu.classList.toggle('active')
+    $(".menu").removeClass("active");
+}
+
+
+
+>>>>>>> 17a6ec2f83237904158cd27da6ef7f0974a5a294

@@ -1,7 +1,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>@yield('title')</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Google Fonts -->
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
@@ -14,9 +13,8 @@
     });
 </script>
 <!-- Favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+<link rel="icon" href="/user/img/favicon.ico" sizes="any" type="image/svg+xml">
+
 <!-- Stylesheet -->
 <link rel="stylesheet" href="/assets/vendors/css/base/bootstrap.min.css">
 <link rel="stylesheet" href="/assets/vendors/css/base/elisyam-1.5.min.css">

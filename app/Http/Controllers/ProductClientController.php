@@ -20,7 +20,10 @@ class ProductClientController extends Controller
         return view('client.product_detail.product_detail', ['product' => $product]);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 17a6ec2f83237904158cd27da6ef7f0974a5a294
     public function getList(Request $request): string
     {
         $products = Product::query();
@@ -55,7 +58,7 @@ class ProductClientController extends Controller
                     break;
             }
         }
-        $products = $products->paginate(6);
+        $products = $products->paginate(12);
         $products->appends($request->all());
         return view('client.products', compact('products', 'categories', 'ingredients'))->render();
     }

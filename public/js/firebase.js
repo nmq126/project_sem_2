@@ -29,14 +29,15 @@ messaging.requestPermission()
     });
 
 messaging.onMessage((payload) => {
-    $('#NotiCount').html(123);
+    $('#NotiCount').html(payload.data.number_of_noti);
+    // $('.notification_dd').load(' .notification_dd');
     // console.log(payload.data.badgeCount);
     $.toast({
-        heading: 'Thành công',
-        text: payload,
-        position: 'top-center',
+        heading: payload.data.heading,
+        text: payload.data.text,
+        position: 'bottom-right',
         showHideTransition: 'slide',
-        hideAfter: 5000,
+        hideAfter: false,
         icon: 'success',
         stack: 5
     })

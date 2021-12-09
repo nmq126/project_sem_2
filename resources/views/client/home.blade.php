@@ -50,13 +50,56 @@
         @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
+            @if($totalQuantity !=0)
             <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @endif
         </a>
         @auth
-            <a href="">
+            <div class="notifications">
                 <i class="fas fa-bell"></i>
-                <span class='badge badge-warning' id='NotiCount'>{{ $numberAlert }}</span>
-            </a>
+                @if($number_noti !=0)
+                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @endif
+            </div>
+
+            <div class="notification_dd">
+                <ul class="notification_ul">
+                    @if(!$notifications->isEmpty())
+                        @foreach($notifications as $notification)
+                            <li>
+                                <a href="/my-account/order/id={{ $notification->order_id }}">
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            {{ $notification->title}}
+                                        </div>
+                                        <div class="sub_title">
+                                            {{ $notification->sub_title }}
+                                        </div>
+                                    </div>
+                                    @if($notification->read_at == null)
+                                        <div class="notify_status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                    @endif
+                                </a>
+
+                            </li>
+                        @endforeach
+                        <li class="show_all">
+                            <p>Xem tất cả</p>
+                        </li>
+                    @else
+                        <li>
+                            <div class="notify_data">
+                                <div class="sub_title">
+                                    Không có thông báo
+                                </div>
+                            </div>
+                        </li>
+
+                    @endif
+                </ul>
+            </div>
             <div>
                 <div class="profile">
                     <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
@@ -243,6 +286,7 @@
 
 <section style="padding: 0 1rem" class="gallery" id="gallery">
 
+
     <h1 class="heading pt-5 pb-5"><span> Gallery </span></h1>
     <div class="containerG">
         <div class="boxG a">
@@ -257,7 +301,7 @@
         </div>
         <div class="boxG c">
             <img
-                src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638169351/gallery/hong-anh-duong-EK--nAm-CYM-unsplash_itgbyk.jpg"
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758595/home_page_gallery/nikolay-smeh-gPpbFaEkl00-unsplash_rcduz6.jpg"
                 alt="">
         </div>
         <div class="boxG d">
@@ -269,17 +313,15 @@
             <img
                 src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758595/home_page_gallery/sonny-mauricio-yhc4pSbl01A-unsplash_g2fmhg.jpg"
                 alt="">
-
         </div>
         <div class="boxG f">
             <img
                 src="https://res.cloudinary.com/dwpmaxxjg/image/upload/v1638168847/gallery/lynda-hinton-q_eyFSd2W3M-unsplash_xrypqq.jpg"
                 alt="">
-
         </div>
         <div class="boxG g">
             <img
-                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758594/home_page_gallery/lynda-hinton-q_eyFSd2W3M-unsplash_w4xcnb.jpg"
+                src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638758595/home_page_gallery/rosalind-chang-P_wPicZYoPI-unsplash_etthar.jpg"
                 alt="">
 
         </div>
@@ -309,8 +351,41 @@
 
 <!-- order section starts  -->
 
-<section class="blog" id="">
-    <h1 class="heading"><span>Food</span> blog </h1>
+<section class="blog mt-30">
+    <h1 class="heading mb-20"><span>Blog</span> Ăn Uống </h1>
+    <div class="col-12">
+        <div class="row">
+            @foreach($blogs as $blog)
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-blog-wrapper mb-50">
+                        <div class="blog-img mb-20">
+                            <a href="blog/{{$blog->id}}/details">
+                                <img src="{{$blog->image}}"
+                                     alt="Lorem ipsum dolor amet">
+                            </a>
+                        </div>
+                        <div class="blog-content">
+                            <h2><a href="blog/{{$blog->id}}/details">{{$blog->title}}</a></h2>
+                            <div class="blog-date-categori">
+                                <ul>
+                                    <li><i class="fa fa-user"></i> {{$blog->author}}</li>
+                                    <li>
+                                        <i class="fa fa-calendar"></i> {{$blog->created}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="rte">
+                                <p>{{$blog->description}}</p>
+                            </div>
+                        </div>
+                        <div class="blog-btn mt-30">
+                            <a href="/blogs/news/lorem-ipsum-dolor-amet">Đọc Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </section>
 
 <!-- order section ends -->
@@ -359,7 +434,7 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my/account">Thông tin tài khoản</a></li>
+                                <li><a href="my-account">Thông tin tài khoản</a></li>
                                 <li><a href="#">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
@@ -374,9 +449,9 @@
                         </div>
                         <div class="footer-contact">
                             <ul>
-                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Địa chỉ: 8A Tôn Thất Thuyết, Hà Nội</li>
                                 <li>Số điện thoại: (012) 800 456 789-987</li>
-                                <li>Email: <a href="#">Info@example.com</a></li>
+                                <li>Email: <a href="#">vietkitchen.hn@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
@@ -384,8 +459,7 @@
                         </div>
                         <div class="footer-time">
                             <ul>
-                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
-                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>22:00 PM</span> mọi ngày</li>
                             </ul>
                         </div>
                     </div>
@@ -417,6 +491,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
 <script src="{{ asset('js/firebase.js') }}"></script>
-
+<script>
+    navigator.serviceWorker.addEventListener('message', function (event) {
+        $('#NotiCount').html(payload.data.number_of_noti);
+        $.toast({
+            heading: payload.data.heading,
+            text: payload.data.text,
+            position: 'top-center',
+            showHideTransition: 'slide',
+            hideAfter: false,
+            icon: 'success',
+            stack: 5
+        })
+    });
+</script>
 </body>
 </html>

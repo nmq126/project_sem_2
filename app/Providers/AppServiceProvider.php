@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -26,8 +27,9 @@ class   AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+
         view()->composer('*',function ($view){
+
             $shoppingCart = [];
             if (Session::has('shoppingCart')) {
                 $shoppingCart = Session::get('shoppingCart');
@@ -36,9 +38,26 @@ class   AppServiceProvider extends ServiceProvider
             foreach ($shoppingCart as $cartItem){
                 $totalQuantity += $cartItem->quantity;
             }
-            $view->with('totalQuantity', $totalQuantity);
+
+            $user_id = null;
+            if (Auth::check()){
+                $user_id = Auth::user()->id;
+            }
+            $number_noti = Notification::where('user_id', $user_id)
+                                        ->where('read_at', null)
+                                        ->count();
+
+            $notifications = Notification::where('user_id', $user_id)->latest('id')->limit(5)->get();
+
+            $data = [
+                'user_id' => $user_id,
+                'totalQuantity' => $totalQuantity,
+                'number_noti' => $number_noti,
+                'notifications' => $notifications
+            ];
+            $view->with($data);
         });
 
-        View::share('numberAlert', Notification::numberAlert());
+//        View::share('numberAlert', Notification::numberAlert());
     }
 }

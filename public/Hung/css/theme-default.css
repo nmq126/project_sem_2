@@ -1,8 +1,24 @@
+.user-thumbnail{
+    margin-bottom: 15px;
+}
+
+.user-thumbnail img{
+    display: block;
+    margin: 0 auto;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
 .product-sidebar-color li.active {
     border: 1px solid #fff;
     outline: 2px solid #ff5216;
     cursor: default
+}
+
+.return:hover .btn-grey{
+    color: white;
 }
 
 .swatch .header {
@@ -466,9 +482,13 @@ a.button.another-button {
     border-top: 1px solid #ddd
 }
 
+.input-line{
+    margin-bottom: 30px;
+}
+
 .my-account-page input, .my-account-page select, .my-account-page textarea {
     border-top: 1px solid #ddd;
-    border-radius: 0
+    border-radius: 0;
 }
 
 .ajax-popup .modal-content-text {
@@ -4160,8 +4180,9 @@ label.error {
 }
 
 .order-table thead th {
-    font-weight: bolder;
+    font-weight: 700;
     color: white;
+    background-color: #e02c2b;
 }
 
 .order-table thead th tr {

@@ -9,7 +9,7 @@
     }
     .mt-0 span{
    margin-left: 5px
-        
+
     }
 </style>
     <link rel="stylesheet" href="/assets/css/datatables/datatables.min.css">
@@ -18,7 +18,7 @@
     <div class="row">
         <div class="page-header">
             <div class="d-flex align-items-center">
-                <h1 class="page-header-title">Order Detail</h1>
+                <h1 class="page-header-title">Chi tiết đơn hàng</h1>
                 <div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/admin/orders">Orders</a></li>
@@ -36,7 +36,7 @@
             <div class="widget has-shadow">
                 <div class="widget-body">
                     <div class="table-responsive">
-                        <h3 class="pb-2 font-weight-bold">Order ID: {{$orders->id}}</h3>
+                        <h3 class="pb-2 font-weight-bold">Đơn hàng : #{{$orders->id}}</h3>
              <div class="container">
                  <div class="content-left">
                     <p><strong>Created At:</strong> {{$orders->created_at}}</p>
@@ -85,52 +85,63 @@
                                 <span>Đợi </span>
         
                
+                    <div class="d-flex mt-0">
+
+                        <p><strong>Status:</strong> </p>
+                        @if($orders->status == 1)
+
+
+                                <span>Chờ xác nhận </span>
+
+
                     @endif
                     @if($orders->status == 0)
-            
-              
-      
+
+
+
 
                             <span>Chờ thanh toán</span>
-                  
-   
-        
+
+
+
                 @endif
                     @if($orders->status == 2)
-          
-  
-               
+
+
+
                             <span>Đang xử lý</span>
-        
+
 
                     </span>
-         
+
                 @endif
                 @if($orders->status == 3)
 
-        
+
                         <span>Giao hàng</span>
-            
+
 
             @endif
                     @if($orders->status == 4)
-    
-                             
-                                    <span>Hoàn thành</span>
-                            
 
-     
+
+                                    <span>Hoàn thành</span>
+
+
+
                     @endif
                     @if($orders->status == -2)
 
-                    
+
                                 <span>Đã Hủy</span>
                       
                     @endif --}}
 
+                    @endif
+
                     </div>
-                 
-         
+
+
                  </div>
                  <div class="content-right">
                     <p><strong>Customer Name:</strong> {{$orders->ship_name}}</p>

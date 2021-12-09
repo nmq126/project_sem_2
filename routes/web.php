@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix('admin')->group(function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
     Route::get('/product/create',[ProductAdminController::class, 'getForm']);
     Route::post('/product/create',[ProductAdminController::class, 'processForm']);
     Route::get('/product/list',[ProductAdminController::class, 'getList']);
@@ -53,6 +53,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard/json', [DashboardController::class, 'DbJson']);
     Route::get('/dashboard/json/month', [DashboardController::class, 'DbJsonMonth']);
     Route::get('/orders', [OrderAdminController::class, 'fetchOrders']);
+    Route::get('/orders/{id}/detail', [OrderDetailsAdminController::class, 'orderDetail']);
     Route::get('/orders/update/{id}',[OrderAdminController::class, 'UpdateView']);
     Route::post('/orders/update/{id}',[OrderAdminController::class, 'UpdateOrder']);
     Route::get('/orders/change', [OrderAdminController::class, 'Change']);
@@ -75,50 +76,53 @@ Route::prefix('admin')->group(function () {
     Route::get('/category/update/{id}',[ProductAdminController::class, 'UpdateViewCate']);
     Route::post('/category/update/{id}',[ProductAdminController::class, 'UpdateCategory']);
 
+    Route::get('/download', [OrderAdminController::class, 'export']);
 
 });
 
 
-Route::get('/download', [OrderAdminController::class, 'export']);
 
-Route::get('/admin/orders/{id}/detail', [OrderDetailsAdminController::class, 'orderDetail']);
 
 
 
 
 //CLIENT SIDE
 
-//home page
-Route::get('/home', [HomePageController::class, 'show']);
-
 //product list
-Route::get('/products', [ProductClientController::class, 'getList']);
+Route::get('/product/recent-view',[ProductClientController::class, 'getRecent']);
 Route::get('/product/{id}/details',[ProductClientController::class, 'getDetail']);
 Route::post('products/search', [ProductClientController::class, 'search']);
-Route::get('/product/recent-view',[ProductClientController::class, 'getRecent']);
+Route::get('/products', [ProductClientController::class, 'getList']);
 
 //cart
-Route::get('/cart',[ShoppingCartController::class, 'show']);
 Route::get('/cart/add',[ShoppingCartController::class, 'add']);
+Route::get('/cart',[ShoppingCartController::class, 'show']);
 Route::get('/cart/remove',[ShoppingCartController::class, 'remove']);
 Route::post('/cart/update',[ShoppingCartController::class, 'update']);
 
+//checkout, order
+Route::get('/checkout', [OrderController::class, 'show']);
+
+
+Route::get('/home', [HomePageController::class, 'show']);
 Route::group(['middleware' => 'auth'],function (){
 
 
     //order
+    Route::post('/checkout', [OrderController::class, 'process']);
     Route::get('/order/{id}', [OrderController::class, 'getDetail']);
     Route::post('/order/create-payment', [OrderController::class, 'createPayment']);
     Route::post('/order/execute-payment', [OrderController::class, 'executePayment']);
     //account info
     Route::get('/my-account', [LoginController::class, 'showOrder']);
     Route::get('/my-account/order/id={id}', [LoginController::class, 'showOrderDetails']);
+
+    Route::get('my-account/update', [LoginController::class, 'showUpdateUser']);
+    Route::post('my-account/update', [LoginController::class, 'processUpdateUser']);
+
+    Route::get('/my-account/logout', [LoginController::class, 'logout']);
+
 });
-
-//checkout
-Route::get('/checkout', [OrderController::class, 'show']);
-Route::post('/checkout', [OrderController::class, 'process']);
-
 
 Route::group(['middleware' => 'guest'],function (){
     //đăng ký
@@ -129,16 +133,24 @@ Route::group(['middleware' => 'guest'],function (){
     Route::post('/login', [LoginController::class, 'store']);
 
 });
-//logout
-Route::get('/my-account/logout', [LoginController::class, 'logout']);
+
+
 
 
 
 //blog
 Route::get('/blog',[BlogController::class, 'getBlog']);
 Route::get('/blog-json',[BlogController::class, 'JsonBlog']);
-Route::get('/blog_detail/{id}',[BlogController::class, 'getBlogDetail']);
+Route::get('/blog/{id}/details',[BlogController::class, 'getBlogDetail']);
 
+Route::get('/login', function () {
+    return view('client.login');
+});
+
+
+Route::get('/cart', function () {
+    return view('client.cart');
+});
 
 Route::get('/contact-us', function () {
     return view('client.contact-us');
@@ -154,3 +166,5 @@ Route::get('/blog-details', function () {
 
 
 Route::get('/product_detail/{id}', [ProductClientController::class, 'getProductDetail']);
+
+
