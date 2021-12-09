@@ -176,6 +176,7 @@
                                     <td>{{$order->ship_address}}</td>
                                     <td>{{$order->ship_phone}}</td>
                                     <td>{{$order->total_price}}</td>
+                     
                                     @if($order->checkout == 1)
                                     <td><i class="fas fa-check"></i></td>
                                     @else
