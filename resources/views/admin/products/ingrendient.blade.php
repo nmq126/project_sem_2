@@ -34,7 +34,7 @@
         </div>
 
         <div class="widget-body">
-        <form class="form-horizontal" action="/admin/product/create/ingredient" name="product-form" method="post">
+        <form class="form-horizontal" action="/admin/ingredient/create" name="product-form" method="post">
         @csrf
         <div class="form-group row d-flex align-items-center mb-5">
         <label class="col-lg-3 form-control-label">Name</label>

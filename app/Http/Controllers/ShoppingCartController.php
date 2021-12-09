@@ -58,6 +58,7 @@ class ShoppingCartController extends Controller
         }
         Session::put('shoppingCart', $shoppingCart);
         return Session::get('shoppingCart');
+
     }
 
     public function remove(Request $request)

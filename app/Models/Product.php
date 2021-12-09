@@ -101,5 +101,22 @@ class Product extends Model
     public function orderDetails(){
         return $this->hasMany(Ingredient::class, "ingredient_id", "id");
     }
+    public function getImageAttribute()
+    {
 
+        if ($this->thumbnail != null) {
+            $thumbnail = $this->thumbnail;
+            $arrayImage = explode(",",$thumbnail);
+        }
+        return   $arrayImage;
+    }
+    public function getFirstAttribute()
+    {
+
+        if ($this->thumbnail != null) {
+            $thumbnail = $this->thumbnail;
+            $arrayImage = explode(",",$thumbnail);
+        }
+        return   $arrayImage[0];
+    }
 }

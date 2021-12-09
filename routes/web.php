@@ -34,7 +34,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/product/list/search',[ProductAdminController::class, 'searchProduct']);
     Route::get('/product/delete/{id}',[ProductAdminController::class, 'delete']);
     Route::get('/product/update/{id}',[ProductAdminController::class, 'updateProduct']);
-    Route::post('/product/update/{id}',[ProductAdminController::class, 'delete']);
+    Route::post('/product/update/{id}',[ProductAdminController::class, 'updateProductForm']);
 
     Route::post('/products/destroy',[ProductAdminController::class, 'destroy']);
     Route::post('/products/status',[ProductAdminController::class, 'status']);
@@ -42,12 +42,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/products/featured',[ProductAdminController::class, 'featured']);
     Route::post('/products/unfeatured',[ProductAdminController::class, 'unfeatured']);
 //Ingrendient
-    Route::get('/product/create/ingredient',[ProductAdminController::class, 'getFormIngredient']);
-    Route::post('/product/create/ingredient',[ProductAdminController::class, 'addIngredient']);
-    Route::get('/product/list/ingredient',[ProductAdminController::class, 'ListIngredient']);
-    Route::get('/product/list/ingredient/delete/{id}',[ProductAdminController::class, 'DeleteIngrendient']);
-    Route::get('/product/update/ingredient/{id}',[ProductAdminController::class, 'UpdateView']);
-    Route::post('/product/update/ingredient/{id}',[ProductAdminController::class, 'UpdateIngrendient']);
+    Route::get('/ingredient/create',[ProductAdminController::class, 'getFormIngredient']);
+    Route::post('/ingredient/create',[ProductAdminController::class, 'addIngredient']);
+    Route::get('/ingredient/list',[ProductAdminController::class, 'ListIngredient']);
+    Route::get('/ingredient/delete/{id}',[ProductAdminController::class, 'DeleteIngrendient']);
+    Route::get('/ingredient/update/{id}',[ProductAdminController::class, 'UpdateView']);
+    Route::post('/ingredient/update/{id}',[ProductAdminController::class, 'UpdateIngrendient']);
 
     Route::get('/dashboard', [DashboardController::class, 'Dashboard']);
     Route::get('/dashboard/json', [DashboardController::class, 'DbJson']);
@@ -68,12 +68,12 @@ Route::prefix('admin')->group(function () {
     Route::get('/orders/delete/{id}', [OrderAdminController::class, 'DeleteOrder']);
     Route::get('/orders/search', [OrderAdminController::class, 'search']);
     // Category
-    Route::get('/product/create/category',[ProductAdminController::class, 'getFormCategory']);
-    Route::post('/product/create/category',[ProductAdminController::class, 'addCategory']);
-    Route::get('/product/list/category',[ProductAdminController::class, 'ListCategory']);
-    Route::get('/product/list/category/delete/{id}',[ProductAdminController::class, 'DeleteCategory']);
-    Route::get('/product/update/category/{id}',[ProductAdminController::class, 'UpdateViewCate']);
-    Route::post('/product/update/category/{id}',[ProductAdminController::class, 'UpdateCategory']);
+    Route::get('/category/create',[ProductAdminController::class, 'getFormCategory']);
+    Route::post('/category/create',[ProductAdminController::class, 'addCategory']);
+    Route::get('/category/list',[ProductAdminController::class, 'ListCategory']);
+    Route::get('/category/delete/{id}',[ProductAdminController::class, 'DeleteCategory']);
+    Route::get('/category/update/{id}',[ProductAdminController::class, 'UpdateViewCate']);
+    Route::post('/category/update/{id}',[ProductAdminController::class, 'UpdateCategory']);
 
 
 });
@@ -154,7 +154,3 @@ Route::get('/blog-details', function () {
 
 
 Route::get('/product_detail/{id}', [ProductClientController::class, 'getProductDetail']);
-
-Route::get('/products', function (){
-   return view('client.products-and-cart.products');
-});

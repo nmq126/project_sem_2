@@ -137,100 +137,50 @@
                         <input type="hidden" name="id" value={{$order->id}}>
                                     <tr>
                                     <td> <div class="id-item"><input type="checkbox" class="checkitem"value={{$order->id}} ><a href="/admin/orders/{{$order->id}}/detail">{{$order->id}}</a></div></td>
-                                    @if($order->status == 1)
-                                    <td>
-                                        <select class="form-control" name="status" >
-                                
-                                            <option value="2">Đang xử lý</option>
-                                            <option selected="selected" value="1">Đợi </option>
-                                            <option value="3">Giao hàng</option>
-                                            <option value="4">Hoàn thành</option>
-                                            <option value="0">Chờ thanh toán</option>
-                                            <option  value="-2">Đã Hủy</option>
-                                        </select>
-                                    </td>
-                                @endif
-                                @if($order->status == 0)
-                                <td>
-                                    <select class="form-control" name="status" >
-                  
-                                        <option value="2">Đang xử lý</option>
-                                        <option  value="1">Đợi </option>
-                                        <option value="3">Giao hàng</option>
-                                        <option value="4">Hoàn thành</option>
-                                        <option selected="selected" value="0">Chờ thanh toán</option>
-                                        <option  value="-2">Đã Hủy</option>
-                                    </select>
-                                </td>
-                            @endif
-                                @if($order->status == 2)
-                                <td>
-                                    <select class="form-control" name="status" >
                            
-                                        <option selected="selected" value="2">Đang xử lý</option>
-                                        <option  value="1">Đợi </option>
-                                        <option value="3">Giao hàng</option>
-                                        <option value="4">Hoàn thành</option>
-                                        <option  value="0">Chờ thanh toán</option>
-                                        <option  value="-2">Đã Hủy</option>
-                                    </select>
-
-                                </span>
-                                </td>
-                            @endif
-                            @if($order->status == 3)
-                            <td>
-                                <select class="form-control" name="status" >
-             
-                                    <option  value="2">Đang xử lý</option>
-                                    <option  value="1">Đợi </option>
-                                    <option selected="selected" value="3">Giao hàng</option>
-                                    <option value="4">Hoàn thành</option>
-                                    <option  value="0">Chờ thanh toán</option>
-                                    <option  value="-2">Đã Hủy</option>
-                                </select>
-                            </td>
-                        @endif
-                                @if($order->status == 4)
-                
-                                        <td>
-                                            <select class="form-control" name="status" >
-                                   
-                                                <option  value="2">Đang xử lý</option>
-                                                <option  value="1">Đợi </option>
-                                                <option  value="3">Giao hàng</option>
-                                                <option selected="selected" value="4">Hoàn thành</option>
-                                                <option  value="0">Chờ thanh toán</option>
-                                                <option  value="-2">Đã Hủy</option>
-                                            </select>
-                                        </td>
-                 
-                                @endif
-                                @if($order->status == -2)
                                     <td>
                                         <select class="form-control" name="status" >
-                         
-                                            <option  value="2">Đang xử lý</option>
-                                            <option  value="1">Đợi </option>
-                                            <option  value="3">Giao hàng</option>
+                                            @if($order->status == 2)
+                                            <option selected="selected" value="2">Đang xử lý</option>
+                                            @else
+                                            <option value="2">Đang xử lý</option>
+                                            @endif    
+                                          @if ($order->status == 1)
+                                          <option selected="selected" value="1">Đợi </option>
+                                          @else
+                                          <option  value="1">Đợi </option>
+                                           @endif    
+                                           @if($order->status == 3)
+                                            <option selected="selected" value="3">Giao hàng</option>
+                                           @else
+                                            <option value="3">Giao hàng</option>
+                                            @endif    
+                                            @if($order->status == 4)
+                                            <option selected="selected" value="4">Hoàn thành</option>
+                                            @else
                                             <option value="4">Hoàn thành</option>
-                                            <option  value="0">Chờ thanh toán</option>
+                                            @endif    
+                                            @if($order->status == 0)
+                                            <option selected="selected" value="0">Chờ thanh toán</option>
+                                            @else
+                                            <option value="0">Chờ thanh toán</option>
+                                            @endif    
+                                            @if($order->status == -2)
                                             <option  selected="selected"  value="-2">Đã Hủy</option>
-                                        </select>
-                                    </td>
-                                @endif
+                                            @else
+                                            <option  value="-2">Đã Hủy</option>
+                                            @endif      
+                                       </select>
+                                    </td>   
                                     <td>{{$order->ship_name}}</td>
                                     <td>{{$order->ship_address}}</td>
                                     <td>{{$order->ship_phone}}</td>
                                     <td>{{$order->total_price}}</td>
-                     
                                     @if($order->checkout == 1)
                                     <td><i class="fas fa-check"></i></td>
-                             
-                                    @endif
-                                @if($order->checkout == 0)
+                                    @else
                                 <td><i class="fas fa-times"></i></td>
-                            @endif
+                                @endif    
                                     <td>{{$order->created_at}}</td>
                                   
                                     <td class="td-actions">

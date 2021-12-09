@@ -23,8 +23,9 @@ class OrderAdminController extends Controller
 
     public function fetchOrders()
     {
-        $orders = Order::paginate(10);
-        $ordersSuccess = $orders->where('checkout', '=', 1);
+        $orders =  Order::orderBy('id', 'DESC')->paginate(10);
+
+        $ordersSuccess = $orders->where('status', '=', 1);
         $total = 0;
         foreach ($ordersSuccess as $order) {
             $total += $order->total_price;

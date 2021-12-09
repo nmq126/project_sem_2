@@ -36,7 +36,7 @@ $poduct->save();
         return redirect('admin/product/create')->with("msg", "Thêm thành công");
     }
     public function getList(){
-        $products = Product::all();
+        $products = Product::paginate(10);
         $categorys= Category::all();
         return view('admin.products.list',["products"=>$products,"categorys"=>$categorys]);
     }
@@ -48,7 +48,7 @@ $poduct->save();
             ->categoryId($request)
             ->name($request)
             ->minprice($request)
-            ->maxprice($request)->get();
+            ->maxprice($request)->paginate(10);
         $categorys= Category::all();
         return view('admin.products.list',["products"=>$products,"categorys"=>$categorys]);
     }
@@ -61,7 +61,27 @@ $poduct->save();
     public function updateProduct(Request $request){
 
         $product = Product::find($request->id);
-        return view('admin.products.updateproduct',["product"=>$product]);
+        $category = Category::all();
+        $ingredient = Ingredient::all();
+       return view('admin.products.updateproduct',["product"=>$product,"categorys"=>$category,"ingredients"=>$ingredient]);
+
+    }
+    public function updateProductForm(ProductRequest $request){
+       $id = $request->id;
+       $product = Product::find($id);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->discount = $request->discount;
+        $product->description =$request->description;
+        $product->isFeatured =$request->isFeatured;
+        $product->status = $request->status;
+        $product->thumbnail = $request->thumbnail;
+        $product->detail = $request->detail;
+        $product->ingredient_id = $request->ingredient;
+        $product->category_id =$request->category_id;
+        $product->update();
+
+        return redirect('admin/product/list')->with("msg", "Update thành công");
     }
 public function  destroy(Request $request){
     $ids =$request->id;
@@ -198,7 +218,7 @@ $product->update();
         $name = $request->name;
         $id = $request->id;
         DB::update('update ingredients set name = ? where id = ?', [$name, $id]);
-        return redirect('admin/product/list/ingredient')->with("msg", "Update thành công");
+        return redirect('admin/ingredient/list')->with("msg", "Update thành công");
     }
 
     public function UpdateCategory(Request $request)
@@ -213,7 +233,7 @@ $product->update();
         $category->description = $description;
         $category->thumbnail=$thumbnail;
         $category->update();
-        return redirect('admin/product/list/category')->with("msg", "Update thành công");
+        return redirect('admin/category/list')->with("msg", "Update thành công");
 
 
     }

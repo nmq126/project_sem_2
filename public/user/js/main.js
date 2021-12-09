@@ -44,8 +44,8 @@ function onScrollUp() {
 
 const numInputs = document.querySelectorAll('input[type=number]')
 
-numInputs.forEach(function (input) {
-    input.addEventListener('change', function (e) {
+numInputs.forEach(function(input) {
+    input.addEventListener('change', function(e) {
         if (e.target.value == '') {
             e.target.value = 1
         }
@@ -58,6 +58,3 @@ profilePic.onclick = () => {
     var toggleMenu = document.querySelector('.menu');
     toggleMenu.classList.toggle('active')
 }
-
-
-
