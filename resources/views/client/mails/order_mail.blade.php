@@ -13,22 +13,22 @@
                                 <tr>
                                     <td bgcolor="#ffffff" width="100" align="left" style="border-radius: 4px 0 0 0;">
                                         <a href="http://127.0.0.1:8000/home" target="_blank">
-                                            <img alt="Logo" src="" width="180" height="120"
+                                            <img alt="Logo" src="https://res.cloudinary.com/dz0vbjbye/image/upload/v1638807022/logo/logo-removebg-preview_fvw3oj.png" width="60" height="40"
                                                  style="display: block; font-family: Helvetica, Arial, sans-serif; color: #666666; font-size: 16px; padding: 30px 0 30px 15px;"
                                                  border="0">
                                         </a>
                                     </td>
-                                    <td bgcolor="#ffffff" width="400" align="right" class="mobile-hide"
-                                        style="border-radius: 0 4px 0 0;">
-                                        <table border="0" cellpadding="0" cellspacing="0">
-                                            <tr>
-                                                <td align="right"
-                                                    style="padding: 30px 15px 30px 0; font-size: 15px; font-family: Noto Sans, Arial, sans-serif; color: #94a4b0; text-decoration: none;">
-                                                    <span style="color: #94a4b0; text-decoration: none;"></span>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
+{{--                                    <td bgcolor="#ffffff" width="400" align="right" class="mobile-hide"--}}
+{{--                                        style="border-radius: 0 4px 0 0;">--}}
+{{--                                        <table border="0" cellpadding="0" cellspacing="0">--}}
+{{--                                            <tr>--}}
+{{--                                                <td align="right"--}}
+{{--                                                    style="padding: 30px 15px 30px 0; font-size: 15px; font-family: Noto Sans, Arial, sans-serif; color: #94a4b0; text-decoration: none;">--}}
+{{--                                                    <span style="color: #94a4b0; text-decoration: none;"></span>--}}
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
+{{--                                        </table>--}}
+{{--                                    </td>--}}
                                 </tr>
                             </table>
                         </td>
@@ -82,7 +82,7 @@
                                             <td align="center" style="padding: 25px 0 0 0;" class="padding-copy">
                                                 <table border="0" cellspacing="0" cellpadding="0" class="responsive-table">
                                                     <tr>
-                                                        <td align="center"><a href="http:/127.0.0.1:8000/order/{{ $order->id }}" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #66E9AE; border-top: 15px solid #66E9AE; border-bottom: 15px solid #66E9AE; border-left: 35px solid #66E9AE; border-right: 35px solid #66E9AE; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; display: inline-block;" class="mobile-button">Chi tiết đơn hàng</a></td>
+                                                        <td align="center"><a href="http:/127.0.0.1:8000/order/{{ $order->id }}" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #e02c2b; border-top: 15px solid #e02c2b; border-bottom: 15px solid #e02c2b; border-left: 35px solid #e02c2b; border-right: 35px solid #e02c2b; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; display: inline-block;" class="mobile-button">Chi tiết đơn hàng</a></td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -247,7 +247,7 @@
                                                             style="padding: 40px 0 0 0; font-family: Noto Sans, Arial, sans-serif; color: #2c304d; font-size: 15px; line-height: 20px; border-top: 2px solid #eee;">
                                                             Tạm tính: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} vnđ<br>Phí vận chuyển:
                                                             MIỄN PHÍ<br><br><span
-                                                                style="font-size: 20px; color: #66E9AE;">Tổng: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} vnđ</span>
+                                                                style="font-size: 20px; color: #e02c2b;">Tổng: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} vnđ</span>
                                                         </td>
                                                     </tr>
                                                 </table>

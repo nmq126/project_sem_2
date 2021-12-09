@@ -181,7 +181,7 @@
                         @if(Auth::user()->profile->dob == null)
                             Chưa cập nhật
                         @else
-                            {{Auth::user()->profile->dob}}
+                            {{ \Carbon\Carbon::parse(Auth::user()->profile->dob)->format('d/m/Y')}}
                         @endif
                     </p>
                     <p><strong>Địa chỉ: </strong>

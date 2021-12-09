@@ -47,7 +47,7 @@ class OrderController extends Controller
     public function getDetail($id)
     {
         $order = Order::find($id);
-        if ($order == null) {
+        if ($order == null || $order->user_id != auth()->id()) {
             return view('client.errors.404', [
                 'msg' => 'Đơn hàng không tồn tại!!'
             ]);
@@ -120,6 +120,26 @@ class OrderController extends Controller
                 $orderDetail->order_id = $order_id;
                 $orderDetail->save();
             }
+
+            //gui mail thong bao
+            $details = [
+                'id' => $order->id,
+                'subject' => 'Đặt hàng thành công',
+                'receiver' => auth()->user()->email
+            ];
+            dispatch(new SendMail($details));
+
+            //gui noti
+            $noti = new Notification();
+            $noti->user_id = auth()->id();
+            $noti->order_id = $order->id;
+            $noti->title = 'Đặt hàng thành công';
+            if ($status = OrderStatus::WaitForCheckout){
+                $noti->sub_title = 'Đơn hàng #' . $order->id . ' cần được thanh toán để tiếp tục xử lý';
+            }
+            $noti->sub_title = 'Đơn hàng #' . $order->id . ' đã được đặt thành công và đang chờ xử lý';
+            $noti->save();
+
             DB::commit();
             Session::forget('shoppingCart');
         } catch (\Exception $e) {
@@ -127,24 +147,7 @@ class OrderController extends Controller
             return $e;
         }
 
-        //gui mail thong bao
-        $details = [
-            'id' => $order->id,
-            'subject' => 'Đặt hàng thành công',
-            'receiver' => auth()->user()->email
-        ];
-        dispatch(new SendMail($details));
 
-        //gui noti
-        $noti = new Notification();
-        $noti->user_id = auth()->id();
-        $noti->order_id = $order->id;
-        $noti->title = 'Đặt hàng thành công';
-        if ($status = OrderStatus::WaitForCheckout){
-            $noti->sub_title = 'Đơn hàng #' . $order->id . ' cần được thanh toán để tiếp tục xử lý';
-        }
-        $noti->sub_title = 'Đơn hàng #' . $order->id . ' đã được đặt thành công và đang chờ xử lý';
-        $noti->save();
 //        if ($noti->save()){
 //            $number_of_noti = Notification::where('user_id', auth()->id())
 //                ->where('read_at', null)
@@ -220,7 +223,7 @@ class OrderController extends Controller
 
 
         ### Transaction
-        $invoice = $order->id + 1600;
+        $invoice = $order->id + 1700;
         $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($itemList)
@@ -309,13 +312,31 @@ class OrderController extends Controller
 
 
             try {
+                DB::beginTransaction();
                 $payment = Payment::get($paymentId, $apiContext);
                 $order->checkout = true;
                 $order->status = OrderStatus::Waiting;
                 $order->updated_at = Carbon::now();
                 $order->save();
-            } catch (Exception $ex) {
 
+                //gui mail thong bao
+                $details = [
+                    'id' => $order->id,
+                    'subject' => 'Thanh toán thành công',
+                    'receiver' => auth()->user()->email
+                ];
+                dispatch(new SendMail($details));
+
+                //gui noti
+                $noti = new Notification();
+                $noti->user_id = auth()->id();
+                $noti->order_id = $order->id;
+                $noti->title = 'Thanh toán thành công';
+                $noti->sub_title = 'Đơn hàng #' . $order->id . ' đã thanh toán và đang chờ xử lý';
+                $noti->save();
+                DB::commit();
+            } catch (Exception $ex) {
+                DB::rollBack();
                 exit(1);
             }
         } catch (Exception $ex) {

@@ -148,7 +148,7 @@ class LoginController extends Controller
         $data = $request->all();
         unset($data['_token']);
         Profile::where('user_id', '=', Auth::id())->update($data);
-        return redirect('/my-account')->with('success', 'Thông tin tài khoản vủa nạn đã được cập nhật.');
+        return redirect('/my-account')->with('success', 'Thông tin tài khoản của bạn đã được cập nhật.');
     }
 
     public function logout()
