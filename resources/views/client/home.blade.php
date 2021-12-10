@@ -394,11 +394,7 @@
                             </div>
                         </div>
                         <div class="blog-btn mt-30">
-<<<<<<< HEAD
-                            <a href="/blogs/news/lorem-ipsum-dolor-amet">Đọc Thêm</a>
-=======
                             <a href="/blog/{{$blog->id}}/details">Đọc Thêm</a>
->>>>>>> 75dbbe0 (final)
                         </div>
                     </div>
                 </div>
