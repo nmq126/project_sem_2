@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blog Ăn Uống</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="/user/img/favicon.ico" sizes="any" type="image/svg+xml">
 
 
     <!-- font awesome cdn link  -->
@@ -29,31 +29,104 @@
     <link rel="stylesheet" href="Hung/css/responsive.css">
     <link rel="stylesheet" href="user/css/home.css">
     <link rel="stylesheet" href="user/css/main.css">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
     {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
 </head>
 <body>
+@php
+    use Illuminate\Support\Facades\Session;
+        $shoppingCart = [];
+        if (Session::has('shoppingCart')) {
+            $shoppingCart = Session::get('shoppingCart');
+        }
+@endphp
+@php
+    $totalQuantity = 0;
+@endphp
+@foreach($shoppingCart as $cartItem)
+    @php
+        if (isset($totalQuantity) && isset($cartItem)) {
+            $totalQuantity += $cartItem->quantity;
+        }
+    @endphp
+@endforeach
 <header id="nav">
 
-    <a href="/home" class="logo"><i class="fas fa-utensils"></i>VietKitchen</a>
+    <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        @if(Auth::check())
-            <a href="/my-account">
-                <i class="fas fa-user"></i>
-                {{ Auth::user()->email }}
-            </a>
-        @else
-            <a href="/login"> Đăng nhập</a>
-        @endif
-        <a href="/products"> Cửa Hàng </a>
+        <a href="/products"> Cửa Hàng</a>
         <a href="/contact-us"> Liên Hệ </a>
         <a href="/blog"> Blog </a>
+        @guest
+            <a href="/login"> Đăng nhập</a>
+        @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
         </a>
+        @auth
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+            </div>
+            <div class="notification_dd">
+                <ul class="notification_ul">
+                    @if(!$notifications->isEmpty())
+                        @foreach($notifications as $notification)
+                            <li>
+                                <a href="/my-account/order/id={{ $notification->order_id }}">
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            {{ $notification->title}}
+                                        </div>
+                                        <div class="sub_title">
+                                            {{ $notification->sub_title }}
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </li>
+                        @endforeach
+                        <li class="show_all">
+                            <p>Xem tất cả</p>
+                        </li>
+                    @else
+                        <li>
+                            <div class="notify_data">
+                                <div class="sub_title">
+                                    Không có thông báo
+                                </div>
+                            </div>
+                        </li>
+
+                    @endif
+                </ul>
+            </div>
+            <div class="user-profile">
+                <div class="profile">
+                    <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="/my-account">
+                                <i class="fas fa-user"></i>
+                                Người dùng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/my-account/logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        @endauth
     </nav>
 </header>
 <div class="breadcrumb-area gray-bg mt-70">
@@ -61,7 +134,7 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
-                <li class="active">Blog</li>
+                <li class="active"> Blog Ăn Uống</li>
             </ul>
         </div>
     </div>
@@ -74,35 +147,41 @@
         <div class="row ">
             <div class="col-lg-8 col-xl-9 col-md-8">
                 <div class="row">
-                    @foreach($blogs as $blog)
-                        <div class="col-lg-6">
-                            <div class="single-blog-wrapper mb-50">
-                                <div class="blog-img mb-20">
-                                    <a href="blog/{{$blog->id}}/details">
-                                        <img src="{{$blog->image}}"
-                                             alt="Lorem ipsum dolor amet">
-                                    </a>
-                                </div>
-                                <div class="blog-content">
-                                    <h2><a href="blog/{{$blog->id}}/details">{{$blog->title}}</a></h2>
-                                    <div class="blog-date-categori">
-                                        <ul>
-                                            <li><i class="fa fa-user"></i> {{$blog->author}}</li>
-                                            <li>
-                                                <i class="fa fa-calendar"></i> {{$blog->created}}
-                                            </li>
-                                        </ul>
+                    @if(count($blogs) > 0)
+                        @foreach($blogs as $blog)
+                            <div class="col-lg-6">
+                                <div class="single-blog-wrapper mb-50">
+                                    <div class="blog-img mb-20">
+                                        <a href="blog/{{$blog->id}}/details">
+                                            <img src="{{$blog->image}}"
+                                                 alt="Lorem ipsum dolor amet">
+                                        </a>
                                     </div>
-                                    <div class="rte">
-                                        <p>{{$blog->description}}</p>
+                                    <div class="blog-content">
+                                        <h2><a href="blog/{{$blog->id}}/details">{{$blog->title}}</a></h2>
+                                        <div class="blog-date-categori">
+                                            <ul>
+                                                <li><i class="fa fa-user"></i> {{$blog->author}}</li>
+                                                <li>
+                                                    <i class="fa fa-calendar"></i> {{$blog->created}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="rte">
+                                            <p>{{$blog->description}}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="blog-btn mt-30">
-                                    <a href="/blogs/news/lorem-ipsum-dolor-amet">Đọc Thêm</a>
+                                    <div class="blog-btn mt-30">
+                                        <a href="/blog/{{$blog->id}}/details">Đọc Thêm</a>
+                                    </div>
                                 </div>
                             </div>
+                        @endforeach
+                    @else
+                        <div class="col-12 text-center mt-5">
+                            <h3>Không Tìm Thấy Bài Viết</h3>
                         </div>
-                    @endforeach
+                    @endif
                 </div>
                 @if($blogs->lastpage() > 1)
                     <div class="pagination-total-pages">
@@ -169,10 +248,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-about mb-40">
                         <div class="footer-logo">
-                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                            <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon
+                            nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
                                 <img src="Hung/img/products/payment.png" alt="">
@@ -204,8 +283,8 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my-account.html">Thông tin tài khoản</a></li>
-                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="/my-account">Thông tin tài khoản</a></li>
+                                <li><a href="/my-account">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
                             </ul>
@@ -219,9 +298,9 @@
                         </div>
                         <div class="footer-contact">
                             <ul>
-                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Địa chỉ: 8A Tôn Thất Thuyết, Hà Nội</li>
                                 <li>Số điện thoại: (012) 800 456 789-987</li>
-                                <li>Email: <a href="#">Info@example.com</a></li>
+                                <li>Email: <a href="#">vietkitchen.hn@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
@@ -229,8 +308,7 @@
                         </div>
                         <div class="footer-time">
                             <ul>
-                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
-                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>22:00 PM</span> mọi ngày</li>
                             </ul>
                         </div>
                     </div>
@@ -243,8 +321,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i
+                                class="fa fa-heart text-danger"></i> bởi <a
+                                href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
             </div>

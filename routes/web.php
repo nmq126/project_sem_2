@@ -106,6 +106,8 @@ Route::get('/checkout', [OrderController::class, 'show']);
 
 Route::get('/home', [HomePageController::class, 'show']);
 Route::group(['middleware' => 'auth'],function (){
+
+
     //order
     Route::post('/checkout', [OrderController::class, 'process']);
     Route::get('/order/{id}', [OrderController::class, 'getDetail']);
@@ -152,6 +154,10 @@ Route::get('/cart', function () {
 
 Route::get('/contact-us', function () {
     return view('client.contact-us');
+});
+
+Route::get('/about-us', function () {
+    return view('client.about-us');
 });
 
 Route::get('/blog-details', function () {
