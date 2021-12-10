@@ -144,13 +144,7 @@
                     </ul>
                 </div>
             </div>
-<<<<<<< HEAD
-
         @endauth
-
-=======
-        @endauth
->>>>>>> 75dbbe0 (final)
     </nav>
 </header>
 <div class="breadcrumb-area gray-bg mt-70">
