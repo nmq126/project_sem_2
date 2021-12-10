@@ -15,7 +15,7 @@ class Product extends Model
     public function scopeStatus($query, $request)
     {
         if ($request->has("status")) {
-            if ($request->status != null) {
+            if ($request->status != null && $request->status != -1) {
 
                     $query->where('status', '=', $request->status);
                 }
@@ -26,7 +26,7 @@ class Product extends Model
     public function scopeDiscount($query,$request)
     {
         if ($request->has("discount")) {
-            if ($request->discount != null) {
+            if ($request->discount != null && $request->discount != -1) {
 
                 $query->where('discount', '>=', $request->discount)->where('discount','<', $request->discount + 10);
             }
@@ -37,7 +37,7 @@ class Product extends Model
     public function scopeIsFeatured($query,$request)
     {
         if ($request->has("isFeatured")) {
-            if ($request->isFeatured != null) {
+            if ($request->isFeatured != null && $request->isFeatured != -1) {
 
                 $query->where('isFeatured', '=', $request->isFeatured);
             }
@@ -48,7 +48,7 @@ class Product extends Model
     public function scopeCategoryId($query,$request)
     {
         if ($request->has("category")) {
-            if ($request->category != null) {
+            if ($request->category != null && $request->category != -1) {
 
                 $query->where('category_id', '=', $request->category);
             }
@@ -61,7 +61,7 @@ class Product extends Model
         if ($request->has("name")) {
             if ($request->name != null) {
 
-                $query->where('name', 'like', $request->name);
+                $query->where('name', 'like', '%' . $request->name . '%');
             }
         }
 
@@ -72,7 +72,7 @@ class Product extends Model
         if ($request->has("min")) {
             if ($request->min != null) {
 
-                $query->where('price', '>', $request->min);
+                $query->where('price', '>=', $request->min);
             }
         }
 

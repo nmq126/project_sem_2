@@ -240,7 +240,7 @@
                             <tbody>
                             @foreach($orderDetails as $orderDetail)
                                 <tr>
-                                    <td><img width="100px" height="100px" src="{{$orderDetail-> product -> thumbnail}}"
+                                    <td><img width="100px" height="100px" src="{{$orderDetail->product->First}}"
                                              alt=""></td>
                                     <td>{{$orderDetail-> product -> name}}</td>
                                     <td>{{\App\Helpers\Helper::formatVnd($orderDetail->unit_price)}} đ</td>

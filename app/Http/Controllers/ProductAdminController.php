@@ -48,7 +48,8 @@ $poduct->save();
             ->categoryId($request)
             ->name($request)
             ->minprice($request)
-            ->maxprice($request)->paginate(10);
+            ->maxprice($request)
+            ->paginate(10);
         $categorys= Category::all();
         return view('admin.products.list',["products"=>$products,"categorys"=>$categorys]);
     }
