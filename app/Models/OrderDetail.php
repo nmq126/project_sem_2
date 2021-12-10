@@ -9,6 +9,8 @@ class OrderDetail extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = ['order_id', 'product_id'];
+
     public $timestamps = false;
 
     public function order()
