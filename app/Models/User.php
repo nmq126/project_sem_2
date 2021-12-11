@@ -15,6 +15,49 @@ class User extends Authenticatable
 
     static $default_thumbnail_url = '/user/img/default-thumbnail.jpg';
 
+    public function scopeSearch($query,$request)
+    {    if ($request->has("key")) {
+
+        if ($request->key != null) {
+            $query->where('email', 'LIKE', '%' . $request->key . '%')
+                ->orwhere('phone', 'LIKE', '%' . $request->key . '%');
+        }
+    }
+
+        return $query;
+    }
+    public function scopeTrash($query,$request)
+    {    if ($request->has("delete")) {
+
+        if ($request->delete == 1) {
+            $query->onlyTrashed();
+        }
+    }
+
+        return $query;
+    }
+    public function scopeLevel($query,$request)
+    {    if ($request->has("admin")) {
+
+        if ($request->admin != null) {
+            $query->where('level', '=',$request->admin);
+
+        }
+    }
+
+        return $query;
+    }
+    public function scopeStatus($query,$request)
+    {    if ($request->has("status")) {
+
+        if ($request->status != null) {
+            $query->where('status', '=',$request->status);
+
+        }
+    }
+
+        return $query;
+    }
     /**
      * The attributes that are mass assignable.
      *

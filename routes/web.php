@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\{BlogController,
     DashboardController,
-
     HomePageController,
     LoginController,
     OrderAdminController,
@@ -11,7 +10,8 @@ use App\Http\Controllers\{BlogController,
     ProductAdminController,
     ProductClientController,
     RegisterController,
-    ShoppingCartController};
+    ShoppingCartController,
+    UserAdminController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +28,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
+    //user
+    Route::get('/user/list',[UserAdminController::class, 'viewUserAdmin']);
+    Route::get('/user/filter',[UserAdminController::class, 'FliterUserAdmin']);
+    Route::get('/user/delete/{id}',[UserAdminController::class, 'DeleteUserAdmin']);
+    Route::get('/user/update',[UserAdminController::class, 'UpdateUserAdmin']);
+    //Product
     Route::get('/product/create',[ProductAdminController::class, 'getForm']);
     Route::post('/product/create',[ProductAdminController::class, 'processForm']);
     Route::get('/product/list',[ProductAdminController::class, 'getList']);

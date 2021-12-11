@@ -164,7 +164,8 @@ Morris.Donut({
     '#00838F',
     '#006064'
   ],
-
+  resize: true,
+  formatter: function (value) { return (value) + '%'; },
   data: [
 <?php echo $chartData ?>
   ]
