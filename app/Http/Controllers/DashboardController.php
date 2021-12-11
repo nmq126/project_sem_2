@@ -16,7 +16,7 @@ class DashboardController extends Controller
     {
 
 
-        $sql = DB::raw("SELECT COUNT(product_id)*COUNT(quantity) as quantity,products.name,products.id FROM order_details LEFT JOIN products ON product_id = products.id GROUP BY product_id,products.id,products.name");
+        $sql = DB::raw("SELECT SUM(quantity) as quantity,products.name,products.id FROM order_details LEFT JOIN products ON product_id = products.id GROUP BY product_id,products.id,products.name");
 $result = DB::select($sql);
     for ($i = 1; $i <sizeof($result); $i++)
     {
@@ -31,10 +31,15 @@ $result = DB::select($sql);
     }
         $data ='';
         $totalquantity = 0;
-
         foreach ($result as $val){
-            $data .="{label:'".$val->name."', value:".$val->quantity."},";
+
             $totalquantity = $val->quantity + $totalquantity;
+        }
+        foreach ($result as $val){
+            $number = round($val->quantity*100/$totalquantity);
+
+            $data .="{label:'".$val->name."', value:".$number."},";
+
         }
         $chartData = $data;
         $sqlcounto = DB::raw("SELECT COUNT(id) AS count FROM orders");

@@ -92,7 +92,7 @@
                 <ul id="dropdown-user"
                     class="collapse list-unstyled pt-0 {{request()->is('admin/user*') ? 'show' : ''}}">
                     <li><a class="{{ request()->is('admin/user') ? 'active' : '' }}"
-                           href="/admin/user">Danh sách blog</a></li>
+                           href="/admin/user/list">Danh sách blog</a></li>
 
                 </ul>
             </li>

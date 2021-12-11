@@ -17,30 +17,35 @@ class ProductAdminController extends Controller
     {
         $category = Category::all();
         $ingredient = Ingredient::all();
-        return view('admin.products.form',["categorys"=>$category,"ingredients"=>$ingredient]);
+        return view('admin.products.form', ["categorys" => $category, "ingredients" => $ingredient]);
     }
+
     public function processForm(ProductRequest $request)
     {
-$poduct = new Product();
-$poduct->name = $request->name;
-$poduct->price = $request->price;
-$poduct->discount = $request->discount;
-$poduct->description =$request->description;
-$poduct->isFeatured =$request->isFeatured;
-$poduct->status = $request->status;
-$poduct->thumbnail = $request->thumbnail;
-$poduct->detail = $request->detail;
-$poduct->ingredient_id = $request->ingredient;
-$poduct->category_id =$request->category_id;
-$poduct->save();
+        $poduct = new Product();
+        $poduct->name = $request->name;
+        $poduct->price = $request->price;
+        $poduct->discount = $request->discount;
+        $poduct->description = $request->description;
+        $poduct->isFeatured = $request->isFeatured;
+        $poduct->status = $request->status;
+        $poduct->thumbnail = $request->thumbnail;
+        $poduct->detail = $request->detail;
+        $poduct->ingredient_id = $request->ingredient;
+        $poduct->category_id = $request->category_id;
+        $poduct->save();
         return redirect('admin/product/create')->with("msg", "Thêm thành công");
     }
-    public function getList(){
+
+    public function getList()
+    {
         $products = Product::paginate(10);
-        $categorys= Category::all();
-        return view('admin.products.list',["products"=>$products,"categorys"=>$categorys]);
+        $categorys = Category::all();
+        return view('admin.products.list', ["products" => $products, "categorys" => $categorys]);
     }
-    public function searchProduct(Request $request){
+
+    public function searchProduct(Request $request)
+    {
         $products = Product::query()
             ->status($request)
             ->discount($request)
@@ -48,91 +53,114 @@ $poduct->save();
             ->categoryId($request)
             ->name($request)
             ->minprice($request)
+<<<<<<< HEAD
+            ->maxprice($request)->paginate(10);
+        $categorys = Category::all();
+        return view('admin.products.list', ["products" => $products, "categorys" => $categorys]);
+=======
             ->maxprice($request)
             ->paginate(10);
         $categorys= Category::all();
         return view('admin.products.list',["products"=>$products,"categorys"=>$categorys]);
+>>>>>>> 83f889277d4d4141a50abc4dc63f689c35b9b6af
     }
-    public function delete(Request $request){
+
+    public function delete(Request $request)
+    {
 
         $product = Product::find($request->id);
         $product->delete();
         return redirect('/admin/product/list')->with("msg", "Xóa thành công");
     }
-    public function updateProduct(Request $request){
+
+    public function updateProduct(Request $request)
+    {
 
         $product = Product::find($request->id);
         $category = Category::all();
         $ingredient = Ingredient::all();
-       return view('admin.products.updateproduct',["product"=>$product,"categorys"=>$category,"ingredients"=>$ingredient]);
+        return view('admin.products.updateproduct', ["product" => $product, "categorys" => $category, "ingredients" => $ingredient]);
 
     }
-    public function updateProductForm(ProductRequest $request){
-       $id = $request->id;
-       $product = Product::find($id);
+
+    public function updateProductForm(ProductRequest $request)
+    {
+        $id = $request->id;
+        $product = Product::find($id);
         $product->name = $request->name;
         $product->price = $request->price;
         $product->discount = $request->discount;
-        $product->description =$request->description;
-        $product->isFeatured =$request->isFeatured;
+        $product->description = $request->description;
+        $product->isFeatured = $request->isFeatured;
         $product->status = $request->status;
         $product->thumbnail = $request->thumbnail;
         $product->detail = $request->detail;
         $product->ingredient_id = $request->ingredient;
-        $product->category_id =$request->category_id;
+        $product->category_id = $request->category_id;
         $product->update();
 
         return redirect('admin/product/list')->with("msg", "Update thành công");
     }
-public function  destroy(Request $request){
-    $ids =$request->id;
 
-    for ($i = 0; $i <  sizeof($ids) ; $i++) {
-        Product::find($ids[$i])->delete();
+    public function destroy(Request $request)
+    {
+        $ids = $request->id;
 
-    }
-    return  "ok";
-}
-    public function  status(Request $request){
-        $ids =$request->id;
+        for ($i = 0; $i < sizeof($ids); $i++) {
+            Product::find($ids[$i])->delete();
 
-        for ($i = 0; $i <  sizeof($ids) ; $i++) {
-       $product = Product::find($ids[$i]);
-$product->status = 1;
-$product->update();
         }
-        return  "ok";
+        return "ok";
     }
-    public function  unsatus(Request $request){
-        $ids =$request->id;
 
-        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+    public function status(Request $request)
+    {
+        $ids = $request->id;
+
+        for ($i = 0; $i < sizeof($ids); $i++) {
+            $product = Product::find($ids[$i]);
+            $product->status = 1;
+            $product->update();
+        }
+        return "ok";
+    }
+
+    public function unsatus(Request $request)
+    {
+        $ids = $request->id;
+
+        for ($i = 0; $i < sizeof($ids); $i++) {
             $product = Product::find($ids[$i]);
             $product->status = 0;
             $product->update();
         }
-        return  "ok";
+        return "ok";
     }
-    public function  featured(Request $request){
-        $ids =$request->id;
 
-        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+    public function featured(Request $request)
+    {
+        $ids = $request->id;
+
+        for ($i = 0; $i < sizeof($ids); $i++) {
             $product = Product::find($ids[$i]);
             $product->isFeatured = 1;
             $product->update();
         }
-        return  "ok";
+        return "ok";
     }
-    public function  unfeatured(Request $request){
-        $ids =$request->id;
 
-        for ($i = 0; $i <  sizeof($ids) ; $i++) {
+    public function unfeatured(Request $request)
+    {
+        $ids = $request->id;
+
+        for ($i = 0; $i < sizeof($ids); $i++) {
             $product = Product::find($ids[$i]);
             $product->isFeatured = 0;
             $product->update();
         }
-        return  "ok";
+        return "ok";
     }
+
     public function getFormIngredient()
     {
         return view('admin.products.ingrendient');
@@ -203,7 +231,7 @@ $product->update();
     public function UpdateView(Request $request)
     {
         $id = $request->id;
-        $ingrendient = Category::find($id);
+        $ingrendient = Ingredient::find($id);
         return view("admin.products.updateView", ["ingrendient" => $ingrendient]);
     }
 
@@ -227,12 +255,12 @@ $product->update();
 
         $name = $request->name;
         $id = $request->id;
-        $thumbnail=$request->image;
+        $thumbnail = $request->image;
         $description = $request->description;
         $category = Category::find($id);
         $category->name = $name;
         $category->description = $description;
-        $category->thumbnail=$thumbnail;
+        $category->thumbnail = $thumbnail;
         $category->update();
         return redirect('admin/category/list')->with("msg", "Update thành công");
 
