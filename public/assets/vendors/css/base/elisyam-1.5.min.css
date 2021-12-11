@@ -726,28 +726,12 @@ a.btn.disabled, fieldset[disabled] a.btn {
     background-image: none
 }
 
-.btn-gradient-01, .btn-gradient-01 a {
-    background: #e23f83;
-    background: linear-gradient(to right, #e23f83 0%, #ea5844 100%);
-    background-size: 200% auto;
-    font-weight: 600;
-    transition: 0.5s;
-    color: #fff;
-    border: 0 none;
-    padding: 12px 20px
-}
-
 .btn-gradient-01 i, .btn-gradient-01 a i {
     color: #fff;
     display: inline-block;
     font-size: 1.2rem;
     vertical-align: middle;
     margin-right: .4rem
-}
-
-.btn-gradient-01:hover, .btn-gradient-01 a:hover {
-    color: #fff;
-    background-position: right center
 }
 
 .btn-gradient-01:active {
@@ -3035,7 +3019,6 @@ form label {
 
 .material-input input:focus ~ label, .material-input input:valid ~ label {
     top: -20px;
-    font-size: .8rem;
     color: #5d5386
 }
 
@@ -12662,9 +12645,7 @@ a.fc-more:hover {
 
 .authentication-form h3 {
     color: #2c304d;
-    font-size: 1.4rem;
-    font-weight: 500;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     text-align: left
 }
 
@@ -12685,7 +12666,8 @@ a.fc-more:hover {
 
 @media (max-width: 991px) {
     .authentication-form {
-        padding: 3rem
+        padding-top: 3rem;
+        padding-bottom: 3rem;
     }
 }
 

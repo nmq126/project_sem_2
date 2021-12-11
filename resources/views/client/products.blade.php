@@ -6,9 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>Cửa Hàng</title>
+    <title>Cửa Hàng | VietKitchen</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">    <!-- font awesome cdn link  -->
+    <link rel="icon" href="/user/img/favicon.ico" sizes="any" type="image/svg+xml">    <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/Hung/css/all.min.css">
 
     <!-- Google Fonts -->
@@ -41,35 +41,21 @@
     <!-- firebase stuff -->
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFXE2CTQ1D"></script>
     <script>
-        WebFont.load({
-            google: {"families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"]},
-            active: function () {
-                sessionStorage.fonts = true;
-            }
-        });
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SFXE2CTQ1D');
     </script>
+
 
     {{--    <link rel="stylesheet" href="user/Hung/css/responsive.css">--}}
 </head>
 <body>
-@php
-    use Illuminate\Support\Facades\Session;
-        $shoppingCart = [];
-        if (Session::has('shoppingCart')) {
-            $shoppingCart = Session::get('shoppingCart');
-        }
-@endphp
-@php
-    $totalQuantity = 0;
-@endphp
-@foreach($shoppingCart as $cartItem)
-    @php
-        if (isset($totalQuantity) && isset($cartItem)) {
-            $totalQuantity += $cartItem->quantity;
-        }
-    @endphp
-@endforeach
 <header id="nav">
 
     <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
@@ -85,12 +71,16 @@
         @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @if($totalQuantity !=0)
+                <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @endif
         </a>
         @auth
             <div class="notifications">
                 <i class="fas fa-bell"></i>
-                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @if($number_noti !=0)
+                    <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @endif
             </div>
 
             <div class="notification_dd">
@@ -107,6 +97,11 @@
                                             {{ $notification->sub_title }}
                                         </div>
                                     </div>
+                                    @if($notification->read_at == null)
+                                        <div class="notify_status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                    @endif
                                 </a>
 
                             </li>
@@ -126,7 +121,7 @@
                     @endif
                 </ul>
             </div>
-            <div>
+            <div class="user-profile">
                 <div class="profile">
                     <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
                 </div>
@@ -147,11 +142,10 @@
                     </ul>
                 </div>
             </div>
-
         @endauth
-
     </nav>
 </header>
+<!-- header section ends -->
 <div class="breadcrumb-area gray-bg mt-70">
     <div class="container">
         <div class="breadcrumb-content">
@@ -220,7 +214,7 @@
                                     <div class="product-wrapper">
                                         <div class="product-img">
                                             <a href="/product/{{$product->id}}/details">
-                                                <img src="{{$product->thumbnail}}" alt="">
+                                                <img src="{{$product->thumbnail}}" alt="" height="250px">
                                             </a>
                                             @if($product ->discount > 0)
                                                 <div class="onsale">
@@ -247,9 +241,9 @@
                                                    style="font-size: 20px">{{$product->name}}</a>
                                             </h4>
                                             <div class="product-price-wrapper">
-                                                <span style="font-size: 15px">{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount /100))}} VND</span>
+                                                <span style="font-size: 15px">{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount /100))}} đ</span>
                                                 @if($product->discount > 0)
-                                                    <span style="font-size: 15px" class="product-price-old">{{\App\Helpers\Helper::formatVnd($product->price)}} VND</span>
+                                                    <span style="font-size: 15px" class="product-price-old">{{\App\Helpers\Helper::formatVnd($product->price)}} đ</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -372,10 +366,9 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-about mb-40">
                         <div class="footer-logo">
-                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                            <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
                                 <img src="Hung/img/products/payment.png" alt="">
@@ -390,7 +383,7 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="about-us.html">Về Chúng Tôi</a></li>
+                                <li><a href="/about-us">Về Chúng Tôi</a></li>
                                 <li><a href="#">Thông tin giao hàng</a></li>
                                 <li><a href="#">Chính sách bảo mật</a></li>
                                 <li><a href="#">Điều khoản và điều kiện</a></li>
@@ -403,12 +396,12 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 ps-md-5">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-                            <h4 >TÀI KHOẢN CỦA TÔI</h4>
+                            <h4>TÀI KHOẢN CỦA TÔI</h4>
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my-account.html">Thông tin tài khoản</a></li>
-                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="/my-account">Thông tin tài khoản</a></li>
+                                <li><a href="/my-account">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
                             </ul>
@@ -422,9 +415,9 @@
                         </div>
                         <div class="footer-contact">
                             <ul>
-                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Địa chỉ: 8A Tôn Thất Thuyết, Hà Nội</li>
                                 <li>Số điện thoại: (012) 800 456 789-987</li>
-                                <li>Email: <a href="#">Info@example.com</a></li>
+                                <li>Email: <a href="#">vietkitchen.hn@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
@@ -432,8 +425,7 @@
                         </div>
                         <div class="footer-time">
                             <ul>
-                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
-                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>22:00 PM</span> mọi ngày</li>
                             </ul>
                         </div>
                     </div>
@@ -446,8 +438,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i class="fa fa-heart text-danger"></i> bởi <a
+                                href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
             </div>
@@ -468,6 +460,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
 <script src="{{ asset('js/firebase.js') }}"></script>
-
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61b4685f0461020e"></script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/61b469c580b2296cfdd12eda/1fmkbqbbe';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

@@ -5,9 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Thông Tin Tài Khoản</title>
+    <title>Thay Đổi Thông Tin | VietKitchen</title>
     <!-- Favicon -->
-    <link rel="icon" href="{{asset('user/img/food.svg')}}" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -36,38 +36,119 @@
     <link rel="stylesheet" href="{{asset('user/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('user/css/home.css')}}">
     {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
+
+<!-- firebase stuff -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFXE2CTQ1D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SFXE2CTQ1D');
+    </script>
 </head>
 <body>
+
 <header id="nav">
 
-    <a href="/home" class="logo"><i class="fas fa-utensils"></i>VietKitchen</a>
+    <a href="/home" class="logo"><img src="/user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        @if(Auth::check())
-            <a href="/my-account">
-                <i class="fas fa-user"></i>
-                {{ Auth::user()->email }}
-            </a>
-        @else
-            <a href="/login"> Đăng nhập</a>
-        @endif
-        <a href="/products"> Cửa Hàng </a>
+        <a href="/products"> Cửa Hàng</a>
         <a href="/contact-us"> Liên Hệ </a>
         <a href="/blog"> Blog </a>
+        @guest
+            <a href="/login"> Đăng nhập</a>
+        @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+            @if($totalQuantity !=0)
+                <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @endif
         </a>
+        @auth
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                @if($number_noti !=0)
+                    <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @endif
+            </div>
+
+            <div class="notification_dd">
+                <ul class="notification_ul">
+                    @if(!$notifications->isEmpty())
+                        @foreach($notifications as $notification)
+                            <li>
+                                <a href="/my-account/order/id={{ $notification->order_id }}">
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            {{ $notification->title}}
+                                        </div>
+                                        <div class="sub_title">
+                                            {{ $notification->sub_title }}
+                                        </div>
+                                    </div>
+                                    @if($notification->read_at == null)
+                                        <div class="notify_status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                    @endif
+                                </a>
+
+                            </li>
+                        @endforeach
+                        <li class="show_all">
+                            <p>Xem tất cả</p>
+                        </li>
+                    @else
+                        <li>
+                            <div class="notify_data">
+                                <div class="sub_title">
+                                    Không có thông báo
+                                </div>
+                            </div>
+                        </li>
+
+                    @endif
+                </ul>
+            </div>
+            <div class="user-profile">
+                <div class="profile">
+                    <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="/my-account">
+                                <i class="fas fa-user"></i>
+                                Người dùng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/my-account/logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        @endauth
     </nav>
 </header>
+<!-- header section ends -->
 <div class="breadcrumb-area gray-bg mt-70">
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
-                <li><a href="/home">Thông Tin Tài Khoản</a></li>
+                <li><a href="/home">Tài Khoản Của Tôi</a></li>
                 <li class="active">Thay đổi thông tin</li>
             </ul>
         </div>
@@ -92,15 +173,15 @@
                     </div>
                     <div class="input-line">
                         <label for="address" style="font-size: 20px">Địa chỉ: </label>
-                        <input type="text" name="address" style="margin-left: 83px" value="{{Auth::user()->profile->address}}">
+                        <input type="text" name="address" style="margin-left: 70px" value="{{Auth::user()->profile->address}}">
                     </div>
-                    <div class="input-line">
+                    <div class="input-line" style="margin-right: 20px">
                         <label for="dob" style="font-size: 20px">Ngày sinh: </label>
-                        <input type="date" name="dob" value="{{Auth::user()->profile->dob}}" style="margin-left: 20px">
+                        <input type="date" name="dob" value="{{Auth::user()->profile->dob}}" style="margin-left: 40px">
                     </div>
-                    <div class="input-line">
+                    <div class="input-line" style="margin-right: 85px">
                         <label for="gender" style="font-size: 20px">Giới tính: </label>
-                        <select name="gender" id="">
+                        <select name="gender" id="" style="width: 100px; margin-left: 55px">
                             <option value="" disabled {{ Auth::user()->profile->gender == null ? 'selected' : '' }}>Giới tính</option>
                             <option value="0" {{ Auth::user()->profile->gender == '0' ? 'selected' : '' }}>Nam</option>
                             <option value="1" {{ Auth::user()->profile->gender == '1' ? 'selected' : '' }}>Nữ</option>
@@ -129,13 +210,12 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-about mb-40">
                         <div class="footer-logo">
-                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                            <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
-                                <img src="Hung/img/payment.png" alt="">
+                                <img src="Hung/img/products/payment.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -164,8 +244,8 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my-account.html">Thông tin tài khoản</a></li>
-                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="/my-account">Thông tin tài khoản</a></li>
+                                <li><a href="/my-account">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
                             </ul>
@@ -179,9 +259,9 @@
                         </div>
                         <div class="footer-contact">
                             <ul>
-                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Địa chỉ: 8A Tôn Thất Thuyết, Hà Nội</li>
                                 <li>Số điện thoại: (012) 800 456 789-987</li>
-                                <li>Email: <a href="#">Info@example.com</a></li>
+                                <li>Email: <a href="#">vietkitchen.hn@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
@@ -189,8 +269,7 @@
                         </div>
                         <div class="footer-time">
                             <ul>
-                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
-                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>22:00 PM</span> mọi ngày</li>
                             </ul>
                         </div>
                     </div>
@@ -201,10 +280,10 @@
     <div class="footer-bottom-area border-top-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-7">
+                <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i class="fa fa-heart text-danger"></i> bởi <a
+                                href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
             </div>
@@ -237,21 +316,40 @@
             },
             messages: {
                 name: {
-                    required: "Vui lòng nhập vào tên ",
-                    minlength: "Tên chứa ít nhất 8 ký tự",
-                    maxlength: "Tên chứa nhiều nhất 250 ký tự",
+                    required: " Vui lòng nhập vào tên ",
+                    minlength: " Tên chứa ít nhất 8 ký tự",
+                    maxlength: " Tên chứa nhiều nhất 250 ký tự",
                 },
                 address: {
-                    required: "Vui lòng nhập vào tên ",
-                    minlength: "Tên chứa ít nhất 8 ký tự",
-                    maxlength: "Tên chứa nhiều nhất 250 ký tự",
+                    required: " Vui lòng nhập vào tên ",
+                    minlength: " Tên chứa ít nhất 8 ký tự",
+                    maxlength: " Tên chứa nhiều nhất 250 ký tự",
                 },
-                dob: "Vui lòng nhập ngày sinh",
-                gender: "Vui lòng chọn giới tính",
+                dob: " Vui lòng nhập ngày sinh",
+                gender: " Vui lòng chọn giới tính",
             },
         });
     })
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
+<script src="{{ asset('js/firebase.js') }}"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61b4685f0461020e"></script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/61b469c580b2296cfdd12eda/1fmkbqbbe';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
     </body>
 </html>

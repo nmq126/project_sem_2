@@ -111,6 +111,7 @@ Route::get('/checkout', [OrderController::class, 'show']);
 
 
 Route::get('/home', [HomePageController::class, 'show']);
+Route::get('/', [HomePageController::class, 'show']);
 Route::group(['middleware' => 'auth'],function (){
 
 
@@ -160,6 +161,10 @@ Route::get('/cart', function () {
 
 Route::get('/contact-us', function () {
     return view('client.contact-us');
+});
+
+Route::get('/about-us', function () {
+    return view('client.about-us');
 });
 
 Route::get('/blog-details', function () {

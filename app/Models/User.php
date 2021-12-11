@@ -63,6 +63,7 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+    protected $primaryKey = 'id';
     protected $fillable = [
         'email',
         'phone',
@@ -97,6 +98,10 @@ class User extends Authenticatable
 
     public function orders(){
         return $this->hasMany(Order::class, 'user_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function setPasswordAttribute($password)

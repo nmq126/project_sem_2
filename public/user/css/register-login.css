@@ -1,34 +1,75 @@
-.sign-btn button{
-    background: linear-gradient(252.62deg, #48D6F2 8.92%, #84FC6A 96.59%) !important;
-    -webkit-transition: all .5s;
-    transition: all .5s;
+body {
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    color: #666;
+}
+
+.gradient-text-01 a{
+    text-decoration: none;
+}
+
+.sign-btn button {
+    display: inline-block;
+    border: .2rem solid #e02c2b;
+    color: #e02c2b;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: .5rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    margin-top: 1rem;
+}
+
+.sign-btn button::before{
+    content: '';
+    position: absolute;
+    top:0; right: 0;
+    width:0;
+    height:100%;
+    background:#e02c2b;
+    transition: .3s linear;
+    z-index: -1;
+}
+
+.sign-btn button:hover::before{
+    width:100%;
+    left: 0;
 }
 
 .sign-btn button:hover{
-    background: linear-gradient(252.62deg, #84FC6A 8.92%, #48D6F2 96.59%)!important;
+    color:#fff;
 }
 
-
 .elisyam-bg.background-07 {
-    background: url(../../../../user/img/sign_in_background.jpg) no-repeat;
-    background-size: cover
+    background-image: linear-gradient(rgba(4, 9, 30, 0.1), rgba(4, 9, 30, 0.1)), url(../../../../user/img/sign_in_background.jpg);
+    background-size: cover;
 }
 
 .elisyam-bg.background-08 {
-    background: url(../../../../user/img/sign_up_background.jpg) no-repeat;
+    background: linear-gradient(rgba(4, 9, 30, 0.1), rgba(4, 9, 30, 0.1)), url(../../../../user/img/sign_up_background.jpg) no-repeat;
     background-size: cover
 }
 
 .error {
-    color: red!important;
+    color: red !important;
     /*font-size: 0.75em!important;*/
     padding-left: 150px;
     /*right: 0;*/
 }
 
-.alert-login{
+.alert-login {
     color: red;
     padding-bottom: 10px;
     text-align: center;
 }
 
+.group label{
+    font-size: 15px;
+}
+
+.authentication-form h3{
+    font-size: 25px;
+}

@@ -489,6 +489,7 @@ a.button.another-button {
 .my-account-page input, .my-account-page select, .my-account-page textarea {
     border-top: 1px solid #ddd;
     border-radius: 0;
+    color: #333;
 }
 
 .ajax-popup .modal-content-text {

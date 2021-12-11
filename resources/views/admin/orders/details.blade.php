@@ -39,114 +39,31 @@
                         <h3 class="pb-2 font-weight-bold">Đơn hàng : #{{$orders->id}}</h3>
              <div class="container">
                  <div class="content-left">
-                    <p><strong>Created At:</strong> {{$orders->created_at}}</p>
-                    <p><strong>Update At:</strong> {{$orders->updated_at}}</p>
-                    <p><strong>Delete At:</strong> {{$orders->deleted_at}}</p>
+                     <p><strong>Tài khoản: </strong> {{$orders->user->email}}</p>
+
+                     <p><strong>Tạo lúc: </strong> {{$orders->created_at->format('H:i:s d/m/Y')}}</p>
+                    <p><strong>Cập nhật lúc: </strong> {{$orders->updated_at->format('H:i:s d/m/Y')}}</p>
+                    <p><strong>Xóa lúc: </strong> {{ $orders->deleted_at != null ? $orders->deleted_at->format('H:i:s d/m/Y') : 'Chưa cập nhật'}}</p>
                     <div style="position: relative" class="d-flex mt-0">
                    <form action="/admin/orders/change" method="GET" name="status">
                     <input type="hidden" name="id" value="{{$orders->id}}">
                         <p><strong>Status:</strong> </p>
-                        <select style="width: 150px;position: absolute;left:80px;bottom:5px;border:2px solid black" class="form-control" name="status" >
-                            @if($orders->status == 2)
-                            <option selected="selected" value="2">Đang xử lý</option>
-                            @else
-                            <option value="2">Đang xử lý</option>
-                            @endif    
-                          @if ($orders->status == 1)
-                          <option selected="selected" value="1">Đợi </option>
-                          @else
-                          <option  value="1">Đợi </option>
-                           @endif    
-                           @if($orders->status == 3)
-                            <option selected="selected" value="3">Giao hàng</option>
-                           @else
-                            <option value="3">Giao hàng</option>
-                            @endif    
-                            @if($orders->status == 4)
-                            <option selected="selected" value="4">Hoàn thành</option>
-                            @else
-                            <option value="4">Hoàn thành</option>
-                            @endif    
-                            @if($orders->status == 0)
-                            <option selected="selected" value="0">Chờ thanh toán</option>
-                            @else
-                            <option value="0">Chờ thanh toán</option>
-                            @endif    
-                            @if($orders->status == -2)
-                            <option  selected="selected"  value="-2">Đã Hủy</option>
-                            @else
-                            <option  value="-2">Đã Hủy</option>
-                            @endif      
+                        <select style="width: 200px;position: absolute;left:80px;bottom:5px;border:2px solid black" class="form-control" name="status" >
+                            <option value="0" {{ $orders->status == '0' ? 'selected' : '' }} disabled>Chờ thanh toán</option>
+                            <option value="1" {{ $orders->status == '1' ? 'selected' : '' }}>Chờ xác nhận </option>
+                            <option value="2" {{ $orders->status == '2' ? 'selected' : '' }}>Đang xử lý</option>
+                            <option value="3" {{ $orders->status == '3' ? 'selected' : '' }}>Đang giao hàng</option>
+                            <option value="4" {{ $orders->status == '4' ? 'selected' : '' }}>Hoàn thành</option>
+                            <option value="-2" {{ $orders->status == '-2' ? 'selected' : '' }}>Đã Hủy</option>
                        </select>
                     </form>
-                        {{-- @if($orders->status == 1)
-                
-                
-                                <span>Đợi </span>
-        
-               
-                    <div class="d-flex mt-0">
-
-                        <p><strong>Status:</strong> </p>
-                        @if($orders->status == 1)
-
-
-                                <span>Chờ xác nhận </span>
-
-
-                    @endif
-                    @if($orders->status == 0)
-
-
-
-
-                            <span>Chờ thanh toán</span>
-
-
-
-                @endif
-                    @if($orders->status == 2)
-
-
-
-                            <span>Đang xử lý</span>
-
-
-                    </span>
-
-                @endif
-                @if($orders->status == 3)
-
-
-                        <span>Giao hàng</span>
-
-
-            @endif
-                    @if($orders->status == 4)
-
-
-                                    <span>Hoàn thành</span>
-
-
-
-                    @endif
-                    @if($orders->status == -2)
-
-
-                                <span>Đã Hủy</span>
-                      
-                    @endif --}}
-
-
                     </div>
-
-
                  </div>
                  <div class="content-right">
-                    <p><strong>Customer Name:</strong> {{$orders->ship_name}}</p>
-                    <p><strong>Phone:</strong> {{$orders->ship_phone}}</p>
-                    <p><strong>Address:</strong> {{$orders->ship_address}}</p>
-                    <p><strong>Note:</strong> {{$orders->ship_note}}</p>
+                    <p><strong>Người nhận: </strong> {{$orders->ship_name}}</p>
+                    <p><strong>Số điện thoại: </strong> {{$orders->ship_phone}}</p>
+                    <p><strong>Địa chỉ: </strong> {{$orders->ship_address}}</p>
+                    <p><strong>Ghi chú: </strong> {{$orders->ship_note != null ? $orders->ship_note : 'Không có'}}</p>
                  </div>
              </div>
                         <table id="sorting-table" class="table mb-0">
@@ -167,16 +84,16 @@
                                              alt="">
                                     </td>
                                     <td>{{$orderDetail->product->name}}</td>
-                                    <td>{{$orderDetail->unit_price}}đ</td>
+                                    <td>{{\App\Helpers\Helper::formatVnd($orderDetail->unit_price)}} đ</td>
                                     <td>{{$orderDetail->quantity}}</td>
-                                    <td>{{$orderDetail->unit_price * $orderDetail->quantity}}đ</td>
+                                    <td>{{\App\Helpers\Helper::formatVnd($orderDetail->unit_price * $orderDetail->quantity)}} đ</td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                         <hr>
                         <h3 class="font-weight-bold text-right mr-5 mt-2">
-                           Tổng: {{$totalPrice}} đ</h3>
+                           Tổng: {{\App\Helpers\Helper::formatVnd($totalPrice)}} đ</h3>
                     </div>
                     <div class="text-right mt-5">
                         <a href="/admin/orders"><button class="btn btn-primary">Quay lại</button></a>

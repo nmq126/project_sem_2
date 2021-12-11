@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Trang chủ</title>
+    <title>Trang chủ | VietKitchen</title>
     <!-- Favicon -->
     <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">
 
@@ -33,6 +33,16 @@
 <!-- firebase stuff -->
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFXE2CTQ1D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SFXE2CTQ1D');
+    </script>
 </head>
 <body>
 <header id="nav">
@@ -100,7 +110,7 @@
                     @endif
                 </ul>
             </div>
-            <div>
+            <div class="user-profile">
                 <div class="profile">
                     <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
                 </div>
@@ -121,9 +131,7 @@
                     </ul>
                 </div>
             </div>
-
         @endauth
-
     </nav>
 </header>
 <!-- header section ends -->
@@ -379,7 +387,7 @@
                             </div>
                         </div>
                         <div class="blog-btn mt-30">
-                            <a href="/blogs/news/lorem-ipsum-dolor-amet">Đọc Thêm</a>
+                            <a href="/blog/{{$blog->id}}/details">Đọc Thêm</a>
                         </div>
                     </div>
                 </div>
@@ -399,10 +407,9 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-about mb-40">
                         <div class="footer-logo">
-                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                            <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
                                 <img src="Hung/img/products/payment.png" alt="">
@@ -417,7 +424,7 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="about-us.html">Về Chúng Tôi</a></li>
+                                <li><a href="/about-us">Về Chúng Tôi</a></li>
                                 <li><a href="#">Thông tin giao hàng</a></li>
                                 <li><a href="#">Chính sách bảo mật</a></li>
                                 <li><a href="#">Điều khoản và điều kiện</a></li>
@@ -434,8 +441,8 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my-account">Thông tin tài khoản</a></li>
-                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="/my-account">Thông tin tài khoản</a></li>
+                                <li><a href="/my-account">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
                             </ul>
@@ -472,8 +479,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i class="fa fa-heart text-danger"></i> bởi <a
+                                href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
             </div>
@@ -505,5 +512,20 @@
         })
     });
 </script>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61b4685f0461020e"></script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/61b469c580b2296cfdd12eda/1fmkbqbbe';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

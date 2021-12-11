@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="orderId" content="{{$order->id}}">
+    <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">
     <title>Đơn hàng</title>
 
     <!-- Favicon -->
@@ -37,11 +38,20 @@
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFXE2CTQ1D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SFXE2CTQ1D');
+    </script>
 </head>
 <body class="bg-white">
 <header id="nav">
 
-    <a href="/home" class="logo"><img src="/user/img/logo.png" alt="">VietKitchen</a>
+    <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
@@ -54,12 +64,16 @@
         @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @if($totalQuantity !=0)
+                <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @endif
         </a>
         @auth
             <div class="notifications">
                 <i class="fas fa-bell"></i>
-                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @if($number_noti !=0)
+                    <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @endif
             </div>
 
             <div class="notification_dd">
@@ -76,6 +90,11 @@
                                             {{ $notification->sub_title }}
                                         </div>
                                     </div>
+                                    @if($notification->read_at == null)
+                                        <div class="notify_status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                    @endif
                                 </a>
 
                             </li>
@@ -95,7 +114,7 @@
                     @endif
                 </ul>
             </div>
-            <div>
+            <div class="user-profile">
                 <div class="profile">
                     <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
                 </div>
@@ -116,12 +135,10 @@
                     </ul>
                 </div>
             </div>
-
         @endauth
-
     </nav>
 </header>
-
+<!-- header section ends -->
 <!-- Begin Header -->
 <table class="" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
     <tr>
@@ -134,7 +151,7 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td bgcolor="#ffffff" style="text-align: center; padding-top: 30px">
-                                        <a href="/home" style="font-size: 40px; color: #666"><i class="fas fa-utensils" style="color: #e02c2b"></i>
+                                        <a href="/home" style="font-size: 40px; color: #666"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">
                                             VietKitchen</a>
                                     </td>
                                 </tr>
@@ -339,7 +356,7 @@
                                                         <tr>
                                                             <td align="right"
                                                                 style="padding: 10px 0 0 0; font-family: Noto Sans, Arial, sans-serif; color: #2c304d; font-size: 15px; line-height: 24px;">{{ \App\Helpers\Helper::formatVnd($orderDetail->unit_price * $orderDetail->quantity) }}
-                                                                vnđ
+                                                                đ
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -370,9 +387,9 @@
                                                             style="padding: 40px 0 0 0; font-family: Noto Sans, Arial, sans-serif; color: #2c304d; font-size: 15px; line-height: 20px; border-top: 2px solid #eee;">
                                                             Tạm
                                                             tính: {{ \App\Helpers\Helper::formatVnd($order->total_price) }}
-                                                            vnđ<br>Phí vận chuyển:
+                                                            đ<br>Phí vận chuyển:
                                                             MIỄN PHÍ<br><br><span
-                                                                style="font-size: 25px; color: #e02c2b;">TỔNG: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} vnđ</span>
+                                                                style="font-size: 25px; color: #e02c2b;">TỔNG: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} đ</span>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -413,9 +430,9 @@
                                             <td align="left"
                                                 style="padding: 20px 15px 35px 15px; font-size: 15px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #aea9c3;"
                                                 class="padding-copy">Nếu bạn cần bất kì sự hỗ trợ nào, vui lòng liên hệ
-                                                "" qua tổng đài <strong>19000091</strong> hoặc tại địa chỉ email <a
+                                                VietKitchen qua tổng đài <strong>19000091</strong> hoặc tại địa chỉ email <a
                                                     class="original-only"
-                                                    style="color: #5d5386; text-decoration: underline;" href="#">contact@example.com</a>
+                                                    style="color: #5d5386; text-decoration: underline;" href="mailto:vietkitchen.hn@gmail.com">vietkitchen.hn@gmail.com</a>
                                             </td>
                                         </tr>
                                     </table>
@@ -564,5 +581,22 @@
         }
     }, '#paypal-button');
 </script>
+<script src="{{ asset('js/firebase.js') }}"></script>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61b4685f0461020e"></script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/61b469c580b2296cfdd12eda/1fmkbqbbe';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

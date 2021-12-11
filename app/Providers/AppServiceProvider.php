@@ -27,6 +27,10 @@ class   AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // dùng asset load bị lỗi do http
+        if(config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
 
         view()->composer('*',function ($view){
 

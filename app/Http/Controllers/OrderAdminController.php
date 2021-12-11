@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Exports\OrderExport;
+use App\Jobs\SendMail;
 use App\Models\Notification;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
@@ -60,7 +61,7 @@ class OrderAdminController extends Controller
                     break;
             }
             $title = 'Trạng thái đơn hàng thay đổi';
-            $body = 'Đơn hàng #'. $order->id . " trạng thái thay đổi: " . $status_noti;
+            $body = 'Đơn hàng #'. $order->id . " : " . $status_noti;
             $notification = new Notification();
             $user = $order->user;
             $notification->user_id = $user->id;
@@ -71,10 +72,18 @@ class OrderAdminController extends Controller
                 $number_of_noti = Notification::where('user_id', $user->id)
                     ->where('read_at', null)
                     ->count();
-                $notification->toSingleDevice($user->device_token, $title, $body, $number_of_noti, null);
+                $notifications = Notification::where('user_id', $user->id)->latest('id')->limit(5)->get();
+                $notification->toSingleDevice($user->device_token, $title, $body, $number_of_noti, $notifications);
             }
+
+            $details = [
+                'id' => $order->id,
+                'subject' => $title . ': ' . $status_noti,
+                'receiver' => $user->email
+            ];
+            dispatch(new SendMail($details));
         }
-        return redirect('/admin/orders')->with("msg", "Thay đổi thành công");
+        return redirect()->back()->with("msg", "Đơn hàng #$order->id thay đổi trạng thái thành công");
 
     }
 public function UpdateView(Request $request){

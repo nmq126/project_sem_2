@@ -5,9 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Thông Tin Tài Khoản</title>
+    <title>Thông Tin Tài Khoản | VietKitchen</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -40,11 +40,21 @@
 <!-- firebase stuff -->
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFXE2CTQ1D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SFXE2CTQ1D');
+    </script>
 </head>
 <body>
 <header id="nav">
 
-    <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
+    <a href="/home" class="logo"><img src="/user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
@@ -57,12 +67,16 @@
         @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @if($totalQuantity !=0)
+                <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @endif
         </a>
         @auth
             <div class="notifications">
                 <i class="fas fa-bell"></i>
-                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @if($number_noti !=0)
+                    <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @endif
             </div>
 
             <div class="notification_dd">
@@ -79,6 +93,11 @@
                                             {{ $notification->sub_title }}
                                         </div>
                                     </div>
+                                    @if($notification->read_at == null)
+                                        <div class="notify_status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                    @endif
                                 </a>
 
                             </li>
@@ -98,7 +117,7 @@
                     @endif
                 </ul>
             </div>
-            <div>
+            <div class="user-profile">
                 <div class="profile">
                     <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
                 </div>
@@ -119,18 +138,17 @@
                     </ul>
                 </div>
             </div>
-
         @endauth
-
     </nav>
 </header>
+<!-- header section ends -->
 <div class="breadcrumb-area gray-bg mt-70">
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
-                <li><a href="/my-account">Thông Tin Tài Khoản</a></li>
-                <li class="active">Chi tiết đơn hàng</li>
+                <li><a href="/my-account">Tài Khoản Của Tôi</a></li>
+                <li class="active">Chi Tiết Đơn Hàng</li>
             </ul>
         </div>
     </div>
@@ -173,23 +191,26 @@
                         @endswitch
                     </p>
                     <p><strong>Thanh toán: </strong>
+                        @if($orders->checkout == 0 && $orders->status == 0) Thanh toán online qua paypal
+                        @endif
                         @if($orders->checkout == 1) Đã thanh toán
-                        @else Chưa thanh toán
+                        @endif
+                        @if($orders->checkout == 0 && $orders->status != 0) Thanh toán khi nhận hàng
                         @endif
                     </p>
                     <div class="mt-2 me-5"><h4>Tổng số tiền: <span>{{\App\Helpers\Helper::formatVnd($orders->total_price)}} đ</span>
                         </h4>
                     </div>
                     @if($orders->status == 0)
-                    <div class="text-center mt-40">
-                        <a href="/order/{{ $orders->id }}">
-                            <button class="btn">Đi tới trang thanh toán</button>
-                        </a>
-                    </div>
+                        <div class="text-center mt-40">
+                            <a href="/order/{{ $orders->id }}">
+                                <button class="btn">Đi tới trang thanh toán</button>
+                            </a>
+                        </div>
                     @endif
-{{--                    <div class="text-center">--}}
-{{--                        <a href="/my-account" class="return"><button type="button" class="btn-grey">Quay Về  </button></a>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="text-center">--}}
+                    {{--                        <a href="/my-account" class="return"><button type="button" class="btn-grey">Quay Về  </button></a>--}}
+                    {{--                    </div>--}}
                 </div>
                 <div class="grid__item two-thirds medium-down--one-whole">
                     <h2 class="text-center" style="font-size: 25px">Chi Tiết Đơn Hàng</h2>
@@ -240,9 +261,10 @@
                             <tbody>
                             @foreach($orderDetails as $orderDetail)
                                 <tr>
-                                    <td><img width="100px" height="100px" src="{{$orderDetail-> product -> thumbnail}}"
-                                             alt=""></td>
-                                    <td>{{$orderDetail-> product -> name}}</td>
+                                    <td><a href="/product/{{$orderDetail->product->id}}/details"> <img width="100px" height="100px"
+                                                         src="{{$orderDetail-> product -> thumbnail}}"
+                                                         alt=""></a></td>
+                                    <td><a href="/product/{{$orderDetail->product->id}}/details">{{$orderDetail-> product -> name}}</a></td>
                                     <td>{{\App\Helpers\Helper::formatVnd($orderDetail->unit_price)}} đ</td>
                                     <td>{{$orderDetail->quantity}}</td>
                                     <td class="product-subtotal">
@@ -257,7 +279,7 @@
                     @if($orderDetails->lastpage() > 1)
                         <div class="pagination-style pt-20">
                             <ul class="text-center" style="display: flex; justify-content: center; align-items: center">
-                                <li><a class="prev-next prev" href="{{$orderDetails->url(1)}}"><i
+                                <li><a class="prev-next prev" href="{{$orderDetails->previousPageUrl()}}"><i
                                             class="fa fa-arrow-left {{($orderDetails->currentPage() == 1) ? 'disabled': ''}}"></i>
                                         Prev</a></li>
                                 @for($i = 1; $i <= $orderDetails->lastPage(); $i++)
@@ -281,17 +303,17 @@
         <a href="/login" class="btn" style="padding-bottom: 35px">Đăng Nhập</a>
     </div>
 @endif
-<div class="footer-area black-bg-2 pt-70 mt-50">
+<div class="footer-area black-bg-2 pt-70">
     <div class="footer-top-area pb-18">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-about mb-40">
                         <div class="footer-logo">
-                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                            <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon
+                            nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
                                 <img src="Hung/img/products/payment.png" alt="">
@@ -302,11 +324,11 @@
                 <div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-                            <h4 style="font-size: 20px">THÔNG TIN</h4>
+                            <h4>THÔNG TIN</h4>
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="about-us.html">Về Chúng Tôi</a></li>
+                                <li><a href="/about-us">Về Chúng Tôi</a></li>
                                 <li><a href="#">Thông tin giao hàng</a></li>
                                 <li><a href="#">Chính sách bảo mật</a></li>
                                 <li><a href="#">Điều khoản và điều kiện</a></li>
@@ -319,12 +341,12 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 ps-md-5">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-                            <h4 style="font-size: 20px">TÀI KHOẢN CỦA TÔI</h4>
+                            <h4>TÀI KHOẢN CỦA TÔI</h4>
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my-account.html">Thông tin tài khoản</a></li>
-                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="/my-account">Thông tin tài khoản</a></li>
+                                <li><a href="/my-account">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
                             </ul>
@@ -334,22 +356,21 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-                            <h4 style="font-size: 20px">LIÊN LẠC VỚI CHÚNG TÔI</h4>
+                            <h4>LIÊN LẠC VỚI CHÚNG TÔI</h4>
                         </div>
                         <div class="footer-contact">
                             <ul>
-                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Địa chỉ: 8A Tôn Thất Thuyết, Hà Nội</li>
                                 <li>Số điện thoại: (012) 800 456 789-987</li>
-                                <li>Email: <a href="#">Info@example.com</a></li>
+                                <li>Email: <a href="#">vietkitchen.hn@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
-                            <h4 style="font-size: 20px">GIỜ MỞ CỬA</h4>
+                            <h4>GIỜ MỞ CỬA</h4>
                         </div>
                         <div class="footer-time">
                             <ul>
-                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
-                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>22:00 PM</span> mọi ngày</li>
                             </ul>
                         </div>
                     </div>
@@ -360,10 +381,11 @@
     <div class="footer-bottom-area border-top-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-7">
+                <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i
+                                class="fa fa-heart text-danger"></i> bởi <a
+                                href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
             </div>
@@ -374,7 +396,26 @@
 <script src="{{asset('Hung/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('Hung/js/main.js')}}"></script>
 <script src="{{asset('user/js/main.js')}}"></script>
+
+<script src="{{asset('Hung/js/jquery-1.12.4.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
 <script src="{{ asset('js/firebase.js') }}"></script>
 
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61b4685f0461020e"></script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/61b469c580b2296cfdd12eda/1fmkbqbbe';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

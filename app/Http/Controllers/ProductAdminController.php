@@ -53,9 +53,16 @@ class ProductAdminController extends Controller
             ->categoryId($request)
             ->name($request)
             ->minprice($request)
+<<<<<<< HEAD
             ->maxprice($request)->paginate(10);
         $categorys = Category::all();
         return view('admin.products.list', ["products" => $products, "categorys" => $categorys]);
+=======
+            ->maxprice($request)
+            ->paginate(10);
+        $categorys= Category::all();
+        return view('admin.products.list',["products"=>$products,"categorys"=>$categorys]);
+>>>>>>> 83f889277d4d4141a50abc4dc63f689c35b9b6af
     }
 
     public function delete(Request $request)

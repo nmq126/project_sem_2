@@ -107,27 +107,18 @@
                             <img src="{{ Auth::user()->DefaultThumbnail }}" alt="..." class="rounded-circle">
                         </li>
                         <li>
-                            <a href="pages-profile.html" class="dropdown-item">
-                                Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a href="app-mail.html" class="dropdown-item">
-                                Messages
+                            <a href="#" class="dropdown-item">
+                                Người dùng
                             </a>
                         </li>
                         <li>
                             <a href="#" class="dropdown-item no-padding-bottom">
-                                Settings
+                                Cài đặt
                             </a>
                         </li>
                         <li class="separator"></li>
-                        <li>
-                            <a href="pages-faq.html" class="dropdown-item no-padding-top">
-                                Faq
-                            </a>
-                        </li>
-                        <li><a rel="nofollow" href="pages-login.html" class="dropdown-item logout text-center"><i class="ti-power-off"></i></a></li>
+
+                        <li><a rel="nofollow" href="/my-account/logout" class="dropdown-item logout text-center"><i class="ti-power-off"></i></a></li>
                     </ul>
                 </li>
                 <!-- End User -->
