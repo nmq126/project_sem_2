@@ -35,6 +35,23 @@
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 </head>
 <body>
+@php
+    use Illuminate\Support\Facades\Session;
+        $shoppingCart = [];
+        if (Session::has('shoppingCart')) {
+            $shoppingCart = Session::get('shoppingCart');
+        }
+@endphp
+@php
+    $totalQuantity = 0;
+@endphp
+@foreach($shoppingCart as $cartItem)
+    @php
+        if (isset($totalQuantity) && isset($cartItem)) {
+            $totalQuantity += $cartItem->quantity;
+        }
+    @endphp
+@endforeach
 <header id="nav">
 
     <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
@@ -100,7 +117,7 @@
                     @endif
                 </ul>
             </div>
-            <div>
+            <div class="user-profile">
                 <div class="profile">
                     <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
                 </div>
@@ -121,9 +138,7 @@
                     </ul>
                 </div>
             </div>
-
         @endauth
-
     </nav>
 </header>
 <!-- header section ends -->
@@ -379,7 +394,7 @@
                             </div>
                         </div>
                         <div class="blog-btn mt-30">
-                            <a href="/blogs/news/lorem-ipsum-dolor-amet">Đọc Thêm</a>
+                            <a href="/blog/{{$blog->id}}/details">Đọc Thêm</a>
                         </div>
                     </div>
                 </div>
@@ -399,10 +414,9 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-about mb-40">
                         <div class="footer-logo">
-                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                            <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
                                 <img src="Hung/img/products/payment.png" alt="">
@@ -417,7 +431,7 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="about-us.html">Về Chúng Tôi</a></li>
+                                <li><a href="/about-us">Về Chúng Tôi</a></li>
                                 <li><a href="#">Thông tin giao hàng</a></li>
                                 <li><a href="#">Chính sách bảo mật</a></li>
                                 <li><a href="#">Điều khoản và điều kiện</a></li>
@@ -434,8 +448,8 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my-account">Thông tin tài khoản</a></li>
-                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="/my-account">Thông tin tài khoản</a></li>
+                                <li><a href="/my-account">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
                             </ul>
@@ -472,8 +486,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i class="fa fa-heart text-danger"></i> bởi <a
+                                href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
             </div>

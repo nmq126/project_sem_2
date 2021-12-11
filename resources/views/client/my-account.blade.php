@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Thông Tin Tài Khoản</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -64,7 +64,6 @@
                 <i class="fas fa-bell"></i>
                 <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
             </div>
-
             <div class="notification_dd">
                 <ul class="notification_ul">
                     @if(!$notifications->isEmpty())
@@ -98,7 +97,7 @@
                     @endif
                 </ul>
             </div>
-            <div>
+            <div class="user-profile">
                 <div class="profile">
                     <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
                 </div>
@@ -119,9 +118,7 @@
                     </ul>
                 </div>
             </div>
-
         @endauth
-
     </nav>
 </header>
 <div class="breadcrumb-area gray-bg mt-70">
@@ -129,7 +126,7 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
-                <li class="active">Thông Tin Tài Khoản</li>
+                <li class="active">Tài Khoản Của Tôi</li>
             </ul>
         </div>
     </div>
@@ -163,9 +160,6 @@
                     </p>
                     <p><strong>Giới tính: </strong>
                         @switch(Auth::user()->profile->gender)
-                            @case(null)
-                                Chưa cập nhật
-                                @break
                             @case(0)
                                 Nam
                                 @break
@@ -175,6 +169,9 @@
                             @case(-1)
                                 Khác
                                 @break
+                            @default
+                            Chưa cập nhật
+                            @break
                         @endswitch
                     </p>
                     <p><strong>Ngày sinh: </strong>
@@ -301,7 +298,7 @@
                     @if($orders->lastpage() > 1)
                         <div class="pagination-style pt-20">
                             <ul class="text-center">
-                                <li><a class="prev-next prev" href="{{$orders->url(1)}}"><i
+                                <li><a class="prev-next prev" href="{{$orders->previousPageUrl()}}"><i
                                             class="fa fa-arrow-left {{($orders->currentPage() == 1) ? 'disabled': ''}}"></i>
                                         Prev</a></li>
                                 @for($i = 1; $i <= $orders->lastPage(); $i++)
@@ -333,10 +330,9 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-about mb-40">
                         <div class="footer-logo">
-                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                            <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
                                 <img src="Hung/img/products/payment.png" alt="">
@@ -368,8 +364,8 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my-account.html">Thông tin tài khoản</a></li>
-                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="/my-account">Thông tin tài khoản</a></li>
+                                <li><a href="/my-account">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
                             </ul>
@@ -383,9 +379,9 @@
                         </div>
                         <div class="footer-contact">
                             <ul>
-                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Địa chỉ: 8A Tôn Thất Thuyết, Hà Nội</li>
                                 <li>Số điện thoại: (012) 800 456 789-987</li>
-                                <li>Email: <a href="#">Info@example.com</a></li>
+                                <li>Email: <a href="#">vietkitchen.hn@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
@@ -393,8 +389,7 @@
                         </div>
                         <div class="footer-time">
                             <ul>
-                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
-                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>22:00 PM</span> mọi ngày</li>
                             </ul>
                         </div>
                     </div>
@@ -405,10 +400,10 @@
     <div class="footer-bottom-area border-top-4">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-7">
+                <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i class="fa fa-heart text-danger"></i> bởi <a
+                                href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
             </div>
