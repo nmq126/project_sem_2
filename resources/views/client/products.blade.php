@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>Cửa Hàng</title>
+    <title>Cửa Hàng | VietKitchen</title>
     <!-- Favicon -->
     <link rel="icon" href="/user/img/favicon.ico" sizes="any" type="image/svg+xml">    <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/Hung/css/all.min.css">
@@ -41,35 +41,21 @@
     <!-- firebase stuff -->
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFXE2CTQ1D"></script>
     <script>
-        WebFont.load({
-            google: {"families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"]},
-            active: function () {
-                sessionStorage.fonts = true;
-            }
-        });
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SFXE2CTQ1D');
     </script>
+
 
     {{--    <link rel="stylesheet" href="user/Hung/css/responsive.css">--}}
 </head>
 <body>
-@php
-    use Illuminate\Support\Facades\Session;
-        $shoppingCart = [];
-        if (Session::has('shoppingCart')) {
-            $shoppingCart = Session::get('shoppingCart');
-        }
-@endphp
-@php
-    $totalQuantity = 0;
-@endphp
-@foreach($shoppingCart as $cartItem)
-    @php
-        if (isset($totalQuantity) && isset($cartItem)) {
-            $totalQuantity += $cartItem->quantity;
-        }
-    @endphp
-@endforeach
 <header id="nav">
 
     <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
@@ -85,13 +71,18 @@
         @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @if($totalQuantity !=0)
+                <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @endif
         </a>
         @auth
             <div class="notifications">
                 <i class="fas fa-bell"></i>
-                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @if($number_noti !=0)
+                    <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @endif
             </div>
+
             <div class="notification_dd">
                 <ul class="notification_ul">
                     @if(!$notifications->isEmpty())
@@ -106,6 +97,11 @@
                                             {{ $notification->sub_title }}
                                         </div>
                                     </div>
+                                    @if($notification->read_at == null)
+                                        <div class="notify_status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                    @endif
                                 </a>
 
                             </li>
@@ -149,6 +145,7 @@
         @endauth
     </nav>
 </header>
+<!-- header section ends -->
 <div class="breadcrumb-area gray-bg mt-70">
     <div class="container">
         <div class="breadcrumb-content">
@@ -463,6 +460,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css">
 <script src="{{ asset('js/firebase.js') }}"></script>
-
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61b4685f0461020e"></script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/61b469c580b2296cfdd12eda/1fmkbqbbe';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

@@ -64,7 +64,7 @@ messaging.onMessage((payload) => {
     $.toast({
         heading: payload.data.heading,
         text: payload.data.text,
-        position: 'bottom-right',
+        position: 'bottom-left',
         showHideTransition: 'slide',
         hideAfter: false,
         icon: 'success',

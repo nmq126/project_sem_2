@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Trang chủ</title>
+    <title>Trang chủ | VietKitchen</title>
     <!-- Favicon -->
     <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">
 
@@ -33,25 +33,18 @@
 <!-- firebase stuff -->
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFXE2CTQ1D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SFXE2CTQ1D');
+    </script>
 </head>
 <body>
-@php
-    use Illuminate\Support\Facades\Session;
-        $shoppingCart = [];
-        if (Session::has('shoppingCart')) {
-            $shoppingCart = Session::get('shoppingCart');
-        }
-@endphp
-@php
-    $totalQuantity = 0;
-@endphp
-@foreach($shoppingCart as $cartItem)
-    @php
-        if (isset($totalQuantity) && isset($cartItem)) {
-            $totalQuantity += $cartItem->quantity;
-        }
-    @endphp
-@endforeach
 <header id="nav">
 
     <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
@@ -519,5 +512,20 @@
         })
     });
 </script>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61b4685f0461020e"></script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/61b469c580b2296cfdd12eda/1fmkbqbbe';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

@@ -105,6 +105,7 @@ Route::get('/checkout', [OrderController::class, 'show']);
 
 
 Route::get('/home', [HomePageController::class, 'show']);
+Route::get('/', [HomePageController::class, 'show']);
 Route::group(['middleware' => 'auth'],function (){
 
 
