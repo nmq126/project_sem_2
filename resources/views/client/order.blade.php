@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="orderId" content="{{$order->id}}">
+    <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">
     <title>Đơn hàng</title>
 
     <!-- Favicon -->
@@ -134,7 +135,7 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td bgcolor="#ffffff" style="text-align: center; padding-top: 30px">
-                                        <a href="/home" style="font-size: 40px; color: #666">
+                                        <a href="/home" style="font-size: 40px; color: #666"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">
                                             VietKitchen</a>
                                     </td>
                                 </tr>
@@ -339,7 +340,7 @@
                                                         <tr>
                                                             <td align="right"
                                                                 style="padding: 10px 0 0 0; font-family: Noto Sans, Arial, sans-serif; color: #2c304d; font-size: 15px; line-height: 24px;">{{ \App\Helpers\Helper::formatVnd($orderDetail->unit_price * $orderDetail->quantity) }}
-                                                                vnđ
+                                                                đ
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -370,9 +371,9 @@
                                                             style="padding: 40px 0 0 0; font-family: Noto Sans, Arial, sans-serif; color: #2c304d; font-size: 15px; line-height: 20px; border-top: 2px solid #eee;">
                                                             Tạm
                                                             tính: {{ \App\Helpers\Helper::formatVnd($order->total_price) }}
-                                                            vnđ<br>Phí vận chuyển:
+                                                            đ<br>Phí vận chuyển:
                                                             MIỄN PHÍ<br><br><span
-                                                                style="font-size: 25px; color: #e02c2b;">TỔNG: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} vnđ</span>
+                                                                style="font-size: 25px; color: #e02c2b;">TỔNG: {{ \App\Helpers\Helper::formatVnd($order->total_price) }} đ</span>
                                                         </td>
                                                     </tr>
                                                 </table>

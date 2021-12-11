@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">
     <title>Đăng nhập tài khoản</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,47 +32,33 @@
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 </head>
 <body class="bg-white">
-<!-- Begin Preloader -->
-<div id="preloader">
-    <div class="canvas">
-        <img src="user/img/loader.gif" alt="">
-    </div>
-</div>
-</div>
-<!-- End Preloader -->
-<!-- Begin Container -->
 <div class="container-fluid no-padding h-100">
     <div class="row flex-row h-100 bg-white">
         <!-- Begin Left Content -->
-        <div class="col-xl-8 col-lg-6 col-md-5 no-padding">
+        <div class="col-xl-8 col-md-6 no-padding">
             <div class="elisyam-bg background-07">
                 <div class="elisyam-overlay overlay-06"></div>
-                <div class="authentication-col-content mx-auto">
+                <div class="authentication-col-content mx-auto text-center">
                     <h1 class="gradient-text-01">
-                        Đăng nhập
+                        <a href="/home" class="logo" style="color: white"><img src="{{asset('user/img/logo.png')}}" width="100px" alt="">VietKitchen</a>
                     </h1>
                     <span class="description">
-                                Đăng nhập tài khoản để mua được bát bún nhìn không giống như này lắm.
+                                Luôn đem tới cho bạn những món ăn - đồ uống ngon nhất với giá cả ưu đãi.
                             </span>
                 </div>
             </div>
         </div>
         <!-- End Left Content -->
         <!-- Begin Right Content -->
-        <div class="col-xl-4 col-lg-6 col-md-7 my-auto no-padding">
+        <div class="col-xl-4 col-md-6 my-auto no-padding">
             <!-- Begin Form -->
             <div class="authentication-form mx-auto">
-                <div class="logo-centered">
-                    <a href="">
-                        <img src="" alt="logo">
-                    </a>
-                </div>
                 @if (session('error'))
                     <div class="alert alert-danger" role="alert">
                         {{ session('error') }}
                     </div>
                 @endif
-                <h3>Đăng nhập</h3>
+                <h3 class="text-center font-weight-bold">Đăng Nhập</h3>
                 <form method="post" action="/login" name="login-form" id="login-form">
                     @csrf
                     <input type="hidden" name="device_token" id="device_token">
@@ -89,19 +76,19 @@
                     </div>
                 </form>
                 <div class="row">
-                    <div class="col text-left">
-                        <a href="">Quên mật khẩu</a>
+                    <div class="text-left pl-4">
+                        <a href="" style="font-size: 15px">Quên mật khẩu ?</a>
                     </div>
                 </div>
                 <div class="sign-btn text-center">
                     <button form="login-form" type="submit" class="btn btn-lg btn-gradient-01">
-                        Đăng nhập
+                        Đăng Nhập
                     </button>
                 </div>
-                <div class="register">
+                <div class="register" style="font-size: 15px">
                     Bạn chưa có tài khoản?
                     <br>
-                    <a class="badge badge-success" href="/register">Đăng ký</a>
+                    <a class="badge badge-success" href="/register">Đăng Ký</a>
                 </div>
             </div>
             <!-- End Form -->

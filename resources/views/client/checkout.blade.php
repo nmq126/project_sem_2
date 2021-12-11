@@ -8,7 +8,7 @@
     <title>Đặt hàng</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">
     <!-- Google Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script>
@@ -73,7 +73,6 @@
                 <i class="fas fa-bell"></i>
                 <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
             </div>
-
             <div class="notification_dd">
                 <ul class="notification_ul">
                     @if(!$notifications->isEmpty())
@@ -107,7 +106,7 @@
                     @endif
                 </ul>
             </div>
-            <div>
+            <div class="user-profile">
                 <div class="profile">
                     <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
                 </div>
@@ -128,9 +127,7 @@
                     </ul>
                 </div>
             </div>
-
         @endauth
-
     </nav>
 </header>
 <div class="breadcrumb-area gray-bg mt-70">
@@ -138,6 +135,7 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
+                <li><a href="/cart">Giỏ Hàng</a></li>
                 <li class="active">Thanh Toán</li>
             </ul>
         </div>
@@ -213,7 +211,8 @@
                                             <td class="cart-product-name"><span>{{$cartItem->name}}</span></td>
                                             <td class="product-quantity">
                                                 <div class="input-quantity">
-                                                    <input class="quantity-checkout" oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null"
+                                                    <input class="quantity-checkout"
+                                                           oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null"
                                                            data-id="{{$cartItem->id}}" min="1" name="quantity"
                                                            type="number"
                                                            value="{{$cartItem->quantity}}">
@@ -221,7 +220,7 @@
                                             </td>
                                             <td class="product-subtotal">
                                         <span class="price item-price-{{$cartItem->id}}"
-                                              id="item-price-{{$cartItem->id}}">{{\App\Helpers\Helper::formatVnd($cartItem->unitPrice * $cartItem->quantity)}} VND</span>
+                                              id="item-price-{{$cartItem->id}}">{{\App\Helpers\Helper::formatVnd($cartItem->unitPrice * $cartItem->quantity)}} đ</span>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -246,11 +245,11 @@
                         <li class="text">
                             <p>Tạm tính</p>
                             <span
-                                class="sub-total">{{\App\Helpers\Helper::formatVnd($totalPrice + $totalPromo)  }} vnđ</span>
+                                class="sub-total">{{\App\Helpers\Helper::formatVnd($totalPrice + $totalPromo)}} đ</span>
                         </li>
                         <li class="text">
                             <p>Khuyến mại</p>
-                            <span class="promo-price">- {{ App\Helpers\Helper::formatVnd($totalPromo) }} vnđ</span>
+                            <span class="promo-price">- {{ App\Helpers\Helper::formatVnd($totalPromo)}} đ</span>
                         </li>
 
                         <li class="text">
@@ -261,7 +260,7 @@
                     <hr>
                     <div class="total">
                         <p>Tổng</p>
-                        <span class="total-price">{{ App\Helpers\Helper::formatVnd($totalPrice) }} vnđ</span>
+                        <span class="total-price">{{ App\Helpers\Helper::formatVnd($totalPrice)}} đ</span>
                     </div>
                 </div>
             </div>
@@ -288,10 +287,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-about mb-40">
                         <div class="footer-logo">
-                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                            <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon
+                            nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
                                 <img src="Hung/img/products/payment.png" alt="">
@@ -306,7 +305,7 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="about-us.html">Về Chúng Tôi</a></li>
+                                <li><a href="/about-us">Về Chúng Tôi</a></li>
                                 <li><a href="#">Thông tin giao hàng</a></li>
                                 <li><a href="#">Chính sách bảo mật</a></li>
                                 <li><a href="#">Điều khoản và điều kiện</a></li>
@@ -323,8 +322,8 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my/account">Thông tin tài khoản</a></li>
-                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="/my-account">Thông tin tài khoản</a></li>
+                                <li><a href="/my-account">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
                             </ul>
@@ -338,9 +337,9 @@
                         </div>
                         <div class="footer-contact">
                             <ul>
-                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Địa chỉ: 8A Tôn Thất Thuyết, Hà Nội</li>
                                 <li>Số điện thoại: (012) 800 456 789-987</li>
-                                <li>Email: <a href="#">Info@example.com</a></li>
+                                <li>Email: <a href="#">vietkitchen.hn@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
@@ -348,8 +347,7 @@
                         </div>
                         <div class="footer-time">
                             <ul>
-                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
-                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>22:00 PM</span> mọi ngày</li>
                             </ul>
                         </div>
                     </div>
@@ -362,8 +360,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i
+                                class="fa fa-heart text-danger"></i> bởi <a
+                                href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
             </div>

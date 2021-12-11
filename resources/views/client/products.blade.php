@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>Cửa Hàng</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/favicon.ico" sizes="any" type="image/svg+xml">    <!-- font awesome cdn link  -->
+    <link rel="icon" href="/user/img/favicon.ico" sizes="any" type="image/svg+xml">    <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/Hung/css/all.min.css">
 
     <!-- Google Fonts -->
@@ -92,7 +92,6 @@
                 <i class="fas fa-bell"></i>
                 <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
             </div>
-
             <div class="notification_dd">
                 <ul class="notification_ul">
                     @if(!$notifications->isEmpty())
@@ -126,7 +125,7 @@
                     @endif
                 </ul>
             </div>
-            <div>
+            <div class="user-profile">
                 <div class="profile">
                     <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
                 </div>
@@ -147,9 +146,7 @@
                     </ul>
                 </div>
             </div>
-
         @endauth
-
     </nav>
 </header>
 <div class="breadcrumb-area gray-bg mt-70">
@@ -220,7 +217,7 @@
                                     <div class="product-wrapper">
                                         <div class="product-img">
                                             <a href="/product/{{$product->id}}/details">
-                                                <img src="{{$product->thumbnail}}" alt="">
+                                                <img src="{{$product->thumbnail}}" alt="" height="250px">
                                             </a>
                                             @if($product ->discount > 0)
                                                 <div class="onsale">
@@ -247,9 +244,9 @@
                                                    style="font-size: 20px">{{$product->name}}</a>
                                             </h4>
                                             <div class="product-price-wrapper">
-                                                <span style="font-size: 15px">{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount /100))}} VND</span>
+                                                <span style="font-size: 15px">{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount /100))}} đ</span>
                                                 @if($product->discount > 0)
-                                                    <span style="font-size: 15px" class="product-price-old">{{\App\Helpers\Helper::formatVnd($product->price)}} VND</span>
+                                                    <span style="font-size: 15px" class="product-price-old">{{\App\Helpers\Helper::formatVnd($product->price)}} đ</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -372,10 +369,9 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-about mb-40">
                         <div class="footer-logo">
-                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                            <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
                                 <img src="Hung/img/products/payment.png" alt="">
@@ -390,7 +386,7 @@
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="about-us.html">Về Chúng Tôi</a></li>
+                                <li><a href="/about-us">Về Chúng Tôi</a></li>
                                 <li><a href="#">Thông tin giao hàng</a></li>
                                 <li><a href="#">Chính sách bảo mật</a></li>
                                 <li><a href="#">Điều khoản và điều kiện</a></li>
@@ -403,12 +399,12 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 ps-md-5">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-                            <h4 >TÀI KHOẢN CỦA TÔI</h4>
+                            <h4>TÀI KHOẢN CỦA TÔI</h4>
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my-account.html">Thông tin tài khoản</a></li>
-                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="/my-account">Thông tin tài khoản</a></li>
+                                <li><a href="/my-account">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
                             </ul>
@@ -422,9 +418,9 @@
                         </div>
                         <div class="footer-contact">
                             <ul>
-                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Địa chỉ: 8A Tôn Thất Thuyết, Hà Nội</li>
                                 <li>Số điện thoại: (012) 800 456 789-987</li>
-                                <li>Email: <a href="#">Info@example.com</a></li>
+                                <li>Email: <a href="#">vietkitchen.hn@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
@@ -432,8 +428,7 @@
                         </div>
                         <div class="footer-time">
                             <ul>
-                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
-                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>22:00 PM</span> mọi ngày</li>
                             </ul>
                         </div>
                     </div>
@@ -446,8 +441,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i class="fa fa-heart text-danger"></i> bởi <a
+                                href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
             </div>

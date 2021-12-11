@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Đăng ký ngay</title>
-    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Google Fonts -->
@@ -28,40 +28,27 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
 <body class="bg-white">
-<!-- Begin Preloader -->
-<div id="preloader">
-    <div class="canvas">
-        <img src="user/img/loader.gif" alt="">
-    </div>
-</div>
-<!-- End Preloader -->
-<!-- Begin Container -->
 <div class="container-fluid no-padding h-100">
     <div class="row flex-row h-100 bg-white">
         <!-- Begin Left Content -->
-        <div class="col-xl-8 col-lg-6 col-md-5 no-padding">
+        <div class="col-xl-8 col-md-6 no-padding">
             <div class="elisyam-bg background-08">
                 <div class="elisyam-overlay overlay-06"></div>
-                <div class="authentication-col-content mx-auto">
+                <div class="authentication-col-content mx-auto text-center">
                     <h1 class="gradient-text-01">
-                        Đăng ký đê!!
+                        <a href="/home" class="logo" style="color: white"><img src="{{asset('user/img/logo.png')}}" width="100px" alt="">VietKitchen</a>
                     </h1>
                     <span class="description">
-                                Tạo tài khoản để có thể đặt mua những món ăn không giống hình cho lắm.
+                                Luôn đem tới cho bạn những món ăn - đồ uống ngon nhất với giá cả ưu đãi.
                             </span>
                 </div>
             </div>
         </div>
         <!-- End Left Content -->
         <!-- Begin Right Content -->
-        <div class="col-xl-4 col-lg-6 col-md-7 my-auto no-padding">
+        <div class="col-xl-4 col-md-6 my-auto no-padding">
             <!-- Begin Form -->
             <div class="authentication-form mx-auto">
-                <div class="logo-centered">
-                    <a href="">
-                        <img src="" alt="logo">
-                    </a>
-                </div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <strong>Có lỗi xảy ra trong quá trình đăng ký:</strong>
@@ -72,7 +59,7 @@
                         </ul>
                     </div>
                 @endif
-                <h3>Đăng ký</h3>
+                <h3 class="text-center font-weight-bold">Đăng Ký</h3>
                 <form method="post" action="/register" name="register-form" id="register-form">
                     @csrf
                     <div class="group material-input">
@@ -107,14 +94,14 @@
                     </div>
                 </div>
                 <div class="sign-btn text-center">
-                    <button form="register-form" type="submit" class="btn btn-lg btn-gradient-01">
-                        Tạo tài khoản
+                    <button form="register-form" type="submit" class="btn btn-lg">
+                        Tạo Tài Khoản
                     </button>
                 </div>
                 <div class="register">
                     Bạn đã có tài khoản?
                     <br>
-                    <a class="badge badge-success" href="/login">Đăng nhập</a>
+                    <a class="badge badge-success" href="/login">Đăng Nhập</a>
                 </div>
             </div>
             <!-- End Form -->

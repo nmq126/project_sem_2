@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Liên Hệ</title>
     <!-- Favicon -->
-    <link rel="icon" href="user/img/food.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -38,28 +38,100 @@
     {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
 </head>
 <body>
+@php
+    use Illuminate\Support\Facades\Session;
+        $shoppingCart = [];
+        if (Session::has('shoppingCart')) {
+            $shoppingCart = Session::get('shoppingCart');
+        }
+@endphp
+@php
+    $totalQuantity = 0;
+@endphp
+@foreach($shoppingCart as $cartItem)
+    @php
+        if (isset($totalQuantity) && isset($cartItem)) {
+            $totalQuantity += $cartItem->quantity;
+        }
+    @endphp
+@endforeach
 <header id="nav">
 
-    <a href="/home" class="logo"><i class="fas fa-utensils"></i>VietKitchen</a>
+    <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
     <nav class="navbar">
-        @if(Auth::check())
-            <a href="/my-account">
-                <i class="fas fa-user"></i>
-                {{ Auth::user()->email }}
-            </a>
-        @else
-            <a href="/login"> Đăng nhập</a>
-        @endif
-        <a href="/products"> Cửa Hàng </a>
+        <a href="/products"> Cửa Hàng</a>
         <a href="/contact-us"> Liên Hệ </a>
         <a href="/blog"> Blog </a>
+        @guest
+            <a href="/login"> Đăng nhập</a>
+        @endguest
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
-            <span class='badge badge-warning' id='lblCartCount'>{{$totalQuantity}}</span>
+            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
         </a>
+        @auth
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+            </div>
+            <div class="notification_dd">
+                <ul class="notification_ul">
+                    @if(!$notifications->isEmpty())
+                        @foreach($notifications as $notification)
+                            <li>
+                                <a href="/my-account/order/id={{ $notification->order_id }}">
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            {{ $notification->title}}
+                                        </div>
+                                        <div class="sub_title">
+                                            {{ $notification->sub_title }}
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </li>
+                        @endforeach
+                        <li class="show_all">
+                            <p>Xem tất cả</p>
+                        </li>
+                    @else
+                        <li>
+                            <div class="notify_data">
+                                <div class="sub_title">
+                                    Không có thông báo
+                                </div>
+                            </div>
+                        </li>
+
+                    @endif
+                </ul>
+            </div>
+            <div class="user-profile">
+                <div class="profile">
+                    <img height="25px" src="{{ Auth::user()->DefaultThumbnail }}" alt="">
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li>
+                            <a href="/my-account">
+                                <i class="fas fa-user"></i>
+                                Người dùng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/my-account/logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        @endauth
     </nav>
 </header>
 <div class="breadcrumb-area gray-bg mt-70">
@@ -117,6 +189,48 @@
         </div>
     </div>
 </div>
+
+<div class="row map m-0">
+    <div class="col-md-8 col-12 float-left mt-5">
+        <div id="map"></div>
+    </div>
+    <div class="col-md-4 col-12 float-left address mt-5">
+        <h3>Địa Chỉ</h3>
+        <div class="mt-md-4">
+            <ul>
+                <li>
+                    <div class="store">
+                        <h5>Vincom Nguyễn Chí Thanh</h5>
+                        <p>Tầng 5, TTTM Vincom 54 Nguyễn Chí Thanh</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="store">
+                        <h5>Tràng Tiền Plaza</h5>
+                        <p>Tầng 5, TTTM Tràng Tiền Plaza, 24 Hai Bà Trưng</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="store">
+                        <h5>Vincom Royal City</h5>
+                        <p>72A Nguyễn Trãi</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="store">
+                        <h5>107 Quán Thánh</h5>
+                    </div>
+                </li>
+                <li>
+                    <div class="store mt-4">
+                        <h5>8 Tôn Thất Thuyết</h5>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 <div id="shopify-section-contact-form" class="shopify-section">
     <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8"
           class="contact-form"><input type="hidden" name="form_type" value="contact"><input type="hidden"
@@ -168,10 +282,9 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-about mb-40">
                         <div class="footer-logo">
-                            <a href="/home" class="logo"><i class="fas fa-utensils"></i> VietKitchen</a>
+                            <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidi ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
                                 <img src="Hung/img/products/payment.png" alt="">
@@ -182,11 +295,11 @@
                 <div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-                            <h4 style="font-size: 20px">THÔNG TIN</h4>
+                            <h4>THÔNG TIN</h4>
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="about-us.html">Về Chúng Tôi</a></li>
+                                <li><a href="/about-us">Về Chúng Tôi</a></li>
                                 <li><a href="#">Thông tin giao hàng</a></li>
                                 <li><a href="#">Chính sách bảo mật</a></li>
                                 <li><a href="#">Điều khoản và điều kiện</a></li>
@@ -199,12 +312,12 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 ps-md-5">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-                            <h4 style="font-size: 20px">TÀI KHOẢN CỦA TÔI</h4>
+                            <h4>TÀI KHOẢN CỦA TÔI</h4>
                         </div>
                         <div class="footer-content">
                             <ul>
-                                <li><a href="my-account.html">Thông tin tài khoản</a></li>
-                                <li><a href="#">Lịch sử đơn hàng</a></li>
+                                <li><a href="/my-account">Thông tin tài khoản</a></li>
+                                <li><a href="/my-account">Lịch sử đơn hàng</a></li>
                                 <li><a href="wishlist.html">Ưa thích</a></li>
                                 <li><a href="#">Hòm thư</a></li>
                             </ul>
@@ -214,22 +327,21 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer-widget mb-40">
                         <div class="footer-title mb-22">
-                            <h4 style="font-size: 20px">LIÊN LẠC VỚI CHÚNG TÔI</h4>
+                            <h4>LIÊN LẠC VỚI CHÚNG TÔI</h4>
                         </div>
                         <div class="footer-contact">
                             <ul>
-                                <li>Địa chỉ: Hà Nội</li>
+                                <li>Địa chỉ: 8A Tôn Thất Thuyết, Hà Nội</li>
                                 <li>Số điện thoại: (012) 800 456 789-987</li>
-                                <li>Email: <a href="#">Info@example.com</a></li>
+                                <li>Email: <a href="#">vietkitchen.hn@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="mt-35 footer-title mb-22">
-                            <h4 style="font-size: 20px">GIỜ MỞ CỬA</h4>
+                            <h4>GIỜ MỞ CỬA</h4>
                         </div>
                         <div class="footer-time">
                             <ul>
-                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>18:00 PM</span></li>
-                                <li>Saturday - Sunday: <span>Đóng cửa</span></li>
+                                <li>Mở cửa từ <span>8:00 AM</span> đến <span>22:00 PM</span> mọi ngày</li>
                             </ul>
                         </div>
                     </div>
@@ -240,10 +352,10 @@
     <div class="footer-bottom-area border-top-4">
         <div class="container">
             <div class="row">
-                <div class="">
+                <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> Billy </strong> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/" target="_blank"><strong>HasThemes</strong></a></p>
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i class="fa fa-heart text-danger"></i> bởi <a
+                                href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
             </div>
@@ -251,6 +363,11 @@
     </div>
 </div>
 <a href="#home" class="fas fa-angle-up" id="scroll-top" onclick="onScrollUp()"></a>
+<script src="user/js/contact-us.js"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAblZQML00gSAW3zLC8ilpsdtBGCfyKfo8&callback=initMap&libraries=&v=weekly"
+    async
+></script>
 <script src="Hung/js/bootstrap.min.js"></script>
 <script src="Hung/js/main.js"></script>
 <script src="user/js/main.js"></script>
