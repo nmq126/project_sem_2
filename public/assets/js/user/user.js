@@ -15,8 +15,8 @@ function hideItem() {
     $("#delete_order").slideUp();
 }
 $("select[name=level]").change(function(e) {
-    $("form[name=change]").submit();
+    this.form.submit();
 });
-$("#lock").click(function(e) {
-    $("form[name=statuschange]").submit();
+$("select[name=status]").change(function(e) {
+    this.form.submit();
 });
