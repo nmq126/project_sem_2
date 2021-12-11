@@ -35,17 +35,21 @@
     <script src="Hung/js/modernizr-2.8.3.min.js"></script>
     <link rel="stylesheet" href="user/css/main.css">
     <link rel="stylesheet" href="user/css/home.css">
-    {{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
+{{--    <link rel="stylesheet" href="user/css/responsive.css">--}}
 
 <!-- firebase stuff -->
     <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase.js"></script>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFXE2CTQ1D"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-SFXE2CTQ1D');
@@ -153,7 +157,53 @@
         </div>
     </div>
 </div>
-
+<div id="shopify-section-contact-form" class="shopify-section">
+    <form method="post" action="/contact-us" id="contact-form" name="contact-form" accept-charset="UTF-8"
+          class="contact-form">
+        @csrf
+        <div class="contact-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="contact-message-wrapper">
+                            <h4 class="contact-title">LIÊN HỆ</h4>
+                            @if (session('success'))
+                                <div class="alert alert-success text-center" role="alert">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <div class="contact-message">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="contact-form-style mb-20">
+                                            <input type="text" placeholder="Họ Tên" name="name"
+                                                   id="name" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="contact-form-style mb-20">
+                                            <input type="email" placeholder="Địa Chỉ Email"
+                                                   name="email" id="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="contact-form-style">
+												<textarea placeholder="Nội Dung" class="custom-textarea"
+                                                          name="content" id="content"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button class="submit btn-style text-center" type="submit">GỬI TIN NHẮN</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 <div id="shopify-section-contact-info" class="shopify-section">
     <div class="contact-area" id="section-contact-info">
         <div class="container">
@@ -165,8 +215,7 @@
                         </div>
                         <div class="contact-info-content">
                             <h4>Địa Điểm</h4>
-                            <p>012 345 678 / 123 456 789</p>
-                            <p><a href="mailto:info@example.com">info@example.com</a></p>
+                            <p>8 Tôn Thất Thuyết</p>
                         </div>
                     </div>
                 </div>
@@ -178,7 +227,6 @@
                         <div class="contact-info-content">
                             <h4>Liên Hệ Với Chúng Tôi</h4>
                             <p>Mobile: 012 345 678</p>
-                            <p><a href="mailto:Fax: 123 456 789">Fax: 123 456 789</a></p>
                         </div>
                     </div>
                 </div>
@@ -189,8 +237,7 @@
                         </div>
                         <div class="contact-info-content">
                             <h4>Email</h4>
-                            <p>Support24/7@example.com</p>
-                            <p><a href="mailto:info@example.com">info@example.com</a></p>
+                            <p><a href="mailto: vietkitchen.hn@gmail.com"> vietkitchen.hn@gmail.com</a></p>
                         </div>
                     </div>
                 </div>
@@ -199,11 +246,11 @@
     </div>
 </div>
 
-<div class="row map m-0">
+<div class="row map ml-10" style="margin-bottom: 60px">
     <div class="col-md-8 col-12 float-left mt-5">
         <div id="map"></div>
     </div>
-    <div class="col-md-4 col-12 float-left address mt-5">
+    <div class="col-md-4 col-12 float-left address mt-5 pl-30">
         <h3>Địa Chỉ</h3>
         <div class="mt-md-4">
             <ul>
@@ -240,50 +287,6 @@
     </div>
 </div>
 
-<div id="shopify-section-contact-form" class="shopify-section">
-    <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8"
-          class="contact-form"><input type="hidden" name="form_type" value="contact"><input type="hidden"
-                                                                                            name="utf8" value="✓">
-        <div class="contact-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="contact-message-wrapper">
-                            <h4 class="contact-title">LIÊN HỆ</h4>
-                            <div class="contact-message">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="contact-form-style mb-20">
-                                            <input type="text" placeholder="Họ Tên" class="" name="contact[name]"
-                                                   id="ContactFormName" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="contact-form-style mb-20">
-                                            <input type="email" placeholder="Địa Chỉ Email" class=""
-                                                   name="contact[email]" id="ContactFormEmail" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="contact-form-style">
-												<textarea placeholder="Nội Dung" class="custom-textarea"
-                                                          name="contact[body]" id="ContactFormMessage"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center">
-                                        <button class="submit btn-style text-center" type="submit">GỬI TIN NHẮN</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-
-
 <div class="footer-area black-bg-2 pt-70">
     <div class="footer-top-area pb-18">
         <div class="container">
@@ -293,7 +296,8 @@
                         <div class="footer-logo">
                             <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
-                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
+                        <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon
+                            nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
                         <div class="payment-img">
                             <a href="#">
                                 <img src="Hung/img/products/payment.png" alt="">
@@ -363,7 +367,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright text-center">
-                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i class="fa fa-heart text-danger"></i> bởi <a
+                        <p>&copy; 2021 <strong> VietKitchen </strong> được tạo nên với <i
+                                class="fa fa-heart text-danger"></i> bởi <a
                                 href="/about-us" target="_blank"><strong>Project Sem 2 Team</strong></a></p>
                     </div>
                 </div>
@@ -388,18 +393,50 @@
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61b4685f0461020e"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/61b469c580b2296cfdd12eda/1fmkbqbbe';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/61b469c580b2296cfdd12eda/1fmkbqbbe';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
     })();
 </script>
 <!--End of Tawk.to Script-->
+<script>
+    $(document).ready(function () {
+        //validate form
+        $("form[name=contact-form]").validate({
+            rules: {
+                name: {
+                    required: true,
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                content: {
+                    required: true
+                }
+            },
+            messages: {
+                email: {
+                    required: "Vui lòng nhập vào email!",
+                    email: "Email không đúng định dạng"
+                },
+                name: {
+                    required: "Vui lòng nhập tên của bạn!"
+                },
+                content: {
+                    required: "Vui lòng nhập nội dung bạn muốn gửi!"
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

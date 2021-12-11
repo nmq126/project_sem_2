@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{BlogController,
+    ContactMessageController,
     DashboardController,
     HomePageController,
     LoginController,
@@ -141,10 +142,6 @@ Route::group(['middleware' => 'guest'],function (){
 
 });
 
-
-
-
-
 //blog
 Route::get('/blog',[BlogController::class, 'getBlog']);
 Route::get('/blog-json',[BlogController::class, 'JsonBlog']);
@@ -153,15 +150,13 @@ Route::get('/blog/{id}/details',[BlogController::class, 'getBlogDetail']);
 Route::get('/login', function () {
     return view('client.login');
 });
-
-
 Route::get('/cart', function () {
     return view('client.cart');
 });
-
 Route::get('/contact-us', function () {
     return view('client.contact-us');
 });
+Route::post('/contact-us', [ContactMessageController::class, 'saveMessage']);
 
 Route::get('/about-us', function () {
     return view('client.about-us');
@@ -170,12 +165,3 @@ Route::get('/about-us', function () {
 Route::get('/blog-details', function () {
     return view('client.blog-details');
 });
-
-
-
-//Route::get('/test_mail', [OrderController::class, 'testMail']);
-
-
-Route::get('/product_detail/{id}', [ProductClientController::class, 'getProductDetail']);
-
-
