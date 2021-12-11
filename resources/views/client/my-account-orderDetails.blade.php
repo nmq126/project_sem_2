@@ -170,8 +170,11 @@
                         @endswitch
                     </p>
                     <p><strong>Thanh toán: </strong>
+                        @if($orders->checkout == 0 && $orders->status == 0) Thanh toán online qua paypal
+                        @endif
                         @if($orders->checkout == 1) Đã thanh toán
-                        @else Thanh toán khi nhận hàng
+                        @endif
+                        @if($orders->checkout == 0 && $orders->status != 0) Thanh toán khi nhận hàng
                         @endif
                     </p>
                     <div class="mt-2 me-5"><h4>Tổng số tiền: <span>{{\App\Helpers\Helper::formatVnd($orders->total_price)}} đ</span>

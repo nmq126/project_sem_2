@@ -152,15 +152,15 @@
                             @csrf
                             <div class="input-line">
                                 <label for="shipName" class=" ">Người nhận</label>
-                                <input type="text" name="shipName" placeholder="Tên người nhận">
+                                <input type="text" name="shipName" value="{{Auth::user()->profile->name}}" placeholder="Tên người nhận">
                             </div>
                             <div class="input-line">
                                 <label for="shipAddress" class=" ">Địa chỉ</label>
-                                <input type="text" name="shipAddress" placeholder="Địa chỉ người nhận">
+                                <input type="text" name="shipAddress" value="{{Auth::user()->profile->address}}" placeholder="Địa chỉ người nhận">
                             </div>
                             <div class="input-line">
                                 <label for="shipPhone" class=" ">Số điện thoại</label>
-                                <input type="text" name="shipPhone" placeholder="Số điện thoại người nhận">
+                                <input type="text" name="shipPhone" value="{{Auth::user()->phone}}" placeholder="Số điện thoại người nhận">
                             </div>
                             <div class="input-line">
                                 <label for="shipNote" class=" ">Ghi chú</label>
@@ -447,9 +447,9 @@
             $('.item-price-' + data[key].id).html(itemPrice.toLocaleString("en-US") + ' VND');
         }
         let totalPrice = subTotal - promoPrice;
-        $('.total-price').html(totalPrice.toLocaleString("en-US") + ' VND');
-        $('.sub-total').html(subTotal.toLocaleString("en-US") + ' VND');
-        $('.promo-price').html('- ' + promoPrice.toLocaleString("en-US") + ' VND');
+        $('.total-price').html(totalPrice.toLocaleString("en-US") + ' đ');
+        $('.sub-total').html(subTotal.toLocaleString("en-US") + ' đ');
+        $('.promo-price').html('- ' + promoPrice.toLocaleString("en-US") + ' đ');
         $('#lblCartCount').html(totalQuantity);
     }
 </script>
