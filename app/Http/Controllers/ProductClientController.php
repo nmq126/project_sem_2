@@ -22,7 +22,7 @@ class ProductClientController extends Controller
 
     public function getList(Request $request): string
     {
-        $products = Product::query();
+        $products = Product::query()->where('status', '=', 1);
         $categories = Category::all();
         $ingredients = Ingredient::all();
         if ($request->has('categories')) {

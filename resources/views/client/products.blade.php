@@ -180,15 +180,17 @@
                                 $checkI = [];
                                 if(isset($_GET['ingredients']))
                                     $checkI = $_GET['ingredients'];
-
+                                $sortBy = '';
+                                if(isset($_GET['sort-by']))
+                                    $sortBy = $_GET['sort-by'];
                             @endphp
                             <label>Sắp xếp:
                                 <select name="sort-by">
                                     <option value="" disabled selected>Sắp xếp theo</option>
-                                    <option value="name">Tên (A - Z)</option>
-                                    <option value="name_desc">Tên (Z - A)</option>
-                                    <option value="price">Giá (Tăng dần)</option>
-                                    <option value="price_desc">Giá (Giảm dần)</option>
+                                    <option value="name" {{ $sortBy == 'name' ? 'selected' : '' }}>Tên (A - Z)</option>
+                                    <option value="name_desc" {{ $sortBy == 'name_desc' ? 'selected' : '' }}>Tên (Z - A)</option>
+                                    <option value="price" {{ $sortBy == 'price' ? 'selected' : '' }}>Giá (Tăng dần)</option>
+                                    <option value="price_desc" {{ $sortBy == 'price_desc' ? 'selected' : '' }}>Giá (Giảm dần)</option>
                                 </select>
                             </label>
                             @foreach($checkC as $C)
