@@ -29,19 +29,20 @@ $user->delete();
     }
     public function UpdateUserAdmin(Request $request){
 
-if ($request->has("level")){
-    DB::table('users')
-        ->where('id',  $request->id)
-        ->update(['level' =>$request->level]);
-}
-if ($request->has("status")){
-    DB::table('users')
-        ->where('id',  $request->id)
-        ->update(['status' =>$request->status]);
-}
-
-
-        return redirect('/admin/user/list');
+//if ($request->has("level")){
+//    DB::table('users')
+//        ->where('id',  $request->id)
+//        ->update(['level' =>$request->level]);
+//}
+//if ($request->has("status")){
+//    DB::table('users')
+//        ->where('id',  $request->id)
+//        ->update(['status' =>$request->status]);
+//}
+//
+//
+//        return redirect('/admin/user/list');
+        return $request->all();
 
 
 

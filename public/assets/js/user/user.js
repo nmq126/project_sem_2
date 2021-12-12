@@ -17,6 +17,6 @@ function hideItem() {
 $("select[name=level]").change(function(e) {
     this.form.submit();
 });
-$("select[name=status]").change(function(e) {
+$("#lock").click(function(e) {
     this.form.submit();
 });
