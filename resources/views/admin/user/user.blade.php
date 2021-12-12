@@ -96,16 +96,16 @@
                         <td><span id="user_id">{{$user->id}}</span> <img src="{{$user->getDefaultThumbnailAttribute()}}"
                                                                          alt=""></td>
                         <td>{{$user->email}}</td>
+                             <td>
                         <form action="/admin/user/update" method="GET" name="statuschange">
                             <input type="hidden" name="id" value="{{$user->id}}">
-                            @if ($user->status  == 1)
-                                <input type="hidden" value="0" name="status">
-                                <td id="lock"><i class="fas fa-circle"></i>Không khóa</td>
-                            @else
-                                <input type="hidden" value="1" name="status">
-                                <td id="lock"><i class="fas fa-lock"></i> Khóa</td>
-                            @endif
+                            <select class="form-control" name="level">
+                                <option value="1" {{ $user->level == '1' ? 'selected' : '' }}>Không khóa</option>
+                                <option value="0" {{ $user->level == '0' ? 'selected' : '' }}>Khóa</option>
+
+                            </select>
                         </form>
+                    </td>
                         <td>{{$user->phone}}</td>
                         <td>
                             <form action="/admin/user/update" method="GET" name="change">

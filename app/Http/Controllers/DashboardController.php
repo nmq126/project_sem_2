@@ -111,17 +111,15 @@ class DashboardController extends Controller
         $order = Order::query()->startDate($request)->endDate($request)->get();
         $dataObjs = [];
         for ($i = 0; $i < sizeof($order); $i++) {
-            if ($order[$i]->status == 4) {
+            if ((integer)$order[$i]->status == 4) {
                 $dataObj = new stdClass();
                 $dataObj->tw = $order[$i]->created_at;
                 $dataObj->year = $order[$i]->created_at->format("Y");
                 $dataObj->price = $order[$i]->total_price;
                 $dataObj->money = $order[$i]->total_price - ($order[$i]->total_price * 10 / 100);
-                $dataObjs[$i] = $dataObj;
+              array_push($dataObjs,$dataObj);
             }
         }
         return $dataObjs;
     }
-
-
 }
