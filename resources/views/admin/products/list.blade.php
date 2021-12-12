@@ -55,11 +55,11 @@
                                         <option value="80">80%</option>
                                         <option value="90">90%</option>
                                     </select></label>
-                                <label for="status" class="text-left mr-5">Độ phổ biến:
+                                <label for="status" class="text-left mr-5">Nổi bật:
                                     <select class="form-control" name="isFeatured">
                                         <option value="-1">Tất cả</option>
-                                        <option value="0">Không phổ biến</option>
-                                        <option value="1">Phổ biến</option>
+                                        <option value="0">Không nổi bật</option>
+                                        <option value="1">Nổi bật</option>
                                     </select></label>
                                 <label for="status" class="text-left mr-5">Món:
                                     <select class="form-control" name="category">

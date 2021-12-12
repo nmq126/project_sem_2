@@ -122,7 +122,7 @@
                                 <th class="id">Order ID</th>
                                  <th class="status">Trạng thái</th>
                                 <th class="checkout">Thanh toán</th>
-                                <th class="name">Tên khách hàng</th>
+                                <th class="name">Người nhận</th>
                                 <th class="address">Địa chỉ</th>
                                 <th class="phone">Điện thoại</th>
                                 <th class="money">Thành tiền</th>
@@ -160,7 +160,7 @@
                                     <td>{{$order->created_at->format('H:i:s d/m/Y')}}</td>
 
                                     <td class="td-actions">
-                                        <a href="/admin/orders/update/{{$order->id}}"><i
+                                        <a href="/admin/orders/{{$order->id}}/detail"><i
                                                 class="la la-edit edit"></i></a>
                                         <a href="#" class="delete"><i class="la la-close delete"></i></a>
                                     </td>
@@ -185,13 +185,10 @@
                     <div class="select-all">
                         <ul class="select">
                             <li class="destroy">Hủy tất cả</li>
-                            <li class="done-all">Hoàn thành tất cả</li>
-                            <li class="wait-all">Chờ tất cả</li>
-                            <li class="waircheckout-all">Chờ thành toán tất cả</li>
+                            <li class="wait-all">Chờ xử lý tất cả</li>
                             <li class="process-all">Đang xử lý tất cả</li>
                             <li class="deliver-all">Đang vận chuyển tất cả</li>
-                            <li class="check-all">Thanh toán tất cả</li>
-                            <li class="checkall-none">Chưa thanh toán tất cả</li>
+                            <li class="done-all">Hoàn thành tất cả</li>
                             <li class="delete-all">Xóa tất cả</li>
                         </ul>
                     </div>

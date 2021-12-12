@@ -172,7 +172,7 @@
                         </ul>
                     </div>
                     <div class="product-sorting-wrapper">
-                        <form class="product-show shorting-style d-flex" action="/products" method="get">
+                        <form class="product-show shorting-style d-flex" name="search-form" action="/products" method="get">
                             @php
                                 $checkC = [];
                                 if(isset($_GET['categories']))
@@ -182,10 +182,13 @@
                                     $checkI = $_GET['ingredients'];
 
                             @endphp
-                            <label>Sắp Xếp Theo:
+                            <label>Sắp xếp:
                                 <select name="sort-by">
-                                    <option value="name">Tên</option>
-                                    <option value="price">Giá</option>
+                                    <option value="" disabled selected>Sắp xếp theo</option>
+                                    <option value="name">Tên (A - Z)</option>
+                                    <option value="name_desc">Tên (Z - A)</option>
+                                    <option value="price">Giá (Tăng dần)</option>
+                                    <option value="price_desc">Giá (Giảm dần)</option>
                                 </select>
                             </label>
                             @foreach($checkC as $C)
@@ -200,9 +203,9 @@
                             @if(isset($_GET['to-price']))
                                 <input type="hidden" name="to-price" value="{{$_GET['to-price']}}">
                             @endif
-                            <div class="price_slider_amount mt-1">
-                                <button type="submit"><i class="fa fa-check"></i></button>
-                            </div>
+{{--                            <div class="price_slider_amount mt-1">--}}
+{{--                                <button type="submit"><i class="fa fa-check"></i></button>--}}
+{{--                            </div>--}}
                         </form>
                     </div>
                 </div>
@@ -475,5 +478,11 @@
     })();
 </script>
 <!--End of Tawk.to Script-->
+
+<script>
+    $('select[name=sort-by]').change(function () {
+        $('form[name=search-form]').submit();
+    })
+</script>
 </body>
 </html>
