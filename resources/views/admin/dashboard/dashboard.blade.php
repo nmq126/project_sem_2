@@ -18,7 +18,7 @@
             <i class="fas fa-users"></i>
             <span>Thành viên</span>
         </div>
-        <div class="number">36</div>
+        <div class="number">{{$usercount}}</div>
     </div>
 </div>
 <div  class="pramater-item">
@@ -153,10 +153,10 @@ Morris.Donut({
   element: 'donut-example',
   resize: true,
   colors: [
-    '#E0F7FA',
-    '#B2EBF2',
-    '#80DEEA',
-    '#4DD0E1',
+    "#878BB6",
+    "#4ACAB4",
+    "#FF8153",
+   "#FFEA88",
     '#26C6DA',
     '#00BCD4',
     '#00ACC1',

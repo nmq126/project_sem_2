@@ -61,7 +61,7 @@
         <a ><i  class="la la-close delete test_delete"></i></a>
         </td>
         </tr>
-        <div id="delete_message">
+        <div class="delete_message">
         <h2>Bạn có chắc muốn xóa mục này</h2>
 
         <a href="/admin/category/delete/{{$i->id}}"  id="delete">Xóa</a>

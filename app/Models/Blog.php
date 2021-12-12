@@ -29,4 +29,14 @@ class blog extends Model
             return $array_detail;
         }
     }
+    public function getThumbnailAttribute()
+    {
+
+        if ($this->image != null && strlen($this->image) > 0) {
+            $array_image = explode(',', $this->image);
+
+
+            return $array_image[0];
+        }
+    }
 }
