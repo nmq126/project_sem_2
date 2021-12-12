@@ -49,8 +49,14 @@ class ProductClientController extends Controller
                 case 'price':
                     $products = $products->orderByRaw('price - (price * discount / 100)');
                     break;
+                case 'price_desc':
+                    $products = $products->orderByRaw('price - (price * discount / 100) DESC');
+                    break;
                 case 'name':
                     $products = $products->orderBy('name');
+                    break;
+                case 'name_desc':
+                    $products = $products->orderBy('name', 'desc');
                     break;
             }
         }
