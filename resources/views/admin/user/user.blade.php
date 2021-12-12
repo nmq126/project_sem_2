@@ -99,9 +99,9 @@
                              <td>
                         <form action="/admin/user/update" method="GET" name="statuschange">
                             <input type="hidden" name="id" value="{{$user->id}}">
-                            <select class="form-control" name="level">
-                                <option value="1" {{ $user->level == '1' ? 'selected' : '' }}>Không khóa</option>
-                                <option value="0" {{ $user->level == '0' ? 'selected' : '' }}>Khóa</option>
+                            <select class="form-control" name="status">
+                                <option value="1" {{ $user->status == '1' ? 'selected' : '' }}>Hoạt động</option>
+                                <option value="0" {{ $user->status == '0' ? 'selected' : '' }}>Khóa</option>
 
                             </select>
                         </form>
@@ -113,7 +113,6 @@
                                 <select class="form-control" name="level">
                                     <option value="1" {{ $user->level == '1' ? 'selected' : '' }}>Admin</option>
                                     <option value="0" {{ $user->level == '0' ? 'selected' : '' }}>Người dùng</option>
-
                                 </select>
                             </form>
                         </td>
