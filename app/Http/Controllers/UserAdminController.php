@@ -45,5 +45,6 @@ $user->delete();
         return $request->all();
 
 
+
     }
 }

@@ -29,6 +29,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
+    //blog
+    Route::get('/blog/create',[BlogController::class, 'getAdminBlogForm']);
+    Route::post('/blog/create',[BlogController::class, 'addBlog']);
+    Route::get('/blog/list',[BlogController::class, 'getAdminBlogList']);
+    Route::get('/blog/delete/{id}',[BlogController::class, 'deleteBlog']);
+    Route::get('/blog/update/{id}',[BlogController::class, 'deleteBlog']);
     //user
     Route::get('/user/list',[UserAdminController::class, 'viewUserAdmin']);
     Route::get('/user/filter',[UserAdminController::class, 'FliterUserAdmin']);

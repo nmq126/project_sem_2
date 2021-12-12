@@ -14,50 +14,54 @@ class DashboardController extends Controller
 {
     public function Dashboard()
     {
-
-
-        $sql = DB::raw("SELECT SUM(quantity) as quantity,products.name,products.id FROM order_details LEFT JOIN products ON product_id = products.id GROUP BY product_id,products.id,products.name");
-$result = DB::select($sql);
-    for ($i = 1; $i <sizeof($result); $i++)
-    {
-        $key = $result[$i];
-        $j = $i - 1;
-        while ($j >= 0 && $result[$j]->quantity < $key->quantity)
-        {
-          $result[$j + 1] = $result[$j];
-            $j = $j - 1;
+        $sql = DB::raw("SELECT SUM(quantity) as quantity,products.name,products.id FROM order_details LEFT JOIN products ON product_id = products.id GROUP BY product_id,products.id,products.name LIMIT 0, 10");
+        $result = DB::select($sql);
+        for ($i = 1; $i < sizeof($result); $i++) {
+            $key = $result[$i];
+            $j = $i - 1;
+            while ($j >= 0 && $result[$j]->quantity < $key->quantity) {
+                $result[$j + 1] = $result[$j];
+                $j = $j - 1;
+            }
+            $result[$j + 1] = $key;
         }
-        $result[$j + 1] = $key;
-    }
-        $data ='';
+        $data = '';
         $totalquantity = 0;
-        foreach ($result as $val){
+        foreach ($result as $val) {
 
             $totalquantity = $val->quantity + $totalquantity;
         }
-        foreach ($result as $val){
-            $number = round($val->quantity*100/$totalquantity);
+        foreach ($result as $val) {
+            $number = round($val->quantity * 100 / $totalquantity);
 
-            $data .="{label:'".$val->name."', value:".$number."},";
+            $data .= "{label:'" . $val->name . "', value:" . $number . "},";
 
         }
         $chartData = $data;
         $sqlcounto = DB::raw("SELECT COUNT(id) AS count FROM orders");
         $sqlcountp = DB::raw("SELECT COUNT(id) AS count FROM products");
-      $count = DB::select($sqlcounto);
+        $count = DB::select($sqlcounto);
         $countproduct = DB::select($sqlcountp);
-$countcontent ="";
+        $usercount = DB::table('users')
+            ->where('deleted_at','=',NULL)
+            ->count();
+        $countcontent = "";
 
-        $countproductnumber ="";
-        foreach ($count as $val){
-         $countcontent .= $val->count;
+        $countproductnumber = "";
+        foreach ($count as $val) {
+            $countcontent .= $val->count;
 
         }
-        foreach ($countproduct as $val){
+        foreach ($countproduct as $val) {
             $countproductnumber .= $val->count;
 
         }
-      return view("admin.dashboard.dashboard", ["chartData"=>$chartData,"result"=>$result,"count"=>$countcontent,"products"=>$countproductnumber,"totalquantity"=>$totalquantity]);
+        return view("admin.dashboard.dashboard", ["chartData" => $chartData,
+            "result" => $result,
+            "count" => $countcontent,
+            "products" => $countproductnumber,
+            "totalquantity" => $totalquantity,
+            "usercount"=>$usercount]);
 
     }
 
@@ -106,17 +110,15 @@ $countcontent ="";
     {
         $order = Order::query()->startDate($request)->endDate($request)->get();
         $dataObjs = [];
-
         for ($i = 0; $i < sizeof($order); $i++) {
-            $dataObj = new stdClass();
-
-
-            $dataObj->tw = $order[$i]->created_at;
-            $dataObj->year = $order[$i]->created_at->format("Y");
-            $dataObj->price = $order[$i]->total_price;
-            $dataObj->money = $order[$i]->total_price - ($order[$i]->total_price * 10 / 100);
-            $dataObjs[$i] = $dataObj;
-
+            if ($order[$i]->status == 4) {
+                $dataObj = new stdClass();
+                $dataObj->tw = $order[$i]->created_at;
+                $dataObj->year = $order[$i]->created_at->format("Y");
+                $dataObj->price = $order[$i]->total_price;
+                $dataObj->money = $order[$i]->total_price - ($order[$i]->total_price * 10 / 100);
+                $dataObjs[$i] = $dataObj;
+            }
         }
         return $dataObjs;
     }

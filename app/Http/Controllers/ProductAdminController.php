@@ -61,7 +61,6 @@ class ProductAdminController extends Controller
 
     public function delete(Request $request)
     {
-
         $product = Product::find($request->id);
         $product->delete();
         return redirect('/admin/product/list')->with("msg", "Xóa thành công");
@@ -69,7 +68,6 @@ class ProductAdminController extends Controller
 
     public function updateProduct(Request $request)
     {
-
         $product = Product::find($request->id);
         $category = Category::all();
         $ingredient = Ingredient::all();

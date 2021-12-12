@@ -63,8 +63,10 @@
                         class="la la-map"></i><span>Quản lý Blog</span></a>
                 <ul id="dropdown-blogs"
                     class="collapse list-unstyled pt-0 {{request()->is('admin/blog*') ? 'show' : ''}}">
-                    <li><a class="{{ request()->is('admin/blog') ? 'active' : '' }}"
-                           href="/admin/blog">Danh sách blog</a></li>
+                    <li><a class="{{ request()->is('admin/blog/list') ? 'active' : '' }}"
+                           href="/admin/blog/list">Danh sách blog</a></li>
+                             <li><a class="{{ request()->is('admin/blog/create') ? 'active' : '' }}"
+                           href="/admin/blog/create">Tạo mới người dùng</a></li>
 
                 </ul>
             </li>

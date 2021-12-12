@@ -24,7 +24,7 @@
     cursor: pointer;
 }
 
-#delete_message {
+.delete_message {
     display: none;
     position: fixed;
     top: 25%;
@@ -36,7 +36,7 @@
     z-index: 999;
 }
 
-#delete_message h2 {
+.delete_message h2 {
     justify-content: center;
     color: #aea9c3;
     margin-top: 10%;

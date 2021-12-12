@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title', 'Dashboard | Admin')
+@section('title', 'User | Admin')
 @section('style')
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link rel="stylesheet" href="/assets/css/datatables/datatables.min.css">
