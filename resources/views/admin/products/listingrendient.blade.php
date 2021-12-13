@@ -58,7 +58,7 @@
             <a ><i  class="la la-close delete test_delete"></i></a>
         </td>
     </tr>
-    <div id="delete_message">
+    <div class="delete_message">
         <h2>Are You Sure You Want To Delete This</h2>
 
         <a href="/admin/ingredient/delete/{{$i->id}}"  id="delete">Delete</a>
