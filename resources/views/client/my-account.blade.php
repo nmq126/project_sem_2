@@ -191,8 +191,8 @@
                             @case(-1)
                                 Khác
                                 @break
-                            @default
-                            Chưa cập nhật
+                            @case(-2)
+                                Chưa Cập Nhật
                             @break
                         @endswitch
                     </p>

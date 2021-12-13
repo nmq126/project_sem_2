@@ -136,7 +136,7 @@
                      <form action="/admin/orders/change " method="GET" >
                         <input type="hidden" name="id" value={{$order->id}}>
                                     <tr>
-                                    <td> <div class="id-item"><input type="checkbox" class="checkitem"value={{$order->id}} ><a href="/admin/orders/{{$order->id}}/detail">{{$order->id}}</a></div></td>
+                                    <td> <div class="id-item"><input type="checkbox" class="checkitem" value={{$order->id}} ><a href="/admin/orders/{{$order->id}}/detail">{{$order->id}}</a></div></td>
                                     <td>
                                         <select class="form-control" name="status" >
                                             <option value="0" {{ $order->status == '0' ? 'selected' : '' }} disabled>Chờ thanh toán</option>
@@ -169,7 +169,7 @@
                                 <div id="delete_order">
                                     <h2>Bạn có chắc muốn xóa đơn hàng này</h2>
 
-                                    <a href="/admin/orders/delete/{{$order->id}}"id="delete-item">Delete</a>
+                                    <a href="/admin/orders/delete/{{$order->id}}" id="delete-item">Delete</a>
 
                                     <a id="cancel-item">Cancel</a>
                                 </div>
