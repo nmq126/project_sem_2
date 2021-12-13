@@ -288,7 +288,7 @@
                     </div>
                     <div class="product-content text-center">
                         <h4>
-                            <a class="fw-bold" href="/products/{{$product->id}}/details">{{$product->name}}</a>
+                            <a class="fw-bold" href="/product/{{$product->id}}/details">{{$product->name}}</a>
                         </h4>
                         <div class="product-price-wrapper">
                             <span>{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount /100))}} đ</span>
