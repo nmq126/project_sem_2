@@ -205,6 +205,9 @@
                             @if(isset($_GET['to-price']))
                                 <input type="hidden" name="to-price" value="{{$_GET['to-price']}}">
                             @endif
+                            @if(isset($_GET['keyword']))
+                                <input type="hidden" name="keyword" value="{{$_GET['keyword']}}">
+                            @endif
 {{--                            <div class="price_slider_amount mt-1">--}}
 {{--                                <button type="submit"><i class="fa fa-check"></i></button>--}}
 {{--                            </div>--}}
