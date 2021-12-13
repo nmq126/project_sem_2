@@ -25,6 +25,10 @@ class ProductClientController extends Controller
         $products = Product::query()->where('status', '=', 1);
         $categories = Category::all();
         $ingredients = Ingredient::all();
+        if ($request->has('keyword')) {
+            $keyword = $request->input('keyword');
+            $products = $products->where('name', 'LIKE', '%'.$keyword.'%');
+        }
         if ($request->has('categories')) {
             $checkC = $_GET['categories'];
             $products = $products->whereIn('category_id', $checkC);

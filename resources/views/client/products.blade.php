@@ -301,11 +301,22 @@
                 <form class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
                     <div class="shop-widget">
                         <h4 class="shop-sidebar-title">Bộ Lọc</h4>
+                        @if(isset($_GET['sort-by']))
+                            <input type="hidden" name="sort-by" value="{{$_GET['sort-by']}}">
+                        @endif
                         <div class="shop-catigory">
                             <ul id="faq">
+                                <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-4">Từ Khóa
+                                        <i class="fa fa-angle-down pt-2"></i></a>
+                                    <ul id="shop-catigory-4" class="panel-collapse collapse">
+                                            <label for="keyword" class="mt-10 ml-15">Nhập từ khóa
+                                                <input type="text" name="keyword" style="width: 100%">
+                                            </label>
+                                    </ul>
+                                </li>
                                 <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-1">Danh Mục
                                         <i class="fa fa-angle-down pt-2"></i></a>
-                                    <ul id="shop-catigory-1" class="panel-collapse collapse show">
+                                    <ul id="shop-catigory-1" class="panel-collapse collapse mt-10">
                                         @foreach($categories as $category)
                                             @php
                                                 $checkC = [];
@@ -324,7 +335,7 @@
                                 </li>
                                 <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-2">Thành phần
                                         <i class="fa fa-angle-down pt-2"></i></a>
-                                    <ul id="shop-catigory-2" class="panel-collapse collapse">
+                                    <ul id="shop-catigory-2" class="panel-collapse collapse mt-10">
                                         @foreach($ingredients as $ingredient)
                                             @php
                                                 $checkI = [];
