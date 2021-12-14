@@ -18,97 +18,39 @@ class OrderDetailSeeder extends Seeder
         DB::table('order_details')->truncate();
         DB::table('order_details')->insert([
             [
-                'product_id' => '6',
+                'product_id' => '1',
                 'order_id' => '1',
-                'quantity' => '1',
-                'unit_price' => 60000,
-            ],
-            [
-                'product_id' => '26',
-                'order_id' => '1',
-                'quantity' => 1,
-                'unit_price' => 80000,
-            ],
-            [
-                'product_id' => '27',
-                'order_id' => '1',
-                'quantity' => 1,
-                'unit_price' => 50000,
-            ],
-            [
-                'product_id' => '13',
-                'order_id' => '2',
                 'quantity' => '3',
-                'unit_price' => 30000,
+                'unit_price' => 32400,
             ],
 
             [
-                'product_id' => '15',
-                'order_id' => '3',
+                'product_id' => '4',
+                'order_id' => '1',
                 'quantity' => '1',
-                'unit_price' => 30000,
+                'unit_price' => 9000,
             ],
-            [
-                'product_id' => '30',
-                'order_id' => '3',
-                'quantity' => 1,
-                'unit_price' => 55000 ,
-            ],
+
             [
                 'product_id' => '6',
-                'order_id' => '3',
-                'quantity' => 1,
-                'unit_price' => 60000 ,
-            ],
-            [
-                'product_id' => '7',
-                'order_id' => '4',
+                'order_id' => '2',
                 'quantity' => '1',
-                'unit_price' => 80000 ,
+                'unit_price' => 54000,
             ],
-            [
-                'product_id' => '29',
-                'order_id' => '4',
-                'quantity' => 1,
-                'unit_price' => 50000   ,
-            ],
+
             [
                 'product_id' => '8',
-                'order_id' => '4',
-                'quantity' => 1,
-                'unit_price' => 65000   ,
-            ],
-            [
-                'product_id' => '31',
-                'order_id' => '5',
-                'quantity' => '2',
-                'unit_price' => 30000 ,
-            ],
-            [
-                'product_id' => '22',
-                'order_id' => '5',
-                'quantity' => 2,
-                'unit_price' => 40000   ,
-            ],
-            [
-                'product_id' => '22',
-                'order_id' => '6',
-                'quantity' => 1,
-                'unit_price' => 65000   ,
-            ],
-            [
-                'product_id' => '31',
-                'order_id' => '6',
-                'quantity' => '2',
-                'unit_price' => 30000 ,
-            ],
-            [
-                'product_id' => '30',
-                'order_id' => '6',
-                'quantity' => 2,
-                'unit_price' => 40000   ,
+                'order_id' => '2',
+                'quantity' => '1',
+                'unit_price' => 58500,
             ],
 
+            [
+                'product_id' => '10',
+                'order_id' => '2',
+                'quantity' => '1',
+                'unit_price' => 58500,
+            ],
         ]);
 //        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
