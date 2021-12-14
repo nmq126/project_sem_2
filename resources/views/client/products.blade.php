@@ -184,6 +184,7 @@
                                 if(isset($_GET['sort-by']))
                                     $sortBy = $_GET['sort-by'];
                             @endphp
+
                             <label>Sắp xếp:
                                 <select name="sort-by">
                                     <option value="" disabled selected>Sắp xếp theo</option>
@@ -301,6 +302,9 @@
                 <form class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
                     <div class="shop-widget">
                         <h4 class="shop-sidebar-title">Bộ Lọc</h4>
+                        @if(isset($_GET['sort-by']))
+                            <input type="hidden" name="sort-by" value="{{$_GET['sort-by']}}">
+                        @endif
                         <div class="shop-catigory">
                             <ul id="faq">
                                 <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-1">Danh Mục

@@ -14,7 +14,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-//        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         DB::table('products')->truncate();
         DB::table('products')->insert([
             [
@@ -485,7 +485,267 @@ class ProductSeeder extends Seeder
                 'isFeatured' => 0,
                 'status' => 1
             ],
+            [
+                'id' => '36',
+                'name' => 'Bánh Mỳ Sốt Vang',
+                'price' => 45000,
+                'category_id' => '2',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '37',
+                'name' => 'Gà Hấp Gừng Rượu',
+                'price' => 100000,
+                'category_id' => '10',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '38',
+                'name' => 'Gà Không Lối Thoát',
+                'price' => 120000,
+                'category_id' => '10',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '39',
+                'name' => 'Cánh Gà Chiên Nước Mắm',
+                'price' => 40000,
+                'category_id' => '10',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '40',
+                'name' => 'Lòng Gà Non Xào Cay',
+                'price' => 45000,
+                'category_id' => '10',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '41',
+                'name' => 'Gà Hầm Táo Đỏ',
+                'price' => 120000,
+                'category_id' => '10',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '42',
+                'name' => 'Gà Hấp Xì Dầu',
+                'price' => 125000,
+                'category_id' => '10',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '43',
+                'name' => 'Chân Gà Nướng',
+                'price' => 10000,
+                'category_id' => '10',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '44',
+                'name' => 'Mẹt Gà 1 Người Ăn',
+                'price' => 90000,
+                'category_id' => '10',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '45',
+                'name' => 'Chân Gà Trộn Thính',
+                'price' => 55000,
+                'category_id' => '10',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '46',
+                'name' => 'Bạch Tuộc Xào Cay Kiểu Hàn',
+                'price' => 110000,
+                'category_id' => '11',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '47',
+                'name' => 'Cua Rang Me',
+                'price' => 80000,
+                'category_id' => '11',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '48',
+                'name' => 'Ngao Nướng Mỡ Hành',
+                'price' => 50000,
+                'category_id' => '11',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '49',
+                'name' => 'Mực Sốt Tỏi Ớt',
+                'price' => 75000,
+                'category_id' => '11',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '50',
+                'name' => 'Sò Huyết Xào Tỏi',
+                'price' => 120000,
+                'category_id' => '11',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '51',
+                'name' => 'Ghẹ Hấp Bia',
+                'price' => 250000,
+                'category_id' => '11',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '52',
+                'name' => 'Caramel',
+                'price' => 10000,
+                'category_id' => '9',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '53',
+                'name' => 'Chè Thái',
+                'price' => 15000,
+                'category_id' => '9',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '54',
+                'name' => 'Chè Khúc Bạch',
+                'price' => 15000,
+                'category_id' => '9',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
+            [
+                'id' => '55',
+                'name' => 'Chè Bưởi',
+                'price' => 15000,
+                'category_id' => '9',
+                'ingredient_id' => '1',
+                'thumbnail' => 'https://res.cloudinary.com/dz0vbjbye/image/upload/v1638534015/products/M%C3%B3n%20N%C6%B0%E1%BB%9Bc/920420012428878301531057027377295887171584n-15889574754601616461893-crop-15889576470461192802370-removebg-preview_nttcnn.png',
+                'description' => '',
+                'detail' => '34',
+                'discount' => 10,
+                'isFeatured' => 0,
+                'status' => 1
+            ],
         ]);
-//        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
