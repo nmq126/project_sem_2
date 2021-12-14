@@ -28,7 +28,7 @@ class ProductClientController extends Controller
         if ($request->has('keyword')) {
             $keyword = $request->input('keyword');
             $lowerKeyword = strtolower($keyword);
-            $products = $products->whereRaw('lower(`name`) LIKE ?', '%' . $lowerKeyword . '%');
+            $products = $products->where('LOWER(name)', 'LIKE', '%' . $lowerKeyword . '%');
         }
         if ($request->has('categories')) {
             $checkC = $_GET['categories'];
