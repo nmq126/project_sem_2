@@ -28,7 +28,7 @@ class OrderAdminController extends Controller
     {
         $orders =  Order::orderBy('id', 'DESC')->paginate(10);
 
-        $ordersSuccess = $orders->where('status', '=', 1);
+        $ordersSuccess = $orders->where('status', '=', 4);
         $total = 0;
         foreach ($ordersSuccess as $order) {
             $total += $order->total_price;
