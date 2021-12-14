@@ -157,7 +157,7 @@
     </div>
 </div>
 <div class="text-center title">
-    <h1>Cửa Hàng</h1>
+    <h1>Danh Sách Sản Phẩm</h1>
 </div>
 <div class="shop-page-area pt-80 pb-100">
     <div class="container">
