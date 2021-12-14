@@ -395,12 +395,12 @@
             promoPrice += (data[key].price - data[key].unitPrice) * data[key].quantity;
             subTotal += itemDelPrice
             // $('.del-price-'+data[key].id).html(itemDelPrice.toLocaleString("en-US"));
-            $('.item-price-' + data[key].id).html(itemPrice.toLocaleString("en-US") + ' VND');
+            $('.item-price-' + data[key].id).html(itemPrice.toLocaleString("en-US") + ' đ');
         }
         let totalPrice = subTotal - promoPrice;
-        $('.total').html(totalPrice.toLocaleString("en-US") + ' VND');
-        $('.sub-total').html(subTotal.toLocaleString("en-US") + ' VND');
-        $('.promo-price').html('- ' + promoPrice.toLocaleString("en-US") + ' VND');
+        $('.total').html(totalPrice.toLocaleString("en-US") + ' đ');
+        $('.sub-total').html(subTotal.toLocaleString("en-US") + ' đ');
+        $('.promo-price').html('- ' + promoPrice.toLocaleString("en-US") + ' đ');
         $('#lblCartCount').html(totalQuantity);
     }
 </script>
