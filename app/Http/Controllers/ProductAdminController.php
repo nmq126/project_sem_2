@@ -39,7 +39,7 @@ class ProductAdminController extends Controller
 
     public function getList()
     {
-        $products = Product::paginate(10);
+        $products = Product::orderBy('id', 'desc')->paginate(10);
         $categorys = Category::all();
         return view('admin.products.list', ["products" => $products, "categorys" => $categorys]);
     }
