@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>Chi Tiết Sản Phẩm</title>
+    <title>>{{$product->name}} | VietKitchen</title>
     <!-- Favicon -->
     <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">   <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -150,7 +150,7 @@
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
                 <li><a href="/products">Cửa Hàng</a></li>
-                <li class="active">Chi Tiết Sản Phẩm - {{$product->name}}</li>
+                <li class="active">{{$product->name}}</li>
             </ul>
         </div>
     </div>
