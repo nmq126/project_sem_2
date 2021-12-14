@@ -15,7 +15,7 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
+//         $faker = \Faker\Factory::create();
 //        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         DB::table('orders')->truncate();
         DB::table('orders')->insert([
