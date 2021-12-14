@@ -465,7 +465,7 @@
             promoPrice += (data[key].price - data[key].unitPrice) * data[key].quantity;
             subTotal += itemDelPrice
             // $('.del-price-'+data[key].id).html(itemDelPrice.toLocaleString("en-US"));
-            $('.item-price-' + data[key].id).html(itemPrice.toLocaleString("en-US") + ' VND');
+            $('.item-price-' + data[key].id).html(itemPrice.toLocaleString("en-US") + ' đ');
         }
         let totalPrice = subTotal - promoPrice;
         $('.total-price').html(totalPrice.toLocaleString("en-US") + ' đ');
