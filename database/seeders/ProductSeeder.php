@@ -19,8 +19,8 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             [
                 'id' => '1',
-                'name' => 'Fried Chicken',
-                'price' => 50000,
+                'name' => 'Gà rán',
+                'price' => 36000,
                 'category_id' => '10',
                 'ingredient_id' => '1',
                 'thumbnail' => 'https://cdn.statically.io/img/gachaybo.com/f=auto/wp-content/uploads/2021/07/4-ga-ran-kfc.jpg',
@@ -42,8 +42,8 @@ class ProductSeeder extends Seeder
 
             [
                 'id' => '2',
-                'name' => 'Pot-roast Beef',
-                'price' => 200000,
+                'name' => 'Bò nướng',
+                'price' => 100000,
                 'category_id' => '8',
                 'ingredient_id' => '2',
                 'thumbnail' => 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/recipe-image-legacy-id-1222463_11-7eaf5a2.jpg?quality=90&webp=true&resize=440,400',
