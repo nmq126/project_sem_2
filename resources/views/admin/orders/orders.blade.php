@@ -193,7 +193,7 @@
                         </ul>
                     </div>
                         <h3 class="font-weight-bold text-right mr-5 mt-2">
-                           Tổng tiền đơn hàng đã thanh toán: {{\App\Helpers\Helper::formatVnd($total)}} đ</h3>
+                           Tổng tiền đơn hàng đã hoàn thành: {{\App\Helpers\Helper::formatVnd($total)}} đ</h3>
                     </div>
                 </div>
             </div>
