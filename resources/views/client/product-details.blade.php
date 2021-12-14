@@ -177,7 +177,7 @@
                         </div>
                         <div class="pro-dec-review">
                             <ul>
-                                <li>32 Reviews</li>
+                                <li>0 Bình Luận</li>
                             </ul>
                         </div>
                     </div>
