@@ -191,7 +191,12 @@
                         <p>Tình Trạng: <span>Còn Hàng</span></p>
                     </div>
                     <p class="pb-30">{{$product->description}}</p>
-                    <div class="pro-details-cart-wrap">
+                    <div class="pro-details-cart-wrap d-flex">
+                        <div class="product-quantity">
+                            <div class="cart-plus-minus">
+                                <input class="cart-plus-minus-box" oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null" type="text" name="quantity" min="1" value="1">
+                            </div>
+                        </div>
                         <div class="shop-list-cart-wishlist">
                             <a title="Add To Cart" class="add-to-cart-button"
                                id="add-to-cart-{{ $product->id }}"
@@ -201,11 +206,6 @@
                             <a title="Wishlist" href="#">
                                 <i class="fa fa-heart"></i>
                             </a>
-                        </div>
-                        <div class="product-quantity">
-                            <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null" type="text" name="quantity" min="1" value="1">
-                            </div>
                         </div>
                     </div>
                     <div class="pro-dec-categories">
