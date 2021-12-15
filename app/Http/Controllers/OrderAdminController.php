@@ -35,7 +35,7 @@ class OrderAdminController extends Controller
         }
         $products = Product::all();
 
-        return view('admin.orders.orders', ["orders"=>$orders,"total"=>$total,"products"=>$products]);
+      return view('admin.orders.orders', ["orders"=>$orders,"total"=>$total,"products"=>$products]);
 
 
     }
