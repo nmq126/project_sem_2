@@ -152,40 +152,6 @@
     <div class="blog-area ptb-100">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-4">
-                    <div class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
-                        <div class="sidebar-search">
-                            <form class="header-search-form" action="/blog" method="get">
-                                <input id="search" type="search" name="keyword" class="input_text" value=""
-                                       placeholder="Tìm Kiếm">
-                                <button id="blogsearchsubmit" type="submit" class="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
-                            <h4 class="shop-sidebar-title">Bài Đăng Gần Đây</h4>
-                            <div class="sidebar-list-style mt-20">
-                                <ul>
-                                    @foreach($blogs as $blog)
-                                        <li><a href="/blog/{{$blog->id}}/details">{{$blog->title}}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
-                            <h4 class="shop-sidebar-title">Tags</h4>
-                            <div class="shop-tags mt-25">
-                                <ul>
-                                    <li><a href="/blogs/news/tagged/bouquet" class="">Món Ăn</a></li>
-                                    <li><a href="/blogs/news/tagged/joy" class="">Đồ Uống</a></li>
-                                    <li><a href="/blogs/news/tagged/event" class="">Địa Điểm</a></li>
-                                    <li><a href="/blogs/news/tagged/gift" class="">Nấu Ăn</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-lg-9 col-md-8">
                     <div class="blog-details-wrapper">
                         <div class="blog-img mb-20">
@@ -234,6 +200,40 @@
                             <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/{{$blog->id}}/details"
                                  data-width="100%"
                                  data-numposts="10"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
+                        <div class="sidebar-search">
+                            <form class="header-search-form" action="/blog" method="get">
+                                <input id="search" type="search" name="keyword" class="input_text" value=""
+                                       placeholder="Tìm Kiếm">
+                                <button id="blogsearchsubmit" type="submit" class="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
+                            <h4 class="shop-sidebar-title">Bài Đăng Gần Đây</h4>
+                            <div class="sidebar-list-style mt-20">
+                                <ul>
+                                    @foreach($blogs as $blog)
+                                        <li><a href="/blog/{{$blog->id}}/details">{{$blog->title}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
+                            <h4 class="shop-sidebar-title">Tags</h4>
+                            <div class="shop-tags mt-25">
+                                <ul>
+                                    <li><a href="/blogs/news/tagged/bouquet" class="">Món Ăn</a></li>
+                                    <li><a href="/blogs/news/tagged/joy" class="">Đồ Uống</a></li>
+                                    <li><a href="/blogs/news/tagged/event" class="">Địa Điểm</a></li>
+                                    <li><a href="/blogs/news/tagged/gift" class="">Nấu Ăn</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
