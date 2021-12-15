@@ -84,6 +84,7 @@
                             </thead>
                             <tbody id="OrdersList">
                             @foreach($messages as $message)
+                            <tr>
                                 <td>{{$message->name}}</td>
                                 <td>{{$message->email}}</td>
                                 <td>{{$message->sent_at}}</td>
@@ -104,6 +105,7 @@
 
                                     <a id="cancel-item">Cancel</a>
                                 </div>
+                            </tr>    
                             @endforeach
                             </tbody>
                         </table>
