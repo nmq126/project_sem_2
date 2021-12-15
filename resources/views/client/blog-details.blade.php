@@ -48,7 +48,7 @@
 
 <header id="nav">
 
-    <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" alt="">VietKitchen</a>
+    <a href="/home" class="logo"><img src="/user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
@@ -190,7 +190,7 @@
                     <div class="blog-details-wrapper">
                         <div class="blog-img mb-20">
                             <img
-                                src="{{$blog->image}}"
+                                src="{{$blog->thumbnail}}"
                                 alt="Lorem ipsum dolor amet">
                         </div>
                         <div class="blog-content">
