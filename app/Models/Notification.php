@@ -49,7 +49,7 @@ class Notification extends Model
         $downstreamResponse->tokensWithError();
     }
 
-    public function scopeToMultiDevice($query, $model, $title, $body, $number_of_noti){
+    public function scopeToMultiDevice($query, $model, $title, $body){
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
 
@@ -57,7 +57,6 @@ class Notification extends Model
         $notificationBuilder->setBody($body);
 
         $dataBuilder = new PayloadDataBuilder();
-        $dataBuilder->addData(['number_of_noti' => $number_of_noti]);
 
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
