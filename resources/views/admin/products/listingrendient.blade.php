@@ -108,11 +108,11 @@
         });
 
         function message() {
-            $("#delete_message").slideDown();
+            $(".delete_message").slideDown();
         }
 
         function hide() {
-            $("#delete_message").slideUp();
+            $(".delete_message").slideUp();
         }
     </script>
 
