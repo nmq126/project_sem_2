@@ -73,7 +73,9 @@ class OrderAdminController extends Controller
                     ->where('read_at', null)
                     ->count();
                 $notifications = Notification::where('user_id', $user->id)->latest('id')->limit(5)->get();
-                $notification->toSingleDevice($user->device_token, $title, $body, $number_of_noti, $notifications);
+                if ($user->device_token != null) {
+                    $notification->toSingleDevice($user->device_token, $title, $body, $number_of_noti, $notifications);
+                }
             }
 
             $details = [
