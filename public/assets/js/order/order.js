@@ -65,7 +65,7 @@
              alert("Thay đổi trạng thái tất cả đơn hàng thành công ")
              location.reload()
          },
-         error: function(data) { alert("Bạn phải chưa chọn mục tiêu") }
+         error: function(data) { alert("Bạn chưa chọn mục tiêu") }
      });
 
  });

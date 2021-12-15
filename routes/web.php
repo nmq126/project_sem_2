@@ -12,7 +12,8 @@ use App\Http\Controllers\{BlogController,
     ProductClientController,
     RegisterController,
     ShoppingCartController,
-    UserAdminController};
+    UserAdminController
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +28,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function () {
     //blog
     Route::get('/blog/create',[BlogController::class, 'getAdminBlogForm']);
     Route::post('/blog/create',[BlogController::class, 'addBlog']);
@@ -36,41 +36,48 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
     Route::get('/blog/delete/{id}',[BlogController::class, 'deleteBlog']);
     Route::get('/blog/update/{id}',[BlogController::class, 'deleteBlog']);
     //user
+<<<<<<< HEAD
     Route::get('/user/list',[UserAdminController::class, 'viewUserAdmin']);
     Route::get('/user/filter',[UserAdminController::class, 'FliterUserAdmin']);
     Route::get('/user/{key}',[UserAdminController::class, 'JsonKey']);
     Route::get('/user/delete/{id}',[UserAdminController::class, 'DeleteUserAdmin']);
     Route::get('/user/update',[UserAdminController::class, 'UpdateUserAdmin']);
     Route::get('/user/detail/{id}',[UserAdminController::class, 'UserDetail']);
+=======
+    Route::get('/user/list', [UserAdminController::class, 'viewUserAdmin']);
+    Route::get('/user/filter', [UserAdminController::class, 'FliterUserAdmin']);
+    Route::get('/user/delete/{id}', [UserAdminController::class, 'DeleteUserAdmin']);
+    Route::get('/user/update', [UserAdminController::class, 'UpdateUserAdmin']);
+>>>>>>> 9d4bd28962d1056fb0c8276a4e37d5ad57a41e4d
     //Product
-    Route::get('/product/create',[ProductAdminController::class, 'getForm']);
-    Route::post('/product/create',[ProductAdminController::class, 'processForm']);
-    Route::get('/product/list',[ProductAdminController::class, 'getList']);
-    Route::get('/product/list/search',[ProductAdminController::class, 'searchProduct']);
-    Route::get('/product/delete/{id}',[ProductAdminController::class, 'delete']);
-    Route::get('/product/update/{id}',[ProductAdminController::class, 'updateProduct']);
-    Route::post('/product/update/{id}',[ProductAdminController::class, 'updateProductForm']);
+    Route::get('/product/create', [ProductAdminController::class, 'getForm']);
+    Route::post('/product/create', [ProductAdminController::class, 'processForm']);
+    Route::get('/product/list', [ProductAdminController::class, 'getList']);
+    Route::get('/product/list/search', [ProductAdminController::class, 'searchProduct']);
+    Route::get('/product/delete/{id}', [ProductAdminController::class, 'delete']);
+    Route::get('/product/update/{id}', [ProductAdminController::class, 'updateProduct']);
+    Route::post('/product/update/{id}', [ProductAdminController::class, 'updateProductForm']);
 
-    Route::post('/products/destroy',[ProductAdminController::class, 'destroy']);
-    Route::post('/products/status',[ProductAdminController::class, 'status']);
-    Route::post('/products/unstatus',[ProductAdminController::class, 'unsatus']);
-    Route::post('/products/featured',[ProductAdminController::class, 'featured']);
-    Route::post('/products/unfeatured',[ProductAdminController::class, 'unfeatured']);
+    Route::post('/products/destroy', [ProductAdminController::class, 'destroy']);
+    Route::post('/products/status', [ProductAdminController::class, 'status']);
+    Route::post('/products/unstatus', [ProductAdminController::class, 'unsatus']);
+    Route::post('/products/featured', [ProductAdminController::class, 'featured']);
+    Route::post('/products/unfeatured', [ProductAdminController::class, 'unfeatured']);
 //Ingrendient
-    Route::get('/ingredient/create',[ProductAdminController::class, 'getFormIngredient']);
-    Route::post('/ingredient/create',[ProductAdminController::class, 'addIngredient']);
-    Route::get('/ingredient/list',[ProductAdminController::class, 'ListIngredient']);
-    Route::get('/ingredient/delete/{id}',[ProductAdminController::class, 'DeleteIngrendient']);
-    Route::get('/ingredient/update/{id}',[ProductAdminController::class, 'UpdateView']);
-    Route::post('/ingredient/update/{id}',[ProductAdminController::class, 'UpdateIngrendient']);
+    Route::get('/ingredient/create', [ProductAdminController::class, 'getFormIngredient']);
+    Route::post('/ingredient/create', [ProductAdminController::class, 'addIngredient']);
+    Route::get('/ingredient/list', [ProductAdminController::class, 'ListIngredient']);
+    Route::get('/ingredient/delete/{id}', [ProductAdminController::class, 'DeleteIngrendient']);
+    Route::get('/ingredient/update/{id}', [ProductAdminController::class, 'UpdateView']);
+    Route::post('/ingredient/update/{id}', [ProductAdminController::class, 'UpdateIngrendient']);
 
     Route::get('/dashboard', [DashboardController::class, 'Dashboard']);
     Route::get('/dashboard/json', [DashboardController::class, 'DbJson']);
     Route::get('/dashboard/json/month', [DashboardController::class, 'DbJsonMonth']);
     Route::get('/orders', [OrderAdminController::class, 'fetchOrders']);
     Route::get('/orders/{id}/detail', [OrderDetailsAdminController::class, 'orderDetail']);
-    Route::get('/orders/update/{id}',[OrderAdminController::class, 'UpdateView']);
-    Route::post('/orders/update/{id}',[OrderAdminController::class, 'UpdateOrder']);
+    Route::get('/orders/update/{id}', [OrderAdminController::class, 'UpdateView']);
+    Route::post('/orders/update/{id}', [OrderAdminController::class, 'UpdateOrder']);
     Route::get('/orders/change', [OrderAdminController::class, 'Change']);
     Route::post('/orders/destroy', [OrderAdminController::class, 'Destroy']);
     Route::post('/orders/done', [OrderAdminController::class, 'Done']);
@@ -84,36 +91,36 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
     Route::get('/orders/delete/{id}', [OrderAdminController::class, 'DeleteOrder']);
     Route::get('/orders/search', [OrderAdminController::class, 'search']);
     // Category
-    Route::get('/category/create',[ProductAdminController::class, 'getFormCategory']);
-    Route::post('/category/create',[ProductAdminController::class, 'addCategory']);
-    Route::get('/category/list',[ProductAdminController::class, 'ListCategory']);
-    Route::get('/category/delete/{id}',[ProductAdminController::class, 'DeleteCategory']);
-    Route::get('/category/update/{id}',[ProductAdminController::class, 'UpdateViewCate']);
-    Route::post('/category/update/{id}',[ProductAdminController::class, 'UpdateCategory']);
+    Route::get('/category/create', [ProductAdminController::class, 'getFormCategory']);
+    Route::post('/category/create', [ProductAdminController::class, 'addCategory']);
+    Route::get('/category/list', [ProductAdminController::class, 'ListCategory']);
+    Route::get('/category/delete/{id}', [ProductAdminController::class, 'DeleteCategory']);
+    Route::get('/category/update/{id}', [ProductAdminController::class, 'UpdateViewCate']);
+    Route::post('/category/update/{id}', [ProductAdminController::class, 'UpdateCategory']);
 
     Route::get('/download', [OrderAdminController::class, 'export']);
 
+    //Contact Message
+    Route::get('/messages/list', [ContactMessageController::class, 'showMessages']);
+    Route::get('/messages/{id}/details', [ContactMessageController::class, 'details']);
+    Route::get('/messages/delete/{id}', [ContactMessageController::class, 'delete']);
+
 });
-
-
-
-
-
 
 
 //CLIENT SIDE
 
 //product list
-Route::get('/product/recent-view',[ProductClientController::class, 'getRecent']);
-Route::get('/product/{id}/details',[ProductClientController::class, 'getDetail']);
+Route::get('/product/recent-view', [ProductClientController::class, 'getRecent']);
+Route::get('/product/{id}/details', [ProductClientController::class, 'getDetail']);
 Route::post('products/search', [ProductClientController::class, 'search']);
 Route::get('/products', [ProductClientController::class, 'getList']);
 
 //cart
-Route::get('/cart/add',[ShoppingCartController::class, 'add']);
-Route::get('/cart',[ShoppingCartController::class, 'show']);
-Route::get('/cart/remove',[ShoppingCartController::class, 'remove']);
-Route::post('/cart/update',[ShoppingCartController::class, 'update']);
+Route::get('/cart/add', [ShoppingCartController::class, 'add']);
+Route::get('/cart', [ShoppingCartController::class, 'show']);
+Route::get('/cart/remove', [ShoppingCartController::class, 'remove']);
+Route::post('/cart/update', [ShoppingCartController::class, 'update']);
 
 //checkout, order
 Route::get('/checkout', [OrderController::class, 'show']);
@@ -121,7 +128,7 @@ Route::get('/checkout', [OrderController::class, 'show']);
 
 Route::get('/home', [HomePageController::class, 'show']);
 Route::get('/', [HomePageController::class, 'show']);
-Route::group(['middleware' => 'auth'],function (){
+Route::group(['middleware' => 'auth'], function () {
 
 
     //order
@@ -140,7 +147,7 @@ Route::group(['middleware' => 'auth'],function (){
 
 });
 
-Route::group(['middleware' => 'guest'],function (){
+Route::group(['middleware' => 'guest'], function () {
     //đăng ký
     Route::get('/register', [RegisterController::class, 'create']);
     Route::post('/register', [RegisterController::class, 'store']);
@@ -151,9 +158,9 @@ Route::group(['middleware' => 'guest'],function (){
 });
 
 //blog
-Route::get('/blog',[BlogController::class, 'getBlog']);
-Route::get('/blog-json',[BlogController::class, 'JsonBlog']);
-Route::get('/blog/{id}/details',[BlogController::class, 'getBlogDetail']);
+Route::get('/blog', [BlogController::class, 'getBlog']);
+Route::get('/blog-json', [BlogController::class, 'JsonBlog']);
+Route::get('/blog/{id}/details', [BlogController::class, 'getBlogDetail']);
 
 Route::get('/login', function () {
     return view('client.login');

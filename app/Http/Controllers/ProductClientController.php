@@ -22,9 +22,14 @@ class ProductClientController extends Controller
 
     public function getList(Request $request): string
     {
-        $products = Product::query();
+        $products = Product::query()->where('status', '=', 1);
         $categories = Category::all();
         $ingredients = Ingredient::all();
+        if ($request->has('keyword')) {
+            $keyword = $request->input('keyword');
+            $lowerKeyword = strtolower($keyword);
+            $products = $products->whereRaw('LOWER(name) LIKE ?', '%' . $lowerKeyword . '%');
+        }
         if ($request->has('categories')) {
             $checkC = $_GET['categories'];
             $products = $products->whereIn('category_id', $checkC);
@@ -49,8 +54,14 @@ class ProductClientController extends Controller
                 case 'price':
                     $products = $products->orderByRaw('price - (price * discount / 100)');
                     break;
+                case 'price_desc':
+                    $products = $products->orderByRaw('price - (price * discount / 100) DESC');
+                    break;
                 case 'name':
                     $products = $products->orderBy('name');
+                    break;
+                case 'name_desc':
+                    $products = $products->orderBy('name', 'desc');
                     break;
             }
         }

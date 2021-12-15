@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <title>Chi Tiết Sản Phẩm</title>
+    <title>{{$product->name}} | VietKitchen</title>
     <!-- Favicon -->
     <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">   <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -150,7 +150,7 @@
             <ul>
                 <li><a href="/home">Trang Chủ</a></li>
                 <li><a href="/products">Cửa Hàng</a></li>
-                <li class="active">Chi Tiết Sản Phẩm - {{$product->name}}</li>
+                <li class="active">{{$product->name}}</li>
             </ul>
         </div>
     </div>
@@ -177,7 +177,7 @@
                         </div>
                         <div class="pro-dec-review">
                             <ul>
-                                <li>32 Reviews</li>
+                                <li>0 Bình Luận</li>
                             </ul>
                         </div>
                     </div>
@@ -191,7 +191,12 @@
                         <p>Tình Trạng: <span>Còn Hàng</span></p>
                     </div>
                     <p class="pb-30">{{$product->description}}</p>
-                    <div class="pro-details-cart-wrap">
+                    <div class="pro-details-cart-wrap d-flex">
+                        <div class="product-quantity">
+                            <div class="cart-plus-minus">
+                                <input class="cart-plus-minus-box" oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null" type="text" name="quantity" min="1" value="1">
+                            </div>
+                        </div>
                         <div class="shop-list-cart-wishlist">
                             <a title="Add To Cart" class="add-to-cart-button"
                                id="add-to-cart-{{ $product->id }}"
@@ -201,11 +206,6 @@
                             <a title="Wishlist" href="#">
                                 <i class="fa fa-heart"></i>
                             </a>
-                        </div>
-                        <div class="product-quantity">
-                            <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null" type="text" name="quantity" min="1" value="1">
-                            </div>
                         </div>
                     </div>
                     <div class="pro-dec-categories">
@@ -288,7 +288,7 @@
                     </div>
                     <div class="product-content text-center">
                         <h4>
-                            <a class="fw-bold" href="/products/{{$product->id}}/details">{{$product->name}}</a>
+                            <a class="fw-bold" href="/product/{{$product->id}}/details">{{$product->name}}</a>
                         </h4>
                         <div class="product-price-wrapper">
                             <span>{{\App\Helpers\Helper::formatVnd($product->price - ($product->price * $product->discount /100))}} đ</span>

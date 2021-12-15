@@ -14,9 +14,18 @@ function deleteItem() {
 function hideItem() {
     $("#delete_order").slideUp();
 }
+
 $("select[name=level]").change(function(e) {
-    this.form.submit();
+    if (window.confirm('Bạn có chắc muốn thay đổi chức vụ của user này?')){
+        this.form.submit();
+    }
+    else if (this.value == 1) this.value = 0;
+    else if (this.value == 0) this.value = 1;
 });
-$(".lock").change(function(e) {
-    this.form.submit();
+$("select[name=status]").change(function(e) {
+    if (window.confirm('Bạn có chắc muốn khóa/mở khóa tài khoản này?')) {
+        this.form.submit();
+    }
+    else if (this.value == 1) this.value = 0;
+    else if (this.value == 0) this.value = 1;
 });

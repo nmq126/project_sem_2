@@ -157,7 +157,7 @@
     </div>
 </div>
 <div class="text-center title">
-    <h1>Cửa Hàng</h1>
+    <h1>Danh Sách Sản Phẩm</h1>
 </div>
 <div class="shop-page-area pt-80 pb-100">
     <div class="container">
@@ -172,7 +172,7 @@
                         </ul>
                     </div>
                     <div class="product-sorting-wrapper">
-                        <form class="product-show shorting-style d-flex" action="/products" method="get">
+                        <form class="product-show shorting-style d-flex" name="search-form" action="/products" method="get">
                             @php
                                 $checkC = [];
                                 if(isset($_GET['categories']))
@@ -180,14 +180,22 @@
                                 $checkI = [];
                                 if(isset($_GET['ingredients']))
                                     $checkI = $_GET['ingredients'];
-
+                                $sortBy = '';
+                                if(isset($_GET['sort-by']))
+                                    $sortBy = $_GET['sort-by'];
                             @endphp
-                            <label>Sắp Xếp Theo:
+                            <label>Sắp xếp:
                                 <select name="sort-by">
-                                    <option value="name">Tên</option>
-                                    <option value="price">Giá</option>
+                                    <option value="" disabled selected>Sắp xếp theo</option>
+                                    <option value="name" {{ $sortBy == 'name' ? 'selected' : '' }}>Tên (A - Z)</option>
+                                    <option value="name_desc" {{ $sortBy == 'name_desc' ? 'selected' : '' }}>Tên (Z - A)</option>
+                                    <option value="price" {{ $sortBy == 'price' ? 'selected' : '' }}>Giá (Tăng dần)</option>
+                                    <option value="price_desc" {{ $sortBy == 'price_desc' ? 'selected' : '' }}>Giá (Giảm dần)</option>
                                 </select>
                             </label>
+                            @if(isset($_GET['keyword']))
+                                <input type="hidden" name="keyword" value="{{$_GET['keyword']}}">
+                            @endif
                             @foreach($checkC as $C)
                                 <input type="hidden" name="categories[]" value="{{$C}}">
                             @endforeach
@@ -200,9 +208,9 @@
                             @if(isset($_GET['to-price']))
                                 <input type="hidden" name="to-price" value="{{$_GET['to-price']}}">
                             @endif
-                            <div class="price_slider_amount mt-1">
-                                <button type="submit"><i class="fa fa-check"></i></button>
-                            </div>
+{{--                            <div class="price_slider_amount mt-1">--}}
+{{--                                <button type="submit"><i class="fa fa-check"></i></button>--}}
+{{--                            </div>--}}
                         </form>
                     </div>
                 </div>
@@ -296,11 +304,22 @@
                 <form class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
                     <div class="shop-widget">
                         <h4 class="shop-sidebar-title">Bộ Lọc</h4>
+                        @if(isset($_GET['sort-by']))
+                            <input type="hidden" name="sort-by" value="{{$_GET['sort-by']}}">
+                        @endif
                         <div class="shop-catigory">
                             <ul id="faq">
+                                <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-4">Từ Khóa
+                                        <i class="fa fa-angle-down pt-2"></i></a>
+                                    <ul id="shop-catigory-4" class="panel-collapse collapse">
+                                            <label for="keyword" class="mt-10 ml-15">Nhập từ khóa
+                                                <input type="text" name="keyword" style="width: 100%">
+                                            </label>
+                                    </ul>
+                                </li>
                                 <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-1">Danh Mục
                                         <i class="fa fa-angle-down pt-2"></i></a>
-                                    <ul id="shop-catigory-1" class="panel-collapse collapse show">
+                                    <ul id="shop-catigory-1" class="panel-collapse collapse mt-10">
                                         @foreach($categories as $category)
                                             @php
                                                 $checkC = [];
@@ -319,7 +338,7 @@
                                 </li>
                                 <li><a data-bs-toggle="collapse" data-parent="#faq" href="#shop-catigory-2">Thành phần
                                         <i class="fa fa-angle-down pt-2"></i></a>
-                                    <ul id="shop-catigory-2" class="panel-collapse collapse">
+                                    <ul id="shop-catigory-2" class="panel-collapse collapse mt-10">
                                         @foreach($ingredients as $ingredient)
                                             @php
                                                 $checkI = [];
@@ -475,5 +494,11 @@
     })();
 </script>
 <!--End of Tawk.to Script-->
+
+<script>
+    $('select[name=sort-by]').change(function () {
+        $('form[name=search-form]').submit();
+    })
+</script>
 </body>
 </html>

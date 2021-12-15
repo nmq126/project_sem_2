@@ -271,6 +271,9 @@ span.tooltip-content {
     .container-sm {
         max-width: 960px;
     }
+    .product-details-content{
+        padding-left: 50px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -280,6 +283,9 @@ span.tooltip-content {
     .container-sm,
     .container-xl {
         max-width: 1200px;
+    }
+    .product-details-content{
+        padding-left: 0;
     }
 }
 
@@ -3376,9 +3382,7 @@ product-quantity {
 
 .product-quantity {
     display: block;
-    margin: 0 0 16px;
     overflow: hidden;
-    padding-left: 27px;
 }
 
 .product-quantity .cart-plus-minus {
@@ -4250,7 +4254,7 @@ h4.shop-sidebar-title {
 }
 
 .pro-details-cart-wrap .product-quantity {
-    margin: 0 0 0px;
+    margin: 0 12px 0 0;
 }
 
 .pro-details-cart-wrap {

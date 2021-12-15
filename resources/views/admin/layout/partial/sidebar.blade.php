@@ -74,10 +74,12 @@
             <li class="{{request()->is('admin/user*') ? 'active' : ''}}">
                 <a href="/admin/user/list"><i
                         class="la la-user"></i><span>Quản lý Người dùng</span></a>
-                </ul>
+            </li>
+            <li class="{{request()->is('admin/messages*') ? 'active' : ''}}">
+                <a href="/admin/messages/list"><i
+                        class="la la-envelope"></i><span>Quản lý tin nhắn</span></a>
             </li>
             {{-- End product--}}
-
         </ul>
         <!-- End Main Navigation -->
     </nav>

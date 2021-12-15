@@ -122,7 +122,7 @@
                                 <th class="id">Order ID</th>
                                  <th class="status">Trạng thái</th>
                                 <th class="checkout">Thanh toán</th>
-                                <th class="name">Tên khách hàng</th>
+                                <th class="name">Người nhận</th>
                                 <th class="address">Địa chỉ</th>
                                 <th class="phone">Điện thoại</th>
                                 <th class="money">Thành tiền</th>
@@ -136,7 +136,7 @@
                      <form action="/admin/orders/change " method="GET" >
                         <input type="hidden" name="id" value={{$order->id}}>
                                     <tr>
-                                    <td> <div class="id-item"><input type="checkbox" class="checkitem"value={{$order->id}} ><a href="/admin/orders/{{$order->id}}/detail">{{$order->id}}</a></div></td>
+                                    <td> <div class="id-item"><input type="checkbox" class="checkitem" value={{$order->id}} ><a href="/admin/orders/{{$order->id}}/detail">{{$order->id}}</a></div></td>
                                     <td>
                                         <select class="form-control" name="status" >
                                             <option value="0" {{ $order->status == '0' ? 'selected' : '' }} disabled>Chờ thanh toán</option>
@@ -160,7 +160,7 @@
                                     <td>{{$order->created_at->format('H:i:s d/m/Y')}}</td>
 
                                     <td class="td-actions">
-                                        <a href="/admin/orders/update/{{$order->id}}"><i
+                                        <a href="/admin/orders/{{$order->id}}/detail"><i
                                                 class="la la-edit edit"></i></a>
                                         <a href="#" class="delete"><i class="la la-close delete"></i></a>
                                     </td>
@@ -169,7 +169,7 @@
                                 <div id="delete_order">
                                     <h2>Bạn có chắc muốn xóa đơn hàng này</h2>
 
-                                    <a href="/admin/orders/delete/{{$order->id}}"id="delete-item">Delete</a>
+                                    <a href="/admin/orders/delete/{{$order->id}}" id="delete-item">Delete</a>
 
                                     <a id="cancel-item">Cancel</a>
                                 </div>
@@ -185,18 +185,15 @@
                     <div class="select-all">
                         <ul class="select">
                             <li class="destroy">Hủy tất cả</li>
-                            <li class="done-all">Hoàn thành tất cả</li>
-                            <li class="wait-all">Chờ tất cả</li>
-                            <li class="waircheckout-all">Chờ thành toán tất cả</li>
+                            <li class="wait-all">Chờ xử lý tất cả</li>
                             <li class="process-all">Đang xử lý tất cả</li>
                             <li class="deliver-all">Đang vận chuyển tất cả</li>
-                            <li class="check-all">Thanh toán tất cả</li>
-                            <li class="checkall-none">Chưa thanh toán tất cả</li>
+                            <li class="done-all">Hoàn thành tất cả</li>
                             <li class="delete-all">Xóa tất cả</li>
                         </ul>
                     </div>
                         <h3 class="font-weight-bold text-right mr-5 mt-2">
-                           Tổng tiền đơn hàng đã thanh toán: {{\App\Helpers\Helper::formatVnd($total)}} đ</h3>
+                           Tổng tiền đơn hàng đã hoàn thành: {{\App\Helpers\Helper::formatVnd($total)}} đ</h3>
                     </div>
                 </div>
             </div>

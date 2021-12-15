@@ -163,11 +163,14 @@
     <div class="box-container">
         @foreach($categories as $category)
             <div class="box">
-                <div class="content">
-                    <img height="50px" src="{{ $category->thumbnail }}" alt="">
-                    <h3>{{ $category->name }}</h3>
-                    <p>{{ $category->description }}</p>
-                </div>
+                <a href="/products?categories%5B%5D={{ $category->id }}">
+                    <div class="content">
+                        <img height="50px" src="{{ $category->thumbnail }}" alt="">
+                        <h3>{{ $category->name }}</h3>
+                        <p>{{ $category->description }}</p>
+                    </div>
+                </a>
+
             </div>
         @endforeach
     </div>
