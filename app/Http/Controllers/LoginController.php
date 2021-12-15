@@ -45,7 +45,7 @@ class LoginController extends Controller
             if ($user->level == 1){
                 return redirect('/admin/dashboard');
             }
-            return redirect('/home');
+            return redirect()->back();
 
         } else {
             return back()->with('error', 'Thông tin đăng nhập chưa chính xác!');
