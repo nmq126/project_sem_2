@@ -38,7 +38,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function () 
     //user
     Route::get('/user/list',[UserAdminController::class, 'viewUserAdmin']);
     Route::get('/user/filter',[UserAdminController::class, 'FliterUserAdmin']);
-    Route::get('/user/{key}',[UserAdminController::class, 'JsonKey']);
     Route::get('/user/delete/{id}',[UserAdminController::class, 'DeleteUserAdmin']);
     Route::get('/user/update',[UserAdminController::class, 'UpdateUserAdmin']);
     Route::get('/user/detail/{id}',[UserAdminController::class, 'UserDetail']);
