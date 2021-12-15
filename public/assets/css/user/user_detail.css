@@ -1,0 +1,84 @@
+.image img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.back {
+    color: black;
+    font-size: 24px;
+}
+
+.user {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    transform: translateX(-150%);
+}
+
+.content_user {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.infomation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 50px;
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+}
+
+.forcus {
+    color: black;
+    font-size: 25px;
+    padding-bottom: 10px;
+}
+
+.item-user {
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.card-user {
+    display: flex;
+}
+
+.item-user:first-child {
+    margin-left: 0px;
+}
+
+.forcus-item {
+    font-size: 15px;
+    font-weight: 700;
+    color: black;
+    margin-left: 5px;
+}
+
+.result {
+    overflow: hidden;
+    width: 200px;
+    position: absolute;
+    -webkit-box-shadow: 5px 8px 6px 6px black;
+    -moz-box-shadow: 5px 8px 6px -6px black;
+    box-shadow: 5px 8px 6px -6px black;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.result-item {
+    width: 800px;
+    overflow: hidden;
+    height: 30px;
+}
+
+.result-item:hover {
+    background-color: rgba(162, 202, 216, 0.542);
+}

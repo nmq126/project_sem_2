@@ -93,13 +93,13 @@
 
                 @foreach ($users as $user)
                     <tr>
-                        <td><span id="user_id">{{$user->id}}</span> <img src="{{$user->getDefaultThumbnailAttribute()}}"
-                                                                         alt=""></td>
+                        <td><a href="/admin/user/detail/{{$user->id}}"><span id="user_id">{{$user->id}}</span> <img src="{{$user->getDefaultThumbnailAttribute()}}"
+                                                                         alt=""></a></td>
                         <td>{{$user->email}}</td>
                              <td>
                         <form action="/admin/user/update" method="GET" name="statuschange">
                             <input type="hidden" name="id" value="{{$user->id}}">
-                            <select class="form-control" name="level">
+                            <select class="form-control" name="status">
                                 <option value="1" {{ $user->level == '1' ? 'selected' : '' }}>Không khóa</option>
                                 <option value="0" {{ $user->level == '0' ? 'selected' : '' }}>Khóa</option>
 

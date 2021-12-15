@@ -15,12 +15,7 @@ class Product extends Model
     public function scopeStatus($query, $request)
     {
         if ($request->has("status")) {
-<<<<<<< HEAD
-            if ($request->status != null && $request->status != -1) {
-
-=======
             if ($request->status != null &&$request->status  != -1 ) {
->>>>>>> ea1a13c0a9b9e632dc5f28213aa9e94de6229cc0
                     $query->where('status', '=', $request->status);
                 }
             }
