@@ -139,6 +139,9 @@ class OrderController extends Controller
             }
             $noti->sub_title = 'Đơn hàng #' . $order->id . ' đã được đặt thành công và đang chờ xử lý';
             $noti->save();
+            
+            $notification_admin = new Notification();
+            $notification_admin->toMultiDevice(User::all()->where('level', '=', 1), $noti->title, $noti->sub_title);
 
             DB::commit();
             Session::forget('shoppingCart');
