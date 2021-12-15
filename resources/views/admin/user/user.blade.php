@@ -100,13 +100,9 @@
                         <form action="/admin/user/update" method="GET" name="statuschange">
                             <input type="hidden" name="id" value="{{$user->id}}">
                             <select class="form-control" name="status">
-<<<<<<< HEAD
-                                <option value="1" {{ $user->level == '1' ? 'selected' : '' }}>Không khóa</option>
-                                <option value="0" {{ $user->level == '0' ? 'selected' : '' }}>Khóa</option>
-=======
+
                                 <option value="1" {{ $user->status == '1' ? 'selected' : '' }}>Hoạt động</option>
                                 <option value="0" {{ $user->status == '0' ? 'selected' : '' }}>Khóa</option>
->>>>>>> 9d4bd28962d1056fb0c8276a4e37d5ad57a41e4d
 
                             </select>
                         </form>
