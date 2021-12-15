@@ -159,7 +159,7 @@
                                 <div class="single-blog-wrapper mb-50">
                                     <div class="blog-img mb-20">
                                         <a href="blog/{{$blog->id}}/details">
-                                            <img src="{{$blog->getThumbnailAttribute()}}"
+                                            <img src="{{$blog->}}"
                                                  alt="Lorem ipsum dolor amet">
                                         </a>
                                     </div>
