@@ -14,9 +14,6 @@ class DashboardController extends Controller
 {
     public function Dashboard()
     {
-<<<<<<< HEAD
-        $sql = DB::raw("SELECT SUM(quantity) as quantity,products.name,products.id FROM order_details LEFT JOIN products ON product_id = products.id GROUP BY product_id,products.id,products.name LIMIT 10 OFFSET 0");
-=======
         $sql = DB::raw("SELECT SUM(quantity) as quantity,products.name,products.id
  FROM orders
   JOIN order_details ON  orders.id = order_details.order_id
@@ -24,7 +21,6 @@ class DashboardController extends Controller
    where orders.status = 4
    GROUP BY product_id,products.id,products.name 
  LIMIT 10 Offset 0");
->>>>>>> 9d4bd28962d1056fb0c8276a4e37d5ad57a41e4d
         $result = DB::select($sql);
         for ($i = 1; $i < sizeof($result); $i++) {
             $key = $result[$i];

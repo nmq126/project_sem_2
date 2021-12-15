@@ -36,19 +36,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function () 
     Route::get('/blog/delete/{id}',[BlogController::class, 'deleteBlog']);
     Route::get('/blog/update/{id}',[BlogController::class, 'deleteBlog']);
     //user
-<<<<<<< HEAD
     Route::get('/user/list',[UserAdminController::class, 'viewUserAdmin']);
     Route::get('/user/filter',[UserAdminController::class, 'FliterUserAdmin']);
     Route::get('/user/{key}',[UserAdminController::class, 'JsonKey']);
     Route::get('/user/delete/{id}',[UserAdminController::class, 'DeleteUserAdmin']);
     Route::get('/user/update',[UserAdminController::class, 'UpdateUserAdmin']);
     Route::get('/user/detail/{id}',[UserAdminController::class, 'UserDetail']);
-=======
-    Route::get('/user/list', [UserAdminController::class, 'viewUserAdmin']);
-    Route::get('/user/filter', [UserAdminController::class, 'FliterUserAdmin']);
-    Route::get('/user/delete/{id}', [UserAdminController::class, 'DeleteUserAdmin']);
-    Route::get('/user/update', [UserAdminController::class, 'UpdateUserAdmin']);
->>>>>>> 9d4bd28962d1056fb0c8276a4e37d5ad57a41e4d
     //Product
     Route::get('/product/create', [ProductAdminController::class, 'getForm']);
     Route::post('/product/create', [ProductAdminController::class, 'processForm']);
