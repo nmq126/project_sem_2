@@ -296,8 +296,8 @@
     @endif
 @endauth
 @guest
-    <div class="text-center mb-40">
-        <h2 style="font-size: 2em">Vui Lòng Đăng Nhập Vào Tài Khoản Của Bạn</h2>
+    <div class="text-center mb-40 mt-40">
+        <h2 style="font-size: 2em">Vui lòng đăng nhập để tiếp tục thanh toán</h2>
         <a href="/login" class="btn" style="padding-bottom: 40px">Đăng Nhập</a>
     </div>
 @endguest
