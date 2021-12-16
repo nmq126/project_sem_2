@@ -249,7 +249,7 @@
 
         <div class="box">
             <img src="user/img/images/billie.jpg" alt="">
-            <h3>Sứ giả địa ngục</h3>
+            <h3>Billie Eilish</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -261,8 +261,8 @@
                 vel laboriosam? Est, maxime rem. Itaque.</p>
         </div>
         <div class="box">
-            <img src="user/img/images/anne.jpg" alt="">
-            <h3>Hung thần sa ngã</h3>
+            <img src="https://i.pinimg.com/564x/d9/23/83/d92383402e735229681d3da682141487.jpg" alt="">
+            <h3>Leonardo Dicaprio</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -274,8 +274,8 @@
                 vel laboriosam? Est, maxime rem. Itaque.</p>
         </div>
         <div class="box">
-            <img src="user/img/images/gal.jpg" alt="">
-            <h3>Ác ma hư vô</h3>
+            <img src="https://i.pinimg.com/564x/20/d6/c8/20d6c85dda4c826847406b1beef9fcb8.jpg" alt="">
+            <h3>Harry Potter</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
