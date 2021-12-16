@@ -72,14 +72,16 @@
         <a href="/cart">
             <i class="fas fa-shopping-cart"></i>
             @if($totalQuantity !=0)
-                <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            <span class='badge badge-warning' id='lblCartCount'>{{ $totalQuantity }}</span>
+            @else<span class='badge badge-warning' id='lblCartCount'></span>
             @endif
         </a>
         @auth
             <div class="notifications">
                 <i class="fas fa-bell"></i>
                 @if($number_noti !=0)
-                    <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                <span class='badge badge-warning' id='NotiCount'>{{ $number_noti }}</span>
+                @else <span class='badge badge-warning' id='NotiCount'></span>
                 @endif
             </div>
 
