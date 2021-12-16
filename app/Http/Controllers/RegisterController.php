@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Models\Notification;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,6 +37,12 @@ class RegisterController extends Controller
             DB::rollBack();
             return $e;
         }
+
+        $noti_admin_title = "Người dùng mới tạo tài khoản: " . $user->email;
+        $noti_sub_title = "";
+        $notification_admin = new Notification();
+        $notification_admin->toMultiDevice(User::all()->where('level', '=', 1), $noti_admin_title, $noti_sub_title);
+
         return redirect('/login')->with('msg', 'Đăng ký thành công!!');
     }
 
