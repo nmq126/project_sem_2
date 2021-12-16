@@ -40,7 +40,6 @@ td img {
 
 .search {
     display: flex;
-    background-image: url("https://i.pinimg.com/236x/48/86/78/48867818d9b30a198b83c5038ecac5c9.jpg");
     background-size: cover;
     justify-content: space-between;
 }
@@ -132,7 +131,7 @@ label.mr-5 {
     cursor: pointer;
 }
 
-#delete_order {
+.delete_order {
     display: none;
     position: fixed;
     top: 25%;
@@ -144,7 +143,7 @@ label.mr-5 {
     z-index: 999;
 }
 
-#delete_order h2 {
+.delete_order h2 {
     justify-content: center;
     color: #aea9c3;
     margin-top: 10%;
