@@ -82,7 +82,7 @@
                                             <td align="center" style="padding: 25px 0 0 0;" class="padding-copy">
                                                 <table border="0" cellspacing="0" cellpadding="0" class="responsive-table">
                                                     <tr>
-                                                        <td align="center"><a href="http:/127.0.0.1:8000/order/{{ $order->id }}" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #e02c2b; border-top: 15px solid #e02c2b; border-bottom: 15px solid #e02c2b; border-left: 35px solid #e02c2b; border-right: 35px solid #e02c2b; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; display: inline-block;" class="mobile-button">Chi tiết đơn hàng</a></td>
+                                                        <td align="center"><a href="http://vietkitchen365.herokuapp.com/order/{{ $order->id }}" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #e02c2b; border-top: 15px solid #e02c2b; border-bottom: 15px solid #e02c2b; border-left: 35px solid #e02c2b; border-right: 35px solid #e02c2b; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; display: inline-block;" class="mobile-button">Chi tiết đơn hàng</a></td>
                                                     </tr>
                                                 </table>
                                             </td>
