@@ -39,7 +39,7 @@
                         <h3 class="pb-2 font-weight-bold">Đơn hàng : #{{$orders->id}}</h3>
              <div class="container">
                  <div class="content-left">
-                     <p><strong>Tài khoản: </strong> {{$orders->user->email}}</p>
+                     <a href="/admin/user/detail/{{$orders->user->id}}"><p><strong>Tài khoản: </strong> {{$orders->user->email}}</p></a>
 
                      <p><strong>Tạo lúc: </strong> {{$orders->created_at->format('H:i:s d/m/Y')}}</p>
                     <p><strong>Cập nhật lúc: </strong> {{$orders->updated_at->format('H:i:s d/m/Y')}}</p>
