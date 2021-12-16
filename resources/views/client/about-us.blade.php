@@ -273,7 +273,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="team-wrapper mb-30">
                         <div class="team-img">
-                            <img src="//cdn.shopify.com/s/files/1/0037/1818/5030/files/team-1_large.jpg?v=1536300260"
+                            <img src="https://i.pinimg.com/236x/34/bc/15/34bc1590bd8df436c20868ee1e3bc174.jpg"
                                  alt="">
                             <div class="team-action">
                                 <a class="action-plus facebook" href="#">
@@ -288,15 +288,15 @@
                             </div>
                         </div>
                         <div class="team-content text-center">
-                            <h4>Mr.Mike Banding</h4>
-                            <span>Manager</span>
+                            <h4>Ngô Minh Quang</h4>
+                            <span>Leader</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="team-wrapper mb-30">
                         <div class="team-img">
-                            <img src="//cdn.shopify.com/s/files/1/0037/1818/5030/files/team-3_large.jpg?v=1536300279"
+                            <img src="https://i.pinimg.com/236x/39/db/40/39db409e4c3b2ee91debc100487c4dc2.jpg"
                                  alt="">
                             <div class="team-action">
                                 <a class="action-plus facebook" href="#">
@@ -311,7 +311,7 @@
                             </div>
                         </div>
                         <div class="team-content text-center">
-                            <h4>Mr.Peter Pan</h4>
+                            <h4>Lý Quốc Hưng</h4>
                             <span>Developer</span>
                         </div>
                     </div>
@@ -319,7 +319,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="team-wrapper mb-30">
                         <div class="team-img">
-                            <img src="//cdn.shopify.com/s/files/1/0037/1818/5030/files/team-2_large.jpg?v=1536300270"
+                            <img src="https://i.pinimg.com/236x/5a/67/05/5a670531aca9ae2a1dea9cdafbaeee79.jpg"
                                  alt="">
                             <div class="team-action">
                                 <a class="action-plus facebook" href="#">
@@ -334,7 +334,7 @@
                             </div>
                         </div>
                         <div class="team-content text-center">
-                            <h4>Ms.Sophia</h4>
+                            <h4>Nguyễn Nhật Huy</h4>
                             <span>Designer</span>
                         </div>
                     </div>
@@ -342,7 +342,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="team-wrapper mb-30">
                         <div class="team-img">
-                            <img src="//cdn.shopify.com/s/files/1/0037/1818/5030/files/team-4_large.jpg?v=1536300290"
+                            <img src="https://i.pinimg.com/236x/3b/90/f1/3b90f1f9906ee32231a42b5e458f99d6.jpg"
                                  alt="">
                             <div class="team-action">
                                 <a class="action-plus facebook" href="#">
@@ -357,7 +357,30 @@
                             </div>
                         </div>
                         <div class="team-content text-center">
-                            <h4>Marcos Alonso</h4>
+                            <h4>Bùi Văn Ái</h4>
+                            <span>Web Designer</span>
+                        </div>
+                    </div>
+                </div>
+                  <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="team-wrapper mb-30">
+                        <div class="team-img">
+                            <img src="https://i.pinimg.com/236x/a5/2f/f7/a52ff783c8a279fede1e11bb25411a3d.jpg"
+                                 alt="">
+                            <div class="team-action">
+                                <a class="action-plus facebook" href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a class="action-heart twitter" title="Wishlist" href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                                <a class="action-cart instagram" href="#">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="team-content text-center">
+                            <h4>Trịnh Ngọc Huy</h4>
                             <span>Web Designer</span>
                         </div>
                     </div>
