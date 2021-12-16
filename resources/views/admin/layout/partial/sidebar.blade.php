@@ -66,7 +66,7 @@
                     <li><a class="{{ request()->is('admin/blog/list') ? 'active' : '' }}"
                            href="/admin/blog/list">Danh sách blog</a></li>
                              <li><a class="{{ request()->is('admin/blog/create') ? 'active' : '' }}"
-                           href="/admin/blog/create">Tạo mới người dùng</a></li>
+                           href="/admin/blog/create">Tạo mới Blog</a></li>
 
                 </ul>
             </li>
