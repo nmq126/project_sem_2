@@ -29,21 +29,18 @@
 
  //~~~~~~~~~~~~
 
- $(".delete").click(function(event) {
-     event.preventDefault();
-     deleteItem();
- });
 
  $("#cancel-item").click(function() {
      hideItem();
  });
 
- function deleteItem() {
-     $("#delete_order").slideDown();
+ function deleteItem(id) {
+     $("#delete_order_" + id).slideDown();
+
  }
 
- function hideItem() {
-     $("#delete_order").slideUp();
+ function hideItem(id) {
+     $("#delete_order_" + id).slideUp();
  }
  $("button[name= deleteall]").click(function(event) {
      event.preventDefault();
