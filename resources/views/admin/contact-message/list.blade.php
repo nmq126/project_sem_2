@@ -95,7 +95,7 @@
                                 @endif
                                 <td class="td-actions">
                                     <a href="/admin/messages/{{$message->id}}/details"><i class="la la-info"></i></a>
-                                    <a href="#" class="delete"><i class="la la-close delete"  onclick="deleteItem({{$order->id}})"></i></a>
+                                    <a href="#" class="delete"><i class="la la-close delete"  onclick="deleteItem({{$message->id}})"></i></a>
                                 </td>
                                 <div class="delete_order" id="delete_order_{{$message->id}}">
                                     <h2>Bạn có chắc muốn xóa tin nhắn này</h2>
