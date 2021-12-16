@@ -287,7 +287,7 @@
             </div>
         </div>
     @else
-        <div style="font-size: 30px; color: black" class="text-center mb-20">Bạn Chưa Có Sản Phẩm Trong Giỏ Hàng!
+         <div style="font-size: 30px; color: black" class="text-center mb-40 mt-40">Bạn chưa có sản phẩm trong giỏ hàng!
             <div class="cart-buy mt-10">
                 <a href="/products"
                    class="fw-bold checkout ms-3">Mua Ngay</a>
