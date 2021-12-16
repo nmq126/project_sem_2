@@ -259,8 +259,7 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti delectus, ducimus facere quod ratione
-                vel laboriosam? Est, maxime rem. Itaque.</p>
+            <p>Giao hàng đúng giờ,đồ ăn nóng hổi,nhiều món ngon mới.</p>
         </div>
         <div class="box">
             <img src="https://i.pinimg.com/564x/d9/23/83/d92383402e735229681d3da682141487.jpg" alt="">
@@ -272,8 +271,7 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti delectus, ducimus facere quod ratione
-                vel laboriosam? Est, maxime rem. Itaque.</p>
+            <p>Tôi đã đồng hành cùng VietKitchen được 2 năm rồi nhưng cảm giác nếm những hương vị ấy như lần đầu tiên vậy 😀.</p>
         </div>
         <div class="box">
             <img src="https://i.pinimg.com/564x/20/d6/c8/20d6c85dda4c826847406b1beef9fcb8.jpg" alt="">
@@ -285,8 +283,7 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti delectus, ducimus facere quod ratione
-                vel laboriosam? Est, maxime rem. Itaque.</p>
+            <p>Chưa bao giờ tôi được nếm những hương vị này trước kia, VietKitchen các bạn thật tuyệt vời.</p>
         </div>
 
     </div>
