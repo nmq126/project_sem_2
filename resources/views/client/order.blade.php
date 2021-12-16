@@ -51,7 +51,7 @@
 <body class="bg-white">
 <header id="nav">
 
-    <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
+    <a href="/home" class="logo"><img src="/user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
