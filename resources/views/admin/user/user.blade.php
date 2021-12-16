@@ -124,12 +124,14 @@
                             <a href="#" class="delete"><i class="la la-close delete"></i></a>
                         </td>
                     </tr>
-                    <div id="delete_order">
-                        <h2>Bạn có chắc muốn xóa người dùng này</h2>
-
-                        <a href="/admin/user/delete/{{$user->id}}" id="delete-item">Delete</a>
-
-                        <a id="cancel-item">Cancel</a>
+                   
+                        <div class="delete_order" id="delete_order_{{$user->id}}">
+                            <h2>Bạn có chắc muốn xóa người dùng này này</h2>
+    
+                            <a href="/admin/user/delete/{{$user->id}}" id="delete-item">Delete</a>
+    
+                            <a id="cancel-item" onclick="hideItem({{$user->id}})">Cancel</a>
+                        </div>
                     </div>
                     @else
                         <td>
