@@ -115,16 +115,17 @@
                         <td class="td-actions">
                             <a href="/admin/orders/update/{{$order->id}}"><i
                                     class="la la-edit edit"></i></a>
-                            <a href="#" class="delete"><i class="la la-close delete"></i></a>
+                            <a href="#" class="delete"><i class="la la-close delete"  onclick="deleteItem({{$order->id}})"></i></a>
                         </td>
                     </tr>
          </form>
-                    <div id="delete_order">
-                        <h2>Bạn có chắc muốn xóa đơn hàng này</h2>
+     
+                    <div class="delete_order" id="delete_order_{{$order->id}}">
+                        <h2>Bạn có chắc muốn xóa sản phẩm này</h2>
 
                         <a href="/admin/orders/delete/{{$order->id}}"id="delete-item">Delete</a>
 
-                        <a id="cancel-item">Cancel</a>
+                        <a id="cancel-item" onclick="hideItem({{$order->id}})">Cancel</a>
                     </div>
                 @endforeach
                 </tbody>
