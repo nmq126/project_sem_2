@@ -97,12 +97,12 @@
                                     <a href="/admin/messages/{{$message->id}}/details"><i class="la la-info"></i></a>
                                     <a href="#" class="delete"><i class="la la-close delete"  onclick="deleteItem({{$order->id}})"></i></a>
                                 </td>
-                                <div class="delete_order" id="delete_order_{{$order->id}}">
+                                <div class="delete_order" id="delete_order_{{$message->id}}">
                                     <h2>Bạn có chắc muốn xóa tin nhắn này</h2>
             
                                     <a href="/admin/messages/delete/{{$message->id}}" id="delete-item">Delete</a>
             
-                                    <a id="cancel-item" onclick="hideItem({{$order->id}})">Cancel</a>
+                                    <a id="cancel-item" onclick="hideItem({{$message->id}})">Cancel</a>
                                 </div>
                             @endforeach
                             </tbody>
