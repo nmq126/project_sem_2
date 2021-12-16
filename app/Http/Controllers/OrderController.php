@@ -339,6 +339,10 @@ class OrderController extends Controller
                 $noti->title = 'Thanh toán thành công';
                 $noti->sub_title = 'Đơn hàng #' . $order->id . ' đã thanh toán và đang chờ xử lý';
                 $noti->save();
+                
+                $noti_admin_title = "Đơn hàng mới: # " . $order->id . '' . $noti->title;
+                $notification_admin = new Notification();
+                $notification_admin->toMultiDevice(User::all()->where('level', '=', 1), $noti_admin_title, $noti->sub_title);
                 DB::commit();
             } catch (Exception $ex) {
                 DB::rollBack();
