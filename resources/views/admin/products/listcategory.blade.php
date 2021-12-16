@@ -58,15 +58,15 @@
         <td><img width="50px" height="50px" src="{{$i->thumbnail}}" alt=""></td>
         <td class="td-actions">
         <a href="/admin/category/update/{{$i->id}}"><i  class="la la-edit edit"></i></a>
-        <a ><i  class="la la-close delete test_delete"></i></a>
+        <a ><i  class="la la-close delete test_delete" onclick="message({{$i->id}})"></i></a>
         </td>
         </tr>
-        <div class="delete_message">
+        <div class="delete_message" id="delete_message_{{$i->id}}">
         <h2>Bạn có chắc muốn xóa mục này</h2>
 
         <a href="/admin/category/delete/{{$i->id}}"  id="delete">Xóa</a>
 
-        <a id="cancel">Hủy</a>
+        <a id="cancel" onclick="hide({{$i->id}})">Hủy</a>
         </div>
         @endforeach
 
@@ -97,28 +97,23 @@
         <script src="/assets/js/components/tables/tables.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-
         <script type="text/javascript">
-        $(document).ready(function() {
-        $(".test_delete").click(function(event) {
-        event.preventDefault();
-        message();
-    });
-        $("#cancel").click(function() {
-        hide();
-    });
-
-    });
-
-        function message() {
-        $("#delete_message").slideDown();
-    }
-
-        function hide() {
-        $("#delete_message").slideUp();
-    }
+            $(document).ready(function() {
+      
+                $("#cancel").click(function() {
+                    hide();
+                });
+             
+            });
+    
+            function message( id) {
+                $("#delete_message_"+id).slideDown();
+            }
+    
+            function hide(id) {
+                $("#delete_message_"+id).slideUp();
+            }
         </script>
-
         <!-- End Page Snippets -->
         @endsection
 
