@@ -159,7 +159,7 @@
                                 <div class="single-blog-wrapper mb-50">
                                     <div class="blog-img mb-20">
                                         <a href="blog/{{$blog->id}}/details">
-                                            <img src="{{$blog->image}}"
+                                            <img src="{{$blog->thumbnail}}"
                                                  alt="Lorem ipsum dolor amet">
                                         </a>
                                     </div>
@@ -258,11 +258,6 @@
                         </div>
                         <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon
                             nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
-                        <div class="payment-img">
-                            <a href="#">
-                                <img src="Hung/img/products/payment.png" alt="">
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 col-sm-6">

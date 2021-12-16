@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$blog->title}}</title>
     <!-- Favicon -->
-    <link rel="icon" href="{{asset('user/img/logo.ico')}}" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{asset('user/img/favicon.ico')}}" sizes="any" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
@@ -48,7 +48,7 @@
 
 <header id="nav">
 
-    <a href="/home" class="logo"><img src="user/img/logo.png" alt="">VietKitchen</a>
+    <a href="/home" class="logo"><img src="/user/img/logo.png" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
@@ -152,45 +152,11 @@
     <div class="blog-area ptb-100">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-4">
-                    <div class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
-                        <div class="sidebar-search">
-                            <form class="header-search-form" action="/blog" method="get">
-                                <input id="search" type="search" name="keyword" class="input_text" value=""
-                                       placeholder="Tìm Kiếm">
-                                <button id="blogsearchsubmit" type="submit" class="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
-                            <h4 class="shop-sidebar-title">Bài Đăng Gần Đây</h4>
-                            <div class="sidebar-list-style mt-20">
-                                <ul>
-                                    @foreach($blogs as $blog)
-                                        <li><a href="/blog/{{$blog->id}}/details">{{$blog->title}}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
-                            <h4 class="shop-sidebar-title">Tags</h4>
-                            <div class="shop-tags mt-25">
-                                <ul>
-                                    <li><a href="/blogs/news/tagged/bouquet" class="">Món Ăn</a></li>
-                                    <li><a href="/blogs/news/tagged/joy" class="">Đồ Uống</a></li>
-                                    <li><a href="/blogs/news/tagged/event" class="">Địa Điểm</a></li>
-                                    <li><a href="/blogs/news/tagged/gift" class="">Nấu Ăn</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-lg-9 col-md-8">
                     <div class="blog-details-wrapper">
                         <div class="blog-img mb-20">
                             <img
-                                src="{{$blog->image}}"
+                                src="{{$blog->thumbnail}}"
                                 alt="Lorem ipsum dolor amet">
                         </div>
                         <div class="blog-content">
@@ -237,6 +203,40 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="shop-sidebar-wrapper gray-bg-7 shop-sidebar-mrg">
+                        <div class="sidebar-search">
+                            <form class="header-search-form" action="/blog" method="get">
+                                <input id="search" type="search" name="keyword" class="input_text" value=""
+                                       placeholder="Tìm Kiếm">
+                                <button id="blogsearchsubmit" type="submit" class="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
+                            <h4 class="shop-sidebar-title">Bài Đăng Gần Đây</h4>
+                            <div class="sidebar-list-style mt-20">
+                                <ul>
+                                    @foreach($blogs as $blog)
+                                        <li><a href="/blog/{{$blog->id}}/details">{{$blog->title}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="shop-widget mt-25 shop-sidebar-border pt-25">
+                            <h4 class="shop-sidebar-title">Tags</h4>
+                            <div class="shop-tags mt-25">
+                                <ul>
+                                    <li><a href="/blogs/news/tagged/bouquet" class="">Món Ăn</a></li>
+                                    <li><a href="/blogs/news/tagged/joy" class="">Đồ Uống</a></li>
+                                    <li><a href="/blogs/news/tagged/event" class="">Địa Điểm</a></li>
+                                    <li><a href="/blogs/news/tagged/gift" class="">Nấu Ăn</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -253,11 +253,6 @@
                         </div>
                         <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon
                             nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
-                        <div class="payment-img">
-                            <a href="#">
-                                <img src="Hung/img/products/payment.png" alt="">
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 col-sm-6">

@@ -55,15 +55,16 @@
     
         <td class="td-actions">
             <a href="/admin/ingredient/update/{{$i->id}}"><i  class="la la-edit edit"></i></a>
-            <a ><i  class="la la-close delete test_delete"></i></a>
+            <a ><i  class="la la-close delete test_delete" onclick="message({{$i->id}})"></i></a>
         </td>
     </tr>
-    <div class="delete_message">
+
+    <div class="delete_message" id="delete_message_{{$i->id}}">
         <h2>Are You Sure You Want To Delete This</h2>
 
-        <a href="/admin/ingredient/delete/{{$i->id}}"  id="delete">Delete</a>
+        <a href="/admin/ingredient/delete/{{$i->id}}"  id="delete"> Delete</a>
 
-        <a id="cancel">Cancel</a>
+        <a id="cancel" onclick="hide({{$i->id}})">Cancel </a>
     </div>
       @endforeach
 
@@ -97,22 +98,19 @@
 
             <script type="text/javascript">
         $(document).ready(function() {
-            $(".test_delete").click(function(event) {
-                event.preventDefault();
-                message();
-            });
+  
             $("#cancel").click(function() {
                 hide();
             });
          
         });
 
-        function message() {
-            $("#delete_message").slideDown();
+        function message( id) {
+            $("#delete_message_"+id).slideDown();
         }
 
-        function hide() {
-            $("#delete_message").slideUp();
+        function hide(id) {
+            $("#delete_message_"+id).slideUp();
         }
     </script>
 

@@ -209,7 +209,7 @@ class ProductAdminController extends Controller
         $id = $request->id;
         $ingrendient = Ingredient::find($id);
         $ingrendient->delete();
-        return redirect('admin/product/list/ingredient')->with("msg", "Xóa thành công");
+       return redirect('admin/ingredient/list')->with("msg", "Xóa thành công");
     }
 
     public function DeleteCategory(Request $request)

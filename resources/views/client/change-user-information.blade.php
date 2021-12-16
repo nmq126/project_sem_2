@@ -55,7 +55,7 @@
 
 <header id="nav">
 
-    <a href="/home" class="logo"><img src="/user/img/logo.png" alt="">VietKitchen</a>
+    <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" alt="">VietKitchen</a>
 
     <div id="menu-bar" class="fas fa-bars"></div>
 
@@ -213,11 +213,6 @@
                             <a href="/home" class="logo"><img src="{{asset('user/img/logo.png')}}" width="70px" alt="">VietKitchen</a>
                         </div>
                         <p>Đến với chúng tôi, bạn sẽ luôn được tận hưởng những món ăn - đồ uống chất lượng nhất, ngon nhất với giá cả ưu đãi, khuyến mại có một không hai.</p>
-                        <div class="payment-img">
-                            <a href="#">
-                                <img src="Hung/img/products/payment.png" alt="">
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 col-sm-6">

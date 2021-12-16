@@ -84,6 +84,7 @@
                             </thead>
                             <tbody id="OrdersList">
                             @foreach($messages as $message)
+                            <tr>
                                 <td>{{$message->name}}</td>
                                 <td>{{$message->email}}</td>
                                 <td>{{$message->sent_at}}</td>
@@ -98,12 +99,13 @@
                                     <a href="#" class="delete"><i class="la la-close delete"></i></a>
                                 </td>
                                 <div id="delete_order">
-                                    <h2>Bạn có chắc muốn xóa đơn tin nhắn này?</h2>
+                                    <h2>Bạn có chắc muốn xóa tin nhắn này?</h2>
 
                                     <a href="/admin/messages/delete/{{$message->id}}" id="delete-item">Delete</a>
 
                                     <a id="cancel-item">Cancel</a>
                                 </div>
+                            </tr>    
                             @endforeach
                             </tbody>
                         </table>
