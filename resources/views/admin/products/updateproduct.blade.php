@@ -38,6 +38,7 @@
 <div class="widget-body">
 <form class="form-horizontal" action="/admin/product/update/{{$product->id}}" name="product-form" method="post">
 @csrf
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="form-group row d-flex align-items-center mb-5">
 <label class="col-lg-3 form-control-label">Id</label>
 <div class="col-lg-9">
