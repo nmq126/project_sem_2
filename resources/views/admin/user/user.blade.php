@@ -93,10 +93,11 @@
 
                 @foreach ($users as $user)
                     <tr>
-                        <td><a href="/admin/user/detail/{{$user->id}}"><span id="user_id">{{$user->id}}</span> <img src="{{$user->getDefaultThumbnailAttribute()}}"
-                                                                         alt=""></a></td>
+                        <td><a href="/admin/user/detail/{{$user->id}}"><span id="user_id">{{$user->id}}</span> <img
+                                    src="{{$user->getDefaultThumbnailAttribute()}}"
+                                    alt=""></a></td>
                         <td>{{$user->email}}</td>
-                         @if($user->id  != \Illuminate\Support\Facades\Auth::id())
+                        @if($user->id  != \Illuminate\Support\Facades\Auth::id())
                         <td>
                             <form action="/admin/user/update" method="GET" name="statuschange">
                                 <input type="hidden" name="id" value="{{$user->id}}">
