@@ -96,16 +96,18 @@
                         <td><a href="/admin/user/detail/{{$user->id}}"><span id="user_id">{{$user->id}}</span> <img src="{{$user->getDefaultThumbnailAttribute()}}"
                                                                          alt=""></a></td>
                         <td>{{$user->email}}</td>
-                             <td>
-                        <form action="/admin/user/update" method="GET" name="statuschange">
-                            <input type="hidden" name="id" value="{{$user->id}}">
-                            <select class="form-control" name="status">
-                                <option value="1" {{ $user->status == '1' ? 'selected' : '' }}>Hoạt động</option>
-                                <option value="0" {{ $user->status == '0' ? 'selected' : '' }}>Khóa</option>
+                         @if($user->id  != \Illuminate\Support\Facades\Auth::id())
+                        <td>
+                            <form action="/admin/user/update" method="GET" name="statuschange">
+                                <input type="hidden" name="id" value="{{$user->id}}">
+                                <select class="form-control" name="status">
 
-                            </select>
-                        </form>
-                    </td>
+                                    <option value="1" {{ $user->status == '1' ? 'selected' : '' }}>Hoạt động</option>
+                                    <option value="0" {{ $user->status == '0' ? 'selected' : '' }}>Khóa</option>
+
+                                </select>
+                            </form>
+                        </td>
                         <td>{{$user->phone}}</td>
                         <td>
                             <form action="/admin/user/update" method="GET" name="change">
@@ -118,20 +120,30 @@
                         </td>
                         <td class="td-actions">
 
-                            <a href="#" class="delete"><i class="la la-close delete" onclick="deleteItem({{$user->id}})"></i></a>
+                            <a href="#" class="delete"><i class="la la-close delete"></i></a>
                         </td>
                     </tr>
-             
-                
+                    <div id="delete_order">
+                        <h2>Bạn có chắc muốn xóa người dùng này</h2>
 
-                        <div class="delete_order" id="delete_order_{{$user->id}}">
-                            <h2>Bạn có chắc muốn xóa người dùng này này</h2>
-    
-                            <a href="/admin/user/delete/{{$user->id}}" id="delete-item">Delete</a>
-    
-                            <a id="cancel-item" onclick="hideItem({{$user->id}})">Cancel</a>
-                        </div>
+                        <a href="/admin/user/delete/{{$user->id}}" id="delete-item">Delete</a>
+
+                        <a id="cancel-item">Cancel</a>
                     </div>
+                    @else
+                        <td>
+                            <select class="form-control">
+                                <option selected disabled>Hoạt động</option>
+                            </select>
+                        </td>
+
+                        <td>{{$user->phone}}</td>
+                        <td>
+                            <select class="form-control">
+                                <option selected disabled>Admin</option>
+                            </select>
+                        </td>
+                    @endif
                 @endforeach
                 </tbody>
             </table>
