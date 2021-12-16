@@ -42,7 +42,7 @@
     margin-top: 10%;
 }
 
-#delete_order {
+.delete_order {
     display: none;
     position: fixed;
     top: 25%;
@@ -54,7 +54,7 @@
     z-index: 999;
 }
 
-#delete_order h2 {
+.delete_order h2 {
     justify-content: center;
     color: #aea9c3;
     margin-top: 10%;
