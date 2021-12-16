@@ -249,7 +249,7 @@
 
         <div class="box">
             <img src="user/img/images/billie.jpg" alt="">
-            <h3>Chị Billie người Việt gốc cây</h3>
+            <h3>Sứ giả địa ngục</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -262,7 +262,7 @@
         </div>
         <div class="box">
             <img src="user/img/images/anne.jpg" alt="">
-            <h3>Chị An nhà khu Mỹ Đình</h3>
+            <h3>Hung thần sa ngã</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -275,7 +275,7 @@
         </div>
         <div class="box">
             <img src="user/img/images/gal.jpg" alt="">
-            <h3>Huê hậu người Do Thái</h3>
+            <h3>Ác ma hư vô</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
