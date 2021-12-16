@@ -265,7 +265,7 @@
             @foreach($products as $product)
                 <div class="product-wrapper">
                     <div class="product-img">
-                        <a href="/products/{{$product->id}}/details">
+                        <a href="/product/{{$product->id}}/details">
                             <img src="{{$product->thumbnail}}" alt="" height="250px">
                         </a>
                         @if($product ->discount > 0)
