@@ -150,15 +150,15 @@
                                     <td>{{$product->ingredient->name}}</td>
                                     <td class="td-actions">
                                         <a href="/admin/product/update/{{$product->id}}"><i class="la la-edit edit"></i></a>
-                                        <a href="#" class="delete"><i class="la la-close delete"></i></a>
+                                        <a href="#" class="delete"><i class="la la-close delete"  onclick="deleteItem({{$product->id}})"></i></a>
                                     </td>
                                 </tr>
-                                <div id="delete_order">
+                                <div class="delete_order" id="delete_order_{{$product->id}}">
                                     <h2>Bạn có chắc muốn xóa sản phẩm này</h2>
 
                                     <a href="/admin/product/delete/{{$product->id}}" id="delete-item">Delete</a>
 
-                                    <a id="cancel-item">Cancel</a>
+                                    <a id="cancel-item" onclick="hideItem({{$product->id}})">Cancel</a>
                                 </div>
                             @endforeach
 
