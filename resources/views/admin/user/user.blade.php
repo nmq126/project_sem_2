@@ -121,7 +121,7 @@
                         </td>
                         <td class="td-actions">
 
-                            <a href="#" class="delete"><i class="la la-close delete"></i></a>
+                            <a href="#" class="delete"><i class="la la-close delete" onclick="deleteItem({{$user->id}})"></i></a>
                         </td>
                     </tr>
                    
