@@ -207,7 +207,7 @@
                                                 <input class="text-center quantity-checkout cart-plus-minus-box"
                                                        oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null"
                                                        required
-                                                       data-id="{{$cartItem->id}}" name="quantity" type="number" min="1"
+                                                       data-id="{{$cartItem->id}}" name="quantity" type="number" min="1" max="5" 
                                                        value="{{$cartItem->quantity}}">
                                             </div>
                                         </td>
